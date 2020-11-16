@@ -1,16 +1,19 @@
 package logico;
 
-//Import libraire - Init
+//Import library
 import java.util.ArrayList;
-//Import libraire - End
+
+
 
 public class Liga {
-	//Variables - Init
+	//Variables
 	private ArrayList<Torneo> torneos;
 	private ArrayList<Equipo> equipos;
 	private ArrayList<Personal> personales;
-	//Variables - End
+
 	
+	
+	//Constructor 
 	public Liga() {
 		super();
 		this.torneos = new ArrayList<>();
@@ -18,7 +21,11 @@ public class Liga {
 		this.personales = new ArrayList<>();
 		
 	}
-
+	
+	
+	
+	
+	//Getters and setters
 	public ArrayList<Torneo> getTorneos() {
 		return torneos;
 	}

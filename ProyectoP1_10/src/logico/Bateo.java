@@ -1,7 +1,7 @@
 package logico;
 
 public class Bateo extends Performance {
-
+	//Variables
 	private int cantHits;
 	private int cantJuegos;
 	private int cantHR;
@@ -17,6 +17,7 @@ public class Bateo extends Performance {
 	private int cantBR;
 	private int ES;
 	
+	//Constructor
 	public Bateo(String torneo, String fase, int cantHits, int cantJuegos, int cantHR, int cantBB, int cantPonches,
 			int hBP, int cantTB, int cantVP, int cantCA, int cant2b, int cant3b, int cantCI, int cantBR, int eS) {
 		super(torneo, fase);
@@ -36,6 +37,8 @@ public class Bateo extends Performance {
 		ES = eS;
 	}
 	
+	
+	//Getters and Setters
 	public int getCantHits() {
 		return cantHits;
 	}

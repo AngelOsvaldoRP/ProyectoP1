@@ -1,9 +1,9 @@
 package logico;
-
+//Import library
 import java.util.ArrayList;
 
 public class Jugador extends Personal {
-
+	//Variables
 	private int numeroCamiseta;
 	private String equipoActual;
 	private String estado;
@@ -13,6 +13,7 @@ public class Jugador extends Personal {
 	private String posicion;
 	private int cantTemporadas;
 	
+	//Constructor
 	public Jugador(String nombre, String apellido, String identificacion, String tipoIdentificacion, int numeroCamiseta,
 			String equipoActual, String estado, ArrayList<Equipo> equipos, ArrayList<Performance> misPerformance,
 			Performance performancePorVida, String posicion, int cantTemporadas) {
@@ -26,7 +27,7 @@ public class Jugador extends Personal {
 		this.posicion = posicion;
 		this.cantTemporadas = cantTemporadas;
 	}
-
+	//Getters and Setters
 	public int getNumeroCamiseta() {
 		return numeroCamiseta;
 	}

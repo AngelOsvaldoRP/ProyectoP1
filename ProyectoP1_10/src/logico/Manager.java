@@ -1,15 +1,18 @@
 package logico;
 
+//Import library
 import java.util.ArrayList;
 
 public class Manager extends Personal {
-
+	//Variables
 	private int numeroCamiseta;
 	private String equipoActual;
 	private ArrayList<Equipo> equipos;
 	private int cantTemporadas;
 	private ArrayList<PerformanceManager> misPM;
 	
+	
+	//Constructor
 	public Manager(String nombre, String apellido, String identificacion, String tipoIdentificacion, int numeroCamiseta,
 			String equipoActual, ArrayList<Equipo> equipos, int cantTemporadas, ArrayList<PerformanceManager> misPM) {
 		super(nombre, apellido, identificacion, tipoIdentificacion);
@@ -19,7 +22,8 @@ public class Manager extends Personal {
 		this.cantTemporadas = cantTemporadas;
 		this.misPM = misPM;
 	}
-
+	
+	//Getters and Setters
 	public int getNumeroCamiseta() {
 		return numeroCamiseta;
 	}

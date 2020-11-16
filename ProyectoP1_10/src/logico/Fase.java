@@ -1,15 +1,17 @@
 package logico;
-//Import libraire - Init
+//Import library
 import java.util.ArrayList;
-//Import libraire - End
+
 public class Fase {
 	
-	//Variables - Init
+	//Variables
 	private String tipoFase;
 	private int cantJuegos;
 	private ArrayList<Equipo> equipos;
 	private ArrayList<Juego> juegos;
-	//Variables - End
+	
+	
+	//Constructor
 	public Fase(String tipoFase, int cantJuegos) {
 		super();
 		this.tipoFase = tipoFase;
@@ -17,6 +19,8 @@ public class Fase {
 		this.equipos = new ArrayList<>();
 		this.juegos = new ArrayList<>();
 	}
+	
+	//Getters and Setters
 	public String getTipoFase() {
 		return tipoFase;
 	}

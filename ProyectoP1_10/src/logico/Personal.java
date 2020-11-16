@@ -1,12 +1,14 @@
 package logico;
 
 public class Personal {
-	
+	//Variables
 	protected String nombre;
 	protected String apellido;
 	protected String identificacion;
 	protected String tipoIdentificacion;
 	
+	
+	//Constructor
 	public Personal(String nombre, String apellido, String identificacion, String tipoIdentificacion) {
 		super();
 		this.nombre = nombre;
@@ -14,7 +16,9 @@ public class Personal {
 		this.identificacion = identificacion;
 		this.tipoIdentificacion = tipoIdentificacion;
 	}
-
+	
+	
+	//Getters and Setters
 	public String getNombre() {
 		return nombre;
 	}

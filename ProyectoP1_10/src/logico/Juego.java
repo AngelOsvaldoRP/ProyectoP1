@@ -1,12 +1,12 @@
 package logico;
 
-//Import libraire - Init
+//Import library
 import java.sql.Date;
 import java.util.ArrayList;
-//Import libraire - End
+
 
 public class Juego {
-	//Variables - Init
+	//Variables
 	private Date fechai;
 	private Date fechaf;
 	private ArrayList<Equipo> equipos;
@@ -14,7 +14,9 @@ public class Juego {
 	private int cantCarreras;
 	private int cantHits;
 	private int cantErrores;
-	//Variables - End
+
+	
+	//Constructor
 	public Juego(Date fechai, Date fechaf, int cantCarreras,
 			int cantHits, int cantErrores) {
 		super();
@@ -26,6 +28,7 @@ public class Juego {
 		this.cantHits = cantHits;
 		this.cantErrores = cantErrores;
 	}
+	//Getters and Setters
 	public Date getFechai() {
 		return fechai;
 	}

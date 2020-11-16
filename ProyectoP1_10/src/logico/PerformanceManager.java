@@ -1,12 +1,14 @@
 package logico;
 
 public class PerformanceManager {
-
+	
+	//Variables
 	private int cantVictorias;
 	private int cantDerrotas;
 	private String torneo;
 	private String fase;
 	
+	//Constructor
 	public PerformanceManager(int cantVictorias, int cantDerrotas, String torneo, String fase) {
 		super();
 		this.cantVictorias = cantVictorias;
@@ -14,7 +16,8 @@ public class PerformanceManager {
 		this.torneo = torneo;
 		this.fase = fase;
 	}
-
+	
+	//Getters and Setters
 	public int getCantVictorias() {
 		return cantVictorias;
 	}

@@ -1,16 +1,18 @@
 package logico;
 
 public abstract class Performance {
-	
+	//Variables
 	protected String torneo;
 	protected String fase;
 	
+	
+	//Constructor
 	public Performance(String torneo, String fase) {
 		super();
 		this.torneo = torneo;
 		this.fase = fase;
 	}
-
+	//Getters and Setters
 	public String getTorneo() {
 		return torneo;
 	}

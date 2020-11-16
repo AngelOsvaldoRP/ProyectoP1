@@ -1,7 +1,7 @@
 package logico;
 
 public class Picheo extends Performance {
-
+	//Variables
 	private int cantHits;
 	private int cantJuegos;
 	private int cantHR;
@@ -20,6 +20,9 @@ public class Picheo extends Performance {
 	private int cantHold;
 	private int outConseguidos;
 	
+	
+	
+	//Constructor
 	public Picheo(String torneo, String fase, int cantHits, int cantJuegos, int cantHR, int cantBB, int cantPonches,
 			int hBP, int cantJG, int cantJP, int cantJC, int cantJS, int cantAperturas, int cantCL, int cantCP,
 			int cantTBE, int cantNL, int cantHold, int outConseguidos) {
@@ -43,6 +46,8 @@ public class Picheo extends Performance {
 		this.outConseguidos = outConseguidos;
 	}
 	
+	
+	//Getters and Setters
 	public int getCantHits() {
 		return cantHits;
 	}
