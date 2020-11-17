@@ -1,13 +1,7 @@
 package logico;
 
-public class Picheo extends Performance {
+public class Picheo extends Jugador {
 	//Variables
-	private int cantHits;
-	private int cantJuegos;
-	private int cantHR;
-	private int cantBB;
-	private int cantPonches;
-	private int hbp;
 	private int cantJG;
 	private int cantJP;
 	private int cantJC;
@@ -23,14 +17,11 @@ public class Picheo extends Performance {
 	
 	
 	//Constructor
-	public Picheo(String torneo, String fase) {
-		super(torneo, fase);
-		this.cantHits = 0;
-		this.cantJuegos = 0;
-		this.cantHR = 0;
-		this.cantBB = 0;
-		this.cantPonches = 0;
-		this.hbp = 0;
+	public Picheo(String nombre, String apellido, String identificacion, String tipoIdentificacion, int numeroCamiseta,
+			String equipoActual, String estado, String equipos, String posicion, int cantTemporadas,
+			float peso, float altura, String mano) {
+		super(nombre, apellido, identificacion, tipoIdentificacion, numeroCamiseta, equipoActual, estado, equipos,
+				posicion, cantTemporadas, peso, altura, mano);
 		this.cantJG = 0;
 		this.cantJP = 0;
 		this.cantJC = 0;
@@ -46,54 +37,6 @@ public class Picheo extends Performance {
 	
 	
 	//Getters and Setters
-	public int getCantHits() {
-		return cantHits;
-	}
-	
-	public void setCantHits(int cantHits) {
-		this.cantHits = cantHits;
-	}
-
-	public int getCantJuegos() {
-		return cantJuegos;
-	}
-
-	public void setCantJuegos(int cantJuegos) {
-		this.cantJuegos = cantJuegos;
-	}
-
-	public int getCantHR() {
-		return cantHR;
-	}
-
-	public void setCantHR(int cantHR) {
-		this.cantHR = cantHR;
-	}
-
-	public int getCantBB() {
-		return cantBB;
-	}
-
-	public void setCantBB(int cantBB) {
-		this.cantBB = cantBB;
-	}
-
-	public int getCantPonches() {
-		return cantPonches;
-	}
-
-	public void setCantPonches(int cantPonches) {
-		this.cantPonches = cantPonches;
-	}
-
-	public int getHBP() {
-		return hbp;
-	}
-
-	public void setHBP(int hBP) {
-		this.hbp = hBP;
-	}
-
 	public int getCantJG() {
 		return cantJG;
 	}

@@ -1,40 +1,54 @@
 package logico;
 //Import library
-import java.util.ArrayList;
 
-public class Jugador extends Personal {
+public abstract class Jugador {
 	
 	//Variables
-	private int numeroCamiseta;
-	private String equipoActual;
-	private String estado;
-	private ArrayList<Equipo> equipos;
-	private ArrayList<Performance> misPerformance;
-	private Performance performancePorVida;
-	private String posicion;
-	private int cantTemporadas;
-	private float peso;
-	private float altura;
-	private String mano;
+	protected String nombre;
+	protected String apellido;
+	protected String identificacion;
+	protected int numeroCamiseta;
+	protected String equipoActual;
+	protected String estado;
+	protected String equipos;
+	protected String posicion;
+	protected int cantTemporadas;
+	protected float peso;
+	protected float altura;
+	protected String mano;
+	
+	//EstadisticasGenerales
+	protected int cantHits;
+	protected int cantJuegos;
+	protected int cantHR;
+	protected int cantBB;
+	protected int cantPonches;
+	protected int hbp;
 	
 
 	//Constructor
 	public Jugador(String nombre, String apellido, String identificacion, String tipoIdentificacion, int numeroCamiseta,
-			String equipoActual, String estado, ArrayList<Equipo> equipos, ArrayList<Performance> misPerformance,
-			Performance performancePorVida, String posicion, int cantTemporadas, float peso, float altura,
+			String equipoActual, String estado, String equipos, String posicion, int cantTemporadas, float peso, float altura,
 			String mano) {
-		super(nombre, apellido, identificacion, tipoIdentificacion);
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.identificacion = identificacion;
 		this.numeroCamiseta = numeroCamiseta;
 		this.equipoActual = equipoActual;
 		this.estado = estado;
 		this.equipos = equipos;
-		this.misPerformance = misPerformance;
-		this.performancePorVida = performancePorVida;
 		this.posicion = posicion;
 		this.cantTemporadas = cantTemporadas;
 		this.peso = peso;
 		this.altura = altura;
 		this.mano = mano;
+		this.cantHits = 0;
+		this.cantJuegos = 0;
+		this.cantHR = 0;
+		this.cantBB = 0;
+		this.cantPonches = 0;
+		this.hbp = 0;
 	}
 
 	
@@ -63,28 +77,12 @@ public class Jugador extends Personal {
 		this.estado = estado;
 	}
 
-	public ArrayList<Equipo> getEquipos() {
+	public String getEquipos() {
 		return equipos;
 	}
 
-	public void setEquipos(ArrayList<Equipo> equipos) {
+	public void setEquipos(String equipos) {
 		this.equipos = equipos;
-	}
-
-	public ArrayList<Performance> getMisPerformance() {
-		return misPerformance;
-	}
-
-	public void setMisPerformance(ArrayList<Performance> misPerformance) {
-		this.misPerformance = misPerformance;
-	}
-
-	public Performance getPerformancePorVida() {
-		return performancePorVida;
-	}
-
-	public void setPerformancePorVida(Performance performancePorVida) {
-		this.performancePorVida = performancePorVida;
 	}
 
 	public String getPosicion() {
@@ -126,5 +124,7 @@ public class Jugador extends Personal {
 	public void setMano(String mano) {
 		this.mano = mano;
 	}
+	
+	public abstract float avg();
 
 }
