@@ -7,34 +7,33 @@ public class Bateo extends Performance {
 	private int cantHR;
 	private int cantBB;
 	private int cantPonches;
-	private int HBP;
+	private int hbp;
 	private int cantTB;
 	private int cantVP;
 	private int cantCA;
-	private int cant2B;
-	private int cant3B;
+	private int cant2b;
+	private int cant3b;
 	private int cantCI;
 	private int cantBR;
-	private int ES;
+	private int es;
 	
 	//Constructor
-	public Bateo(String torneo, String fase, int cantHits, int cantJuegos, int cantHR, int cantBB, int cantPonches,
-			int hBP, int cantTB, int cantVP, int cantCA, int cant2b, int cant3b, int cantCI, int cantBR, int eS) {
+	public Bateo(String torneo, String fase) {
 		super(torneo, fase);
-		this.cantHits = cantHits;
-		this.cantJuegos = cantJuegos;
-		this.cantHR = cantHR;
-		this.cantBB = cantBB;
-		this.cantPonches = cantPonches;
-		HBP = hBP;
-		this.cantTB = cantTB;
-		this.cantVP = cantVP;
-		this.cantCA = cantCA;
-		cant2B = cant2b;
-		cant3B = cant3b;
-		this.cantCI = cantCI;
-		this.cantBR = cantBR;
-		ES = eS;
+		this.cantHits = 0;
+		this.cantJuegos = 0;
+		this.cantHR = 0;
+		this.cantBB = 0;
+		this.cantPonches = 0;
+		this.hbp = 0;
+		this.cantTB = 0;
+		this.cantVP = 0;
+		this.cantCA = 0;
+		this.cant2b = 0;
+		this.cant3b = 0;
+		this.cantCI = 0;
+		this.cantBR = 0;
+		this.es = 0;
 	}
 	
 	
@@ -80,11 +79,11 @@ public class Bateo extends Performance {
 	}
 
 	public int getHBP() {
-		return HBP;
+		return hbp;
 	}
 
 	public void setHBP(int hBP) {
-		HBP = hBP;
+		this.hbp = hBP;
 	}
 
 	public int getCantTB() {
@@ -112,19 +111,19 @@ public class Bateo extends Performance {
 	}
 
 	public int getCant2B() {
-		return cant2B;
+		return cant2b;
 	}
 
 	public void setCant2B(int cant2b) {
-		cant2B = cant2b;
+		this.cant2b = cant2b;
 	}
 
 	public int getCant3B() {
-		return cant3B;
+		return cant3b;
 	}
 
 	public void setCant3B(int cant3b) {
-		cant3B = cant3b;
+		this.cant3b = cant3b;
 	}
 
 	public int getCantCI() {
@@ -144,11 +143,11 @@ public class Bateo extends Performance {
 	}
 
 	public int getES() {
-		return ES;
+		return es;
 	}
 
 	public void setES(int eS) {
-		ES = eS;
+		this.es = eS;
 	}
 
 

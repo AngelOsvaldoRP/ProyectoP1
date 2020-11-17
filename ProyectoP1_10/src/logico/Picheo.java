@@ -7,7 +7,7 @@ public class Picheo extends Performance {
 	private int cantHR;
 	private int cantBB;
 	private int cantPonches;
-	private int HBP;
+	private int hbp;
 	private int cantJG;
 	private int cantJP;
 	private int cantJC;
@@ -23,27 +23,25 @@ public class Picheo extends Performance {
 	
 	
 	//Constructor
-	public Picheo(String torneo, String fase, int cantHits, int cantJuegos, int cantHR, int cantBB, int cantPonches,
-			int hBP, int cantJG, int cantJP, int cantJC, int cantJS, int cantAperturas, int cantCL, int cantCP,
-			int cantTBE, int cantNL, int cantHold, int outConseguidos) {
+	public Picheo(String torneo, String fase) {
 		super(torneo, fase);
-		this.cantHits = cantHits;
-		this.cantJuegos = cantJuegos;
-		this.cantHR = cantHR;
-		this.cantBB = cantBB;
-		this.cantPonches = cantPonches;
-		HBP = hBP;
-		this.cantJG = cantJG;
-		this.cantJP = cantJP;
-		this.cantJC = cantJC;
-		this.cantJS = cantJS;
-		this.cantAperturas = cantAperturas;
-		this.cantCL = cantCL;
-		this.cantCP = cantCP;
-		this.cantTBE = cantTBE;
-		this.cantNL = cantNL;
-		this.cantHold = cantHold;
-		this.outConseguidos = outConseguidos;
+		this.cantHits = 0;
+		this.cantJuegos = 0;
+		this.cantHR = 0;
+		this.cantBB = 0;
+		this.cantPonches = 0;
+		this.hbp = 0;
+		this.cantJG = 0;
+		this.cantJP = 0;
+		this.cantJC = 0;
+		this.cantJS = 0;
+		this.cantAperturas = 0;
+		this.cantCL = 0;
+		this.cantCP = 0;
+		this.cantTBE = 0;
+		this.cantNL = 0;
+		this.cantHold = 0;
+		this.outConseguidos = 0;
 	}
 	
 	
@@ -89,11 +87,11 @@ public class Picheo extends Performance {
 	}
 
 	public int getHBP() {
-		return HBP;
+		return hbp;
 	}
 
 	public void setHBP(int hBP) {
-		HBP = hBP;
+		this.hbp = hBP;
 	}
 
 	public int getCantJG() {
