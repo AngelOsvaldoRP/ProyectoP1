@@ -3,6 +3,7 @@ package logico;
 import java.util.ArrayList;
 
 public class Jugador extends Personal {
+	
 	//Variables
 	private int numeroCamiseta;
 	private String equipoActual;
@@ -12,11 +13,16 @@ public class Jugador extends Personal {
 	private Performance performancePorVida;
 	private String posicion;
 	private int cantTemporadas;
+	private float peso;
+	private float altura;
+	private String mano;
 	
+
 	//Constructor
 	public Jugador(String nombre, String apellido, String identificacion, String tipoIdentificacion, int numeroCamiseta,
 			String equipoActual, String estado, ArrayList<Equipo> equipos, ArrayList<Performance> misPerformance,
-			Performance performancePorVida, String posicion, int cantTemporadas) {
+			Performance performancePorVida, String posicion, int cantTemporadas, float peso, float altura,
+			String mano) {
 		super(nombre, apellido, identificacion, tipoIdentificacion);
 		this.numeroCamiseta = numeroCamiseta;
 		this.equipoActual = equipoActual;
@@ -26,7 +32,12 @@ public class Jugador extends Personal {
 		this.performancePorVida = performancePorVida;
 		this.posicion = posicion;
 		this.cantTemporadas = cantTemporadas;
+		this.peso = peso;
+		this.altura = altura;
+		this.mano = mano;
 	}
+
+	
 	//Getters and Setters
 	public int getNumeroCamiseta() {
 		return numeroCamiseta;
@@ -90,6 +101,36 @@ public class Jugador extends Personal {
 
 	public void setCantTemporadas(int cantTemporadas) {
 		this.cantTemporadas = cantTemporadas;
+	}
+
+
+	public float getPeso() {
+		return peso;
+	}
+
+
+	public void setPeso(float peso) {
+		this.peso = peso;
+	}
+
+
+	public float getAltura() {
+		return altura;
+	}
+
+
+	public void setAltura(float altura) {
+		this.altura = altura;
+	}
+
+
+	public String getMano() {
+		return mano;
+	}
+
+
+	public void setMano(String mano) {
+		this.mano = mano;
 	}
 
 }

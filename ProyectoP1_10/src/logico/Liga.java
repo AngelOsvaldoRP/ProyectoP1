@@ -9,21 +9,22 @@ public class Liga {
 	//Variables
 	private ArrayList<Torneo> torneos;
 	private ArrayList<Equipo> equipos;
-	private ArrayList<Personal> personales;
+	private ArrayList<Personal> jugadores;
+	private ArrayList<Personal> managers;
+	private ArrayList<Personal> lesionados;
 
 	
-	
-	//Constructor 
-	public Liga() {
+	//Constructor
+	public Liga(ArrayList<Torneo> torneos, ArrayList<Equipo> equipos, ArrayList<Personal> jugadores,
+			ArrayList<Personal> managers, ArrayList<Personal> lesionados) {
 		super();
-		this.torneos = new ArrayList<>();
-		this.equipos = new ArrayList<>();
-		this.personales = new ArrayList<>();
-		
+		this.torneos = torneos;
+		this.equipos = equipos;
+		this.jugadores = jugadores;
+		this.managers = managers;
+		this.lesionados = lesionados;
 	}
-	
-	
-	
+
 	
 	//Getters and setters
 	public ArrayList<Torneo> getTorneos() {
@@ -42,12 +43,32 @@ public class Liga {
 		this.equipos = equipos;
 	}
 
-	public ArrayList<Personal> getPersonales() {
-		return personales;
+	public ArrayList<Personal> getJugadores() {
+		return jugadores;
 	}
 
-	public void setPersonales(ArrayList<Personal> personales) {
-		this.personales = personales;
+	public void setJugadores(ArrayList<Personal> jugadores) {
+		this.jugadores = jugadores;
+	}
+
+
+	public ArrayList<Personal> getManagers() {
+		return managers;
+	}
+
+
+	public void setManagers(ArrayList<Personal> managers) {
+		this.managers = managers;
+	}
+
+
+	public ArrayList<Personal> getLesionados() {
+		return lesionados;
+	}
+
+
+	public void setLesionados(ArrayList<Personal> lesionados) {
+		this.lesionados = lesionados;
 	}
 	
 }

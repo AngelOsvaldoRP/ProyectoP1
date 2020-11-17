@@ -9,19 +9,23 @@ public class Torneo {
 	private String nombre;
 	private ArrayList<Fase> fases;
 	private ArrayList<Equipo> equipos;
-	private ArrayList<Personal> personales;
+	private ArrayList<Personal> jugadores;
+	private ArrayList<Personal> managers;
 
 	
-	
 	//Constructor
-	public Torneo(String year, String nombre) {
+	public Torneo(String year, String nombre, ArrayList<Fase> fases, ArrayList<Equipo> equipos,
+			ArrayList<Personal> jugadores, ArrayList<Personal> managers) {
 		super();
 		this.year = year;
 		this.nombre = nombre;
-		this.fases = new ArrayList<>();
-		this.equipos = new ArrayList<>();
-		this.personales = new ArrayList<>();
+		this.fases = fases;
+		this.equipos = equipos;
+		this.jugadores = jugadores;
+		this.managers = managers;
 	}
+
+
 	//Getters and Setters
 	public String getYear() {
 		return year;
@@ -47,11 +51,24 @@ public class Torneo {
 	public void setEquipos(ArrayList<Equipo> equipos) {
 		this.equipos = equipos;
 	}
-	public ArrayList<Personal> getPersonales() {
-		return personales;
+
+	public ArrayList<Personal> getJugadores() {
+		return jugadores;
 	}
-	public void setPersonales(ArrayList<Personal> personales) {
-		this.personales = personales;
+
+
+	public void setJugadores(ArrayList<Personal> jugadores) {
+		this.jugadores = jugadores;
+	}
+
+
+	public ArrayList<Personal> getManagers() {
+		return managers;
+	}
+
+
+	public void setManagers(ArrayList<Personal> managers) {
+		this.managers = managers;
 	}
 	
 	
