@@ -7,28 +7,46 @@ import java.util.ArrayList;
 
 public class Juego {
 	//Variables
+	private int juegoCod;
+	private String estado;
 	private Date fechai;
 	private Date fechaf;
-	private ArrayList<Equipo> equipos;
-	private ArrayList<Personal> personales;
-	private int cantCarreras;
-	private int cantHits;
-	private int cantErrores;
-
-	
+	private Equipo equipoLocal;
+	private Equipo equipoVisitante;
+	private String estadio;
+	private String equipoganador;
+	private String equipoPerdedor;
+	private int carrerasVisitante;
+	private int hitsVisitante;
+	private int erroresVisitante;
+	private int carrerasLocal;
+	private int hitsLocal;
+	private int erroresLocal;
 	//Constructor
-	public Juego(Date fechai, Date fechaf, int cantCarreras,
-			int cantHits, int cantErrores) {
+	public Juego(int juegoCod, String estado, Date fechai, Date fechaf, Equipo equipoLocal, Equipo equipoVisitante,
+			String estadio, String equipoganador) {
 		super();
+		this.juegoCod = juegoCod;
+		this.estado = estado;
 		this.fechai = fechai;
 		this.fechaf = fechaf;
-		this.equipos = new ArrayList<>();
-		this.personales = new ArrayList<>();
-		this.cantCarreras = cantCarreras;
-		this.cantHits = cantHits;
-		this.cantErrores = cantErrores;
+		this.equipoLocal = equipoLocal;
+		this.equipoVisitante = equipoVisitante;
+		this.estadio = estadio;
+		this.equipoganador = equipoganador;
 	}
-	//Getters and Setters
+	public int getJuegoCod() {
+		return juegoCod;
+	}
+	public void setJuegoCod(int juegoCod) {
+		this.juegoCod = juegoCod;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	public Date getFechai() {
 		return fechai;
 	}
@@ -41,35 +59,71 @@ public class Juego {
 	public void setFechaf(Date fechaf) {
 		this.fechaf = fechaf;
 	}
-	public ArrayList<Equipo> getEquipos() {
-		return equipos;
+	public Equipo getEquipoLocal() {
+		return equipoLocal;
 	}
-	public void setEquipos(ArrayList<Equipo> equipos) {
-		this.equipos = equipos;
+	public void setEquipoLocal(Equipo equipoLocal) {
+		this.equipoLocal = equipoLocal;
 	}
-	public ArrayList<Personal> getPersonales() {
-		return personales;
+	public Equipo getEquipoVisitante() {
+		return equipoVisitante;
 	}
-	public void setPersonales(ArrayList<Personal> personales) {
-		this.personales = personales;
+	public void setEquipoVisitante(Equipo equipoVisitante) {
+		this.equipoVisitante = equipoVisitante;
 	}
-	public int getCantCarreras() {
-		return cantCarreras;
+	public String getEstadio() {
+		return estadio;
 	}
-	public void setCantCarreras(int cantCarreras) {
-		this.cantCarreras = cantCarreras;
+	public void setEstadio(String estadio) {
+		this.estadio = estadio;
 	}
-	public int getCantHits() {
-		return cantHits;
+	public String getEquipoganador() {
+		return equipoganador;
 	}
-	public void setCantHits(int cantHits) {
-		this.cantHits = cantHits;
+	public void setEquipoganador(String equipoganador) {
+		this.equipoganador = equipoganador;
 	}
-	public int getCantErrores() {
-		return cantErrores;
+	public String getEquipoPerdedor() {
+		return equipoPerdedor;
 	}
-	public void setCantErrores(int cantErrores) {
-		this.cantErrores = cantErrores;
+	public void setEquipoPerdedor(String equipoPerdedor) {
+		this.equipoPerdedor = equipoPerdedor;
+	}
+	public int getCarrerasVisitante() {
+		return carrerasVisitante;
+	}
+	public void setCarrerasVisitante(int carrerasVisitante) {
+		this.carrerasVisitante = carrerasVisitante;
+	}
+	public int getHitsVisitante() {
+		return hitsVisitante;
+	}
+	public void setHitsVisitante(int hitsVisitante) {
+		this.hitsVisitante = hitsVisitante;
+	}
+	public int getErroresVisitante() {
+		return erroresVisitante;
+	}
+	public void setErroresVisitante(int erroresVisitante) {
+		this.erroresVisitante = erroresVisitante;
+	}
+	public int getCarrerasLocal() {
+		return carrerasLocal;
+	}
+	public void setCarrerasLocal(int carrerasLocal) {
+		this.carrerasLocal = carrerasLocal;
+	}
+	public int getHitsLocal() {
+		return hitsLocal;
+	}
+	public void setHitsLocal(int hitsLocal) {
+		this.hitsLocal = hitsLocal;
+	}
+	public int getErroresLocal() {
+		return erroresLocal;
+	}
+	public void setErroresLocal(int erroresLocal) {
+		this.erroresLocal = erroresLocal;
 	}
 	
 	
