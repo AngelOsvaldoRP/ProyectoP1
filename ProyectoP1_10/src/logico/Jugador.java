@@ -103,31 +103,25 @@ public class Jugador extends Personal {
 		this.cantTemporadas = cantTemporadas;
 	}
 
-
 	public float getPeso() {
 		return peso;
 	}
-
 
 	public void setPeso(float peso) {
 		this.peso = peso;
 	}
 
-
 	public float getAltura() {
 		return altura;
 	}
-
 
 	public void setAltura(float altura) {
 		this.altura = altura;
 	}
 
-
 	public String getMano() {
 		return mano;
 	}
-
 
 	public void setMano(String mano) {
 		this.mano = mano;
