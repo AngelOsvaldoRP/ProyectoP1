@@ -25,14 +25,14 @@ public abstract class Jugador {
 	
 
 	//Constructor
-	public Jugador(String nombre, String apellido, String identificacion, int numeroCamiseta,
+	public Jugador(String nombre, String apellido, String identificacion, int numeroCamiset,
 			String equipoActual, String estado, String posicion, float peso, float altura,
 			String mano) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.identificacion = identificacion;
-		this.numeroCamiseta = numeroCamiseta;
+		this.numeroCamiseta = numeroCamiset;
 		this.equipoActual = equipoActual;
 		this.estado = estado;
 		this.posicion = posicion;
