@@ -10,9 +10,7 @@ public abstract class Jugador {
 	protected int numeroCamiseta;
 	protected String equipoActual;
 	protected String estado;
-	protected String equipos;
 	protected String posicion;
-	protected int cantTemporadas;
 	protected float peso;
 	protected float altura;
 	protected String mano;
@@ -27,8 +25,8 @@ public abstract class Jugador {
 	
 
 	//Constructor
-	public Jugador(String nombre, String apellido, String identificacion, String tipoIdentificacion, int numeroCamiseta,
-			String equipoActual, String estado, String equipos, String posicion, int cantTemporadas, float peso, float altura,
+	public Jugador(String nombre, String apellido, String identificacion, int numeroCamiseta,
+			String equipoActual, String estado, String posicion, float peso, float altura,
 			String mano) {
 		super();
 		this.nombre = nombre;
@@ -37,9 +35,7 @@ public abstract class Jugador {
 		this.numeroCamiseta = numeroCamiseta;
 		this.equipoActual = equipoActual;
 		this.estado = estado;
-		this.equipos = equipos;
 		this.posicion = posicion;
-		this.cantTemporadas = cantTemporadas;
 		this.peso = peso;
 		this.altura = altura;
 		this.mano = mano;
@@ -77,28 +73,12 @@ public abstract class Jugador {
 		this.estado = estado;
 	}
 
-	public String getEquipos() {
-		return equipos;
-	}
-
-	public void setEquipos(String equipos) {
-		this.equipos = equipos;
-	}
-
 	public String getPosicion() {
 		return posicion;
 	}
 
 	public void setPosicion(String posicion) {
 		this.posicion = posicion;
-	}
-
-	public int getCantTemporadas() {
-		return cantTemporadas;
-	}
-
-	public void setCantTemporadas(int cantTemporadas) {
-		this.cantTemporadas = cantTemporadas;
 	}
 
 	public float getPeso() {

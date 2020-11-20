@@ -12,11 +12,11 @@ public class Bateo extends Jugador {
 	private int es;
 	
 	//Constructor
-	public Bateo(String nombre, String apellido, String identificacion, String tipoIdentificacion, int numeroCamiseta,
-			String equipoActual, String estado, String equipos, String posicion, int cantTemporadas,
+	public Bateo(String nombre, String apellido, String identificacion, int numeroCamiseta,
+			String equipoActual, String estado, String posicion,
 			float peso, float altura, String mano) {
-		super(nombre, apellido, identificacion, tipoIdentificacion, numeroCamiseta, equipoActual, estado, equipos,
-				posicion, cantTemporadas, peso, altura, mano);
+		super(nombre, apellido, identificacion, numeroCamiseta, equipoActual, estado,
+				posicion, peso, altura, mano);
 		this.cantTB = 0;
 		this.cantVP = 0;
 		this.cantCA = 0;
