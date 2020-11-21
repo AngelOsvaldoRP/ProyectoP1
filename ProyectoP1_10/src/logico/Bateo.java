@@ -17,11 +17,11 @@ public class Bateo extends Jugador {
 			float peso, float altura, String mano) {
 		super(nombre, apellido, identificacion, numeroCamiseta, equipoActual, estado,
 				posicion, peso, altura, mano);
-		this.cantTB = 0;
+		this.cantTB = 29;
 		this.cantVP = 0;
 		this.cantCA = 0;
-		this.cant2b = 0;
-		this.cant3b = 0;
+		this.cant2b = 1;
+		this.cant3b = 2;
 		this.cantCI = 0;
 		this.cantBR = 0;
 		this.es = 0;
@@ -93,9 +93,25 @@ public class Bateo extends Jugador {
 	}
 
 
-
 	public float avg() {
-		return (float)cantHits/cantTB;
+		return (float)(Math.round(((float)cantHits/cantTB) * 1000d) / 1000d);
+		
+	}
+	
+	public float obp() {
+		return (float)(Math.round(((float)(cantHits+cantBB+hbp)/(cantHits+cantBB+hbp+es)) * 1000d) / 1000d);	
+	}
+	
+	public float slg() {
+		return (float)(Math.round(((float)(cantHits+(cant2b*2)+(cant3b*3)+(cantHR*4))/cantTB) * 1000d) / 1000d);	
+	}
+	
+	public float ops() {
+		return (float)(Math.round((float)(obp()/slg()) * 1000d) / 1000d);
+	}
+	
+	public int xbh() {
+		return cant2b+cant3b+cantHR;
 	}
 
 }

@@ -39,12 +39,12 @@ public abstract class Jugador {
 		this.peso = peso;
 		this.altura = altura;
 		this.mano = mano;
-		this.cantHits = 0;
+		this.cantHits = 9;
 		this.cantJuegos = 0;
-		this.cantHR = 0;
-		this.cantBB = 0;
+		this.cantHR = 2;
+		this.cantBB = 5;
 		this.cantPonches = 0;
-		this.hbp = 0;
+		this.hbp = 2;
 	}
 
 	

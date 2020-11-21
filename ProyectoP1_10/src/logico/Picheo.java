@@ -12,7 +12,7 @@ public class Picheo extends Jugador {
 	private int cantTBE;
 	private int cantNL;
 	private int cantHold;
-	private int outConseguidos;
+	private int entradasLanzada;
 	
 	
 	
@@ -32,7 +32,7 @@ public class Picheo extends Jugador {
 		this.cantTBE = 0;
 		this.cantNL = 0;
 		this.cantHold = 0;
-		this.outConseguidos = 0;
+		this.entradasLanzada = 0;
 	}
 	
 	
@@ -117,17 +117,29 @@ public class Picheo extends Jugador {
 		this.cantHold = cantHold;
 	}
 
-	public int getOutConseguidos() {
-		return outConseguidos;
+	public int getEntradasLanzada() {
+		return entradasLanzada;
 	}
 
-	public void setOutConseguidos(int outConseguidos) {
-		this.outConseguidos = outConseguidos;
+	public void setEntradasLanzada(int entradasLanzada) {
+		this.entradasLanzada = entradasLanzada;
 	}
 
 
 	public float avg() {
-		return (float)cantHits/cantTBE;
+		return (float)(Math.round(((float)cantHits/cantTBE) * 1000d) / 1000d);
+	}
+	
+	public float whip() {
+		return (float)(Math.round(((float)cantBB/cantHits) * 1000d) / 1000d);
+	}
+	
+	public float ponche9IL() {
+		return (float)(Math.round(((float)cantPonches/entradasLanzada) * 1000d) / 1000d);
+	}
+	
+	public float bb9IL() {
+		return (float)(Math.round(((float)cantBB/entradasLanzada) * 1000d) / 1000d);
 	}
 
 }
