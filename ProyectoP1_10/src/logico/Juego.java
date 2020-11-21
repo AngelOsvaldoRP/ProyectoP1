@@ -8,8 +8,7 @@ public class Juego {
 	//Variables
 	private int juegoCod;
 	private String estado;
-	private Date fechai;
-	private Date fechaf;
+	private Date fecha;
 	private Equipo equipoLocal;
 	private Equipo equipoVisitante;
 	private String estadio;
@@ -21,22 +20,32 @@ public class Juego {
 	private int carrerasLocal;
 	private int hitsLocal;
 	private int erroresLocal;
+	
 	//Constructor
-	public Juego(int juegoCod, String estado, Date fechai, Date fechaf, Equipo equipoLocal, Equipo equipoVisitante,
-			String estadio, String equipoganador) {
+	
+	public Juego(int juegoCod, String estado, Date fecha, Equipo equipoLocal, Equipo equipoVisitante,
+			String estadio) {
 		super();
 		this.juegoCod = juegoCod;
 		this.estado = estado;
-		this.fechai = fechai;
-		this.fechaf = fechaf;
+		this.fecha = fecha;
 		this.equipoLocal = equipoLocal;
 		this.equipoVisitante = equipoVisitante;
 		this.estadio = estadio;
-		this.equipoganador = equipoganador;
+		this.equipoganador = "";
+		this.equipoPerdedor = "";
+		this.carrerasVisitante = 0;
+		this.hitsVisitante = 0;
+		this.erroresVisitante = 0;
+		this.carrerasLocal = 0;
+		this.hitsLocal = 0;
+		this.erroresLocal = 0;
 	}
+	
 	public int getJuegoCod() {
 		return juegoCod;
 	}
+	
 	public void setJuegoCod(int juegoCod) {
 		this.juegoCod = juegoCod;
 	}
@@ -46,17 +55,11 @@ public class Juego {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public Date getFechai() {
-		return fechai;
+	public Date getFecha() {
+		return fecha;
 	}
-	public void setFechai(Date fechai) {
-		this.fechai = fechai;
-	}
-	public Date getFechaf() {
-		return fechaf;
-	}
-	public void setFechaf(Date fechaf) {
-		this.fechaf = fechaf;
+	public void setFecha(Date fechai) {
+		this.fecha = fechai;
 	}
 	public Equipo getEquipoLocal() {
 		return equipoLocal;

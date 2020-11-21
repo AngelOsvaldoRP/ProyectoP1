@@ -9,7 +9,6 @@ public class Equipo {
 	private String yearFundation;
 	private String manager;
 	private String estadio;
-	private int cantTitulos;
 	private int cantJJ;
 	private int cantJG;
 	private int cantJP;
@@ -17,19 +16,17 @@ public class Equipo {
 	private ArrayList<Lesion> lesiones;
 	
 	//Constructor
-	public Equipo(String nombre, String yearFundation, String manager, String estadio, int cantTitulos, int cantJJ,
-			int cantJG, int cantJP, ArrayList<Jugador> jugadores, ArrayList<Lesion> lesiones) {
+	public Equipo(String nombre, String yearFundation, String manager, String estadio) {
 		super();
 		this.nombre = nombre;
 		this.yearFundation = yearFundation;
 		this.manager = manager;
 		this.estadio = estadio;
-		this.cantTitulos = cantTitulos;
-		this.cantJJ = cantJJ;
-		this.cantJG = cantJG;
-		this.cantJP = cantJP;
-		this.jugadores = jugadores;
-		this.lesiones = lesiones;
+		this.cantJJ = 0;
+		this.cantJG = 0;
+		this.cantJP = 0;
+		this.jugadores = new ArrayList<>();
+		this.lesiones = new ArrayList<>();
 	}
 	
 	//Getters and setters
@@ -64,14 +61,6 @@ public class Equipo {
 
 	public void setEstadio(String estadio) {
 		this.estadio = estadio;
-	}
-
-	public int getCantTitulos() {
-		return cantTitulos;
-	}
-
-	public void setCantTitulos(int cantTitulos) {
-		this.cantTitulos = cantTitulos;
 	}
 
 	public int getCantJJ() {
