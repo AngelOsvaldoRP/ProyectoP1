@@ -116,6 +116,7 @@ public class ListJugador extends JDialog {
 								btnModificar.setEnabled(true);
 								btnVerJugadores.setEnabled(true);
 								aux = equipo.buscarJugadorByNumero((Integer)modelo.getValueAt(seleccion, 0));
+								Torneo.nombreJ= (String)modelo.getValueAt(seleccion, 1);
 							}
 						}
 					});

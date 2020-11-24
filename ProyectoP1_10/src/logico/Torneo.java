@@ -10,6 +10,9 @@ public class Torneo {
 	private ArrayList<Jugador> jugadores;
 	private static Torneo torneo = null;
 	
+	public static String nombreJ;
+	public static String nombreE;
+	
 	public static int autoGenCode;
 
 	
@@ -115,6 +118,23 @@ public class Torneo {
 
 		}
 		return aux;
+	}
+
+	public Jugador buscarJugadorNombreEJ(String nombreEquipo, String nombreJugador) {
+		Equipo aux = null;
+		Jugador player = null;
+		boolean encontrado = false;
+		int i = 0;
+
+		while(i<equipos.size() && !encontrado){
+			if(equipos.get(i).getNombre().equalsIgnoreCase(nombreEquipo)){
+				aux = equipos.get(i);
+				player = aux.findJugadorByNombre(nombreJugador);
+				encontrado = true;
+			}i++;
+
+		}
+		return player;
 	}
 	
 }

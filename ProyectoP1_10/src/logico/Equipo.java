@@ -231,4 +231,9 @@ public class Equipo {
 	public void eliminarJugador(Jugador jugador) {
 		jugadores.remove(jugador);
 	}
+
+	public void insertarLesion(Lesion lesion) {
+		lesiones.add(lesion);
+		
+	}
 }

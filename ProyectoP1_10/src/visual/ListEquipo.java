@@ -90,6 +90,7 @@ public class ListEquipo extends JDialog {
 								btnEliminar.setEnabled(true);
 								btnModificar.setEnabled(true);
 								aux = Torneo.getInstance().buscarEquiporNombre((String)modelo.getValueAt(seleccion, 0));
+								Torneo.nombreE = (String)modelo.getValueAt(seleccion, 0);
 							}
 						}
 					});
