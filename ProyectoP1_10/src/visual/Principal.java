@@ -112,9 +112,12 @@ public class Principal extends JFrame {
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Lista de Juegos");
-		mntmNewMenuItem_3.setEnabled(false);
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ListJuego lj = new ListJuego();
+				lj.setModal(true);
+				lj.setLocationRelativeTo(null);
+				lj.setVisible(true);
 				
 			}
 		});

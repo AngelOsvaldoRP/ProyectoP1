@@ -62,7 +62,7 @@ public class RegEquipo extends JDialog {
 			panel.add(lblNewLabel_1);
 			
 			JLabel lblNewLabel_2 = new JLabel("A\u00F1o de fundacion:");
-			lblNewLabel_2.setBounds(10, 122, 100, 14);
+			lblNewLabel_2.setBounds(10, 122, 117, 14);
 			panel.add(lblNewLabel_2);
 			
 			JLabel lblNewLabel_3 = new JLabel("Manager:");
@@ -87,7 +87,7 @@ public class RegEquipo extends JDialog {
 				MaskFormatter year= new MaskFormatter("####");
 				txtAnno = new JFormattedTextField(year);
 			}catch (Exception e) {} 
-			txtAnno.setBounds(120, 119, 178, 22);
+			txtAnno.setBounds(137, 119, 161, 22);
 			panel.add(txtAnno);
 			txtAnno.setColumns(10);
 			

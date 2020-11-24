@@ -31,15 +31,7 @@ public class BuscarEstadisticasJugador extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			BuscarEstadisticasJugador dialog = new BuscarEstadisticasJugador();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
@@ -48,7 +40,7 @@ public class BuscarEstadisticasJugador extends JDialog {
 		setTitle("Buscar estadisticas de un jugador");
 		setResizable(false);
 		setModal(true);
-		setBounds(100, 100, 337, 189);
+		setBounds(100, 100, 370, 189);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -56,18 +48,18 @@ public class BuscarEstadisticasJugador extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(null, "Datos:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel.setBounds(10, 11, 309, 100);
+			panel.setBounds(10, 11, 332, 100);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
 				JLabel lblNewLabel = new JLabel("Nombre del Equipo:");
-				lblNewLabel.setBounds(10, 21, 100, 14);
+				lblNewLabel.setBounds(10, 21, 137, 14);
 				panel.add(lblNewLabel);
 			}
 			{
 				cbxNEquipo = new JComboBox();
 				cbxNEquipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
-				cbxNEquipo.setBounds(142, 17, 150, 22);
+				cbxNEquipo.setBounds(172, 17, 150, 22);
 				for (int i = 0; i < Torneo.getInstance().getEquipos().size(); i++) {
 					cbxNEquipo.addItem(( Torneo.getInstance().getEquipos().get(i).getNombre()));
 					
@@ -76,12 +68,12 @@ public class BuscarEstadisticasJugador extends JDialog {
 			}
 			{
 				JLabel lblNewLabel_1 = new JLabel("Nombre del Jugador:");
-				lblNewLabel_1.setBounds(10, 65, 117, 14);
+				lblNewLabel_1.setBounds(10, 65, 137, 14);
 				panel.add(lblNewLabel_1);
 			}
 			{
 				txtNJugador = new JTextField();
-				txtNJugador.setBounds(142, 62, 150, 22);
+				txtNJugador.setBounds(144, 61, 178, 22);
 				panel.add(txtNJugador);
 				txtNJugador.setColumns(10);
 			}

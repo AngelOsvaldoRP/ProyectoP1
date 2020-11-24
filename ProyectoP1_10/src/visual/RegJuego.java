@@ -24,6 +24,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
+import javax.swing.border.TitledBorder;
 
 public class RegJuego extends JDialog {
 
@@ -45,7 +46,7 @@ public class RegJuego extends JDialog {
 		setResizable(false);
 		setModal(true);
 		setTitle("Registrar Juego");
-		setBounds(100, 100, 507, 288);
+		setBounds(100, 100, 525, 288);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -53,12 +54,13 @@ public class RegJuego extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 21, 477, 194);
+		panel.setBorder(new TitledBorder(null, "Informacion para el Juego:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 488, 204);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Equipo Visitante:");
-		lblNewLabel.setBounds(10, 23, 102, 14);
+		lblNewLabel.setBounds(10, 42, 102, 14);
 		panel.add(lblNewLabel);
 		
 		cbxEquipoV = new JComboBox();
@@ -67,11 +69,11 @@ public class RegJuego extends JDialog {
 			cbxEquipoV.addItem(Torneo.getInstance().getEquipos().get(i).getNombre());
 			
 		}
-		cbxEquipoV.setBounds(106, 19, 131, 22);
+		cbxEquipoV.setBounds(121, 38, 131, 22);
 		panel.add(cbxEquipoV);
 		
 		JLabel lblNewLabel_1 = new JLabel("Equipo Local:");
-		lblNewLabel_1.setBounds(253, 23, 84, 14);
+		lblNewLabel_1.setBounds(264, 42, 84, 14);
 		panel.add(lblNewLabel_1);
 		
 		cbxEquipoL = new JComboBox();
@@ -86,30 +88,30 @@ public class RegJuego extends JDialog {
 			cbxEquipoL.addItem(Torneo.getInstance().getEquipos().get(i).getNombre());
 			
 		}
-		cbxEquipoL.setBounds(333, 19, 131, 22);
+		cbxEquipoL.setBounds(347, 38, 131, 22);
 		panel.add(cbxEquipoL);
 		
 		JLabel lblNewLabel_2 = new JLabel("Estadio:");
-		lblNewLabel_2.setBounds(216, 59, 68, 14);
+		lblNewLabel_2.setBounds(219, 84, 68, 14);
 		panel.add(lblNewLabel_2);
 		
 		txtEstadio = new JTextField();
 		txtEstadio.setBackground(Color.WHITE);
 		txtEstadio.setEditable(false);
-		txtEstadio.setBounds(175, 84, 150, 22);
+		txtEstadio.setBounds(169, 109, 150, 22);
 		panel.add(txtEstadio);
 		txtEstadio.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Fecha del encuentro:");
-		lblNewLabel_3.setBounds(10, 138, 119, 14);
+		lblNewLabel_3.setBounds(10, 167, 140, 14);
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Hora:");
-		lblNewLabel_4.setBounds(271, 138, 46, 14);
+		lblNewLabel_4.setBounds(302, 167, 46, 14);
 		panel.add(lblNewLabel_4);
 		
 		txtFecha = new JTextField();
-		txtFecha.setBounds(121, 135, 140, 22);
+		txtFecha.setBounds(147, 163, 140, 22);
 		panel.add(txtFecha);
 		txtFecha.setColumns(10);
 		
@@ -118,10 +120,11 @@ public class RegJuego extends JDialog {
 			txtHora =new JFormattedTextField(Hora);
 		} catch(Exception e){}
 		
-		txtHora.setBounds(333, 135, 131, 22);
+		txtHora.setBounds(358, 163, 68, 22);
 		panel.add(txtHora);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
