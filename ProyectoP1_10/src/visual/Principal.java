@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -27,7 +26,6 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 import javax.swing.JScrollPane;
-import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
@@ -39,6 +37,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Toolkit;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
 	private JPanel contentPane;
@@ -81,23 +81,60 @@ public class Principal extends JFrame {
 		JMenu mnNewMenu = new JMenu("Registro");
 		menuBar.add(mnNewMenu);
 		
-		JMenu mnNewMenu_3 = new JMenu("Equipos");
-		mnNewMenu.add(mnNewMenu_3);
+		JMenuItem mntmNewMenuItem = new JMenuItem("Registrar Equipo");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				RegEquipo re = new RegEquipo();
+				re.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Nuevo Equipo");
-		mnNewMenu_3.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Nuevo Jugador");
-		mnNewMenu_3.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Lesiones");
-		mnNewMenu.add(mntmNewMenuItem_2);
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registrar Juegos");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			RegJuego rj = new RegJuego();
+			rj.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenu mnNewMenu_1 = new JMenu("Lista");
 		menuBar.add(mnNewMenu_1);
 		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Lista de Equipos");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListEquipo le = new ListEquipo();
+				le.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Lista de Juegos");
+		mntmNewMenuItem_3.setEnabled(false);
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_3);
+		
 		JMenu mnNewMenu_2 = new JMenu("Informacion");
 		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Buscar Jugador");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				BuscarEstadisticasJugador bej = new BuscarEstadisticasJugador();
+				bej.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_4);
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Visita Nuestro sitio web");
+		mnNewMenu_2.add(mntmNewMenuItem_5);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -105,6 +142,7 @@ public class Principal extends JFrame {
 		
 		Panel panel = new Panel();
 		panel.setBounds(5, 5, 1381, 684);
+		panel.setSize(dim.width, dim.height-50);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
