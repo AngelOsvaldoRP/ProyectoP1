@@ -22,9 +22,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import logico.Equipo;
+import logico.Jugador;
+import logico.Lesion;
 import logico.Torneo;
 
-public class ListEquipo extends JDialog {
+public class ListLesionado extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
@@ -32,32 +34,19 @@ public class ListEquipo extends JDialog {
 	public static Object[] filas;
 	private JButton btnModificar;
 	private JButton btnEliminar;
-	public Equipo aux = null;
-	private JButton btnVerLesionados;
-	private JButton btnVerEstadisticas;
-	private JButton btnVerJugadores;
+	public Jugador aux = null;
+	private static Equipo equipoSelected = null;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListEquipo frame = new ListEquipo();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	/**
 	 * Create the dialog.
 	 *
 	 */
-	public ListEquipo() {
-		setTitle("Listado de Equipos en la Liga");
+	public ListLesionado(Equipo equipo) {
+		this.equipoSelected = equipo;
+		setTitle("Lesionados de "+equipo.getNombre());
 		setModal(true);
 		setBounds(100, 100, 747, 379);
 		setLocationRelativeTo(null);
@@ -76,7 +65,7 @@ public class ListEquipo extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					modelo = new DefaultTableModel();
-					String[] headers = {"Nombre", "Manager", "Estadio", "Año de Fundación"};
+					String[] headers = {"No.", "Nombre/Apellido", "Tipo Lesion", "Estado", "Cant. Dias"};
 					modelo.setColumnIdentifiers(headers);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -84,12 +73,9 @@ public class ListEquipo extends JDialog {
 						public void mouseClicked(MouseEvent e) {
 							int seleccion = table.getSelectedRow();
 							if(seleccion!=-1) {
-								btnVerLesionados.setEnabled(true);
-								btnVerEstadisticas.setEnabled(true);
-								btnVerJugadores.setEnabled(true);
 								btnEliminar.setEnabled(true);
 								btnModificar.setEnabled(true);
-								aux = Torneo.getInstance().buscarEquiporNombre((String)modelo.getValueAt(seleccion, 0));
+								aux = equipoSelected.buscarJugadorByNumero((Integer)modelo.getValueAt(seleccion, 0));
 							}
 						}
 					});
@@ -105,64 +91,23 @@ public class ListEquipo extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnModificar = new JButton("Modificar");
+				btnModificar = new JButton("Ver Informacion");
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					}
 				});
-				{
-					
-					btnVerLesionados = new JButton("Ver Lesionados");
-					btnVerLesionados.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							ListLesionado listaLesionados = new ListLesionado(aux);
-							listaLesionados.setModal(true);
-							listaLesionados.setLocationRelativeTo(null);
-							listaLesionados.setVisible(true);
-						}
-					});
-					btnVerLesionados.setEnabled(false);
-					btnVerLesionados.setActionCommand("OK");
-					buttonPane.add(btnVerLesionados);
-				}
-				{
-					btnVerEstadisticas = new JButton("Ver Estadisticas");
-					btnVerEstadisticas.setEnabled(false);
-					btnVerEstadisticas.setActionCommand("OK");
-					buttonPane.add(btnVerEstadisticas);
-				}
-				{
-					btnVerJugadores = new JButton("Ver Jugadores");
-					btnVerJugadores.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							ListJugador listaJugadores = new ListJugador(aux);
-							listaJugadores.setModal(true);
-							listaJugadores.setLocationRelativeTo(null);
-							listaJugadores.setVisible(true);
-						}
-					});
-					btnVerJugadores.setEnabled(false);
-					btnVerJugadores.setActionCommand("OK");
-					buttonPane.add(btnVerJugadores);
-				}
 				btnModificar.setEnabled(false);
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
 				getRootPane().setDefaultButton(btnModificar);
 			}
 			{
-				btnEliminar = new JButton("Eliminar");
+				btnEliminar = new JButton("Reactivar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(aux!=null) {
-							int option = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar al equipo: "+aux.getNombre(), "Confirmacion", JOptionPane.WARNING_MESSAGE);
-							if(option == JOptionPane.OK_OPTION) {
-								Torneo.getInstance().eliminarEquipo(aux);
-								llenarTabla();
-								btnEliminar.setEnabled(false);
-								btnModificar.setEnabled(false);
-							}
-						}
+						aux.setEstado("Activo");
+						Torneo.getInstance().buscarJugadorByIdentificacion(aux.getIdentificacion()).setEstado("Activo");
+						llenarTabla();
 					}
 				});
 				btnEliminar.setEnabled(false);
@@ -186,11 +131,12 @@ public class ListEquipo extends JDialog {
 	public static void llenarTabla() {
 		modelo.setRowCount(0);
 		filas = new Object[modelo.getColumnCount()];
-		for (Equipo equipo : Torneo.getInstance().getEquipos()) {
-			filas[0] = equipo.getNombre();
-			filas[1] = equipo.getManager();
-			filas[2] = equipo.getEstadio();
-			filas[3] = equipo.getYearFundation();
+		for (Lesion lesion : equipoSelected.getLesiones()) {
+			filas[0] = lesion.getJugador().getNumeroCamiseta();
+			filas[1] = lesion.getJugador().getNombre()+lesion.getJugador().getApellido();
+			filas[2] = lesion.getTipo();
+			filas[3] = lesion.getJugador().getEstado();
+			filas[4] = lesion.getCantDias();
 			modelo.addRow(filas);
 		}
 		

@@ -4,7 +4,7 @@ public class Picheo extends Jugador {
 	//Variables
 	private int cantJG;
 	private int cantJP;
-	private int cantJC;
+	private int cantJJ;
 	private int cantJS;
 	private int cantAperturas;
 	private int cantCL;
@@ -24,7 +24,7 @@ public class Picheo extends Jugador {
 				posicion, peso, altura, mano);
 		this.cantJG = 0;
 		this.cantJP = 0;
-		this.cantJC = 0;
+		this.cantJJ = 0;
 		this.cantJS = 0;
 		this.cantAperturas = 0;
 		this.cantCL = 0;
@@ -53,12 +53,12 @@ public class Picheo extends Jugador {
 		this.cantJP = cantJP;
 	}
 
-	public int getCantJC() {
-		return cantJC;
+	public int getCantJJ() {
+		return cantJJ;
 	}
 
-	public void setCantJC(int cantJC) {
-		this.cantJC = cantJC;
+	public void setCantJJ(int cantJC) {
+		this.cantJJ = cantJC;
 	}
 
 	public int getCantJS() {

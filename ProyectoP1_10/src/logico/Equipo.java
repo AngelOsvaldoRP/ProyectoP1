@@ -214,9 +214,21 @@ public class Equipo {
 		return aux;
 	}
 	
+	public Jugador buscarJugadorByNumero(int numero) {
+		Jugador aux = null;
+		boolean encontrado = false;
+		int i = 0;
+		while(!encontrado && i<jugadores.size()){
+			if(jugadores.get(i).getNumeroCamiseta() == numero) {
+					aux = jugadores.get(i);
+					encontrado = true;	
+			}
+			i++;
+		}
+		return aux;
+	}
 	
-	
-	
-	
-	
+	public void eliminarJugador(Jugador jugador) {
+		jugadores.remove(jugador);
+	}
 }

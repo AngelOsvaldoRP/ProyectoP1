@@ -94,24 +94,27 @@ public class Torneo {
 
 		return cod;
 	}
+	
+	public void eliminarJugador(Jugador jugador) {
+		jugadores.remove(jugador);
+	}
+	
+	public void eliminarEquipo(Equipo equipo) {
+		equipos.remove(equipo);
+	}
 
-	public Equipo findEquipoByNombre(String nombre) {
-		Equipo aux = null;
-		boolean buscar = false;
+	public Jugador buscarJugadorByIdentificacion(String identificacion) {
+		Jugador aux = null;
+		boolean encontrado = false;
 		int i = 0;
-		while(i<equipos.size() && !buscar){
-			if(equipos.get(i).getNombre().equalsIgnoreCase(nombre)){
-				aux = equipos.get(i);
-				buscar = true;
-			}
-			i++;
+		while(i<jugadores.size() && !encontrado){
+			if(jugadores.get(i).getIdentificacion().equalsIgnoreCase(identificacion)){
+				aux = jugadores.get(i);
+				encontrado = true;
+			}i++;
 
 		}
 		return aux;
 	}
-
-	
-	
-	
 	
 }

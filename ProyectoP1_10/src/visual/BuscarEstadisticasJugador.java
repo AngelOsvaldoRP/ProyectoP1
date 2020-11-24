@@ -96,7 +96,7 @@ public class BuscarEstadisticasJugador extends JDialog {
 				btnBuscar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(cbxNEquipo.getSelectedIndex()!=0 &&  !txtNJugador.getText().equalsIgnoreCase("")) {
-							Equipo equipo = Torneo.getInstance().findEquipoByNombre(cbxNEquipo.getSelectedItem().toString());
+							Equipo equipo = Torneo.getInstance().buscarEquiporNombre(cbxNEquipo.getSelectedItem().toString());
 							if(equipo != null){
 								Jugador jugador= equipo.findJugadorByNombre(txtNJugador.getText());
 								if(jugador != null){
