@@ -65,7 +65,7 @@ public class Principal extends JFrame {
 	public Principal() {
 		setAutoRequestFocus(false);
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("E:\\Proyectos\\Java\\Programacion 1- WorkSpace\\PrimerProyecto\\src\\assets\\Logo-AC.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\assets\\Logo-AC.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1397, 744);
 		
@@ -144,7 +144,7 @@ public class Principal extends JFrame {
 			}
 		});
 		Logo_aguilas_campeon.setToolTipText("Ver equipo");
-		Logo_aguilas_campeon.setIcon(new ImageIcon("E:\\Proyectos\\Java\\Programacion 1- WorkSpace\\PrimerProyecto\\src\\assets\\Logo-AC.png"));
+		Logo_aguilas_campeon.setIcon(new ImageIcon("..\\assets\\Logo-AC.png"));
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -152,7 +152,7 @@ public class Principal extends JFrame {
 		
 		JLabel logo_babosos_del_licey = new JLabel("");
 		panel_2.add(logo_babosos_del_licey);
-		logo_babosos_del_licey.setIcon(new ImageIcon("E:\\Proyectos\\Java\\Programacion 1- WorkSpace\\PrimerProyecto\\src\\assets\\Logo-TL.png"));
+		logo_babosos_del_licey.setIcon(new ImageIcon("..\\src\\assets\\Logo-TL.png"));
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -160,7 +160,7 @@ public class Principal extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		panel_3.add(lblNewLabel);
-		lblNewLabel.setIcon(new ImageIcon("E:\\Proyectos\\Java\\Programacion 1- WorkSpace\\PrimerProyecto\\src\\assets\\Logo-TE.png"));
+		lblNewLabel.setIcon(new ImageIcon("..\\src\\assets\\Logo-TE.png"));
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -168,7 +168,7 @@ public class Principal extends JFrame {
 		
 		JLabel logo_estrellas = new JLabel("");
 		panel_4.add(logo_estrellas);
-		logo_estrellas.setIcon(new ImageIcon("E:\\Proyectos\\Java\\Programacion 1- WorkSpace\\PrimerProyecto\\src\\assets\\Logo-ES.png"));
+		logo_estrellas.setIcon(new ImageIcon("..\\src\\assets\\Logo-ES.png"));
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -176,7 +176,7 @@ public class Principal extends JFrame {
 		
 		JLabel logo_gigantes = new JLabel("");
 		panel_5.add(logo_gigantes);
-		logo_gigantes.setIcon(new ImageIcon("E:\\Proyectos\\Java\\Programacion 1- WorkSpace\\PrimerProyecto\\src\\assets\\Logo-GC.png"));
+		logo_gigantes.setIcon(new ImageIcon("..\\src\\assets\\Logo-GC.png"));
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -184,7 +184,7 @@ public class Principal extends JFrame {
 		
 		JLabel logo_escojido = new JLabel("");
 		panel_6.add(logo_escojido);
-		logo_escojido.setIcon(new ImageIcon("E:\\Proyectos\\Java\\Programacion 1- WorkSpace\\PrimerProyecto\\src\\assets\\Logo-EC.png"));
+		logo_escojido.setIcon(new ImageIcon("..\\assets\\Logo-EC.png"));
 		logo_escojido.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		JLabel LogoLidom = new JLabel("");
@@ -193,7 +193,7 @@ public class Principal extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 			}
 		});
-		LogoLidom.setIcon(new ImageIcon("E:\\Proyectos\\Java\\Programacion 1- WorkSpace\\PrimerProyecto\\src\\assets\\logo lidom.png"));
+		LogoLidom.setIcon(new ImageIcon("..\\assets\\logo lidom.png"));
 		LogoLidom.setBounds(259, 83, 381, 313);
 		panel.add(LogoLidom);
 		
