@@ -114,7 +114,7 @@ public class RegEquipo extends JDialog {
 							Equipo team = new Equipo(txtNombre.getText(), Integer.parseInt(txtAnno.getText().toString()), txtManager.getText(), txtCiudad.getText(), txtEstadio.getText());
 							//Torneo.estadio = txtEstadio.getText();
 							Torneo.getInstance().insertarEquipo(team);
-							//Torneo.getInstance().guardar();
+							
 							
 							JOptionPane.showMessageDialog(null, "Equipo ''"+txtNombre.getText()+"'' fue registrado satisfectoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 							clear();

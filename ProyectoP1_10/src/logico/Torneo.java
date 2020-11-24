@@ -80,7 +80,6 @@ public class Torneo {
 	public void insertarJuego(Juego juego) {
 		autoGenCode = FindCodMayor(juegos);
 		autoGenCode++;
-		//guardar();
 		juegos.add(juego);
 		juego.setJuegoCod(autoGenCode);
 	}
@@ -136,5 +135,36 @@ public class Torneo {
 		}
 		return player;
 	}
+
+	public Juego buscarJuegoPorCodigo(int identificador) {
+		Juego aux = null;
+		int i = 0;
+		boolean encontrado = false;
+		while (i<juegos.size() && !encontrado) {
+			if(juegos.get(i).getJuegoCod() == identificador){
+				aux = juegos.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+
+		return aux;
+
+	}
+
+	public void eliminarJuego(int identificador) {
+		int  i = 0;
+		boolean encontrado = false;
+
+		while(i<juegos.size() && !encontrado){
+			if (juegos.get(i).getJuegoCod()==identificador)	{
+				juegos.remove(juegos.get(i));
+				encontrado = true;
+			}else {
+				i++;
+			}
+		}
+	}
+	
 	
 }

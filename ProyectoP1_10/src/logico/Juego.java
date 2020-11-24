@@ -9,6 +9,7 @@ public class Juego {
 	private int juegoCod;
 	private String estado;
 	private Date fecha;
+	private String hora;
 	private Equipo equipoLocal;
 	private Equipo equipoVisitante;
 	private String estadio;
@@ -23,12 +24,13 @@ public class Juego {
 	
 	//Constructor
 	
-	public Juego(String estado, Date fecha, Equipo equipoLocal, Equipo equipoVisitante,
+	public Juego(String estado, Date fecha, String hora, Equipo equipoLocal, Equipo equipoVisitante,
 			String estadio) {
 		super();
 		
 		this.estado = estado;
 		this.fecha = fecha;
+		this.hora = hora;
 		this.equipoLocal = equipoLocal;
 		this.equipoVisitante = equipoVisitante;
 		this.estadio = estadio;
@@ -60,6 +62,12 @@ public class Juego {
 	}
 	public void setFecha(Date fechai) {
 		this.fecha = fechai;
+	}
+	public String getHora() {
+		return hora;
+	}
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 	public Equipo getEquipoLocal() {
 		return equipoLocal;
