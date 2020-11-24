@@ -144,7 +144,7 @@ public class Principal extends JFrame {
 			}
 		});
 		Logo_aguilas_campeon.setToolTipText("Ver equipo");
-		Logo_aguilas_campeon.setIcon(new ImageIcon("..\\assets\\Logo-AC.png"));
+		Logo_aguilas_campeon.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-AC.png")));
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -152,15 +152,15 @@ public class Principal extends JFrame {
 		
 		JLabel logo_babosos_del_licey = new JLabel("");
 		panel_2.add(logo_babosos_del_licey);
-		logo_babosos_del_licey.setIcon(new ImageIcon("..\\src\\assets\\Logo-TL.png"));
+		logo_babosos_del_licey.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-TL.png")));
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		equipos.add(panel_3);
 		
-		JLabel lblNewLabel = new JLabel("");
-		panel_3.add(lblNewLabel);
-		lblNewLabel.setIcon(new ImageIcon("..\\src\\assets\\Logo-TE.png"));
+		JLabel logo_toros = new JLabel("");
+		panel_3.add(logo_toros);
+		logo_toros.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-TE.png")));
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -168,7 +168,7 @@ public class Principal extends JFrame {
 		
 		JLabel logo_estrellas = new JLabel("");
 		panel_4.add(logo_estrellas);
-		logo_estrellas.setIcon(new ImageIcon("..\\src\\assets\\Logo-ES.png"));
+		logo_estrellas.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-ES.png")));
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -176,7 +176,7 @@ public class Principal extends JFrame {
 		
 		JLabel logo_gigantes = new JLabel("");
 		panel_5.add(logo_gigantes);
-		logo_gigantes.setIcon(new ImageIcon("..\\src\\assets\\Logo-GC.png"));
+		logo_gigantes.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-GC.png")));
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -184,7 +184,7 @@ public class Principal extends JFrame {
 		
 		JLabel logo_escojido = new JLabel("");
 		panel_6.add(logo_escojido);
-		logo_escojido.setIcon(new ImageIcon("..\\assets\\Logo-EC.png"));
+		logo_escojido.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-EC.png")));
 		logo_escojido.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		JLabel LogoLidom = new JLabel("");
