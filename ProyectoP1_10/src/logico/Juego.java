@@ -23,10 +23,10 @@ public class Juego {
 	
 	//Constructor
 	
-	public Juego(int juegoCod, String estado, Date fecha, Equipo equipoLocal, Equipo equipoVisitante,
+	public Juego(String estado, Date fecha, Equipo equipoLocal, Equipo equipoVisitante,
 			String estadio) {
 		super();
-		this.juegoCod = juegoCod;
+		
 		this.estado = estado;
 		this.fecha = fecha;
 		this.equipoLocal = equipoLocal;

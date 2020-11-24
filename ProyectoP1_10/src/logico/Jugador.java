@@ -105,6 +105,96 @@ public abstract class Jugador {
 		this.mano = mano;
 	}
 	
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public String getApellido() {
+		return apellido;
+	}
+
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+
+	public String getIdentificacion() {
+		return identificacion;
+	}
+
+
+	public void setIdentificacion(String identificacion) {
+		this.identificacion = identificacion;
+	}
+	
+
+	public int getCantHits() {
+		return cantHits;
+	}
+
+
+	public void setCantHits(int cantHits) {
+		this.cantHits = cantHits;
+	}
+
+
+	public int getCantJuegos() {
+		return cantJuegos;
+	}
+
+
+	public void setCantJuegos(int cantJuegos) {
+		this.cantJuegos = cantJuegos;
+	}
+
+
+	public int getCantHR() {
+		return cantHR;
+	}
+
+
+	public void setCantHR(int cantHR) {
+		this.cantHR = cantHR;
+	}
+
+
+	public int getCantBB() {
+		return cantBB;
+	}
+
+
+	public void setCantBB(int cantBB) {
+		this.cantBB = cantBB;
+	}
+
+
+	public int getCantPonches() {
+		return cantPonches;
+	}
+
+
+	public void setCantPonches(int cantPonches) {
+		this.cantPonches = cantPonches;
+	}
+
+
+	public int getHbp() {
+		return hbp;
+	}
+
+
+	public void setHbp(int hbp) {
+		this.hbp = hbp;
+	}
 	public abstract float avg();
+
 
 }

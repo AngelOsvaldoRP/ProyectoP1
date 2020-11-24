@@ -6,8 +6,9 @@ import java.util.ArrayList;
 public class Equipo {
 	//Variables
 	private String nombre;
-	private String yearFundation;
+	private int yearFundation;
 	private String manager;
+	private String ciudad;
 	private String estadio;
 	private int cantJJ;
 	private int cantJG;
@@ -16,11 +17,12 @@ public class Equipo {
 	private ArrayList<Lesion> lesiones;
 	
 	//Constructor
-	public Equipo(String nombre, String yearFundation, String manager, String estadio) {
+	public Equipo(String nombre, int yearFundation, String manager, String ciudad, String estadio) {
 		super();
 		this.nombre = nombre;
 		this.yearFundation = yearFundation;
 		this.manager = manager;
+		this.ciudad = ciudad;
 		this.estadio = estadio;
 		this.cantJJ = 0;
 		this.cantJG = 0;
@@ -39,11 +41,11 @@ public class Equipo {
 		this.nombre = nombre;
 	}
 
-	public String getYearFundation() {
+	public int getYearFundation() {
 		return yearFundation;
 	}
 
-	public void setYearFundation(String yearFundation) {
+	public void setYearFundation(int yearFundation) {
 		this.yearFundation = yearFundation;
 	}
 
@@ -55,6 +57,14 @@ public class Equipo {
 		this.manager = manager;
 	}
 
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+	
 	public String getEstadio() {
 		return estadio;
 	}
@@ -188,6 +198,20 @@ public class Equipo {
 			}
 		}
 		return BBEquipo;
+	}
+
+	public Jugador findJugadorByNombre(String nombre) {
+		Jugador aux = null;
+		boolean buscar = false;
+		int i=0;
+		while (i<jugadores.size()&&!buscar) {
+			if(jugadores.get(i).getNombre().equalsIgnoreCase(nombre)){
+				aux = jugadores.get(i);
+				buscar = true;
+			}
+			i++;
+		}
+		return aux;
 	}
 	
 	

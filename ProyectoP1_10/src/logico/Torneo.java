@@ -9,6 +9,8 @@ public class Torneo {
 	private ArrayList<Equipo> equipos;
 	private ArrayList<Jugador> jugadores;
 	private static Torneo torneo = null;
+	
+	public static int autoGenCode;
 
 	
 	//Constructor
@@ -17,9 +19,10 @@ public class Torneo {
 		this.juegos =new ArrayList<Juego>();
 		this.equipos = new ArrayList<Equipo>();
 		this.jugadores = new ArrayList<Jugador>();
+		autoGenCode = 0;
 	}
 	
-	public Torneo getInstance() {
+	public static Torneo getInstance() {
 		if(torneo==null) {
 			torneo = new Torneo();
 		}
@@ -51,6 +54,63 @@ public class Torneo {
 	public void setJugadores(ArrayList<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
+
+	public void insertarEquipo(Equipo team) {
+		equipos.add(team);
+		
+	}
+
+	public Equipo buscarEquiporNombre(String nombre) {
+		Equipo aux = null;
+		boolean encontrado = false;
+		int i = 0;
+		while(i<equipos.size() && !encontrado){
+			if(equipos.get(i).getNombre().equalsIgnoreCase(nombre)){
+				aux = equipos.get(i);
+				encontrado = true;
+			}i++;
+
+		}
+		return aux;
+	}
+
+	public void insertarJuego(Juego juego) {
+		autoGenCode = FindCodMayor(juegos);
+		autoGenCode++;
+		//guardar();
+		juegos.add(juego);
+		juego.setJuegoCod(autoGenCode);
+	}
+
+	private int FindCodMayor(ArrayList<Juego> juego) {
+		int cod = 0;
+
+		for (int i = 0; i < juegos.size(); i++) {
+			if(cod < juegos.get(i).getJuegoCod()){
+				cod = juegos.get(i).getJuegoCod();
+			}
+
+		}
+
+		return cod;
+	}
+
+	public Equipo findEquipoByNombre(String nombre) {
+		Equipo aux = null;
+		boolean buscar = false;
+		int i = 0;
+		while(i<equipos.size() && !buscar){
+			if(equipos.get(i).getNombre().equalsIgnoreCase(nombre)){
+				aux = equipos.get(i);
+				buscar = true;
+			}
+			i++;
+
+		}
+		return aux;
+	}
+
+	
 	
 	
 	
