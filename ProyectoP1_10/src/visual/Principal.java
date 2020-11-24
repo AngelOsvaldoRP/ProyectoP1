@@ -31,6 +31,8 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.border.MatteBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
@@ -42,6 +44,7 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private JTextField fecha_textfield;
 	private JTable table;
+	private Dimension dim;
 
 	/**
 	 * Launch the application.
@@ -68,6 +71,9 @@ public class Principal extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\assets\\Logo-AC.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1397, 744);
+		dim = getToolkit().getScreenSize();
+		super.setSize(dim.width, dim.height-50);
+		setLocationRelativeTo(null);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
