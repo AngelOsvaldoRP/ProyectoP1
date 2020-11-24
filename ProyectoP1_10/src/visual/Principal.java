@@ -63,8 +63,8 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
-		setAutoRequestFocus(false);
 		setResizable(false);
+		setAutoRequestFocus(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\assets\\Logo-AC.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1397, 744);
@@ -193,7 +193,7 @@ public class Principal extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 			}
 		});
-		LogoLidom.setIcon(new ImageIcon("..\\assets\\logo lidom.png"));
+		LogoLidom.setIcon(new ImageIcon(Principal.class.getResource("/assets/logo lidom.png")));
 		LogoLidom.setBounds(259, 83, 381, 313);
 		panel.add(LogoLidom);
 		
