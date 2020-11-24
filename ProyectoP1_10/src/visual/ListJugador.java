@@ -41,7 +41,6 @@ public class ListJugador extends JDialog {
 	private JButton btnEliminar;
 	public Jugador aux = null;
 	public static Equipo equipo = null;
-	private JButton btnMoverJugador;
 	private JButton btnVerJugadores;
 
 	/**
@@ -82,8 +81,6 @@ public class ListJugador extends JDialog {
 							int seleccion = table.getSelectedRow();
 							if(seleccion!=-1) {
 								btnEliminar.setEnabled(true);
-								btnModificar.setEnabled(true);
-								btnMoverJugador.setEnabled(true);
 								btnVerJugadores.setEnabled(true);
 								aux = equipo.buscarJugadorByNumero(((Integer)modelo.getValueAt(seleccion, 0)));
 							}
@@ -117,7 +114,6 @@ public class ListJugador extends JDialog {
 							if(seleccion!=-1) {
 								btnEliminar.setEnabled(true);
 								btnModificar.setEnabled(true);
-								btnMoverJugador.setEnabled(true);
 								btnVerJugadores.setEnabled(true);
 								aux = equipo.buscarJugadorByNumero((Integer)modelo.getValueAt(seleccion, 0));
 							}
@@ -141,13 +137,23 @@ public class ListJugador extends JDialog {
 					}
 				});
 				{
-					btnMoverJugador = new JButton("Mover Jugador");
-					btnMoverJugador.setEnabled(false);
-					btnMoverJugador.setActionCommand("OK");
-					buttonPane.add(btnMoverJugador);
-				}
-				{
 					btnVerJugadores = new JButton("Ver Jugador");
+					btnVerJugadores.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							if(aux instanceof Bateo) {
+								EstadisticasJugadorBateo vista = new EstadisticasJugadorBateo(aux);
+								vista.setModal(true);
+								vista.setLocationRelativeTo(null);
+								vista.setVisible(true);
+							}
+							if(aux instanceof Picheo) {
+								EstadisticasJugadorPicheo vista = new EstadisticasJugadorPicheo(aux);
+								vista.setModal(true);
+								vista.setLocationRelativeTo(null);
+								vista.setVisible(true);
+							}
+						}
+					});
 					btnVerJugadores.setEnabled(false);
 					btnVerJugadores.setActionCommand("OK");
 					buttonPane.add(btnVerJugadores);
@@ -170,7 +176,6 @@ public class ListJugador extends JDialog {
 								llenarTabla2();
 								btnEliminar.setEnabled(false);
 								btnModificar.setEnabled(false);
-								btnMoverJugador.setEnabled(true);
 								btnVerJugadores.setEnabled(true);
 							}
 						}
