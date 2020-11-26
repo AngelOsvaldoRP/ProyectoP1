@@ -14,7 +14,9 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import logico.Bateo;
 import logico.Equipo;
+import logico.Jugador;
 import logico.Torneo;
 
 import java.awt.event.ActionListener;
@@ -36,8 +38,13 @@ public class RegEquipo extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegEquipo() {
-		setTitle("Registrar Equipo");
+	public RegEquipo(String modo, Equipo equipo) {
+		if(modo.equalsIgnoreCase("Modificar")){
+			setTitle("Modificar Equipo");
+		}
+		if(modo.equalsIgnoreCase("Registrar")){
+			setTitle("Registrar Equipo");
+		}
 		setResizable(false);
 		setModal(true);
 		setBounds(100, 100, 340, 378);
@@ -100,6 +107,14 @@ public class RegEquipo extends JDialog {
 			txtEstadio.setBounds(120, 214, 178, 22);
 			panel.add(txtEstadio);
 			txtEstadio.setColumns(10);
+			
+			if(modo.equalsIgnoreCase("Modificar")) {
+				txtNombre.setText(equipo.getNombre());
+				txtCiudad.setText(equipo.getCiudad());
+				txtAnno.setText(String.valueOf(equipo.getYearFundation()));
+				txtManager.setText(equipo.getManager());
+				txtEstadio.setText(equipo.getEstadio());
+			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -110,12 +125,16 @@ public class RegEquipo extends JDialog {
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if(modo.equalsIgnoreCase("Modificar")) {
+							equipo.setNombre(txtNombre.getText());
+							equipo.setCiudad(txtCiudad.getText());
+							equipo.setYearFundation(Integer.valueOf(txtAnno.getText()));
+							equipo.setManager(txtManager.getText());
+							equipo.setEstadio(txtEstadio.getText());
+						}
 						if(!txtNombre.getText().equalsIgnoreCase("") && !txtCiudad.getText().equalsIgnoreCase("") && !txtManager.getText().equalsIgnoreCase("")&& !txtAnno.getText().equalsIgnoreCase("") && !txtEstadio.getText().equalsIgnoreCase("")){
 							Equipo team = new Equipo(txtNombre.getText(), Integer.parseInt(txtAnno.getText().toString()), txtManager.getText(), txtCiudad.getText(), txtEstadio.getText());
-							//Torneo.estadio = txtEstadio.getText();
 							Torneo.getInstance().insertarEquipo(team);
-							
-							
 							JOptionPane.showMessageDialog(null, "Equipo ''"+txtNombre.getText()+"'' fue registrado satisfectoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 							clear();
 						}else{

@@ -84,8 +84,10 @@ public class Principal extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Registrar Equipo");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				RegEquipo re = new RegEquipo();
+				RegEquipo re = new RegEquipo("Registrar", null);
 				re.setVisible(true);
+				re.setModal(true);
+				re.setLocationRelativeTo(null);
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
@@ -95,6 +97,8 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			RegJuego rj = new RegJuego();
 			rj.setVisible(true);
+			rj.setModal(true);
+			rj.setLocationRelativeTo(null);
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
@@ -107,6 +111,8 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ListEquipo le = new ListEquipo();
 				le.setVisible(true);
+				le.setModal(true);
+				le.setLocationRelativeTo(null);
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_2);
@@ -132,6 +138,8 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				BuscarEstadisticasJugador bej = new BuscarEstadisticasJugador();
 				bej.setVisible(true);
+				bej.setModal(true);
+				bej.setLocationRelativeTo(null);
 			}
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_4);

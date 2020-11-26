@@ -115,8 +115,8 @@ public class ListJugador extends JDialog {
 								btnEliminar.setEnabled(true);
 								btnModificar.setEnabled(true);
 								btnVerJugadores.setEnabled(true);
-								aux = equipo.buscarJugadorByNumero((Integer)modelo.getValueAt(seleccion, 0));
-								Torneo.nombreJ= (String)modelo.getValueAt(seleccion, 1);
+								aux = equipo.buscarJugadorByNumero((Integer)modelo2.getValueAt(seleccion, 0));
+								Torneo.nombreJ= (String)modelo2.getValueAt(seleccion, 1);
 							}
 						}
 					});
@@ -192,6 +192,11 @@ public class ListJugador extends JDialog {
 						dispose();
 					}
 				});
+				{
+					JButton btnAgregarJugador = new JButton("Agregar Jugador");
+					btnAgregarJugador.setActionCommand("OK");
+					buttonPane.add(btnAgregarJugador);
+				}
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}
@@ -205,15 +210,17 @@ public class ListJugador extends JDialog {
 		modelo.setRowCount(0);
 		filas = new Object[modelo.getColumnCount()];
 		for (Jugador jugador : equipo.getJugadores()) {
-			filas[0] = jugador.getNumeroCamiseta();
-			filas[1] = jugador.getApellido()+","+jugador.getNombre();
-			filas[2] = jugador.getPosicion();
-			filas[3] = jugador.avg();
-			filas[4] = jugador.getCantHits();
-			filas[5] = jugador.getCantHR();
-			filas[6] = jugador.getCantBB();
-			filas[7] = ((Bateo)jugador).obp();
-			modelo.addRow(filas);
+			if(jugador instanceof Bateo) {
+				filas[0] = jugador.getNumeroCamiseta();
+				filas[1] = jugador.getApellido()+","+jugador.getNombre();
+				filas[2] = jugador.getPosicion();
+				filas[3] = jugador.avg();
+				filas[4] = jugador.getCantHits();
+				filas[5] = jugador.getCantHR();
+				filas[6] = jugador.getCantBB();
+				filas[7] = ((Bateo)jugador).obp();
+				modelo.addRow(filas);
+			}
 		}
 		
 	}
@@ -222,16 +229,18 @@ public class ListJugador extends JDialog {
 		modelo2.setRowCount(0);
 		filas2 = new Object[modelo2.getColumnCount()];
 		for (Jugador jugador : equipo.getJugadores()) {
-			filas2[0] = jugador.getNumeroCamiseta();
-			filas2[1] = jugador.getApellido()+","+jugador.getNombre();
-			filas2[2] = jugador.avg();
-			filas2[3] = ((Picheo)jugador).getCantJG();
-			filas2[4] = ((Picheo)jugador).getCantJP();
-			filas2[5] = ((Picheo)jugador).whip();
-			filas2[6] = jugador.getCantPonches();
-			filas2[7] = jugador.getCantBB();
-			filas2[8] = ((Picheo)jugador).getEntradasLanzada();
-			modelo2.addRow(filas2);
+			if(jugador instanceof Picheo) {
+				filas2[0] = jugador.getNumeroCamiseta();
+				filas2[1] = jugador.getApellido()+","+jugador.getNombre();
+				filas2[2] = jugador.avg();
+				filas2[3] = ((Picheo)jugador).getCantJG();
+				filas2[4] = ((Picheo)jugador).getCantJP();
+				filas2[5] = ((Picheo)jugador).whip();
+				filas2[6] = jugador.getCantPonches();
+				filas2[7] = jugador.getCantBB();
+				filas2[8] = ((Picheo)jugador).getEntradasLanzada();
+				modelo2.addRow(filas2);
+			}
 		}
 		
 	}
