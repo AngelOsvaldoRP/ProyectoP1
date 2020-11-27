@@ -236,4 +236,9 @@ public class Equipo {
 		lesiones.add(lesion);
 		
 	}
+
+	public void insertarJugador(Jugador player) {
+		jugadores.add(player);
+		
+	}
 }

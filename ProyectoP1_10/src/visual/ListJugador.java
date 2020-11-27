@@ -72,7 +72,7 @@ public class ListJugador extends JDialog {
 				panel.add(scrollPane);
 				{
 					modelo = new DefaultTableModel();
-					String[] headers = {"No.", "Nombre/Apellido", "Posicion", "AVG", "H", "HR", "BB", "OBP"};
+					String[] headers = {"No.", "Estado", "Nombre", "Apellido", "Posicion", "AVG", "H", "HR", "BB", "OBP"};
 					modelo.setColumnIdentifiers(headers);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -82,7 +82,9 @@ public class ListJugador extends JDialog {
 							if(seleccion!=-1) {
 								btnEliminar.setEnabled(true);
 								btnVerJugadores.setEnabled(true);
+								btnVerJugadores.setEnabled(true);
 								aux = equipo.buscarJugadorByNumero(((Integer)modelo.getValueAt(seleccion, 0)));
+								Torneo.nombreJ= (String)modelo.getValueAt(seleccion, 2);
 							}
 						}
 					});
@@ -104,7 +106,7 @@ public class ListJugador extends JDialog {
 				panel2.add(scrollPane);
 				{
 					modelo2 = new DefaultTableModel();
-					String[] headers = {"No.", "Nombre/Apellido", "JG", "JP", "WHIP", "K", "BB", "IL"};
+					String[] headers = {"No.", "Estado", "Nombre", "Apellido", "AVG", "JG", "JP", "WHIP", "K", "BB", "IL"};
 					modelo2.setColumnIdentifiers(headers);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -116,7 +118,7 @@ public class ListJugador extends JDialog {
 								btnModificar.setEnabled(true);
 								btnVerJugadores.setEnabled(true);
 								aux = equipo.buscarJugadorByNumero((Integer)modelo2.getValueAt(seleccion, 0));
-								Torneo.nombreJ= (String)modelo2.getValueAt(seleccion, 1);
+								Torneo.nombreJ= (String)modelo2.getValueAt(seleccion, 2);
 							}
 						}
 					});
@@ -155,6 +157,15 @@ public class ListJugador extends JDialog {
 							}
 						}
 					});
+					{
+						JButton btnLesionar = new JButton("Lesionar");
+						btnLesionar.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+							}
+						});
+						btnLesionar.setEnabled(false);
+						buttonPane.add(btnLesionar);
+					}
 					btnVerJugadores.setEnabled(false);
 					btnVerJugadores.setActionCommand("OK");
 					buttonPane.add(btnVerJugadores);
@@ -194,6 +205,15 @@ public class ListJugador extends JDialog {
 				});
 				{
 					JButton btnAgregarJugador = new JButton("Agregar Jugador");
+					btnAgregarJugador.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							RegJugador reg = new RegJugador(equipo);
+							reg.setModal(true);
+							reg.setLocationRelativeTo(null);
+							reg.setVisible(true);
+							dispose();
+						}
+					});
 					btnAgregarJugador.setActionCommand("OK");
 					buttonPane.add(btnAgregarJugador);
 				}
@@ -212,13 +232,15 @@ public class ListJugador extends JDialog {
 		for (Jugador jugador : equipo.getJugadores()) {
 			if(jugador instanceof Bateo) {
 				filas[0] = jugador.getNumeroCamiseta();
-				filas[1] = jugador.getApellido()+","+jugador.getNombre();
-				filas[2] = jugador.getPosicion();
-				filas[3] = jugador.avg();
-				filas[4] = jugador.getCantHits();
-				filas[5] = jugador.getCantHR();
-				filas[6] = jugador.getCantBB();
-				filas[7] = ((Bateo)jugador).obp();
+				filas[1] = jugador.getEstado();
+				filas[2] = jugador.getNombre();
+				filas[3] = jugador.getApellido();
+				filas[4] = jugador.getPosicion();
+				filas[5] = jugador.avg();
+				filas[6] = jugador.getCantHits();
+				filas[7] = jugador.getCantHR();
+				filas[8] = jugador.getCantBB();
+				filas[9] = ((Bateo)jugador).obp();
 				modelo.addRow(filas);
 			}
 		}
@@ -231,14 +253,16 @@ public class ListJugador extends JDialog {
 		for (Jugador jugador : equipo.getJugadores()) {
 			if(jugador instanceof Picheo) {
 				filas2[0] = jugador.getNumeroCamiseta();
-				filas2[1] = jugador.getApellido()+","+jugador.getNombre();
-				filas2[2] = jugador.avg();
-				filas2[3] = ((Picheo)jugador).getCantJG();
-				filas2[4] = ((Picheo)jugador).getCantJP();
-				filas2[5] = ((Picheo)jugador).whip();
-				filas2[6] = jugador.getCantPonches();
-				filas2[7] = jugador.getCantBB();
-				filas2[8] = ((Picheo)jugador).getEntradasLanzada();
+				filas2[1] = jugador.getEstado();
+				filas2[2] = jugador.getNombre();
+				filas2[3] = jugador.getApellido();
+				filas2[4] = jugador.avg();
+				filas2[5] = ((Picheo)jugador).getCantJG();
+				filas2[6] = ((Picheo)jugador).getCantJP();
+				filas2[7] = ((Picheo)jugador).whip();
+				filas2[8] = jugador.getCantPonches();
+				filas2[9] = jugador.getCantBB();
+				filas2[10] = ((Picheo)jugador).getEntradasLanzada();
 				modelo2.addRow(filas2);
 			}
 		}

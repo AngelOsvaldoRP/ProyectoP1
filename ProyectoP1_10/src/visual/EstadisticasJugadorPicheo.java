@@ -82,13 +82,13 @@ public class EstadisticasJugadorPicheo extends JDialog {
 				panel.add(lblNewLabel_2);
 			}
 			{
-				JLabel lblNewLabel_4 = new JLabel("Numero de Camiseta:");
+				JLabel lblNewLabel_4 = new JLabel("Numero:");
 				lblNewLabel_4.setBounds(10, 115, 116, 14);
 				panel.add(lblNewLabel_4);
 			}
 			{
 				JLabel lblNewLabel_5 = new JLabel("Posicion:");
-				lblNewLabel_5.setBounds(228, 115, 54, 14);
+				lblNewLabel_5.setBounds(211, 115, 54, 14);
 				panel.add(lblNewLabel_5);
 			}
 			{
@@ -158,7 +158,7 @@ public class EstadisticasJugadorPicheo extends JDialog {
 				txtNumeroC = new JTextField();
 				txtNumeroC.setEditable(false);
 				txtNumeroC.setText(String.valueOf(jugador.getNumeroCamiseta()));
-				txtNumeroC.setBounds(132, 111, 86, 22);
+				txtNumeroC.setBounds(132, 111, 62, 22);
 				panel.add(txtNumeroC);
 				txtNumeroC.setColumns(10);
 			}

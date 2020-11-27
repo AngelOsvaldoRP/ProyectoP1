@@ -13,9 +13,9 @@ public class Bateo extends Jugador {
 	
 	//Constructor
 	public Bateo(String nombre, String apellido, String identificacion, int numeroCamiseta,
-			String equipoActual, String estado, String posicion,
+			int edad, String estado, String posicion,
 			float peso, float altura, String mano) {
-		super(nombre, apellido, identificacion, numeroCamiseta, equipoActual, estado,
+		super(nombre, apellido, identificacion, numeroCamiseta, edad, estado,
 				posicion, peso, altura, mano);
 		this.cantTB = 29;
 		this.cantVP = 0;
