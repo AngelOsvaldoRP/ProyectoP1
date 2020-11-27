@@ -25,6 +25,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
+
+import com.toedter.calendar.JCalendar;
+
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.border.BevelBorder;
@@ -39,13 +42,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JMonthChooser;
 
 public class Principal extends JFrame {
 	private JPanel contentPane;
 	private JTextField fecha_textfield;
 	private JTable table;
 	private Dimension dim;
-
 	/**
 	 * Launch the application.
 	 */
@@ -149,11 +153,9 @@ public class Principal extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		Panel panel = new Panel();
-		panel.setBounds(5, 5, 1381, 684);
-		panel.setSize(dim.width, dim.height-50);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -262,7 +264,6 @@ public class Principal extends JFrame {
 	    int year = fecha.get(Calendar.YEAR);
 	    int mes = fecha.get(Calendar.MONTH);
 	    int dia = fecha.get(Calendar.DAY_OF_MONTH);
-	    
 		fecha_textfield = new JTextField();
 		fecha_textfield.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		fecha_textfield.setHorizontalAlignment(SwingConstants.CENTER);
