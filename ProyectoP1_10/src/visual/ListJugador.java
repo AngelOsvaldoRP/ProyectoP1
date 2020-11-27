@@ -142,6 +142,22 @@ public class ListJugador extends JDialog {
 				btnModificar = new JButton("Modificar Jugador");
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if(aux1 instanceof Bateo) {
+							ModJugador mod = new ModJugador(equipo, aux1);
+							mod.setModal(true);
+							mod.setLocationRelativeTo(null);
+							mod.setVisible(true);
+						
+							dispose();
+						}
+						if(aux2 instanceof Picheo) {
+							ModJugador mod = new ModJugador(equipo, aux2);
+							mod.setModal(true);
+							mod.setLocationRelativeTo(null);
+							mod.setVisible(true);
+							
+							dispose();
+						}
 					}
 				});
 				{

@@ -65,6 +65,7 @@ public class RegJugador extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(!txtNombre.getText().equalsIgnoreCase("")&& !txtNumero.getText().equalsIgnoreCase("")&&
+								!txtIdentificacion.getText().equalsIgnoreCase("")&& cbxMano.getSelectedIndex()!=0 &&
 								!txtAltura.getText().equalsIgnoreCase("#.##")&& !txtPeso.getText().equalsIgnoreCase("###")&&
 								cbxPosicion.getSelectedIndex()!=0){
 							Jugador player = null;
