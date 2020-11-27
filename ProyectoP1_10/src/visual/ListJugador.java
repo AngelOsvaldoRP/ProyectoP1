@@ -182,6 +182,21 @@ public class ListJugador extends JDialog {
 						btnLesionar = new JButton("Lesionar");
 						btnLesionar.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
+								Jugador aux = Torneo.getInstance().buscarJugadorNombreEJ(Torneo.nombreE, Torneo.nombreJ);
+								if(aux.getEstado()!= "Lesionado"){
+									
+								
+								RegJugadorLesionado reg = new RegJugadorLesionado(equipo);
+								
+								reg.setModal(true);
+								reg.setLocationRelativeTo(null);
+								reg.setVisible(true);
+								
+								dispose();
+								
+								}else{
+									JOptionPane.showMessageDialog(null, "El jugador "+Torneo.nombreJ+" ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
+								}
 							}
 						});
 						btnLesionar.setEnabled(false);

@@ -8,10 +8,10 @@ public class Juego {
 	//Variables
 	private int juegoCod;
 	private String estado;
-	private Date fecha;
+	private String fecha;
 	private String hora;
-	private Equipo equipoLocal;
-	private Equipo equipoVisitante;
+	private String equipoLocal;
+	private String equipoVisitante;
 	private String estadio;
 	private String equipoganador;
 	private String equipoPerdedor;
@@ -24,7 +24,7 @@ public class Juego {
 	
 	//Constructor
 	
-	public Juego(String estado, Date fecha, String hora, Equipo equipoLocal, Equipo equipoVisitante,
+	public Juego(String estado, String fecha, String hora, String equipoLocal, String equipoVisitante,
 			String estadio) {
 		super();
 		
@@ -57,11 +57,11 @@ public class Juego {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fechai) {
-		this.fecha = fechai;
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 	public String getHora() {
 		return hora;
@@ -69,16 +69,16 @@ public class Juego {
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
-	public Equipo getEquipoLocal() {
+	public String getEquipoLocal() {
 		return equipoLocal;
 	}
-	public void setEquipoLocal(Equipo equipoLocal) {
+	public void setEquipoLocal(String equipoLocal) {
 		this.equipoLocal = equipoLocal;
 	}
-	public Equipo getEquipoVisitante() {
+	public String getEquipoVisitante() {
 		return equipoVisitante;
 	}
-	public void setEquipoVisitante(Equipo equipoVisitante) {
+	public void setEquipoVisitante(String equipoVisitante) {
 		this.equipoVisitante = equipoVisitante;
 	}
 	public String getEstadio() {

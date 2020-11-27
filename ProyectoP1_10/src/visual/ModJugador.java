@@ -31,7 +31,7 @@ public class ModJugador extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtNombre;
 	private JTextField txtApellido;
-	private JTextField txtNumero;
+	private JFormattedTextField txtNumero;
 	private JFormattedTextField txtAltura;
 	private JFormattedTextField txtPeso;
 	private JSpinner spnEdad;
@@ -162,7 +162,11 @@ public class ModJugador extends JDialog {
 			spnEdad.setBounds(66, 69, 46, 22);
 			panel.add(spnEdad);
 			
-			txtNumero = new JTextField();
+			try{
+				MaskFormatter mascaral= new MaskFormatter("##");
+				mascaral.setPlaceholderCharacter('-');
+				txtNumero =new JFormattedTextField(mascaral);
+			} catch(Exception e){}
 			txtNumero.setText(""+aux.getNumeroCamiseta());
 			txtNumero.setBounds(86, 112, 46, 22);
 			panel.add(txtNumero);

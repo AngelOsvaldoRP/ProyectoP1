@@ -8,10 +8,10 @@ public class Lesion {
 	private String Descripcion;
 	private Jugador jugador;
 	private String estado;
-	private int cantDias;
+	private String cantDias;
 	
 	//Constructor
-	public Lesion(String tipo, String descripcion, Jugador jugador, String estado, int cantDias) {
+	public Lesion(String tipo, String descripcion, Jugador jugador, String estado, String cantDias) {
 		super();
 		
 		this.tipo = tipo;
@@ -63,11 +63,11 @@ public class Lesion {
 		this.estado = estado;
 	}
 
-	public int getCantDias() {
+	public String getCantDias() {
 		return cantDias;
 	}
 
-	public void setCantDias(int cantDias) {
+	public void setCantDias(String cantDias) {
 		this.cantDias = cantDias;
 	}
 }

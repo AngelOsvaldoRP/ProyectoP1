@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import com.toedter.calendar.JDateChooser;
+
 import logico.Juego;
 import logico.Torneo;
 
@@ -30,10 +32,11 @@ public class RegJuego extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtEstadio;
-	private JTextField txtFecha;
 	private JFormattedTextField txtHora;
 	private JComboBox cbxEquipoV;
 	private JComboBox cbxEquipoL;
+	private JDateChooser txtFecha;
+	
 	
 	/**
 	 * Launch the application.
@@ -110,17 +113,23 @@ public class RegJuego extends JDialog {
 		lblNewLabel_4.setBounds(302, 167, 46, 14);
 		panel.add(lblNewLabel_4);
 		
-		txtFecha = new JTextField();
-		txtFecha.setBounds(147, 163, 140, 22);
+		txtFecha = new JDateChooser();
+		txtFecha.getCalendarButton().setForeground(Color.RED);
+		txtFecha.setForeground(Color.RED);
+		txtFecha.setEnabled(false);
+		txtFecha.getCalendarButton().setEnabled(true);
+		txtFecha.getCalendarButton().setBackground(Color.WHITE);
+		txtFecha.setBackground(Color.WHITE);
+		txtFecha.setBounds(138, 167, 140, 22);
 		panel.add(txtFecha);
-		txtFecha.setColumns(10);
+		
 		
 		try{
 			MaskFormatter Hora= new MaskFormatter("##:##");
 			txtHora =new JFormattedTextField(Hora);
 		} catch(Exception e){}
 		
-		txtHora.setBounds(358, 163, 68, 22);
+		txtHora.setBounds(358, 163, 46, 22);
 		panel.add(txtHora);
 		{
 			JPanel buttonPane = new JPanel();
@@ -132,15 +141,30 @@ public class RegJuego extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(cbxEquipoV.getSelectedIndex()!=0 && cbxEquipoV.getSelectedIndex()!=0 && !txtEstadio.getText().equalsIgnoreCase("") &&
-						!txtHora.getText().equalsIgnoreCase("  :  ")){
-							if (cbxEquipoV.getSelectedIndex()== cbxEquipoV.getSelectedIndex()){
+						!txtHora.getText().equalsIgnoreCase("  :  ") && txtFecha.getCalendar()!=null ){
+							
+							if (cbxEquipoV.getSelectedIndex()== cbxEquipoL.getSelectedIndex()){
 								JOptionPane.showMessageDialog(null, "Los Equipos no pueden ser iguales", null, JOptionPane.ERROR_MESSAGE, null);
 			
 							}else{
 								Juego juego = null;
-								//juego = new Juego(visitante, local, fecha, estadio, hora, true);
+								String local = cbxEquipoL.getSelectedItem().toString();
+								String visitante = cbxEquipoV.getSelectedItem().toString();
+								String estadio = txtEstadio.getText();
+								String dia = Integer.toString(txtFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
+								String mes = Integer.toString(txtFecha.getCalendar().get(Calendar.MONTH)+1);
+								String anno = Integer.toString(txtFecha.getCalendar().get(Calendar.YEAR));
+								String fecha =(dia+"-"+mes+"-"+anno);
+								String hora = txtHora.getText();
+								String estado = "En espera";
+								
+								juego = new Juego(estado, fecha, hora, local, visitante, estadio);
 								Torneo.getInstance().insertarJuego(juego);
+								
+								JOptionPane.showMessageDialog(null, "El juego se registró sastifactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+								clear();
 							}
+							
 						}else{
 						
 						JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
@@ -162,6 +186,16 @@ public class RegJuego extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+			
+			
 		}
 	}
+	public void clear(){
+		
+		
+		txtHora.setText("");
+		txtFecha.setDateFormatString("");
+		
+	}
+	
 }

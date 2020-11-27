@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import com.toedter.calendar.JDateChooser;
+
 import logico.Equipo;
 import logico.Jugador;
 import logico.Lesion;
@@ -21,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 
 public class RegJugadorLesionado extends JDialog {
@@ -28,26 +31,20 @@ public class RegJugadorLesionado extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtDescripcion;
 	private JTextField txtNombre;
-	private JTextField txtCantDias;
+	private JDateChooser txtCantDias;
 	private JComboBox cbxCausa;
+	private Equipo equip;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			RegJugadorLesionado dialog = new RegJugadorLesionado();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
 	 */
-	public RegJugadorLesionado() {
+	public RegJugadorLesionado(Equipo team) {
+		this.equip=team;
 		setTitle("Lesionar Jugador");
 		setResizable(false);
 		setBounds(100, 100, 493, 267);
@@ -99,10 +96,12 @@ public class RegJugadorLesionado extends JDialog {
 				txtNombre.setColumns(10);
 			}
 			{
-				txtCantDias = new JTextField();
+				txtCantDias = new JDateChooser();
+				txtCantDias.setEnabled(false);
+				txtCantDias.getCalendarButton().setEnabled(true);
 				txtCantDias.setBounds(122, 143, 86, 22);
 				panel.add(txtCantDias);
-				txtCantDias.setColumns(10);
+				
 			}
 			{
 				cbxCausa = new JComboBox();
@@ -120,17 +119,21 @@ public class RegJugadorLesionado extends JDialog {
 				JButton okButton = new JButton("Lesionar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(cbxCausa.getSelectedIndex() !=0 && !txtDescripcion.getText().equalsIgnoreCase("") && !txtCantDias.getText().equalsIgnoreCase("")){
+						if(cbxCausa.getSelectedIndex() !=0 && !txtDescripcion.getText().equalsIgnoreCase("") &&
+								txtCantDias.getCalendar()!=null){
 							
-							Equipo team= Torneo.getInstance().buscarEquiporNombre(Torneo.nombreE);
+							Equipo team= Torneo.getInstance().buscarEquiporNombre(equip.getNombre());
 							Lesion lesion = null;
 							
 							String causa = cbxCausa.getSelectedItem().toString();
 							String descripcion = txtDescripcion.getText();
-							//CantidadDias
+							String dia = Integer.toString(txtCantDias.getCalendar().get(Calendar.DAY_OF_MONTH));
+							String mes = Integer.toString(txtCantDias.getCalendar().get(Calendar.MONTH)+1);
+							String anno = Integer.toString(txtCantDias.getCalendar().get(Calendar.YEAR));
+							String fecha =(dia+"-"+mes+"-"+anno);
 							Jugador player= Torneo.getInstance().buscarJugadorNombreEJ(Torneo.nombreE, Torneo.nombreJ);
 							String estado= "Activa";
-							//lesion = new Lesion(causa, descripcion, player, estado, cantDias);
+							lesion = new Lesion(causa, descripcion, player, estado, fecha);
 							
 							team.insertarLesion(lesion);
 							player.setEstado("Lesionado");

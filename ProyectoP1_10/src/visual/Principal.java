@@ -42,8 +42,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import com.toedter.calendar.JDayChooser;
-import com.toedter.calendar.JMonthChooser;
 
 public class Principal extends JFrame {
 	private JPanel contentPane;
@@ -100,9 +98,10 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			RegJuego rj = new RegJuego();
-			rj.setVisible(true);
+			
 			rj.setModal(true);
 			rj.setLocationRelativeTo(null);
+			rj.setVisible(true);
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
