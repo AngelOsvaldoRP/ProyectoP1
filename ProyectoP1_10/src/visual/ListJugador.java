@@ -32,16 +32,19 @@ import java.awt.Color;
 public class ListJugador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
+	private JTable table1;
+	private JTable table2;
 	public static DefaultTableModel modelo;
 	public static Object[] filas;
 	public static DefaultTableModel modelo2;
 	public static Object[] filas2;
 	private JButton btnModificar;
 	private JButton btnEliminar;
-	public Jugador aux = null;
+	public Jugador aux1 = null;
+	public Jugador aux2 = null;
 	public static Equipo equipo = null;
 	private JButton btnVerJugadores;
+	private JButton btnLesionar;
 
 	/**
 	 * Launch the application.
@@ -74,23 +77,24 @@ public class ListJugador extends JDialog {
 					modelo = new DefaultTableModel();
 					String[] headers = {"No.", "Estado", "Nombre", "Apellido", "Posicion", "AVG", "H", "HR", "BB", "OBP"};
 					modelo.setColumnIdentifiers(headers);
-					table = new JTable();
-					table.addMouseListener(new MouseAdapter() {
+					table1 = new JTable();
+					table1.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							int seleccion = table.getSelectedRow();
+							int seleccion = table1.getSelectedRow();
 							if(seleccion!=-1) {
 								btnEliminar.setEnabled(true);
+								btnModificar.setEnabled(true);
 								btnVerJugadores.setEnabled(true);
-								btnVerJugadores.setEnabled(true);
-								aux = equipo.buscarJugadorByNumero(((Integer)modelo.getValueAt(seleccion, 0)));
+								btnLesionar.setEnabled(true);
+								aux1 = equipo.buscarJugadorByNumero(((Integer)modelo.getValueAt(seleccion, 0)));
 								Torneo.nombreJ= (String)modelo.getValueAt(seleccion, 2);
 							}
 						}
 					});
-					table.setModel(modelo);
-					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					scrollPane.setViewportView(table);
+					table1.setModel(modelo);
+					table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					scrollPane.setViewportView(table1);
 				}
 			}
 		}
@@ -108,23 +112,24 @@ public class ListJugador extends JDialog {
 					modelo2 = new DefaultTableModel();
 					String[] headers = {"No.", "Estado", "Nombre", "Apellido", "AVG", "JG", "JP", "WHIP", "K", "BB", "IL"};
 					modelo2.setColumnIdentifiers(headers);
-					table = new JTable();
-					table.addMouseListener(new MouseAdapter() {
+					table2 = new JTable();
+					table2.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							int seleccion = table.getSelectedRow();
+							int seleccion = table2.getSelectedRow();
 							if(seleccion!=-1) {
 								btnEliminar.setEnabled(true);
 								btnModificar.setEnabled(true);
 								btnVerJugadores.setEnabled(true);
-								aux = equipo.buscarJugadorByNumero((Integer)modelo2.getValueAt(seleccion, 0));
+								btnLesionar.setEnabled(true);
+								aux2 = equipo.buscarJugadorByNumero((Integer)modelo2.getValueAt(seleccion, 0));
 								Torneo.nombreJ= (String)modelo2.getValueAt(seleccion, 2);
 							}
 						}
 					});
-					table.setModel(modelo2);
-					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					scrollPane.setViewportView(table);
+					table2.setModel(modelo2);
+					table2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					scrollPane.setViewportView(table2);
 				}
 			}
 		}
@@ -143,14 +148,14 @@ public class ListJugador extends JDialog {
 					btnVerJugadores = new JButton("Ver Jugador");
 					btnVerJugadores.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							if(aux instanceof Bateo) {
-								EstadisticasJugadorBateo vista = new EstadisticasJugadorBateo(aux);
+							if(aux1 instanceof Bateo) {
+								EstadisticasJugadorBateo vista = new EstadisticasJugadorBateo(aux1);
 								vista.setModal(true);
 								vista.setLocationRelativeTo(null);
 								vista.setVisible(true);
 							}
-							if(aux instanceof Picheo) {
-								EstadisticasJugadorPicheo vista = new EstadisticasJugadorPicheo(aux);
+							if(aux2 instanceof Picheo) {
+								EstadisticasJugadorPicheo vista = new EstadisticasJugadorPicheo(aux2);
 								vista.setModal(true);
 								vista.setLocationRelativeTo(null);
 								vista.setVisible(true);
@@ -158,7 +163,7 @@ public class ListJugador extends JDialog {
 						}
 					});
 					{
-						JButton btnLesionar = new JButton("Lesionar");
+						btnLesionar = new JButton("Lesionar");
 						btnLesionar.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 							}
@@ -179,11 +184,23 @@ public class ListJugador extends JDialog {
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(aux!=null) {
-							int option = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar al jugador: "+aux.getNombre(), "Confirmacion", JOptionPane.WARNING_MESSAGE);
+						if(aux1!=null) {
+							int option = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar al jugador: "+aux1.getNombre(), "Confirmacion", JOptionPane.WARNING_MESSAGE);
 							if(option == JOptionPane.OK_OPTION) {
-								Torneo.getInstance().eliminarJugador(aux);
-								equipo.eliminarJugador(aux);
+								Torneo.getInstance().eliminarJugador(aux1);
+								equipo.eliminarJugador(aux1);
+								llenarTabla();
+								llenarTabla2();
+								btnEliminar.setEnabled(false);
+								btnModificar.setEnabled(false);
+								btnVerJugadores.setEnabled(true);
+							}
+						}
+						if(aux2!=null) {
+							int option = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar al jugador: "+aux2.getNombre(), "Confirmacion", JOptionPane.WARNING_MESSAGE);
+							if(option == JOptionPane.OK_OPTION) {
+								Torneo.getInstance().eliminarJugador(aux2);
+								equipo.eliminarJugador(aux2);
 								llenarTabla();
 								llenarTabla2();
 								btnEliminar.setEnabled(false);

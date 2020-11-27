@@ -40,18 +40,6 @@ public class ListEquipo extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListEquipo frame = new ListEquipo();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	/**
 	 * Create the dialog.
 	 *
@@ -113,6 +101,7 @@ public class ListEquipo extends JDialog {
 						re.setVisible(true);
 						re.setModal(true);
 						re.setLocationRelativeTo(null);
+						llenarTabla();
 					}
 				});
 				{

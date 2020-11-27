@@ -30,6 +30,7 @@ public class RegEquipo extends JDialog {
 	private JTextField txtAnno;
 	private JTextField txtManager;
 	private JTextField txtEstadio;
+	private JButton btnRegistrar;
 
 	/**
 	 * Launch the application.
@@ -114,6 +115,7 @@ public class RegEquipo extends JDialog {
 				txtAnno.setText(String.valueOf(equipo.getYearFundation()));
 				txtManager.setText(equipo.getManager());
 				txtEstadio.setText(equipo.getEstadio());
+				
 			}
 		}
 		{
@@ -122,24 +124,40 @@ public class RegEquipo extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnRegistrar = new JButton("Registrar");
+				if(modo.equalsIgnoreCase("Modificar")) {
+					btnRegistrar = new JButton("Modificar");
+				}
+				if(modo.equalsIgnoreCase("Registrar")) {
+					btnRegistrar = new JButton("Registrar");
+				}
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(modo.equalsIgnoreCase("Modificar")) {
-							equipo.setNombre(txtNombre.getText());
-							equipo.setCiudad(txtCiudad.getText());
-							equipo.setYearFundation(Integer.valueOf(txtAnno.getText()));
-							equipo.setManager(txtManager.getText());
-							equipo.setEstadio(txtEstadio.getText());
+							if(!txtNombre.getText().equalsIgnoreCase("") && !txtCiudad.getText().equalsIgnoreCase("") && !txtManager.getText().equalsIgnoreCase("")&& !txtAnno.getText().equalsIgnoreCase("") && !txtEstadio.getText().equalsIgnoreCase("")){
+								equipo.setNombre(txtNombre.getText());
+								equipo.setCiudad(txtCiudad.getText());
+								equipo.setYearFundation(Integer.valueOf(txtAnno.getText()));
+								equipo.setManager(txtManager.getText());
+								equipo.setEstadio(txtEstadio.getText());
+								JOptionPane.showMessageDialog(null, "Equipo ''"+txtNombre.getText()+"'' fue registrado satisfectoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+								dispose();
+							}
+							else{
+								JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+							}
 						}
-						if(!txtNombre.getText().equalsIgnoreCase("") && !txtCiudad.getText().equalsIgnoreCase("") && !txtManager.getText().equalsIgnoreCase("")&& !txtAnno.getText().equalsIgnoreCase("") && !txtEstadio.getText().equalsIgnoreCase("")){
-							Equipo team = new Equipo(txtNombre.getText(), Integer.parseInt(txtAnno.getText().toString()), txtManager.getText(), txtCiudad.getText(), txtEstadio.getText());
-							Torneo.getInstance().insertarEquipo(team);
-							JOptionPane.showMessageDialog(null, "Equipo ''"+txtNombre.getText()+"'' fue registrado satisfectoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-							clear();
-						}else{
-							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+						if(modo.equalsIgnoreCase("Registrar")) {
+							if(!txtNombre.getText().equalsIgnoreCase("") && !txtCiudad.getText().equalsIgnoreCase("") && !txtManager.getText().equalsIgnoreCase("")&& !txtAnno.getText().equalsIgnoreCase("") && !txtEstadio.getText().equalsIgnoreCase("")){
+								Equipo team = new Equipo(txtNombre.getText(), Integer.parseInt(txtAnno.getText().toString()), txtManager.getText(), txtCiudad.getText(), txtEstadio.getText());
+								Torneo.getInstance().insertarEquipo(team);
+								JOptionPane.showMessageDialog(null, "Equipo ''"+txtNombre.getText()+"'' fue registrado satisfectoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+								clear();
+							}
+							else{
+								JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+							}
 						}
+						
 					}
 				});
 				btnRegistrar.setActionCommand("OK");
