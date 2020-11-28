@@ -32,7 +32,6 @@ public class ListLesionado extends JDialog {
 	private JTable table;
 	public static DefaultTableModel modelo;
 	public static Object[] filas;
-	private JButton btnModificar;
 	private JButton btnEliminar;
 	public Jugador aux = null;
 	private static Equipo equipoSelected = null;
@@ -74,8 +73,9 @@ public class ListLesionado extends JDialog {
 							int seleccion = table.getSelectedRow();
 							if(seleccion!=-1) {
 								btnEliminar.setEnabled(true);
-								btnModificar.setEnabled(true);
+								
 								aux = equipoSelected.buscarJugadorByNumero((Integer)modelo.getValueAt(seleccion, 0));
+								
 							}
 						}
 					});
@@ -91,22 +91,11 @@ public class ListLesionado extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnModificar = new JButton("Ver Informacion");
-				btnModificar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				btnModificar.setEnabled(false);
-				btnModificar.setActionCommand("OK");
-				buttonPane.add(btnModificar);
-				getRootPane().setDefaultButton(btnModificar);
-			}
-			{
 				btnEliminar = new JButton("Reactivar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						aux.setEstado("Activo");
-						Torneo.getInstance().buscarJugadorByIdentificacion(aux.getIdentificacion()).setEstado("Activo");
+						aux.setEstado("Terminada");
+						Torneo.getInstance().buscarJugadorByIdentificacion(aux.getIdentificacion()).setEstado("Disponible");
 						llenarTabla();
 					}
 				});
@@ -135,7 +124,7 @@ public class ListLesionado extends JDialog {
 			filas[0] = lesion.getJugador().getNumeroCamiseta();
 			filas[1] = lesion.getJugador().getNombre()+lesion.getJugador().getApellido();
 			filas[2] = lesion.getTipo();
-			filas[3] = lesion.getJugador().getEstado();
+			filas[3] = lesion.getEstado();
 			filas[4] = lesion.getCantDias();
 			modelo.addRow(filas);
 		}
