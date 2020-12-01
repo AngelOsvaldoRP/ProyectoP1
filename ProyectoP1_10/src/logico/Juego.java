@@ -1,9 +1,5 @@
 package logico;
 
-//Import library
-import java.sql.Date;
-
-
 public class Juego {
 	//Variables
 	private int juegoCod;
