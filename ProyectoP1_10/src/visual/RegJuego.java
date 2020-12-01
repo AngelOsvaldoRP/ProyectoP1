@@ -244,6 +244,7 @@ public class RegJuego extends JDialog {
     public static synchronized java.util.Date StringToDate(String fecha) {
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
         Date fechaEnviar = null;
+        
         try {
             fechaEnviar = formatoDelTexto.parse(fecha);
             return fechaEnviar;
