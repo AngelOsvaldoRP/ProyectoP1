@@ -90,7 +90,7 @@ public class RegJugadorLesionado extends JDialog {
 				txtNombre = new JTextField();
 				txtNombre.setBackground(Color.WHITE);
 				
-				txtNombre.setText(jugador.getNombre()+", "+jugador.getApellido());
+				txtNombre.setText(jugador.getNombre()+" "+jugador.getApellido());
 				txtNombre.setEditable(false);
 				txtNombre.setBounds(86, 30, 362, 22);
 				panel.add(txtNombre);
