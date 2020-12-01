@@ -91,6 +91,9 @@ public class RegJugadorLesionado extends JDialog {
 				txtNombre.setBackground(Color.WHITE);
 				
 				txtNombre.setText(jugador.getNombre()+", "+jugador.getApellido());
+
+				txtNombre.setText(jugador.getNombre()+" "+jugador.getApellido());
+
 				txtNombre.setEditable(false);
 				txtNombre.setBounds(86, 30, 362, 22);
 				panel.add(txtNombre);
@@ -141,7 +144,7 @@ public class RegJugadorLesionado extends JDialog {
 								String fecha =(dia+"-"+mes+"-"+anno);
 								String estado= "Activa";
 								lesion = new Lesion(causa, descripcion, jugador, estado, fecha);
-								 
+
 								team.insertarLesion(lesion);
 								jugador.setEstado("Lesionado");
 								

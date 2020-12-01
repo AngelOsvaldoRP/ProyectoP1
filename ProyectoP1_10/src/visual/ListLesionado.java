@@ -122,7 +122,7 @@ public class ListLesionado extends JDialog {
 		filas = new Object[modelo.getColumnCount()];
 		for (Lesion lesion : equipoSelected.getLesiones()) {
 			filas[0] = lesion.getJugador().getNumeroCamiseta();
-			filas[1] = lesion.getJugador().getNombre()+lesion.getJugador().getApellido();
+			filas[1] = lesion.getJugador().getNombre()+" "+lesion.getJugador().getApellido();
 			filas[2] = lesion.getTipo();
 			filas[3] = lesion.getEstado();
 			filas[4] = lesion.getCantDias();

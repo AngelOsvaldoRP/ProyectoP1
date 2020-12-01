@@ -148,9 +148,10 @@ public class Principal extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				BuscarEstadisticasJugador bej = new BuscarEstadisticasJugador();
-				bej.setVisible(true);
+				
 				bej.setModal(true);
 				bej.setLocationRelativeTo(null);
+				bej.setVisible(true);
 			}
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_4);

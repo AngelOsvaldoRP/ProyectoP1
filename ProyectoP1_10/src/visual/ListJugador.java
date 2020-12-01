@@ -30,7 +30,6 @@ import javax.swing.UIManager;
 import java.awt.Color;
 
 public class ListJugador extends JDialog {
-	//Hola
 	private final JPanel contentPanel = new JPanel();
 	private JTable table1;
 	private JTable table2;
@@ -195,7 +194,11 @@ public class ListJugador extends JDialog {
 								dispose();
 								}
 								if(jugadorALesionar.getEstado()== "Lesionado"){
+
 					 				JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
+
+									JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
+
 								}
 							}
 						});

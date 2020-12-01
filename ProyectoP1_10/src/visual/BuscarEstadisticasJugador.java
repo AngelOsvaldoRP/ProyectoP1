@@ -12,6 +12,7 @@ import javax.swing.border.TitledBorder;
 import logico.Bateo;
 import logico.Equipo;
 import logico.Jugador;
+import logico.Picheo;
 import logico.Torneo;
 
 import javax.swing.JLabel;
@@ -100,7 +101,7 @@ public class BuscarEstadisticasJugador extends JDialog {
 										
 										clear();
 									}
-									if(jugador instanceof Bateo) {
+									if(jugador instanceof Picheo) {
 										EstadisticasJugadorPicheo pich = new EstadisticasJugadorPicheo(jugador);
 										pich.setModal(true);
 										pich.setLocationRelativeTo(null);
