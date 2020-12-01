@@ -88,7 +88,6 @@ public class ListJugador extends JDialog {
 								btnVerJugadores.setEnabled(true);
 								btnLesionar.setEnabled(true);
 								aux1 = equipo.buscarJugadorByNumero(((Integer)modelo.getValueAt(seleccion, 0)));
-								Torneo.nombreJ= (String)modelo.getValueAt(seleccion, 2);
 							}
 						}
 					});
@@ -123,7 +122,6 @@ public class ListJugador extends JDialog {
 								btnVerJugadores.setEnabled(true);
 								btnLesionar.setEnabled(true);
 								aux2 = equipo.buscarJugadorByNumero((Integer)modelo2.getValueAt(seleccion, 0));
-								Torneo.nombreJ= (String)modelo2.getValueAt(seleccion, 2);
 							}
 						}
 					});
@@ -182,20 +180,22 @@ public class ListJugador extends JDialog {
 						btnLesionar = new JButton("Lesionar");
 						btnLesionar.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								Jugador aux = Torneo.getInstance().buscarJugadorNombreEJ(Torneo.nombreE, Torneo.nombreJ);
-								if(aux.getEstado()!= "Lesionado"){
-									
-								
-								RegJugadorLesionado reg = new RegJugadorLesionado(equipo);
-								
+								Jugador jugadorALesionar = null;
+								if(aux1==null && aux2!=null) {
+									jugadorALesionar = aux2;
+								}
+								if(aux2==null && aux1!=null) {
+									jugadorALesionar = aux1;
+								}
+								if(jugadorALesionar.getEstado()!= "Lesionado"){
+								RegJugadorLesionado reg = new RegJugadorLesionado(jugadorALesionar);
 								reg.setModal(true);
 								reg.setLocationRelativeTo(null);
 								reg.setVisible(true);
-								
 								dispose();
-								
-								}else{
-									JOptionPane.showMessageDialog(null, "El jugador "+Torneo.nombreJ+" ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
+								}
+								if(jugadorALesionar.getEstado()== "Lesionado"){
+									JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
 								}
 							}
 						});

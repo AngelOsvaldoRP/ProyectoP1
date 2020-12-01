@@ -37,7 +37,6 @@ public class RegJugadorLesionado extends JDialog {
 	private JTextField txtNombre;
 	private JDateChooser txtCantDias;
 	private JComboBox cbxCausa;
-	private Equipo equip;
 
 	/**
 	 * Launch the application.
@@ -47,8 +46,7 @@ public class RegJugadorLesionado extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegJugadorLesionado(Equipo team) {
-		this.equip=team;
+	public RegJugadorLesionado(Jugador jugador) {
 		setTitle("Lesionar Jugador");
 		setResizable(false);
 		setBounds(100, 100, 493, 267);
@@ -92,8 +90,7 @@ public class RegJugadorLesionado extends JDialog {
 				txtNombre = new JTextField();
 				txtNombre.setBackground(Color.WHITE);
 				
-				Jugador aux= Torneo.getInstance().buscarJugadorNombreEJ(Torneo.nombreE, Torneo.nombreJ);
-				txtNombre.setText(aux.getNombre()+", "+aux.getApellido());
+				txtNombre.setText(jugador.getNombre()+", "+jugador.getApellido());
 				txtNombre.setEditable(false);
 				txtNombre.setBounds(86, 30, 362, 22);
 				panel.add(txtNombre);
@@ -134,21 +131,19 @@ public class RegJugadorLesionado extends JDialog {
 								JOptionPane.showMessageDialog(null, "La fecha para la cantidad de dias no puede ser pasada", null, JOptionPane.ERROR_MESSAGE, null);
 							
 							}else{
-								Equipo team= Torneo.getInstance().buscarEquiporNombre(equip.getNombre());
+								Equipo team= Torneo.getInstance().buscarEquiporNombre(jugador.getEquipoActual());
 								Lesion lesion = null;
-							
 								String causa = cbxCausa.getSelectedItem().toString();
 								String descripcion = txtDescripcion.getText();
 								String dia = Integer.toString(txtCantDias.getCalendar().get(Calendar.DAY_OF_MONTH));
 								String mes = Integer.toString(txtCantDias.getCalendar().get(Calendar.MONTH)+1);
 								String anno = Integer.toString(txtCantDias.getCalendar().get(Calendar.YEAR));
 								String fecha =(dia+"-"+mes+"-"+anno);
-								Jugador player= Torneo.getInstance().buscarJugadorNombreEJ(Torneo.nombreE, Torneo.nombreJ);
 								String estado= "Activa";
-								lesion = new Lesion(causa, descripcion, player, estado, fecha);
+								lesion = new Lesion(causa, descripcion, jugador, estado, fecha);
 								
 								team.insertarLesion(lesion);
-								player.setEstado("Lesionado");
+								jugador.setEstado("Lesionado");
 								
 								JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado.", null, JOptionPane.INFORMATION_MESSAGE, null);
 								dispose();
