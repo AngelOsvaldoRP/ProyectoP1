@@ -31,6 +31,8 @@ import java.awt.Color;
 
 public class ListJugador extends JDialog {
 
+	//HolaEstoEsUnaPrueba
+	
 	private final JPanel contentPanel = new JPanel();
 	private JTable table1;
 	private JTable table2;
