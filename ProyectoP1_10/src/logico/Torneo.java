@@ -10,12 +10,9 @@ public class Torneo {
 	private ArrayList<Jugador> jugadores;
 	private static Torneo torneo = null;
 	
-	public static String nombreJ;
-	public static String nombreE;
-	
 	public static int autoGenCode;
 
-	
+	 
 	//Constructor
 	private Torneo() {
 		super();

@@ -78,7 +78,6 @@ public class ListEquipo extends JDialog {
 								btnEliminar.setEnabled(true);
 								btnModificar.setEnabled(true);
 								aux = Torneo.getInstance().buscarEquiporNombre((String)modelo.getValueAt(seleccion, 0));
-								Torneo.nombreE = (String)modelo.getValueAt(seleccion, 0);
 							}
 						}
 					});
@@ -144,7 +143,7 @@ public class ListEquipo extends JDialog {
 				buttonPane.add(btnModificar);
 				getRootPane().setDefaultButton(btnModificar);
 			}
-			{
+			{ 
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
