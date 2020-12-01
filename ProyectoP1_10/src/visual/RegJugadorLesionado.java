@@ -109,7 +109,7 @@ public class RegJugadorLesionado extends JDialog {
 			}
 			{
 				cbxCausa = new JComboBox();
-				cbxCausa.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
+				cbxCausa.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Fractura", "Molestias", "Desgarre", "Enfermedad", "Esguince"}));
 				cbxCausa.setBounds(86, 66, 114, 22);
 				panel.add(cbxCausa);
 			}
