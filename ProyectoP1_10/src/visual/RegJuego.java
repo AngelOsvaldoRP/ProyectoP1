@@ -20,10 +20,14 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.border.TitledBorder;
@@ -110,7 +114,7 @@ public class RegJuego extends JDialog {
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Hora:");
-		lblNewLabel_4.setBounds(302, 167, 46, 14);
+		lblNewLabel_4.setBounds(315, 167, 46, 14);
 		panel.add(lblNewLabel_4);
 		
 		txtFecha = new JDateChooser();
@@ -119,8 +123,8 @@ public class RegJuego extends JDialog {
 		txtFecha.setEnabled(false);
 		txtFecha.getCalendarButton().setEnabled(true);
 		txtFecha.getCalendarButton().setBackground(Color.WHITE);
-		txtFecha.setBackground(Color.WHITE);
-		txtFecha.setBounds(138, 167, 140, 22);
+		txtFecha.setBackground(Color.BLACK);
+		txtFecha.setBounds(138, 167, 167, 22);
 		panel.add(txtFecha);
 		
 		
@@ -129,7 +133,7 @@ public class RegJuego extends JDialog {
 			txtHora =new JFormattedTextField(Hora);
 		} catch(Exception e){}
 		
-		txtHora.setBounds(358, 163, 46, 22);
+		txtHora.setBounds(371, 167, 46, 22);
 		panel.add(txtHora);
 		{
 			JPanel buttonPane = new JPanel();
@@ -143,26 +147,37 @@ public class RegJuego extends JDialog {
 						if(cbxEquipoV.getSelectedIndex()!=0 && cbxEquipoV.getSelectedIndex()!=0 && !txtEstadio.getText().equalsIgnoreCase("") &&
 						!txtHora.getText().equalsIgnoreCase("  :  ") && txtFecha.getCalendar()!=null ){
 							
-							if (cbxEquipoV.getSelectedIndex()== cbxEquipoL.getSelectedIndex()){
-								JOptionPane.showMessageDialog(null, "Los Equipos no pueden ser iguales", null, JOptionPane.ERROR_MESSAGE, null);
-			
+							Date fechaActual = StringToDate(getFechaActual());
+							Date fechaElegida = txtFecha.getDate();
+						
+							if(diferenciasDeFechas(fechaActual, fechaElegida)<0){
+								
+								JOptionPane.showMessageDialog(null, "EL juego no puede ser registrado con una fecha pasada", null, JOptionPane.ERROR_MESSAGE, null);
+							
 							}else{
-								Juego juego = null;
-								String local = cbxEquipoL.getSelectedItem().toString();
-								String visitante = cbxEquipoV.getSelectedItem().toString();
-								String estadio = txtEstadio.getText();
-								String dia = Integer.toString(txtFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
-								String mes = Integer.toString(txtFecha.getCalendar().get(Calendar.MONTH)+1);
-								String anno = Integer.toString(txtFecha.getCalendar().get(Calendar.YEAR));
-								String fecha =(dia+"-"+mes+"-"+anno);
-								String hora = txtHora.getText();
-								String estado = "En espera";
 								
-								juego = new Juego(estado, fecha, hora, local, visitante, estadio);
-								Torneo.getInstance().insertarJuego(juego);
+								if (cbxEquipoV.getSelectedIndex()== cbxEquipoL.getSelectedIndex()){
+									JOptionPane.showMessageDialog(null, "Los Equipos no pueden ser iguales", null, JOptionPane.ERROR_MESSAGE, null);
+			
+								}else{
+									Juego juego = null;
+									String local = cbxEquipoL.getSelectedItem().toString();
+									String visitante = cbxEquipoV.getSelectedItem().toString();
+									String estadio = txtEstadio.getText();
+									String dia = Integer.toString(txtFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
+									String mes = Integer.toString(txtFecha.getCalendar().get(Calendar.MONTH)+1);
+									String anno = Integer.toString(txtFecha.getCalendar().get(Calendar.YEAR));
+									String fecha =(dia+"-"+mes+"-"+anno);
+									String hora = txtHora.getText();
+									String estado = "En espera";
 								
-								JOptionPane.showMessageDialog(null, "El juego se registró sastifactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-								clear();
+									juego = new Juego(estado, fecha, hora, local, visitante, estadio);
+									Torneo.getInstance().insertarJuego(juego);
+								
+									JOptionPane.showMessageDialog(null, "El juego se registró sastifactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+									clear();
+									
+								}
 							}
 							
 						}else{
@@ -190,11 +205,55 @@ public class RegJuego extends JDialog {
 			
 		}
 	}
+	
+	//Metodo usado para obtener la fecha actual
+    //Retorna un <b>STRING</b> con la fecha actual formato "dd-MM-yyyy"
+	
+	public static String getFechaActual() {
+        Date FechaA = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        return formato.format(FechaA);
+    }
+	
+	//Metodo para opbtener la diferencia entre las fechas. Retorna el numero de dias entre dos fechas
+	
+    public static synchronized int diferenciasDeFechas(Date fechaActual, Date fechaElegida){
+
+        DateFormat dateFormat =new SimpleDateFormat("MM/dd/yyyy");
+        
+        String fechaActualString = dateFormat.format(fechaActual);
+        try {
+        	fechaActual = dateFormat.parse(fechaActualString);
+        } catch (ParseException ex) {
+        }
+
+        String fechaElegidaString = dateFormat.format(fechaElegida);
+        try {
+        	fechaElegida = dateFormat.parse(fechaElegidaString);
+        } catch (ParseException ex) {
+        }
+  
+        long diferencia = fechaElegida.getTime() - fechaActual.getTime();
+        double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        return ((int) dias);
+    }
+	
+	
+	//Metodo para devolver un java.util.Date desde un String en formato dd-MM-yyyy
+  
+    public static synchronized java.util.Date StringToDate(String fecha) {
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
+        Date fechaEnviar = null;
+        try {
+            fechaEnviar = formatoDelTexto.parse(fecha);
+            return fechaEnviar;
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+            return null;
+        } 
+    }
 	public void clear(){
-		
-		
 		txtHora.setText("");
-		txtFecha.setDateFormatString("");
 		
 	}
 	

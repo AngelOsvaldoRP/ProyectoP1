@@ -23,7 +23,11 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 public class RegJugadorLesionado extends JDialog {
@@ -99,7 +103,7 @@ public class RegJugadorLesionado extends JDialog {
 				txtCantDias = new JDateChooser();
 				txtCantDias.setEnabled(false);
 				txtCantDias.getCalendarButton().setEnabled(true);
-				txtCantDias.setBounds(122, 143, 86, 22);
+				txtCantDias.setBounds(122, 143, 182, 22);
 				panel.add(txtCantDias);
 				
 			}
@@ -122,28 +126,37 @@ public class RegJugadorLesionado extends JDialog {
 						if(cbxCausa.getSelectedIndex() !=0 && !txtDescripcion.getText().equalsIgnoreCase("") &&
 								txtCantDias.getCalendar()!=null){
 							
-							Equipo team= Torneo.getInstance().buscarEquiporNombre(equip.getNombre());
-							Lesion lesion = null;
+							Date fechaActual = StringToDate(getFechaActual());
+							Date fechaElegida = txtCantDias.getDate();
 							
-							String causa = cbxCausa.getSelectedItem().toString();
-							String descripcion = txtDescripcion.getText();
-							String dia = Integer.toString(txtCantDias.getCalendar().get(Calendar.DAY_OF_MONTH));
-							String mes = Integer.toString(txtCantDias.getCalendar().get(Calendar.MONTH)+1);
-							String anno = Integer.toString(txtCantDias.getCalendar().get(Calendar.YEAR));
-							String fecha =(dia+"-"+mes+"-"+anno);
-							Jugador player= Torneo.getInstance().buscarJugadorNombreEJ(Torneo.nombreE, Torneo.nombreJ);
-							String estado= "Activa";
-							lesion = new Lesion(causa, descripcion, player, estado, fecha);
+							if(diferenciasDeFechas(fechaActual, fechaElegida)<0){
+								
+								JOptionPane.showMessageDialog(null, "La fecha para la cantidad de dias no puede ser pasada", null, JOptionPane.ERROR_MESSAGE, null);
 							
-							team.insertarLesion(lesion);
-							player.setEstado("Lesionado");
+							}else{
+								Equipo team= Torneo.getInstance().buscarEquiporNombre(equip.getNombre());
+								Lesion lesion = null;
 							
-							JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado.", null, JOptionPane.INFORMATION_MESSAGE, null);
-							dispose();
-							ListJugador list = new ListJugador(team);
-							list.setModal(true);
-							list.setLocationRelativeTo(null);
-							list.setVisible(true);
+								String causa = cbxCausa.getSelectedItem().toString();
+								String descripcion = txtDescripcion.getText();
+								String dia = Integer.toString(txtCantDias.getCalendar().get(Calendar.DAY_OF_MONTH));
+								String mes = Integer.toString(txtCantDias.getCalendar().get(Calendar.MONTH)+1);
+								String anno = Integer.toString(txtCantDias.getCalendar().get(Calendar.YEAR));
+								String fecha =(dia+"-"+mes+"-"+anno);
+								Jugador player= Torneo.getInstance().buscarJugadorNombreEJ(Torneo.nombreE, Torneo.nombreJ);
+								String estado= "Activa";
+								lesion = new Lesion(causa, descripcion, player, estado, fecha);
+								
+								team.insertarLesion(lesion);
+								player.setEstado("Lesionado");
+								
+								JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado.", null, JOptionPane.INFORMATION_MESSAGE, null);
+								dispose();
+								ListJugador list = new ListJugador(team);
+								list.setModal(true);
+								list.setLocationRelativeTo(null);
+								list.setVisible(true);
+							}
 							
 						}else{
 							JOptionPane.showMessageDialog(null, "Verifique que todos los campos estén llenos", null, JOptionPane.INFORMATION_MESSAGE, null);
@@ -167,5 +180,52 @@ public class RegJugadorLesionado extends JDialog {
 			}
 		}
 	}
+	
+	//Metodo usado para obtener la fecha actual
+    //Retorna un <b>STRING</b> con la fecha actual formato "dd-MM-yyyy"
+	
+	public static String getFechaActual() {
+        Date FechaA = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        return formato.format(FechaA);
+    }
+	
+	//Metodo para opbtener la diferencia entre las fechas. Retorna el numero de dias entre dos fechas
+	
+    public static synchronized int diferenciasDeFechas(Date fechaActual, Date fechaElegida){
+
+        DateFormat dateFormat =new SimpleDateFormat("MM/dd/yyyy");
+        
+        String fechaActualString = dateFormat.format(fechaActual);
+        try {
+        	fechaActual = dateFormat.parse(fechaActualString);
+        } catch (ParseException ex) {
+        }
+
+        String fechaElegidaString = dateFormat.format(fechaElegida);
+        try {
+        	fechaElegida = dateFormat.parse(fechaElegidaString);
+        } catch (ParseException ex) {
+        }
+  
+        long diferencia = fechaElegida.getTime() - fechaActual.getTime();
+        double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        return ((int) dias);
+    }
+	
+	
+	//Metodo para devolver un java.util.Date desde un String en formato dd-MM-yyyy
+  
+    public static synchronized java.util.Date StringToDate(String fecha) {
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
+        Date fechaEnviar = null;
+        try {
+            fechaEnviar = formatoDelTexto.parse(fecha);
+            return fechaEnviar;
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+            return null;
+        } 
+    }
 
 }

@@ -36,7 +36,6 @@ public class ModJugador extends JDialog {
 	private JFormattedTextField txtPeso;
 	private JSpinner spnEdad;
 	private JComboBox cbxMano;
-	private JComboBox cbxPosicion;
 	private JTextField txtIdentificacion;
 	private Equipo team;
 	private Jugador aux;
@@ -68,8 +67,7 @@ public class ModJugador extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if(!txtNombre.getText().equalsIgnoreCase("")&& !txtNumero.getText().equalsIgnoreCase("")&&
 								!txtIdentificacion.getText().equalsIgnoreCase("")&& cbxMano.getSelectedIndex()!=0 &&
-								!txtAltura.getText().equalsIgnoreCase("#.##")&& !txtPeso.getText().equalsIgnoreCase("###")&&
-								cbxPosicion.getSelectedIndex()!=0){
+								!txtAltura.getText().equalsIgnoreCase("#.##")&& !txtPeso.getText().equalsIgnoreCase("###")){
 							
 							aux.setNombre(txtNombre.getText());
 							aux.setApellido(txtApellido.getText());
@@ -77,7 +75,6 @@ public class ModJugador extends JDialog {
 							aux.setNumeroCamiseta(new Integer (txtNumero.getText().toString()));
 							aux.setEdad(new Integer (spnEdad.getValue().toString()));
 							aux.setPeso(new Float(txtPeso.getText()));
-							aux.setPosicion(cbxPosicion.getSelectedItem().toString());
 							aux.setMano(cbxMano.getSelectedItem().toString());
 							
 							
@@ -185,16 +182,6 @@ public class ModJugador extends JDialog {
 			cbxMano.setBounds(66, 151, 138, 22);
 			cbxMano.setSelectedItem(aux.getMano());
 			panel.add(cbxMano);
-			
-			JLabel lblNewLabel_5 = new JLabel("Posicion:");
-			lblNewLabel_5.setBounds(239, 151, 66, 14);
-			panel.add(lblNewLabel_5);
-			
-			cbxPosicion = new JComboBox();
-			cbxPosicion.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "P", "C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "DH"}));
-			cbxPosicion.setBounds(315, 148, 130, 22);
-			cbxPosicion.setSelectedItem(aux.getPosicion());
-			panel.add(cbxPosicion);
 			
 			JLabel lblNewLabel_6 = new JLabel("Peso:");
 			lblNewLabel_6.setBounds(163, 116, 46, 14);
