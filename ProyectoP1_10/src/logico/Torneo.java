@@ -21,7 +21,7 @@ public class Torneo {
 		this.jugadores = new ArrayList<Jugador>();
 		autoGenCode = 0;
 	}
-	
+	 
 	public static Torneo getInstance() {
 		if(torneo==null) {
 			torneo = new Torneo();

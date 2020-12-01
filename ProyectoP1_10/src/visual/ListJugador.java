@@ -195,7 +195,7 @@ public class ListJugador extends JDialog {
 								dispose();
 								}
 								if(jugadorALesionar.getEstado()== "Lesionado"){
-									JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
+					 				JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
 								}
 							}
 						});
