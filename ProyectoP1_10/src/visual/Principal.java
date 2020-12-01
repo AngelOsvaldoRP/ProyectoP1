@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JCalendar;
 
@@ -42,12 +43,20 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JMonthChooser;
+
+import logico.Equipo;
+import logico.Torneo;
+import javax.swing.JButton;
 
 public class Principal extends JFrame {
 	private JPanel contentPane;
 	private JTextField fecha_textfield;
 	private JTable table;
 	private Dimension dim;
+	public static DefaultTableModel modelo;
+	public static Object[] filas;
 	/**
 	 * Launch the application.
 	 */
@@ -98,10 +107,9 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			RegJuego rj = new RegJuego();
-			
+			rj.setVisible(true);
 			rj.setModal(true);
 			rj.setLocationRelativeTo(null);
-			rj.setVisible(true);
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
@@ -170,6 +178,10 @@ public class Principal extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		modelo = new DefaultTableModel();
+		String[] headers = {"No.", "Equipo","JJ", "JG", "JP"};
+		modelo.setColumnIdentifiers(headers);
+		table.setModel(modelo);
 		
 		JPanel panel_juegosdeldia = new JPanel();
 		panel_juegosdeldia.setBorder(new TitledBorder(null, "Juegos del dia", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -247,6 +259,8 @@ public class Principal extends JFrame {
 		LogoLidom.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				ListEquipo le = new ListEquipo();
+				le.setVisible(true);
 			}
 		});
 		LogoLidom.setIcon(new ImageIcon(Principal.class.getResource("/assets/logo lidom.png")));
@@ -272,9 +286,33 @@ public class Principal extends JFrame {
 		fecha_textfield.setColumns(10);
 		fecha_textfield.setText(dia+"/"+mes+"/"+year);
 		
+		JButton btnNewButton = new JButton("Reset");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				llenarTabla();
+			}
+		});
+		btnNewButton.setBounds(1041, 60, 89, 23);
+		panel.add(btnNewButton);
 		
 		
 	}
+	public static void llenarTabla() {
+		modelo.setRowCount(0);
+		filas = new Object[modelo.getColumnCount()];
+		for (Equipo equipo : Torneo.getInstance().getEquipos()) {
+			filas[0] = 1;
+			filas[1] = equipo.getNombre();
+			filas[2] = equipo.getCantJJ();
+			filas[3] = equipo.getCantJG();
+			filas[4] = equipo.getCantJP();
+			
+			modelo.addRow(filas);
+		}
+		
+	}
 }
+
+
 
 
