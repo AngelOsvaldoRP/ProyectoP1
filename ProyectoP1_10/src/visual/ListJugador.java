@@ -30,8 +30,6 @@ import javax.swing.UIManager;
 import java.awt.Color;
 
 public class ListJugador extends JDialog {
-
-	//HolaEstoEsUnaPrueba
 	
 	private final JPanel contentPanel = new JPanel();
 	private JTable table1;
