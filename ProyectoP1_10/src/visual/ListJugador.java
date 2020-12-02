@@ -28,6 +28,9 @@ import logico.Picheo;
 import logico.Torneo;
 import javax.swing.UIManager;
 import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class ListJugador extends JDialog {
 	private final JPanel contentPanel = new JPanel();
@@ -37,13 +40,15 @@ public class ListJugador extends JDialog {
 	public static Object[] filas;
 	public static DefaultTableModel modelo2;
 	public static Object[] filas2;
-	private JButton btnModificar;
-	private JButton btnEliminar;
 	public Jugador aux1 = null;
 	public Jugador aux2 = null;
 	public static Equipo equipo = null;
 	private JButton btnVerJugadores;
 	private JButton btnLesionar;
+	private JButton btnModificar;
+	private JButton btnEliminar;
+	private JPanel panel;
+	private JPanel panel2;
 
 	/**
 	 * Launch the application.
@@ -56,15 +61,15 @@ public class ListJugador extends JDialog {
 		this.equipo = equipo;
 		setTitle("Jugadores de "+equipo.getNombre());
 		setModal(true);
-		setBounds(100, 100, 1178, 536);
+		setBounds(100, 100, 1178, 367);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JPanel panel = new JPanel();
-			panel.setBounds(10, 21, 1142, 206);
+			panel = new JPanel();
+			panel.setBounds(10, 69, 1142, 206);
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Bateadores", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel);
 			panel.setLayout(new BorderLayout(0, 0));
@@ -97,9 +102,9 @@ public class ListJugador extends JDialog {
 			}
 		}
 		{
-			JPanel panel2 = new JPanel();
+			panel2 = new JPanel();
 			panel2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lanzadores", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel2.setBounds(10, 238, 1142, 206);
+			panel2.setBounds(10, 69, 1142, 206);
 			contentPanel.add(panel2);
 			panel2.setLayout(new BorderLayout(0, 0));
 			{
@@ -108,7 +113,7 @@ public class ListJugador extends JDialog {
 				panel2.add(scrollPane);
 				{
 					modelo2 = new DefaultTableModel();
-					String[] headers = {"No.", "Estado", "Nombre", "Apellido", "AVG", "JG", "JP", "WHIP", "K", "BB", "IL"};
+					String[] headers = {"No.", "Estado", "Nombre", "Apellido", "AVG", "JG", "JP", "K", "BB", "IL"};
 					modelo2.setColumnIdentifiers(headers);
 					table2 = new JTable();
 					table2.addMouseListener(new MouseAdapter() {
@@ -130,6 +135,38 @@ public class ListJugador extends JDialog {
 				}
 			}
 		}
+		
+		JLabel lblTipoDeJugador = new JLabel("Tipo de Jugador:");
+		lblTipoDeJugador.setBounds(10, 31, 112, 23);
+		contentPanel.add(lblTipoDeJugador);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String tipo = comboBox.getSelectedItem().toString();
+				if(tipo == "Bateadores") {
+					llenarTabla();
+					panel.setVisible(true);
+					panel2.setVisible(false);
+					btnEliminar.setEnabled(false);
+					btnModificar.setEnabled(false);
+					btnVerJugadores.setEnabled(false);
+					btnLesionar.setEnabled(false);
+				}
+				if(tipo == "Lanzadores") {
+					llenarTabla2();
+					btnEliminar.setEnabled(false);
+					btnModificar.setEnabled(false);
+					btnVerJugadores.setEnabled(false);
+					btnLesionar.setEnabled(false);
+					panel2.setVisible(true);
+					panel.setVisible(false);
+				}
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Bateadores", "Lanzadores"}));
+		comboBox.setBounds(109, 31, 86, 23);
+		contentPanel.add(comboBox);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -144,16 +181,14 @@ public class ListJugador extends JDialog {
 							mod.setModal(true);
 							mod.setLocationRelativeTo(null);
 							mod.setVisible(true);
-						
-							dispose();
+							llenarTabla();
 						}
 						if(aux2 instanceof Picheo) {
 							ModJugador mod = new ModJugador(equipo, aux2);
 							mod.setModal(true);
 							mod.setLocationRelativeTo(null);
 							mod.setVisible(true);
-							
-							dispose();
+							llenarTabla2();
 						}
 					}
 				});
@@ -310,10 +345,9 @@ public class ListJugador extends JDialog {
 				filas2[4] = jugador.avg();
 				filas2[5] = ((Picheo)jugador).getCantJG();
 				filas2[6] = ((Picheo)jugador).getCantJP();
-				filas2[7] = ((Picheo)jugador).whip();
-				filas2[8] = jugador.getCantPonches();
-				filas2[9] = jugador.getCantBB();
-				filas2[10] = ((Picheo)jugador).getEntradasLanzada();
+				filas2[7] = jugador.getCantPonches();
+				filas2[8] = jugador.getCantBB();
+				filas2[9] = ((Picheo)jugador).getEntradasLanzada();
 				modelo2.addRow(filas2);
 			}
 		}

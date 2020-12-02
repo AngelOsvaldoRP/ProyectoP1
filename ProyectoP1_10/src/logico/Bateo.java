@@ -17,11 +17,11 @@ public class Bateo extends Jugador {
 			float peso, float altura, String mano) {
 		super(nombre, apellido, identificacion, numeroCamiseta, edad, estado,
 				posicion, peso, altura, mano);
-		this.cantTB = 29;
+		this.cantTB = 0;
 		this.cantVP = 0;
 		this.cantCA = 0;
-		this.cant2b = 1;
-		this.cant3b = 2;
+		this.cant2b = 0;
+		this.cant3b = 0;
 		this.cantCI = 0;
 		this.cantBR = 0;
 		this.es = 0;

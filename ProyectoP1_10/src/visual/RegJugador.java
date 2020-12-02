@@ -80,7 +80,6 @@ public class RegJugador extends JDialog {
 							float peso = new Float(txtPeso.getText());
 							String mano = cbxMano.getSelectedItem().toString();
 							
-							
 							if(posicion == "P") {
 								player = new Picheo(nombre, apellido, identificacion, numero, edad,
 										estado, posicion, peso, altura,
@@ -113,10 +112,6 @@ public class RegJugador extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
-						ListJugador list = new ListJugador(team);
-						list.setModal(true);
-						list.setLocationRelativeTo(null);
-						list.setVisible(true);
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
