@@ -124,7 +124,7 @@ public class RegJugadorLesionado extends JDialog {
 			textFieldCodLesion.setEditable(false);
 			textFieldCodLesion.setColumns(10);
 			textFieldCodLesion.setBackground(Color.WHITE);
-			textFieldCodLesion.setBounds(286, 65, 77, 22);
+			textFieldCodLesion.setBounds(320, 65, 77, 22);
 			panel.add(textFieldCodLesion);
 		}
 		{

@@ -32,7 +32,7 @@ public class ListLesionado extends JDialog {
 	private JTable table;
 	public static DefaultTableModel modelo;
 	public static Object[] filas;
-	private JButton btnEliminar;
+	private JButton btnReactivar;
 	public Lesion aux = null;
 	private static Equipo equipoSelected = null;
 
@@ -72,7 +72,7 @@ public class ListLesionado extends JDialog {
 						public void mouseClicked(MouseEvent e) {
 							int seleccion = table.getSelectedRow();
 							if(seleccion!=-1) {
-								btnEliminar.setEnabled(true);
+								btnReactivar.setEnabled(true);
 								aux = equipoSelected.buscarLesion((String)modelo.getValueAt(seleccion, 0));
 								
 							}
@@ -90,8 +90,8 @@ public class ListLesionado extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnEliminar = new JButton("Reactivar");
-				btnEliminar.addActionListener(new ActionListener() {
+				btnReactivar = new JButton("Reactivar");
+				btnReactivar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						aux.setEstado("Terminada");
 						aux.getJugador().setEstado("Disponible");
@@ -99,8 +99,8 @@ public class ListLesionado extends JDialog {
 						llenarTabla();
 					}
 				});
-				btnEliminar.setEnabled(false);
-				buttonPane.add(btnEliminar);
+				btnReactivar.setEnabled(false);
+				buttonPane.add(btnReactivar);
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");

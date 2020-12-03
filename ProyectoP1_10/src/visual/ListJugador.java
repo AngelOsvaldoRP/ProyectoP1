@@ -165,7 +165,7 @@ public class ListJugador extends JDialog {
 			}
 		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Bateadores", "Lanzadores"}));
-		comboBox.setBounds(109, 31, 86, 23);
+		comboBox.setBounds(109, 31, 136, 23);
 		contentPanel.add(comboBox);
 		{
 			JPanel buttonPane = new JPanel();
@@ -214,27 +214,35 @@ public class ListJugador extends JDialog {
 						btnLesionar = new JButton("Lesionar");
 						btnLesionar.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								Jugador jugadorALesionar = null;
-								if(aux1==null && aux2!=null) {
-									jugadorALesionar = aux2;
-								}
-								if(aux2==null && aux1!=null) {
-									jugadorALesionar = aux1;
-								}
-								if(jugadorALesionar.getEstado()!= "Lesionado"){
-								RegJugadorLesionado reg = new RegJugadorLesionado(jugadorALesionar);
-								reg.setModal(true);
-								reg.setLocationRelativeTo(null);
-								reg.setVisible(true);
-								dispose();
-								}
-								if(jugadorALesionar.getEstado()== "Lesionado"){
+								
+								if(aux1!=null) {
+									if(aux1.getEstado()== "Lesionado"){
 
-					 				JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
-
-									JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
-
+										JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
+									}else {
+									RegJugadorLesionado reg = new RegJugadorLesionado(aux1);
+									reg.setModal(true);
+									reg.setLocationRelativeTo(null);
+									reg.setVisible(true);
+									dispose();
+									}
+									
 								}
+								
+								if(aux2!=null) {
+									if(aux2.getEstado()== "Lesionado"){
+
+										JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
+									}else {
+									RegJugadorLesionado reg = new RegJugadorLesionado(aux2);
+									reg.setModal(true);
+									reg.setLocationRelativeTo(null);
+									reg.setVisible(true);
+									dispose();
+									}
+									
+								}
+								
 							}
 						});
 						btnLesionar.setEnabled(false);
