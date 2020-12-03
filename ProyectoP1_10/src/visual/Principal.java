@@ -27,15 +27,12 @@ import java.awt.Font;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.toedter.calendar.JCalendar;
-
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.border.MatteBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Toolkit;
@@ -51,12 +48,17 @@ import logico.Torneo;
 import javax.swing.JButton;
 
 public class Principal extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField fecha_textfield;
 	private JTable table;
 	private Dimension dim;
 	public static DefaultTableModel modelo;
 	public static Object[] filas;
+	Equipo aux;
 	/**
 	 * Launch the application.
 	 */
@@ -66,6 +68,8 @@ public class Principal extends JFrame {
 				try {
 					Principal frame = new Principal();
 					frame.setVisible(true);
+					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -143,21 +147,29 @@ public class Principal extends JFrame {
 		JMenu mnNewMenu_2 = new JMenu("Informacion");
 		menuBar.add(mnNewMenu_2);
 		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Buscar Jugador");
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+		JMenuItem Buscar_jugadores = new JMenuItem("Buscar Jugador");
+		Buscar_jugadores.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				BuscarEstadisticasJugador bej = new BuscarEstadisticasJugador();
-				
+				bej.setVisible(true);
 				bej.setModal(true);
 				bej.setLocationRelativeTo(null);
-				bej.setVisible(true);
 			}
 		});
-		mnNewMenu_2.add(mntmNewMenuItem_4);
+		mnNewMenu_2.add(Buscar_jugadores);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Visita Nuestro sitio web");
-		mnNewMenu_2.add(mntmNewMenuItem_5);
+		JMenuItem Sitio_web = new JMenuItem("Visita Nuestro sitio web");
+		mnNewMenu_2.add(Sitio_web);
+		
+		JMenu Estadisticas = new JMenu("Estadisticas");
+		menuBar.add(Estadisticas);
+		
+		JMenuItem Graficos = new JMenuItem("Graficos de la liga");
+		Estadisticas.add(Graficos);
+		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Top10 - Bateadores/Pitchers");
+		Estadisticas.add(mntmNewMenuItem_4);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -209,7 +221,11 @@ public class Principal extends JFrame {
 		Logo_aguilas_campeon.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane.showMessageDialog(null, "El cliente existe", "Error", JOptionPane.ERROR_MESSAGE);
+				aux = Torneo.getInstance().buscarEquiporNombre("Las Aguilas");
+				ListJugador listaJugadores = new ListJugador(aux);
+				listaJugadores.setModal(true);
+				listaJugadores.setLocationRelativeTo(null);
+				listaJugadores.setVisible(true);
 			}
 		});
 		Logo_aguilas_campeon.setToolTipText("Ver equipo");
@@ -220,6 +236,16 @@ public class Principal extends JFrame {
 		equipos.add(panel_2);
 		
 		JLabel logo_babosos_del_licey = new JLabel("");
+		logo_babosos_del_licey.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				aux = Torneo.getInstance().buscarEquiporNombre("Licey");
+				ListJugador listaJugadores = new ListJugador(aux);
+				listaJugadores.setModal(true);
+				listaJugadores.setLocationRelativeTo(null);
+				listaJugadores.setVisible(true);
+			}
+		});
 		panel_2.add(logo_babosos_del_licey);
 		logo_babosos_del_licey.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-TL.png")));
 		
@@ -228,6 +254,16 @@ public class Principal extends JFrame {
 		equipos.add(panel_3);
 		
 		JLabel logo_toros = new JLabel("");
+		logo_toros.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				aux = Torneo.getInstance().buscarEquiporNombre("Toros");
+				ListJugador listaJugadores = new ListJugador(aux);
+				listaJugadores.setModal(true);
+				listaJugadores.setLocationRelativeTo(null);
+				listaJugadores.setVisible(true);
+			}
+		});
 		panel_3.add(logo_toros);
 		logo_toros.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-TE.png")));
 		
@@ -236,6 +272,16 @@ public class Principal extends JFrame {
 		equipos.add(panel_4);
 		
 		JLabel logo_estrellas = new JLabel("");
+		logo_estrellas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				aux = Torneo.getInstance().buscarEquiporNombre("Estrellas");
+				ListJugador listaJugadores = new ListJugador(aux);
+				listaJugadores.setModal(true);
+				listaJugadores.setLocationRelativeTo(null);
+				listaJugadores.setVisible(true);
+			}
+		});
 		panel_4.add(logo_estrellas);
 		logo_estrellas.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-ES.png")));
 		
@@ -244,6 +290,16 @@ public class Principal extends JFrame {
 		equipos.add(panel_5);
 		
 		JLabel logo_gigantes = new JLabel("");
+		logo_gigantes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				aux = Torneo.getInstance().buscarEquiporNombre("Gigantes");
+				ListJugador listaJugadores = new ListJugador(aux);
+				listaJugadores.setModal(true);
+				listaJugadores.setLocationRelativeTo(null);
+				listaJugadores.setVisible(true);
+			}
+		});
 		panel_5.add(logo_gigantes);
 		logo_gigantes.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-GC.png")));
 		
@@ -252,6 +308,16 @@ public class Principal extends JFrame {
 		equipos.add(panel_6);
 		
 		JLabel logo_escojido = new JLabel("");
+		logo_escojido.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				aux = Torneo.getInstance().buscarEquiporNombre("Escojido");
+				ListJugador listaJugadores = new ListJugador(aux);
+				listaJugadores.setModal(true);
+				listaJugadores.setLocationRelativeTo(null);
+				listaJugadores.setVisible(true);
+			}
+		});
 		panel_6.add(logo_escojido);
 		logo_escojido.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-EC.png")));
 		logo_escojido.setHorizontalAlignment(SwingConstants.LEFT);
@@ -287,33 +353,6 @@ public class Principal extends JFrame {
 		fecha_textfield.setColumns(10);
 		fecha_textfield.setText(dia+"/"+mes+"/"+year);
 		
-		JButton btnNewButton = new JButton("Reset");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				llenarTabla();
-			}
-		});
-		btnNewButton.setBounds(1041, 60, 89, 23);
-		panel.add(btnNewButton);
-		
-		
-	}
-	public static void llenarTabla() {
-		modelo.setRowCount(0);
-		filas = new Object[modelo.getColumnCount()];
-		for (Equipo equipo : Torneo.getInstance().getEquipos()) {
-			filas[0] = 1;
-			filas[1] = equipo.getNombre();
-			filas[2] = equipo.getCantJJ();
-			filas[3] = equipo.getCantJG();
-			filas[4] = equipo.getCantJP();
-			
-			modelo.addRow(filas);
-		}
 		
 	}
 }
-
-
-
-
