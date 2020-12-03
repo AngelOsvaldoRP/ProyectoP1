@@ -37,6 +37,7 @@ public class RegJugadorLesionado extends JDialog {
 	private JTextField txtNombre;
 	private JDateChooser txtCantDias;
 	private JComboBox cbxCausa;
+	private JTextField textFieldCodLesion;
 
 	/**
 	 * Launch the application.
@@ -113,6 +114,18 @@ public class RegJugadorLesionado extends JDialog {
 				cbxCausa.setBounds(86, 66, 114, 22);
 				panel.add(cbxCausa);
 			}
+			
+			JLabel lblCodigoLesin = new JLabel("Codigo Lesi\u00F3n:");
+			lblCodigoLesin.setBounds(210, 69, 94, 14);
+			panel.add(lblCodigoLesin);
+			
+			textFieldCodLesion = new JTextField();
+			textFieldCodLesion.setText("L-"+ (Torneo.getInstance().getAutoLesionCode()));
+			textFieldCodLesion.setEditable(false);
+			textFieldCodLesion.setColumns(10);
+			textFieldCodLesion.setBackground(Color.WHITE);
+			textFieldCodLesion.setBounds(286, 65, 77, 22);
+			panel.add(textFieldCodLesion);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -225,5 +238,4 @@ public class RegJugadorLesionado extends JDialog {
             return null;
         } 
     }
-
 }

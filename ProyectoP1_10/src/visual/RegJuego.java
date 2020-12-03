@@ -53,7 +53,7 @@ public class RegJuego extends JDialog {
 		setResizable(false);
 		setModal(true);
 		setTitle("Registrar Juego");
-		setBounds(100, 100, 525, 288);
+		setBounds(100, 100, 525, 256);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -62,7 +62,7 @@ public class RegJuego extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Informacion para el Juego:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 488, 204);
+		panel.setBounds(10, 11, 488, 167);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -80,7 +80,7 @@ public class RegJuego extends JDialog {
 		panel.add(cbxEquipoV);
 		
 		JLabel lblNewLabel_1 = new JLabel("Equipo Local:");
-		lblNewLabel_1.setBounds(264, 42, 84, 14);
+		lblNewLabel_1.setBounds(10, 71, 84, 14);
 		panel.add(lblNewLabel_1);
 		
 		cbxEquipoL = new JComboBox();
@@ -95,26 +95,26 @@ public class RegJuego extends JDialog {
 			cbxEquipoL.addItem(Torneo.getInstance().getEquipos().get(i).getNombre());
 			
 		}
-		cbxEquipoL.setBounds(347, 38, 131, 22);
+		cbxEquipoL.setBounds(121, 71, 131, 22);
 		panel.add(cbxEquipoL);
 		
 		JLabel lblNewLabel_2 = new JLabel("Estadio:");
-		lblNewLabel_2.setBounds(219, 84, 68, 14);
+		lblNewLabel_2.setBounds(270, 53, 68, 14);
 		panel.add(lblNewLabel_2);
 		
 		txtEstadio = new JTextField();
 		txtEstadio.setBackground(Color.WHITE);
 		txtEstadio.setEditable(false);
-		txtEstadio.setBounds(169, 109, 150, 22);
+		txtEstadio.setBounds(317, 49, 150, 22);
 		panel.add(txtEstadio);
 		txtEstadio.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Fecha del encuentro:");
-		lblNewLabel_3.setBounds(10, 167, 140, 14);
+		lblNewLabel_3.setBounds(10, 127, 140, 14);
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Hora:");
-		lblNewLabel_4.setBounds(315, 167, 46, 14);
+		lblNewLabel_4.setBounds(308, 127, 46, 14);
 		panel.add(lblNewLabel_4);
 		
 		txtFecha = new JDateChooser();
@@ -124,7 +124,7 @@ public class RegJuego extends JDialog {
 		txtFecha.getCalendarButton().setEnabled(true);
 		txtFecha.getCalendarButton().setBackground(Color.WHITE);
 		txtFecha.setBackground(Color.BLACK);
-		txtFecha.setBounds(138, 167, 167, 22);
+		txtFecha.setBounds(121, 119, 167, 23);
 		panel.add(txtFecha);
 		
 		
@@ -133,7 +133,7 @@ public class RegJuego extends JDialog {
 			txtHora =new JFormattedTextField(Hora);
 		} catch(Exception e){}
 		
-		txtHora.setBounds(371, 167, 46, 22);
+		txtHora.setBounds(349, 123, 46, 22);
 		panel.add(txtHora);
 		{
 			JPanel buttonPane = new JPanel();
@@ -170,8 +170,9 @@ public class RegJuego extends JDialog {
 									String fecha =(dia+"-"+mes+"-"+anno);
 									String hora = txtHora.getText();
 									String estado = "En espera";
-								
-									juego = new Juego(estado, fecha, hora, local, visitante, estadio);
+									String juegoCod = "J-"+Torneo.getInstance().getAutoJuegoCode();
+									
+									juego = new Juego(juegoCod, estado, fecha, hora, local, visitante, estadio);
 									Torneo.getInstance().insertarJuego(juego);
 								
 									JOptionPane.showMessageDialog(null, "El juego se registró sastifactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);

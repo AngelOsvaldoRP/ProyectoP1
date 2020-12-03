@@ -241,4 +241,20 @@ public class Equipo {
 		jugadores.add(player);
 		
 	}
+
+	public Jugador buscarJugadorLesionado(int numero) {
+		Jugador aux = null;
+		boolean encontrado = false;
+		int i = 0;
+		while(!encontrado && i<jugadores.size()){
+			if(jugadores.get(i).getNumeroCamiseta() == numero) {
+				if(jugadores.get(i).getEstado().equalsIgnoreCase("Lesionado")) {
+					aux = jugadores.get(i);
+					encontrado = true;
+				}		
+			}
+			i++;
+		}
+		return aux;
+	}
 }

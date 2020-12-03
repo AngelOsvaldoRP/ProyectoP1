@@ -2,7 +2,7 @@ package logico;
 
 public class Juego {
 	//Variables
-	private int juegoCod;
+	private String juegoCod;
 	private String estado;
 	private String fecha;
 	private String hora;
@@ -20,10 +20,10 @@ public class Juego {
 	
 	//Constructor
 	
-	public Juego(String estado, String fecha, String hora, String equipoLocal, String equipoVisitante,
+	public Juego(String juegoCod, String estado, String fecha, String hora, String equipoLocal, String equipoVisitante,
 			String estadio) {
 		super();
-		
+		this.juegoCod = juegoCod;
 		this.estado = estado;
 		this.fecha = fecha;
 		this.hora = hora;
@@ -40,11 +40,11 @@ public class Juego {
 		this.erroresLocal = 0;
 	}
 	
-	public int getJuegoCod() {
+	public String getJuegoCod() {
 		return juegoCod;
 	}
 	
-	public void setJuegoCod(int juegoCod) {
+	public void setJuegoCod(String juegoCod) {
 		this.juegoCod = juegoCod;
 	}
 	public String getEstado() {

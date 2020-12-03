@@ -28,7 +28,7 @@ public class ListJuego extends JDialog {
 	private static JTable table;
 	private static DefaultTableModel modelo;
 	public static Object[] filas;
-	private int identificador;
+	private String identificador;
 	private JButton btnJugar;
 	private JButton btnInformacion;
 	private JButton btnEliminar;
@@ -79,7 +79,7 @@ public class ListJuego extends JDialog {
 						btnEliminar.setEnabled(true);
 						btnJugar.setEnabled(true);
 						btnInformacion.setEnabled(true);
-						identificador = (int)table.getModel().getValueAt(seleccion, 0);
+						identificador = (String)table.getModel().getValueAt(seleccion, 0);
 					}
 				}
 			});

@@ -9,8 +9,8 @@ public class Torneo {
 	private ArrayList<Equipo> equipos;
 	private ArrayList<Jugador> jugadores;
 	private static Torneo torneo = null;
-	
-	public static int autoGenCode;
+	private int autoJuegoCode;
+	private int autoLesionCode;
 
 	 
 	//Constructor
@@ -19,7 +19,8 @@ public class Torneo {
 		this.juegos =new ArrayList<Juego>();
 		this.equipos = new ArrayList<Equipo>();
 		this.jugadores = new ArrayList<Jugador>();
-		autoGenCode = 0;
+		this.setAutoJuegoCode(1);
+		this.setAutoLesionCode(1);
 	}
 	 
 	public static Torneo getInstance() {
@@ -55,6 +56,22 @@ public class Torneo {
 		this.jugadores = jugadores;
 	}
 
+	public int getAutoJuegoCode() {
+		return autoJuegoCode;
+	}
+
+	public void setAutoJuegoCode(int autoJuegoCode) {
+		this.autoJuegoCode = autoJuegoCode;
+	}
+
+	public int getAutoLesionCode() {
+		return autoLesionCode;
+	}
+
+	public void setAutoLesionCode(int autoLesionCode) {
+		this.autoLesionCode = autoLesionCode;
+	}
+
 	public void insertarEquipo(Equipo team) {
 		equipos.add(team);
 		
@@ -75,23 +92,8 @@ public class Torneo {
 	}
 
 	public void insertarJuego(Juego juego) {
-		autoGenCode = FindCodMayor(juegos);
-		autoGenCode++;
+		autoJuegoCode++;
 		juegos.add(juego);
-		juego.setJuegoCod(autoGenCode);
-	}
-
-	private int FindCodMayor(ArrayList<Juego> juego) {
-		int cod = 0;
-
-		for (int i = 0; i < juegos.size(); i++) {
-			if(cod < juegos.get(i).getJuegoCod()){
-				cod = juegos.get(i).getJuegoCod();
-			}
-
-		}
-
-		return cod;
 	}
 	
 	public void eliminarJugador(Jugador jugador) {
@@ -133,7 +135,7 @@ public class Torneo {
 		return player;
 	}
 
-	public Juego buscarJuegoPorCodigo(int identificador) {
+	public Juego buscarJuegoPorCodigo(String identificador) {
 		Juego aux = null;
 		int i = 0;
 		boolean encontrado = false;
@@ -149,7 +151,7 @@ public class Torneo {
 
 	}
 
-	public void eliminarJuego(int identificador) {
+	public void eliminarJuego(String identificador) {
 		int  i = 0;
 		boolean encontrado = false;
 

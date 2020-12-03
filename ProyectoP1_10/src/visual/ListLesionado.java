@@ -73,9 +73,7 @@ public class ListLesionado extends JDialog {
 							int seleccion = table.getSelectedRow();
 							if(seleccion!=-1) {
 								btnEliminar.setEnabled(true);
-								
-								aux = equipoSelected.buscarJugadorByNumero((Integer)modelo.getValueAt(seleccion, 0));
-								
+								aux = equipoSelected.buscarJugadorLesionado((Integer)modelo.getValueAt(seleccion, 0));
 							}
 						}
 					});
