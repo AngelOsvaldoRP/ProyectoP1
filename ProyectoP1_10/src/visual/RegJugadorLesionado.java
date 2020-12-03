@@ -156,7 +156,8 @@ public class RegJugadorLesionado extends JDialog {
 								String anno = Integer.toString(txtCantDias.getCalendar().get(Calendar.YEAR));
 								String fecha =(dia+"-"+mes+"-"+anno);
 								String estado= "Activa";
-								lesion = new Lesion(causa, descripcion, jugador, estado, fecha);
+								String lesionCod = "L-" + Torneo.getInstance().getAutoLesionCode();
+								lesion = new Lesion(lesionCod, causa, descripcion, jugador, estado, fecha);
 
 								team.insertarLesion(lesion);
 								jugador.setEstado("Lesionado");

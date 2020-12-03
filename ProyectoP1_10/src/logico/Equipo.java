@@ -257,4 +257,18 @@ public class Equipo {
 		}
 		return aux;
 	}
+	
+	public Lesion buscarLesion(String codigo) {
+		Lesion aux = null;
+		boolean encontrado = false;
+		int i = 0;
+		while(!encontrado && i<lesiones.size()){
+			if(lesiones.get(i).getLesionCod().equalsIgnoreCase(codigo)) {
+				aux = lesiones.get(i);
+				encontrado = true;		
+			}
+			i++;
+		}
+		return aux;
+	}
 }

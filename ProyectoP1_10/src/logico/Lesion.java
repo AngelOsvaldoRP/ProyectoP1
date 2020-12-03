@@ -11,9 +11,9 @@ public class Lesion {
 	private String cantDias;
 	
 	//Constructor
-	public Lesion(String tipo, String descripcion, Jugador jugador, String estado, String cantDias) {
+	public Lesion(String lesionCod, String tipo, String descripcion, Jugador jugador, String estado, String cantDias) {
 		super();
-		
+		this.lesionCod = lesionCod;
 		this.tipo = tipo;
 		this.Descripcion = descripcion;
 		this.jugador = jugador;

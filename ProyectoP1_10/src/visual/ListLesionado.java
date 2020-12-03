@@ -33,7 +33,7 @@ public class ListLesionado extends JDialog {
 	public static DefaultTableModel modelo;
 	public static Object[] filas;
 	private JButton btnEliminar;
-	public Jugador aux = null;
+	public Lesion aux = null;
 	private static Equipo equipoSelected = null;
 
 	/**
@@ -64,7 +64,7 @@ public class ListLesionado extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					modelo = new DefaultTableModel();
-					String[] headers = {"No.", "Nombre/Apellido", "Tipo Lesion", "Estado", "Cant. Dias"};
+					String[] headers = {"Codigo", "Nombre/Apellido", "Tipo Lesion", "Estado", "Cant. Dias"};
 					modelo.setColumnIdentifiers(headers);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -73,7 +73,8 @@ public class ListLesionado extends JDialog {
 							int seleccion = table.getSelectedRow();
 							if(seleccion!=-1) {
 								btnEliminar.setEnabled(true);
-								aux = equipoSelected.buscarJugadorLesionado((Integer)modelo.getValueAt(seleccion, 0));
+								aux = equipoSelected.buscarLesion((String)modelo.getValueAt(seleccion, 0));
+								
 							}
 						}
 					});
@@ -93,7 +94,8 @@ public class ListLesionado extends JDialog {
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						aux.setEstado("Terminada");
-						Torneo.getInstance().buscarJugadorByIdentificacion(aux.getIdentificacion()).setEstado("Disponible");
+						aux.getJugador().setEstado("Disponible");
+						JOptionPane.showMessageDialog(null, "El jugador ya esta disponible", null, JOptionPane.INFORMATION_MESSAGE, null);
 						llenarTabla();
 					}
 				});
@@ -119,7 +121,7 @@ public class ListLesionado extends JDialog {
 		modelo.setRowCount(0);
 		filas = new Object[modelo.getColumnCount()];
 		for (Lesion lesion : equipoSelected.getLesiones()) {
-			filas[0] = lesion.getJugador().getNumeroCamiseta();
+			filas[0] = lesion.getLesionCod();
 			filas[1] = lesion.getJugador().getNombre()+" "+lesion.getJugador().getApellido();
 			filas[2] = lesion.getTipo();
 			filas[3] = lesion.getEstado();
