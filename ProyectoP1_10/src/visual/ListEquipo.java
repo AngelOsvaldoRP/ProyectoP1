@@ -172,7 +172,6 @@ public class ListEquipo extends JDialog {
 				buttonPane.add(btnCancelar);
 			}
 		}
-		
 		llenarTabla();
 	}
 

@@ -50,6 +50,7 @@ public class RegJuego extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegJuego() {
+		
 		setResizable(false);
 		setModal(true);
 		setTitle("Registrar Juego");
@@ -176,6 +177,7 @@ public class RegJuego extends JDialog {
 									Torneo.getInstance().insertarJuego(juego);
 								
 									JOptionPane.showMessageDialog(null, "El juego se registró sastifactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+									Principal.llenarTabla();
 									clear();
 									
 								}

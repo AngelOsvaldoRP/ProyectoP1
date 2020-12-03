@@ -44,6 +44,7 @@ import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JMonthChooser;
 
 import logico.Equipo;
+import logico.Juego;
 import logico.Torneo;
 import javax.swing.JButton;
 
@@ -81,13 +82,13 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
-		setResizable(false);
+		setResizable(true);
 		setAutoRequestFocus(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\assets\\Logo-AC.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1397, 744);
 		dim = getToolkit().getScreenSize();
-		super.setSize(dim.width, dim.height-50);
+		//super.setSize(dim.width, dim.height-50);
 		setLocationRelativeTo(null);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -147,18 +148,6 @@ public class Principal extends JFrame {
 		JMenu mnNewMenu_2 = new JMenu("Informacion");
 		menuBar.add(mnNewMenu_2);
 		
-		JMenuItem Buscar_jugadores = new JMenuItem("Buscar Jugador");
-		Buscar_jugadores.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				BuscarEstadisticasJugador bej = new BuscarEstadisticasJugador();
-				bej.setVisible(true);
-				bej.setModal(true);
-				bej.setLocationRelativeTo(null);
-			}
-		});
-		mnNewMenu_2.add(Buscar_jugadores);
-		
 		JMenuItem Sitio_web = new JMenuItem("Visita Nuestro sitio web");
 		mnNewMenu_2.add(Sitio_web);
 		
@@ -167,6 +156,17 @@ public class Principal extends JFrame {
 		
 		JMenuItem Graficos = new JMenuItem("Graficos de la liga");
 		Estadisticas.add(Graficos);
+		
+		JMenuItem menuItem = new JMenuItem("Buscar Jugador");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BuscarEstadisticasJugador bej = new BuscarEstadisticasJugador();
+				bej.setModal(true);
+				bej.setLocationRelativeTo(null);
+				bej.setVisible(true);
+			}
+		});
+		Estadisticas.add(menuItem);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Top10 - Bateadores/Pitchers");
 		Estadisticas.add(mntmNewMenuItem_4);
@@ -221,11 +221,15 @@ public class Principal extends JFrame {
 		Logo_aguilas_campeon.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				aux = Torneo.getInstance().buscarEquiporNombre("Las Aguilas");
-				ListJugador listaJugadores = new ListJugador(aux);
-				listaJugadores.setModal(true);
-				listaJugadores.setLocationRelativeTo(null);
-				listaJugadores.setVisible(true);
+				try {
+					aux = Torneo.getInstance().buscarEquiporNombre("Las Aguilas");
+					ListJugador listaJugadores = new ListJugador(aux);
+					listaJugadores.setModal(true);
+					listaJugadores.setLocationRelativeTo(null);
+					listaJugadores.setVisible(true);
+				} catch (Exception e) {
+					System.out.println("Equipo aun no registrado Error: "+e);
+				}
 			}
 		});
 		Logo_aguilas_campeon.setToolTipText("Ver equipo");
@@ -239,11 +243,15 @@ public class Principal extends JFrame {
 		logo_babosos_del_licey.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				aux = Torneo.getInstance().buscarEquiporNombre("Licey");
-				ListJugador listaJugadores = new ListJugador(aux);
-				listaJugadores.setModal(true);
-				listaJugadores.setLocationRelativeTo(null);
-				listaJugadores.setVisible(true);
+				try {
+					aux = Torneo.getInstance().buscarEquiporNombre("Licey");
+					ListJugador listaJugadores = new ListJugador(aux);
+					listaJugadores.setModal(true);
+					listaJugadores.setLocationRelativeTo(null);
+					listaJugadores.setVisible(true);
+				} catch (Exception e2) {
+					System.out.println("Equipo aun no registrado Error: "+e2);
+				}
 			}
 		});
 		panel_2.add(logo_babosos_del_licey);
@@ -257,11 +265,15 @@ public class Principal extends JFrame {
 		logo_toros.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				aux = Torneo.getInstance().buscarEquiporNombre("Toros");
-				ListJugador listaJugadores = new ListJugador(aux);
-				listaJugadores.setModal(true);
-				listaJugadores.setLocationRelativeTo(null);
-				listaJugadores.setVisible(true);
+				try {
+					aux = Torneo.getInstance().buscarEquiporNombre("Toros");
+					ListJugador listaJugadores = new ListJugador(aux);
+					listaJugadores.setModal(true);
+					listaJugadores.setLocationRelativeTo(null);
+					listaJugadores.setVisible(true);
+				} catch (Exception e2) {
+					System.out.println("Equipo aun no registrado nError: " + e2);
+				}
 			}
 		});
 		panel_3.add(logo_toros);
@@ -275,11 +287,15 @@ public class Principal extends JFrame {
 		logo_estrellas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				aux = Torneo.getInstance().buscarEquiporNombre("Estrellas");
-				ListJugador listaJugadores = new ListJugador(aux);
-				listaJugadores.setModal(true);
-				listaJugadores.setLocationRelativeTo(null);
-				listaJugadores.setVisible(true);
+				try {
+					aux = Torneo.getInstance().buscarEquiporNombre("Estrellas");
+					ListJugador listaJugadores = new ListJugador(aux);
+					listaJugadores.setModal(true);
+					listaJugadores.setLocationRelativeTo(null);
+					listaJugadores.setVisible(true);
+				} catch (Exception e2) {
+					System.out.println("Equipo aun no registrado Error: "+e2);
+				}
 			}
 		});
 		panel_4.add(logo_estrellas);
@@ -293,11 +309,15 @@ public class Principal extends JFrame {
 		logo_gigantes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				aux = Torneo.getInstance().buscarEquiporNombre("Gigantes");
-				ListJugador listaJugadores = new ListJugador(aux);
-				listaJugadores.setModal(true);
-				listaJugadores.setLocationRelativeTo(null);
-				listaJugadores.setVisible(true);
+				try {
+					aux = Torneo.getInstance().buscarEquiporNombre("Gigantes");
+					ListJugador listaJugadores = new ListJugador(aux);
+					listaJugadores.setModal(true);
+					listaJugadores.setLocationRelativeTo(null);
+					listaJugadores.setVisible(true);
+				} catch (Exception e2) {
+					System.out.println("Equipo aun no registrado Error: "+e);
+				}
 			}
 		});
 		panel_5.add(logo_gigantes);
@@ -311,11 +331,15 @@ public class Principal extends JFrame {
 		logo_escojido.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				aux = Torneo.getInstance().buscarEquiporNombre("Escojido");
-				ListJugador listaJugadores = new ListJugador(aux);
-				listaJugadores.setModal(true);
-				listaJugadores.setLocationRelativeTo(null);
-				listaJugadores.setVisible(true);
+				try {
+					aux = Torneo.getInstance().buscarEquiporNombre("Escojido");
+					ListJugador listaJugadores = new ListJugador(aux);
+					listaJugadores.setModal(true);
+					listaJugadores.setLocationRelativeTo(null);
+					listaJugadores.setVisible(true);
+				} catch (Exception e2) {
+					System.out.println("Equipo aun no registrado Error: "+e2);
+				}
 			}
 		});
 		panel_6.add(logo_escojido);
@@ -342,7 +366,7 @@ public class Principal extends JFrame {
 	
 		Calendar fecha = new GregorianCalendar();                                 
 	    int year = fecha.get(Calendar.YEAR);
-	    int mes = fecha.get(Calendar.MONTH);
+	    int mes = 1+fecha.get(Calendar.MONTH);
 	    int dia = fecha.get(Calendar.DAY_OF_MONTH);
 		fecha_textfield = new JTextField();
 		fecha_textfield.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -352,7 +376,31 @@ public class Principal extends JFrame {
 		panel.add(fecha_textfield);
 		fecha_textfield.setColumns(10);
 		fecha_textfield.setText(dia+"/"+mes+"/"+year);
-		
+		llenarTabla();
 		
 	}
+	
+	public static void llenarTabla() {
+		modelo.setRowCount(0);
+		filas = new Object[modelo.getColumnCount()];
+		for (Equipo equipo : Torneo.getInstance().getEquipos()) {
+			filas[0] = 1;
+			filas[1] = equipo.getNombre();
+			filas[2] = equipo.getCantJJ();
+			filas[3] = equipo.getCantJG();
+			filas[4] = equipo.getCantJP();
+			modelo.addRow(filas);
+		}
+		
+	}
+	
+	/*public static void llenarTabla2() {
+		modelo.setRowCount(0);
+		filas = new Object[modelo.getColumnCount()];
+		for (Juego juego : Torneo.getInstance().getJuegos()) {
+			filas[0] = 1;
+			
+		}
+		
+	}*/
 }
