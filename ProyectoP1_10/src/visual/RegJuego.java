@@ -168,7 +168,7 @@ public class RegJuego extends JDialog {
 									String dia = Integer.toString(txtFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
 									String mes = Integer.toString(txtFecha.getCalendar().get(Calendar.MONTH)+1);
 									String anno = Integer.toString(txtFecha.getCalendar().get(Calendar.YEAR));
-									String fecha =(dia+"//"+mes+"//"+anno);
+									String fecha =(dia+"/"+mes+"/"+anno);
 									String hora = txtHora.getText();
 									String estado = "En espera";
 									String juegoCod = "J-"+Torneo.getInstance().getAutoJuegoCode();

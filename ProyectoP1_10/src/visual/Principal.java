@@ -2,7 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
+import java.util.Collections;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -40,6 +42,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JMonthChooser;
 
@@ -47,19 +51,27 @@ import logico.Equipo;
 import logico.Juego;
 import logico.Torneo;
 import javax.swing.JButton;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
+import java.awt.Window.Type;
+import java.awt.ComponentOrientation;
 
 public class Principal extends JFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	private static JPanel contentPane;
 	private JTextField fecha_textfield;
 	private JTable table;
 	private Dimension dim;
 	public static DefaultTableModel modelo;
 	public static Object[] filas;
+	public static ArrayList<Equipo> equp = Torneo.getInstance().getEquipos();
+	private JTable table_1;
+	public static DefaultTableModel modelo2;
 	Equipo aux;
+	private Panel panel;
 	/**
 	 * Launch the application.
 	 */
@@ -69,6 +81,18 @@ public class Principal extends JFrame {
 				try {
 					Principal frame = new Principal();
 					frame.setVisible(true);
+					Equipo e1= new Equipo("Las Aguilas", 1990,"Pepito", "Santiago", "El Valle de la Muerte");
+					Equipo e2= new Equipo("Licey", 1990,"Trujillo", "La Capital", "Sin Casa");
+					Torneo.getInstance().insertarEquipo(e1);
+					Torneo.getInstance().insertarEquipo(e2);
+					Torneo.getInstance().buscarEquiporNombre("Licey").setCantJJ(10);
+					Torneo.getInstance().buscarEquiporNombre("Licey").setCantJP(10);
+					Torneo.getInstance().buscarEquiporNombre("Licey").setCantJG(0);
+					Torneo.getInstance().buscarEquiporNombre("Las Aguilas").setCantJJ(10);
+					Torneo.getInstance().buscarEquiporNombre("Las Aguilas").setCantJP(0);
+					Torneo.getInstance().buscarEquiporNombre("Las Aguilas").setCantJG(10);
+					Principal.llenarTabla();
+					Principal.llenarTabla2();
 					
 
 				} catch (Exception e) {
@@ -86,12 +110,14 @@ public class Principal extends JFrame {
 		setAutoRequestFocus(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\assets\\Logo-AC.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1397, 744);
-		dim = getToolkit().getScreenSize();
+		setBounds(100, 100, 1284, 716);
+		//dim = getToolkit().getScreenSize();
 		//super.setSize(dim.width, dim.height-50);
 		setLocationRelativeTo(null);
 		
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setFocusTraversalPolicyProvider(true);
+		menuBar.setBorderPainted(false);
 		setJMenuBar(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Registro");
@@ -170,18 +196,27 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Top10 - Bateadores/Pitchers");
 		Estadisticas.add(mntmNewMenuItem_4);
+		
+		
+		
+		
 		contentPane = new JPanel();
+		contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(null);
 		
-		Panel panel = new Panel();
+		panel = new Panel();
+		panel.setBounds(0, 53, 1257, 606);
+		panel.setFocusable(false);
+		panel.setFocusTraversalKeysEnabled(false);
+		panel.setMaximumSize(new Dimension(32767, 30000));
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JPanel panel_position = new JPanel();
 		panel_position.setBorder(new TitledBorder(null, "Tabla de posiciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_position.setBounds(1032, 94, 310, 237);
+		panel_position.setBounds(939, 42, 310, 237);
 		panel.add(panel_position);
 		panel_position.setLayout(new BorderLayout(0, 0));
 		
@@ -198,7 +233,7 @@ public class Principal extends JFrame {
 		
 		JPanel panel_juegosdeldia = new JPanel();
 		panel_juegosdeldia.setBorder(new TitledBorder(null, "Juegos del dia", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_juegosdeldia.setBounds(1032, 358, 310, 278);
+		panel_juegosdeldia.setBounds(939, 306, 310, 278);
 		panel.add(panel_juegosdeldia);
 		panel_juegosdeldia.setLayout(new BorderLayout(0, 0));
 		
@@ -206,9 +241,16 @@ public class Principal extends JFrame {
 		scrollPane_1.setViewportBorder(null);
 		panel_juegosdeldia.add(scrollPane_1);
 		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		modelo2 = new DefaultTableModel();
+		String[] headers2 = {"Local", "Visitante","Local Score", "Visitante Score", "Hora"};
+		modelo2.setColumnIdentifiers(headers2);
+		table_1.setModel(modelo2);
+		
 		JPanel equipos = new JPanel();
 		equipos.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(171, 173, 179)), new EmptyBorder(2, 2, 2, 2)), "Equipos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		equipos.setBounds(10, 454, 919, 182);
+		equipos.setBounds(10, 402, 919, 182);
 		panel.add(equipos);
 		equipos.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -355,12 +397,12 @@ public class Principal extends JFrame {
 			}
 		});
 		LogoLidom.setIcon(new ImageIcon(Principal.class.getResource("/assets/logo lidom.png")));
-		LogoLidom.setBounds(259, 83, 381, 313);
+		LogoLidom.setBounds(259, 31, 381, 313);
 		panel.add(LogoLidom);
 		
 		JLabel fecha_label = new JLabel("Fecha Actual:");
 		fecha_label.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		fecha_label.setBounds(1152, 66, 102, 14);
+		fecha_label.setBounds(1059, 14, 102, 14);
 		panel.add(fecha_label);
 		
 	
@@ -372,35 +414,55 @@ public class Principal extends JFrame {
 		fecha_textfield.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		fecha_textfield.setHorizontalAlignment(SwingConstants.CENTER);
 		fecha_textfield.setEditable(false);
-		fecha_textfield.setBounds(1256, 63, 86, 20);
+		fecha_textfield.setBounds(1163, 11, 86, 20);
 		panel.add(fecha_textfield);
 		fecha_textfield.setColumns(10);
 		fecha_textfield.setText(dia+"/"+mes+"/"+year);
+		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{scrollPane, table, panel_juegosdeldia, scrollPane_1, table_1, equipos, panel_1, Logo_aguilas_campeon, panel_2, logo_babosos_del_licey, panel_3, logo_toros, panel_4, logo_estrellas, panel_5, logo_gigantes, panel_6, logo_escojido, LogoLidom, fecha_label, fecha_textfield}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{menuBar}));
 		llenarTabla();
+		llenarTabla2();
 		
 	}
 	
+
 	public static void llenarTabla() {
+		int posicion = 1;
 		modelo.setRowCount(0);
 		filas = new Object[modelo.getColumnCount()];
+
 		for (Equipo equipo : Torneo.getInstance().getEquipos()) {
-			filas[0] = 1;
+			
+			filas[0] = posicion;
 			filas[1] = equipo.getNombre();
 			filas[2] = equipo.getCantJJ();
 			filas[3] = equipo.getCantJG();
 			filas[4] = equipo.getCantJP();
 			modelo.addRow(filas);
+			posicion++;
 		}
-		
 	}
 	
-	/*public static void llenarTabla2() {
-		modelo.setRowCount(0);
-		filas = new Object[modelo.getColumnCount()];
+	public static void llenarTabla2() {
+		Calendar fecha = new GregorianCalendar();
+		int year = fecha.get(Calendar.YEAR);
+		int mes = 1+fecha.get(Calendar.MONTH);
+		int dia = fecha.get(Calendar.DAY_OF_MONTH);
+		String actual = dia+"/"+mes+"/"+year;
+		//"Local", "Visitante","Local Score", "Visitante Score", "Hora"
+		modelo2.setRowCount(0);
+		filas = new Object[modelo2.getColumnCount()];
 		for (Juego juego : Torneo.getInstance().getJuegos()) {
-			filas[0] = 1;
-			
+			System.out.println(juego.getFecha());
+			System.out.println(actual);
+			if(juego.getFecha().equalsIgnoreCase(actual)) {
+			filas[0] = juego.getEquipoLocal();
+			filas[1] = juego.getEquipoVisitante();
+			filas[2] = juego.getCarrerasLocal();
+			filas[3] = juego.getCarrerasVisitante();
+			filas[4] = juego.getHora();
+			modelo2.addRow(filas);
+			}
 		}
-		
-	}*/
+	}
 }
