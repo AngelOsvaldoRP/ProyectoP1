@@ -21,13 +21,22 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import logico.Equipo;
 import logico.Jugador;
 import logico.Lesion;
 import logico.Torneo;
+import java.awt.CardLayout;
+import java.awt.Color;
 
 public class ListLesionado extends JDialog {
-
+	private static DefaultCategoryDataset dataset;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	public static DefaultTableModel modelo;
@@ -35,6 +44,8 @@ public class ListLesionado extends JDialog {
 	private JButton btnReactivar;
 	public Lesion aux = null;
 	private static Equipo equipoSelected = null;
+	static DefaultCategoryDataset data;
+	static JPanel panel_stire ;
 
 	/**
 	 * Launch the application.
@@ -44,24 +55,28 @@ public class ListLesionado extends JDialog {
 	 *
 	 */
 	public ListLesionado(Equipo equipo) {
+		
 		this.equipoSelected = equipo;
 		setTitle("Lesionados de "+equipo.getNombre());
 		setModal(true);
-		setBounds(100, 100, 747, 379);
+	        
+		setBounds(100, 100, 1159, 383);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new BorderLayout(0, 0));
+		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
+			panel.setBounds(5, 5, 608, 290);
 			panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			contentPanel.add(panel, BorderLayout.CENTER);
-			panel.setLayout(new BorderLayout(0, 0));
+			contentPanel.add(panel);
+			panel.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(2, 2, 606, 288);
 				scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-				panel.add(scrollPane, BorderLayout.CENTER);
+				panel.add(scrollPane);
 				{
 					modelo = new DefaultTableModel();
 					String[] headers = {"Codigo", "Nombre/Apellido", "Tipo Lesion", "Estado", "Cant. Dias"};
@@ -83,6 +98,23 @@ public class ListLesionado extends JDialog {
 					scrollPane.setViewportView(table);
 				}
 			}
+		}
+		{
+			JPanel panel_1 = new JPanel();
+			panel_1.setBounds(623, 5, 510, 290);
+			contentPanel.add(panel_1);
+			panel_1.setLayout(new BorderLayout(0, 0));
+			// Fuente de Datos
+			dataset = new DefaultCategoryDataset();
+	        JFreeChart chart = ChartFactory.createBarChart3D
+	        ("Jugadores lesionados en la temporada","Tipo de Lesion", "Cantidad de jugadores", 
+	        dataset, PlotOrientation.VERTICAL, true,true, false);
+	        chart.getTitle().setPaint(Color.black); 
+	        CategoryPlot p = chart.getCategoryPlot(); 
+	        p.setRangeGridlinePaint(Color.RED); 
+	        // Mostrar Grafico
+	        ChartPanel chartPanel = new ChartPanel(chart);
+	        panel_1.add(chartPanel);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -118,7 +150,13 @@ public class ListLesionado extends JDialog {
 	}
 
 	public static void llenarTabla() {
+		int de = 0;
+		int fr = 0;
+		int mo = 0;
+		int en = 0;
+		int es = 0;
 		modelo.setRowCount(0);
+		data = new DefaultCategoryDataset();
 		filas = new Object[modelo.getColumnCount()];
 		for (Lesion lesion : equipoSelected.getLesiones()) {
 			filas[0] = lesion.getLesionCod();
@@ -127,8 +165,12 @@ public class ListLesionado extends JDialog {
 			filas[3] = lesion.getEstado();
 			filas[4] = lesion.getCantDias();
 			modelo.addRow(filas);
-		}
+			if(lesion.getTipo().equalsIgnoreCase("Fractura"))  {dataset.setValue(++fr,"", "Fractura");}
+			if(lesion.getTipo().equalsIgnoreCase("Molestias")) {dataset.setValue(++mo,"", "Molestias");}
+			if(lesion.getTipo().equalsIgnoreCase("Desgarre"))  {dataset.setValue(++de,"", "Desgarre");}
+			if(lesion.getTipo().equalsIgnoreCase("Enfermedad")){dataset.setValue(++en,"", "Enfermedad");}
+			if(lesion.getTipo().equalsIgnoreCase("Esguince"))  {dataset.setValue(++es,"", "Esguince");}
+		}	
 		
 	}
-
 }
