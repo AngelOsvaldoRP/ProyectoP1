@@ -149,7 +149,7 @@ public class ListJugador extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				String tipo = comboBox.getSelectedItem().toString();
 				if(tipo == "Bateadores") {
-					llenarTabla();
+					aux2 = null;
 					panel.setVisible(true);
 					panel2.setVisible(false);
 					btnEliminar.setEnabled(false);
@@ -159,6 +159,7 @@ public class ListJugador extends JDialog {
 				}
 				if(tipo == "Lanzadores") {
 					llenarTabla2();
+					aux1 = null;
 					btnEliminar.setEnabled(false);
 					btnModificar.setEnabled(false);
 					btnVerJugadores.setEnabled(false);
@@ -383,4 +384,6 @@ public class ListJugador extends JDialog {
 		}
 		
 	}
+	
+	
 }

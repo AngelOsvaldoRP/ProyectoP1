@@ -33,16 +33,16 @@ import java.awt.event.ActionEvent;
 public class SimulacionJuego extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable tableBV;
+	public static JTable tableBV = new JTable();
 	public static DefaultTableModel modeloBV;
 	public static Object[] filasBV;
-	private JTable tableLV;
+	private static JTable tableLV;
 	public static DefaultTableModel modeloLV;
 	public static Object[] filasLV;
-	private JTable tableBL;
+	private static JTable tableBL;
 	public static DefaultTableModel modeloBL;
 	public static Object[] filasBL;
-	private JTable tableLL;
+	private static JTable tableLL;
 	public static DefaultTableModel modeloLL;
 	public static Object[] filasLL;
 	private static Equipo visitante;
@@ -66,7 +66,7 @@ public class SimulacionJuego extends JDialog {
 	 */
 	public SimulacionJuego(Juego juego) {
 		visitante = Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante());
-		local = Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante());
+		local = Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal());
 		setBounds(100, 100, 1137, 767);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,19 +84,18 @@ public class SimulacionJuego extends JDialog {
 				panel.add(panelBV);
 				panelBV.setLayout(new BorderLayout(0, 0));
 				{
-					JScrollPane scrollPane = new JScrollPane();
-					scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-					scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-					panelBV.add(scrollPane);
+					JScrollPane scrollPane1 = new JScrollPane();
+					scrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+					scrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+					panelBV.add(scrollPane1);
 					{
 						modeloBV = new DefaultTableModel();
 						String[] headers = {"No.","Nombre", "Pos.", "H", "2B", "3B", "HR", "K", "HBP", "TB", "BB", "CA", "CI", "ES", "BR"};
 						modeloBV.setColumnIdentifiers(headers);
-						tableBV = new JTable();
 						tableBV.setModel(modeloBV);
 						tableBV.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 						tableBV.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-						scrollPane.setViewportView(tableBV);
+						scrollPane1.setViewportView(tableBV);
 					}
 				}
 			}
@@ -107,10 +106,10 @@ public class SimulacionJuego extends JDialog {
 				panelLV.setBounds(10, 276, 450, 206);
 				panel.add(panelLV);
 				{
-					JScrollPane scrollPane = new JScrollPane();
-					scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-					scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-					panelLV.add(scrollPane);
+					JScrollPane scrollPane2 = new JScrollPane();
+					scrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+					scrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+					panelLV.add(scrollPane2);
 					{
 						modeloLV = new DefaultTableModel();
 						String[] headers = {"No.","Nombre", "IL", "H", "HR", "K", "HBP", "BB", "CL", "A", "JS", "TBE", "HOLD"};
@@ -119,7 +118,7 @@ public class SimulacionJuego extends JDialog {
 						tableLV.setModel(modeloLV);
 						tableLV.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 						tableLV.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-						scrollPane.setViewportView(tableLV);
+						scrollPane2.setViewportView(tableLV);
 					}
 				}
 			}
@@ -130,11 +129,11 @@ public class SimulacionJuego extends JDialog {
 				panelBL.setBounds(639, 57, 450, 206);
 				panel.add(panelBL);
 				{
-					JScrollPane scrollPane = new JScrollPane();
-					scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-					scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-					scrollPane.setBounds(6, 16, 438, 183);
-					panelBL.add(scrollPane);
+					JScrollPane scrollPane3 = new JScrollPane();
+					scrollPane3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+					scrollPane3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+					scrollPane3.setBounds(6, 16, 438, 183);
+					panelBL.add(scrollPane3);
 					{
 						modeloBL = new DefaultTableModel();
 						String[] headers = {"No.","Nombre", "Pos.", "H", "2B", "3B", "HR", "K", "HBP", "TB", "BB", "CA", "CI", "ES", "BR"};
@@ -143,7 +142,7 @@ public class SimulacionJuego extends JDialog {
 						tableBL.setModel(modeloBL);
 						tableBL.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 						tableBL.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-						scrollPane.setViewportView(tableBL);
+						scrollPane3.setViewportView(tableBL);
 					}
 				}
 			}
@@ -154,11 +153,11 @@ public class SimulacionJuego extends JDialog {
 				panelLL.setBounds(639, 276, 450, 206);
 				panel.add(panelLL);
 				{
-					JScrollPane scrollPane = new JScrollPane();
-					scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-					scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-					scrollPane.setBounds(6, 16, 438, 183);
-					panelLL.add(scrollPane);
+					JScrollPane scrollPane4 = new JScrollPane();
+					scrollPane4.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+					scrollPane4.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+					scrollPane4.setBounds(6, 16, 438, 183);
+					panelLL.add(scrollPane4);
 					{
 						modeloLL = new DefaultTableModel();
 						String[] headers = {"No.","Nombre", "IL", "H", "HR", "K", "HBP", "BB", "CL", "A", "JS", "TBE", "HOLD"};
@@ -167,7 +166,7 @@ public class SimulacionJuego extends JDialog {
 						tableLL.setModel(modeloLL);
 						tableLL.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 						tableLL.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-						scrollPane.setViewportView(tableLL);
+						scrollPane4.setViewportView(tableLL);
 					}
 				}
 			}
@@ -206,13 +205,36 @@ public class SimulacionJuego extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		llenarTablaBV();
+		llenarTablaLV();
+		llenarTablaBL();
+		llenarTablaLL();
 	}
 	
 	private void actualizarBV() {
-
-		for (int i = 0; i < filasBV.length; i++) {
-			//Jugador jugador = visitante.buscarJugadorByNumero((Integer)modelo2.getValueAt(seleccion, 0));
-		}
+		int[] estadistica = new int[12];
+		int i = 0;
+		for (Jugador jugador : visitante.getJugadores()) {
+			if(jugador instanceof Bateo) {
+				for (int j = 3; j < filasBV.length; j++) {
+					estadistica[j-3] = (int)modeloBV.getValueAt(i, j);
+				}
+				jugador.setCantHits(jugador.getCantHits()+estadistica[0]);
+				((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B()+estadistica[1]);
+				((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B()+estadistica[2]);
+				jugador.setCantHR(jugador.getCantHR()+estadistica[3]);
+				jugador.setCantPonches(jugador.getCantPonches()+estadistica[4]);
+				jugador.setHbp(jugador.getHbp()+estadistica[5]);
+				((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB()+estadistica[6]);
+				jugador.setCantBB(jugador.getCantBB()+estadistica[7]);
+				((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA()+estadistica[8]);
+				((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI()+estadistica[9]);
+				((Bateo)jugador).setES(((Bateo)jugador).getES()+estadistica[10]);
+				((Bateo)jugador).setCantBR(((Bateo)jugador).getCantBR()+estadistica[11]);
+				i++;
+			}
+			}
+			
 	}
 	
 	public static void llenarTablaBV() {
@@ -223,18 +245,18 @@ public class SimulacionJuego extends JDialog {
 				filasBV[0] = jugador.getNumeroCamiseta();
 				filasBV[1] = jugador.getNombre();
 				filasBV[2] = jugador.getPosicion();
-				filasBV[3] = "";
-				filasBV[4] = "";
-				filasBV[5] = "";
-				filasBV[6] = "";
-				filasBV[7] = "";
-				filasBV[8] = "";
-				filasBV[9] = "";
-				filasBV[10] = "";
-				filasBV[11] = "";
-				filasBV[12] = "";
-				filasBV[13] = "";
-				filasBV[14] = "";
+				filasBV[3] = 0;
+				filasBV[4] = 0;
+				filasBV[5] = 0;
+				filasBV[6] = 0;
+				filasBV[7] = 0;
+				filasBV[8] = 0;
+				filasBV[9] = 0;
+				filasBV[10] = 0;
+				filasBV[11] = 0;
+				filasBV[12] = 0;
+				filasBV[13] = 0;
+				filasBV[14] = 0;
 				modeloBV.addRow(filasBV);
 			}
 		}
@@ -247,17 +269,17 @@ public class SimulacionJuego extends JDialog {
 			if(jugador instanceof Picheo) {
 				filasLV[0] = jugador.getNumeroCamiseta();
 				filasLV[1] = jugador.getNombre();
-				filasLV[2] = "";
-				filasLV[3] = "";
-				filasLV[4] = "";
-				filasLV[5] = "";
-				filasLV[6] = "";
-				filasLV[7] = "";
-				filasLV[8] = "";
-				filasLV[9] = "";
-				filasLV[10] = "";
-				filasLV[11] = "";
-				filasLV[12] = "";
+				filasLV[2] = 0;
+				filasLV[3] = 0;
+				filasLV[4] = 0;
+				filasLV[5] = 0;
+				filasLV[6] = 0;
+				filasLV[7] = 0;
+				filasLV[8] = 0;
+				filasLV[9] = 0;
+				filasLV[10] = 0;
+				filasLV[11] = 0;
+				filasLV[12] = 0;
 				modeloLV.addRow(filasLV);
 			}
 		}
@@ -272,19 +294,19 @@ public class SimulacionJuego extends JDialog {
 				filasBL[0] = jugador.getNumeroCamiseta();
 				filasBL[1] = jugador.getNombre();
 				filasBL[2] = jugador.getPosicion();
-				filasBL[3] = "";
-				filasBL[4] = "";
-				filasBL[5] = "";
-				filasBL[6] = "";
-				filasBL[7] = "";
-				filasBL[8] = "";
-				filasBL[9] = "";
-				filasBL[10] = "";
-				filasBL[11] = "";
-				filasBL[12] = "";
-				filasBL[13] = "";
-				filasBL[14] = "";
-				modeloBV.addRow(filasBL);
+				filasBL[3] = 0;
+				filasBL[4] = 0;
+				filasBL[5] = 0;
+				filasBL[6] = 0;
+				filasBL[7] = 0;
+				filasBL[8] = 0;
+				filasBL[9] = 0;
+				filasBL[10] = 0;
+				filasBL[11] = 0;
+				filasBL[12] = 0;
+				filasBL[13] = 0;
+				filasBL[14] = 0;
+				modeloBL.addRow(filasBL);
 			}
 		}
 		
@@ -296,18 +318,18 @@ public class SimulacionJuego extends JDialog {
 			if(jugador instanceof Picheo) {
 				filasLL[0] = jugador.getNumeroCamiseta();
 				filasLL[1] = jugador.getNombre();
-				filasLL[2] = "";
-				filasLL[3] = "";
-				filasLL[4] = "";
-				filasLL[5] = "";
-				filasLL[6] = "";
-				filasLL[7] = "";
-				filasLL[8] = "";
-				filasLL[9] = "";
-				filasLL[10] = "";
-				filasLL[11] = "";
-				filasLL[12] = "";
-				modeloLV.addRow(filasLL);
+				filasLL[2] = 0;
+				filasLL[3] = 0;
+				filasLL[4] = 0;
+				filasLL[5] = 0;
+				filasLL[6] = 0;
+				filasLL[7] = 0;
+				filasLL[8] = 0;
+				filasLL[9] = 0;
+				filasLL[10] = 0;
+				filasLL[11] = 0;
+				filasLL[12] = 0;
+				modeloLL.addRow(filasLL);
 			}
 		}
 		
