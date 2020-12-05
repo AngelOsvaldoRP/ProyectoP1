@@ -3,7 +3,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="src/visual/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/git/ProyectoP1/ProyectoP1_10/jcommon-1.0.23.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/git/ProyectoP1/ProyectoP1_10/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/USUARIO/git/ProyectoP1/ProyectoP1_10/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/USUARIO/git/ProyectoP1/ProyectoP1_10/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

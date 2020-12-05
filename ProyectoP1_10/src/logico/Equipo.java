@@ -214,6 +214,20 @@ public class Equipo {
 		return aux;
 	}
 	
+	public Jugador findJugadorByIdentificacion(String id) {
+		Jugador aux = null;
+		boolean buscar = false;
+		int i=0;
+		while (i<jugadores.size()&&!buscar) {
+			if(jugadores.get(i).getIdentificacion().equalsIgnoreCase(id)){
+				aux = jugadores.get(i);
+				buscar = true;
+			}
+			i++;
+		}
+		return aux;
+	}
+	
 	public Jugador buscarJugadorByNumero(int numero) {
 		Jugador aux = null;
 		boolean encontrado = false;

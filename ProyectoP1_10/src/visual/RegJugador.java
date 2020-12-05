@@ -37,7 +37,7 @@ public class RegJugador extends JDialog {
 	private JSpinner spnEdad;
 	private JComboBox cbxMano;
 	private JComboBox cbxPosicion;
-	private JTextField txtIdentificacion;
+	private JFormattedTextField txtIdentificacion;
 	private Equipo team;
 
 	/**
@@ -68,34 +68,44 @@ public class RegJugador extends JDialog {
 								!txtIdentificacion.getText().equalsIgnoreCase("")&& cbxMano.getSelectedIndex()!=0 &&
 								!txtAltura.getText().equalsIgnoreCase("#.##")&& !txtPeso.getText().equalsIgnoreCase("###")&&
 								cbxPosicion.getSelectedIndex()!=0){
-							Jugador player = null;
-							String nombre = txtNombre.getText();
-							String apellido = txtApellido.getText();
-							String identificacion = txtIdentificacion.getText();
-							int numero = new Integer (txtNumero.getText().toString());
-							String estado = "Disponible";
-							int edad = new Integer (spnEdad.getValue().toString());
-							String posicion = cbxPosicion.getSelectedItem().toString();
-							float altura = new Float(txtAltura.getText());
-							float peso = new Float(txtPeso.getText());
-							String mano = cbxMano.getSelectedItem().toString();
+							Jugador aux1= team.buscarJugadorByNumero(new Integer (txtNumero.getText()));
+							if(aux1 == null) {
+								Jugador aux2 = team.findJugadorByIdentificacion(txtIdentificacion.getText());
+								if(aux2 == null) {
 							
-							if(posicion == "P") {
-								player = new Picheo(nombre, apellido, identificacion, numero, edad,
-										estado, posicion, peso, altura,
-										 mano);
+									Jugador player = null;
+									String nombre = txtNombre.getText();
+									String apellido = txtApellido.getText();
+									String identificacion = txtIdentificacion.getText();
+									int numero = new Integer (txtNumero.getText().toString());
+									String estado = "Disponible";
+									int edad = new Integer (spnEdad.getValue().toString());
+									String posicion = cbxPosicion.getSelectedItem().toString();
+									float altura = new Float(txtAltura.getText());
+									float peso = new Float(txtPeso.getText());
+									String mano = cbxMano.getSelectedItem().toString();
+									
+									if(posicion == "P") {
+										player = new Picheo(nombre, apellido, identificacion, numero, edad,
+												estado, posicion, peso, altura,
+												 mano);
+									}else {
+										player = new Bateo(nombre, apellido, identificacion, numero, edad,
+												estado, posicion, peso, altura,
+												 mano);
+									}
+									player.setEquipoActual(team.getNombre());
+									team.insertarJugador(player);
+									JOptionPane.showMessageDialog(null, "El jugador ''" + nombre+"'' se agregó sastifactoriamente.", null, JOptionPane.INFORMATION_MESSAGE, null);
+									clean();
+								}else {
+									JOptionPane.showMessageDialog(null, "No pueden haber dos jugadores con la misma identificacion", null, JOptionPane.ERROR_MESSAGE, null);
+								}
 							}else {
-								player = new Bateo(nombre, apellido, identificacion, numero, edad,
-										estado, posicion, peso, altura,
-										 mano);
+								JOptionPane.showMessageDialog(null, "Este numero de camiseta ya esta ocupado", null, JOptionPane.ERROR_MESSAGE, null);
 							}
-							player.setEquipoActual(team.getNombre());
-							team.insertarJugador(player);
-							JOptionPane.showMessageDialog(null, "El jugador ''" + nombre+"'' se agregó sastifactoriamente.", null, JOptionPane.INFORMATION_MESSAGE, null);
-							clean();
-							
 						}else{
-							JOptionPane.showMessageDialog(null, "Verifique que todos los campos estén llenos", null, JOptionPane.INFORMATION_MESSAGE, null);
+							JOptionPane.showMessageDialog(null, "Verifique que todos los campos estén llenos", null, JOptionPane.ERROR_MESSAGE, null);
 
 						}
 						
@@ -229,7 +239,12 @@ public class RegJugador extends JDialog {
 			lblNewLabel_10.setBounds(186, 72, 104, 14);
 			panel.add(lblNewLabel_10);
 			
-			txtIdentificacion = new JTextField();
+			try {
+				MaskFormatter id = new MaskFormatter("###-#######-#");
+				id.setPlaceholderCharacter(' ');
+				txtIdentificacion = new JFormattedTextField(id);
+				
+			} catch (Exception e) {}
 			txtIdentificacion.setBounds(284, 69, 161, 22);
 			panel.add(txtIdentificacion);
 			txtIdentificacion.setColumns(10);
