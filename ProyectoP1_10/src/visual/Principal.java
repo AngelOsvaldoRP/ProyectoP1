@@ -49,8 +49,11 @@ import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JMonthChooser;
 
+import logico.Bateo;
 import logico.Equipo;
 import logico.Juego;
+import logico.Jugador;
+import logico.Picheo;
 import logico.Torneo;
 import javax.swing.JButton;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
@@ -96,12 +99,100 @@ public class Principal extends JFrame {
 					Torneo.getInstance().insertarEquipo(e5);
 					Torneo.getInstance().insertarEquipo(e6);
 					
-					Torneo.getInstance().buscarEquiporNombre("Las Aguilas Cibaeñas").setCantJG(1);
-					Torneo.getInstance().buscarEquiporNombre("Tigres del Licey").setCantJG(3);
+					Torneo.getInstance().buscarEquiporNombre("Las Aguilas Cibaeñas").setCantJG(15);
+					Torneo.getInstance().buscarEquiporNombre("Tigres del Licey").setCantJG(1);
 					Torneo.getInstance().buscarEquiporNombre("Gigantes del Cibao").setCantJG(5);
 					Torneo.getInstance().buscarEquiporNombre("Estrellas Orientales").setCantJG(10);
 					Torneo.getInstance().buscarEquiporNombre("Toros del Este").setCantJG(9);
 					Torneo.getInstance().buscarEquiporNombre("Leones del Escogido").setCantJG(11);
+					
+					//Jugadores de Las Aguilas
+					Jugador jacb1 = new Bateo("Luis", "Valenzuela", "11111111", 21, 20, "Disponible", "2B", 176, 6, "Derecho");
+					Jugador jacb2 = new Bateo("Ronny", "Rodriguez", "22222222", 32, 25, "Disponible", "3B", 176, 6, "Izquierdo");
+					Jugador jacb3 = new Bateo("Victor", "Robles", "33333333", 53, 30, "Disponible", "1B", 176, 6, "Derecho");
+					Jugador jacb4 = new Bateo("Deivy", "Grullon", "44444444", 14, 35, "Disponible", "SS", 176, 6, "Derecho");
+					Jugador jacb5 = new Bateo("Juan Carlos", "Pérez", "55555555", 15, 32, "Disponible", "LF", 176, 6, "Derecho");
+					Jugador jacb6 = new Bateo("Arismendy ", "Alcántara", "66666666", 96, 36, "Disponible", "CF", 176, 6, "Derecho");
+					Jugador jacb7 = new Bateo("Francisco", "Peña", "77777777", 87, 27, "Disponible", "RF", 176, 6, "Derecho");
+					Jugador jacb8 = new Bateo("Johan ", "Camargo", "88888888", 18, 27, "Disponible", "C", 176, 6, "Derecho");
+					Jugador jacb9 = new Bateo("Rangel", "Ravelo", "99999999", 19, 26, "Disponible", "2B", 176, 6, "Derecho");
+					
+					Jugador jacb10 = new Picheo("Michael", "Ynoa", "11112222", 10, 19, "Disponible", "P", 176, 6, "Izquierdo");
+					Jugador jacb11 = new Picheo("Ramón", "Rosso", "11113333", 11, 23, "Disponible", "P", 176, 6, "Derecho");
+					Jugador jacb12 = new Picheo("Luis", "Castillo", "11114444", 12, 22, "Disponible", "P", 176, 6, "Izquierdo");
+					Jugador jacb13 = new Picheo("Jorge", "Martínez", "11115555", 13, 23, "Disponible", "P", 176, 6, "Derecho");
+					
+					e1.insertarJugador(jacb1);
+					e1.insertarJugador(jacb2);
+					e1.insertarJugador(jacb3);
+					e1.insertarJugador(jacb4);
+					e1.insertarJugador(jacb5);
+					e1.insertarJugador(jacb6);
+					e1.insertarJugador(jacb7);
+					e1.insertarJugador(jacb8);
+					e1.insertarJugador(jacb9);
+					e1.insertarJugador(jacb10);
+					e1.insertarJugador(jacb11);
+					e1.insertarJugador(jacb12);
+					e1.insertarJugador(jacb13);
+					
+					jacb1.setEquipoActual(e1.getNombre());
+					jacb2.setEquipoActual(e1.getNombre());
+					jacb3.setEquipoActual(e1.getNombre());
+					jacb4.setEquipoActual(e1.getNombre());
+					jacb5.setEquipoActual(e1.getNombre());
+					jacb6.setEquipoActual(e1.getNombre());
+					jacb7.setEquipoActual(e1.getNombre());
+					jacb8.setEquipoActual(e1.getNombre());
+					jacb9.setEquipoActual(e1.getNombre());
+					jacb10.setEquipoActual(e1.getNombre());
+					jacb11.setEquipoActual(e1.getNombre());
+					jacb12.setEquipoActual(e1.getNombre());
+					jacb13.setEquipoActual(e1.getNombre());
+					
+					//Jugadores de los Tigres del Licey
+					Jugador jtlb1 = new Bateo("Yermín", "Merdeces", "22221111", 45, 20, "Disponible", "2B", 166, 6, "Derecho");
+					Jugador jtlb2 = new Bateo("Welington", "Castillo", "22223333", 72, 25, "Disponible", "3B", 186, 6, "Izquierdo");
+					Jugador jtlb3 = new Bateo("Vladimir", "Gutierrez", "33331111", 33, 30, "Disponible", "1B", 206, 6, "Derecho");
+					Jugador jtlb4 = new Bateo("Sergio", "Alcántara", "44441111", 44, 35, "Disponible", "SS", 176, 6, "Derecho");
+					Jugador jtlb5 = new Bateo("Jorge", "Bonifacio", "55551111", 95, 32, "Disponible", "LF", 179, 6, "Derecho");
+					Jugador jtlb6 = new Bateo("Jaime", "Barria", "66661111", 26, 36, "Disponible", "CF", 176, 6, "Derecho");
+					Jugador jtlb7 = new Bateo("Emilio", "Bonifacio", "77771111", 37, 27, "Disponible", "RF", 176, 6, "Derecho");
+					Jugador jtlb8 = new Bateo("Eric", "Mariñez", "88881111", 18, 27, "Disponible", "C", 176, 6, "Derecho");
+					Jugador jtlb9 = new Bateo("Fernando", "Cruz", "99999999", 19, 26, "Disponible", "2B", 176, 6, "Derecho");
+					
+					Jugador jtlb10 = new Picheo("Alberto", "Abreu", "33332222", 20, 19, "Disponible", "P", 176, 6, "Derecho");
+					Jugador jtlb11 = new Picheo("Ervin", "Santana", "44443333", 11, 23, "Disponible", "P", 176, 6, "Derecho");
+					Jugador jtlb12 = new Picheo("Yeison", "Asencio", "66664444", 12, 22, "Disponible", "P", 176, 6, "Izquierdo");
+					Jugador jtlb13 = new Picheo("Jorge", "Martínez", "77775555", 13, 23, "Disponible", "P", 176, 6, "Derecho");
+			
+					e2.insertarJugador(jtlb1);
+					e2.insertarJugador(jtlb2);
+					e2.insertarJugador(jtlb3);
+					e2.insertarJugador(jtlb4);
+					e2.insertarJugador(jtlb5);
+					e2.insertarJugador(jtlb6);
+					e2.insertarJugador(jtlb7);
+					e2.insertarJugador(jtlb8);
+					e2.insertarJugador(jtlb9);
+					e2.insertarJugador(jtlb10);
+					e2.insertarJugador(jtlb11);
+					e2.insertarJugador(jtlb12);
+					e2.insertarJugador(jtlb13);
+					
+					jtlb1.setEquipoActual(e2.getNombre());
+					jtlb2.setEquipoActual(e2.getNombre());
+					jtlb3.setEquipoActual(e2.getNombre());
+					jtlb4.setEquipoActual(e2.getNombre());
+					jtlb5.setEquipoActual(e2.getNombre());
+					jtlb6.setEquipoActual(e2.getNombre());
+					jtlb7.setEquipoActual(e2.getNombre());
+					jtlb8.setEquipoActual(e2.getNombre());
+					jtlb9.setEquipoActual(e2.getNombre());
+					jtlb10.setEquipoActual(e2.getNombre());
+					jtlb11.setEquipoActual(e2.getNombre());
+					jtlb12.setEquipoActual(e2.getNombre());
+					jtlb13.setEquipoActual(e2.getNombre());
 
 					Principal.llenarTabla();
 					Principal.llenarTabla2();
