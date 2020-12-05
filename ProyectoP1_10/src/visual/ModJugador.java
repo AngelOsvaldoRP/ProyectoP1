@@ -27,6 +27,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class ModJugador extends JDialog {
 
@@ -51,6 +52,7 @@ public class ModJugador extends JDialog {
 	 * Create the dialog.
 	 */
 	public ModJugador(Equipo equipo, Jugador jugador) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ModJugador.class.getResource("/assets/lidomlogo.png")));
 		this.team= equipo;
 		this.aux= jugador;
 		setResizable(false);

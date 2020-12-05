@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class BuscarEstadisticasJugador extends JDialog {
 
@@ -42,6 +43,7 @@ public class BuscarEstadisticasJugador extends JDialog {
 	 * Create the dialog.
 	 */
 	public BuscarEstadisticasJugador() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(BuscarEstadisticasJugador.class.getResource("/assets/lidomlogo.png")));
 		setTitle("Buscar estadisticas de un jugador");
 		setResizable(false);
 		setModal(true);

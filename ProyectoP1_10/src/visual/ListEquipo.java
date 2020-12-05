@@ -25,6 +25,7 @@ import logico.Equipo;
 import logico.Torneo;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class ListEquipo extends JDialog {
 
@@ -47,6 +48,7 @@ public class ListEquipo extends JDialog {
 	 *
 	 */
 	public ListEquipo() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListEquipo.class.getResource("/assets/lidomlogo.png")));
 		setTitle("Listado de Equipos en la Liga");
 		setModal(true);
 		setBounds(100, 100, 747, 379);

@@ -32,6 +32,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class ListJugador extends JDialog {
 	private final JPanel contentPanel = new JPanel();
@@ -59,6 +60,7 @@ public class ListJugador extends JDialog {
 	 *
 	 */
 	public ListJugador(Equipo equipo) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListJugador.class.getResource("/assets/lidomlogo.png")));
 		this.equipo = equipo;
 		setTitle("Jugadores de "+equipo.getNombre());
 		setModal(true);

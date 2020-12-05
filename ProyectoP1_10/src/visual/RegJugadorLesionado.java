@@ -30,6 +30,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class RegJugadorLesionado extends JDialog {
 
@@ -49,6 +50,7 @@ public class RegJugadorLesionado extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegJugadorLesionado(Jugador jugador) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegJugadorLesionado.class.getResource("/assets/lidomlogo.png")));
 		setTitle("Lesionar Jugador");
 		setResizable(false);
 		setBounds(100, 100, 493, 267);

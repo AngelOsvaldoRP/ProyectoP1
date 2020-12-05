@@ -121,7 +121,7 @@ public class Principal extends JFrame {
 		setTitle("AWJ Manage League");
 		setResizable(true);
 		setAutoRequestFocus(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/assets/logo lidom.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/assets/lidomlogo.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1284, 716);
 		//dim = getToolkit().getScreenSize();

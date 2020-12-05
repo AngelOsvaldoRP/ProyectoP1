@@ -27,6 +27,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class RegJugador extends JDialog {
 
@@ -51,6 +52,7 @@ public class RegJugador extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegJugador(Equipo equipo) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegJugador.class.getResource("/assets/lidomlogo.png")));
 		this.team= equipo;
 		setResizable(false);
 		setModal(true);

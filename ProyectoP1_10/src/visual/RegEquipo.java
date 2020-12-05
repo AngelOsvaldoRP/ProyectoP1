@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class RegEquipo extends JDialog {
 
@@ -42,6 +43,7 @@ public class RegEquipo extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegEquipo(String modo, Equipo equipo) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegEquipo.class.getResource("/assets/lidomlogo.png")));
 		if(modo.equalsIgnoreCase("Modificar")){
 			setTitle("Modificar Equipo");
 		}

@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class EstadisticasJugadorPicheo extends JDialog {
 
@@ -53,6 +54,7 @@ public class EstadisticasJugadorPicheo extends JDialog {
 	 * Create the dialog.
 	 */
 	public EstadisticasJugadorPicheo(Jugador miJugador) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(EstadisticasJugadorPicheo.class.getResource("/assets/lidomlogo.png")));
 		setModal(true);
 		setResizable(false);
 		setTitle("Estadisticas del jugador:");

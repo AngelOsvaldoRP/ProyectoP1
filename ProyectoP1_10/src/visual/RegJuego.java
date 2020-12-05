@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class RegJuego extends JDialog {
 
@@ -51,6 +52,7 @@ public class RegJuego extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegJuego() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegJuego.class.getResource("/assets/lidomlogo.png")));
 		
 		setResizable(false);
 		setModal(true);

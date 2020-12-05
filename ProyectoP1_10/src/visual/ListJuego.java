@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class ListJuego extends JDialog {
 
@@ -52,6 +53,7 @@ public class ListJuego extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListJuego() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListJuego.class.getResource("/assets/lidomlogo.png")));
 		setBounds(100, 100, 658, 357);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

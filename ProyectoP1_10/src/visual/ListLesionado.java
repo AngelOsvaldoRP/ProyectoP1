@@ -58,7 +58,7 @@ public class ListLesionado extends JDialog {
 	 *
 	 */
 	public ListLesionado(Equipo equipo) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(ListLesionado.class.getResource("/assets/logo lidom.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListLesionado.class.getResource("/assets/lidomlogo.png")));
 		
 		this.equipoSelected = equipo;
 		setTitle("Lesionados de "+equipo.getNombre());
