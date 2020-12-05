@@ -178,6 +178,7 @@ public class RegJuego extends JDialog {
 								
 									JOptionPane.showMessageDialog(null, "El juego se registró sastifactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 									Principal.llenarTabla();
+									Principal.llenarTabla2();
 									clear();
 									
 								}

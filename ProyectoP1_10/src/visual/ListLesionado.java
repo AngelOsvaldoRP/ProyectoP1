@@ -34,6 +34,8 @@ import logico.Lesion;
 import logico.Torneo;
 import java.awt.CardLayout;
 import java.awt.Color;
+import javax.swing.border.LineBorder;
+import java.awt.Toolkit;
 
 public class ListLesionado extends JDialog {
 	private static DefaultCategoryDataset dataset;
@@ -55,6 +57,7 @@ public class ListLesionado extends JDialog {
 	 *
 	 */
 	public ListLesionado(Equipo equipo) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListLesionado.class.getResource("/assets/logo lidom.png")));
 		
 		this.equipoSelected = equipo;
 		setTitle("Lesionados de "+equipo.getNombre());
@@ -63,11 +66,13 @@ public class ListLesionado extends JDialog {
 		setBounds(100, 100, 1159, 383);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(Color.WHITE);
 			panel.setBounds(5, 5, 608, 290);
 			panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			contentPanel.add(panel);
@@ -118,11 +123,14 @@ public class ListLesionado extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnReactivar = new JButton("Reactivar");
+				btnReactivar.setForeground(Color.WHITE);
+				btnReactivar.setBackground(new Color(0, 128, 0));
 				btnReactivar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						aux.setEstado("Terminada");
@@ -136,6 +144,8 @@ public class ListLesionado extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setForeground(Color.WHITE);
+				btnCancelar.setBackground(new Color(178, 34, 34));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

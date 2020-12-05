@@ -3,6 +3,8 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.Collections;
+import java.util.Comparator;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -67,7 +69,6 @@ public class Principal extends JFrame {
 	private Dimension dim;
 	public static DefaultTableModel modelo;
 	public static Object[] filas;
-	public static ArrayList<Equipo> equp = Torneo.getInstance().getEquipos();
 	private JTable table_1;
 	public static DefaultTableModel modelo2;
 	Equipo aux;
@@ -81,16 +82,27 @@ public class Principal extends JFrame {
 				try {
 					Principal frame = new Principal();
 					frame.setVisible(true);
-					Equipo e1= new Equipo("Las Aguilas", 1990,"Pepito", "Santiago", "El Valle de la Muerte");
-					Equipo e2= new Equipo("Licey", 1990,"Trujillo", "La Capital", "Sin Casa");
+					Equipo e1= new Equipo("Las Aguilas Cibaeñas", 1933,"Félix Fermín", "Santiago", "El Valle de la Muerte");
+					Equipo e2= new Equipo("Tigres del Licey", 1907,"Luis Sojo", "Santo Domingo", "Sin Casa");
+					Equipo e3= new Equipo("Gigantes del Cibao", 1996,"Pipe Urueta", "San Francisco de Macorís.", "Estadio Julián Javier");
+					Equipo e4= new Equipo("Estrellas Orientales", 1910,"José Alguacil", "San Pedro de Macoris", "Estadio Tetelo Vargas");
+					Equipo e5= new Equipo("Toros del Este", 1983,"Lino Rivera", "La Romana", "Estadio Francisco Micheli");
+					Equipo e6= new Equipo("Leones del Escogido", 1921,"Dave Jauss", "Santo Domingo", "Estadio Quisqueya Juan Marichal");
+					
 					Torneo.getInstance().insertarEquipo(e1);
 					Torneo.getInstance().insertarEquipo(e2);
-					Torneo.getInstance().buscarEquiporNombre("Licey").setCantJJ(10);
-					Torneo.getInstance().buscarEquiporNombre("Licey").setCantJP(10);
-					Torneo.getInstance().buscarEquiporNombre("Licey").setCantJG(0);
-					Torneo.getInstance().buscarEquiporNombre("Las Aguilas").setCantJJ(10);
-					Torneo.getInstance().buscarEquiporNombre("Las Aguilas").setCantJP(0);
-					Torneo.getInstance().buscarEquiporNombre("Las Aguilas").setCantJG(10);
+					Torneo.getInstance().insertarEquipo(e3);
+					Torneo.getInstance().insertarEquipo(e4);
+					Torneo.getInstance().insertarEquipo(e5);
+					Torneo.getInstance().insertarEquipo(e6);
+					
+					Torneo.getInstance().buscarEquiporNombre("Las Aguilas Cibaeñas").setCantJG(1);
+					Torneo.getInstance().buscarEquiporNombre("Tigres del Licey").setCantJG(3);
+					Torneo.getInstance().buscarEquiporNombre("Gigantes del Cibao").setCantJG(5);
+					Torneo.getInstance().buscarEquiporNombre("Estrellas Orientales").setCantJG(10);
+					Torneo.getInstance().buscarEquiporNombre("Toros del Este").setCantJG(9);
+					Torneo.getInstance().buscarEquiporNombre("Leones del Escogido").setCantJG(11);
+
 					Principal.llenarTabla();
 					Principal.llenarTabla2();
 					
@@ -106,9 +118,10 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		setTitle("AWJ Manage League");
 		setResizable(true);
 		setAutoRequestFocus(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\assets\\Logo-AC.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/assets/logo lidom.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1284, 716);
 		//dim = getToolkit().getScreenSize();
@@ -221,6 +234,7 @@ public class Principal extends JFrame {
 		panel_position.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setEnabled(false);
 		scrollPane.setViewportBorder(null);
 		panel_position.add(scrollPane, BorderLayout.CENTER);
 		
@@ -238,6 +252,7 @@ public class Principal extends JFrame {
 		panel_juegosdeldia.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setEnabled(false);
 		scrollPane_1.setViewportBorder(null);
 		panel_juegosdeldia.add(scrollPane_1);
 		
@@ -264,7 +279,7 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				try {
-					aux = Torneo.getInstance().buscarEquiporNombre("Las Aguilas");
+					aux = Torneo.getInstance().buscarEquiporNombre("Las Aguilas Cibaeñas");
 					ListJugador listaJugadores = new ListJugador(aux);
 					listaJugadores.setModal(true);
 					listaJugadores.setLocationRelativeTo(null);
@@ -286,7 +301,7 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					aux = Torneo.getInstance().buscarEquiporNombre("Licey");
+					aux = Torneo.getInstance().buscarEquiporNombre("Tigres del Licey");
 					ListJugador listaJugadores = new ListJugador(aux);
 					listaJugadores.setModal(true);
 					listaJugadores.setLocationRelativeTo(null);
@@ -308,7 +323,7 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					aux = Torneo.getInstance().buscarEquiporNombre("Toros");
+					aux = Torneo.getInstance().buscarEquiporNombre("Toros del Este");
 					ListJugador listaJugadores = new ListJugador(aux);
 					listaJugadores.setModal(true);
 					listaJugadores.setLocationRelativeTo(null);
@@ -330,7 +345,7 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					aux = Torneo.getInstance().buscarEquiporNombre("Estrellas");
+					aux = Torneo.getInstance().buscarEquiporNombre("Estrellas Orientales");
 					ListJugador listaJugadores = new ListJugador(aux);
 					listaJugadores.setModal(true);
 					listaJugadores.setLocationRelativeTo(null);
@@ -352,7 +367,7 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					aux = Torneo.getInstance().buscarEquiporNombre("Gigantes");
+					aux = Torneo.getInstance().buscarEquiporNombre("Gigantes del Cibao");
 					ListJugador listaJugadores = new ListJugador(aux);
 					listaJugadores.setModal(true);
 					listaJugadores.setLocationRelativeTo(null);
@@ -374,7 +389,7 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					aux = Torneo.getInstance().buscarEquiporNombre("Escojido");
+					aux = Torneo.getInstance().buscarEquiporNombre("Leones del Escogido");
 					ListJugador listaJugadores = new ListJugador(aux);
 					listaJugadores.setModal(true);
 					listaJugadores.setLocationRelativeTo(null);
@@ -425,14 +440,22 @@ public class Principal extends JFrame {
 		
 	}
 	
-
+	
+	
 	public static void llenarTabla() {
+		ArrayList<Equipo> equp=Torneo.getInstance().getEquipos();
+		filas = new Object[modelo.getColumnCount()];
+		//Ordenando
+		Collections.sort(equp, new Comparator<Equipo>() {
+			public int compare(Equipo p1, Equipo p2) {
+				return new Integer(p1.getCantJG()).compareTo(new Integer(p2.getCantJG()));
+			}
+		});
+		Collections.reverse(equp);
+		//Imprimiendo
 		int posicion = 1;
 		modelo.setRowCount(0);
-		filas = new Object[modelo.getColumnCount()];
-
-		for (Equipo equipo : Torneo.getInstance().getEquipos()) {
-			
+		for (Equipo equipo : equp) {
 			filas[0] = posicion;
 			filas[1] = equipo.getNombre();
 			filas[2] = equipo.getCantJJ();
@@ -453,8 +476,6 @@ public class Principal extends JFrame {
 		modelo2.setRowCount(0);
 		filas = new Object[modelo2.getColumnCount()];
 		for (Juego juego : Torneo.getInstance().getJuegos()) {
-			System.out.println(juego.getFecha());
-			System.out.println(actual);
 			if(juego.getFecha().equalsIgnoreCase(actual)) {
 			filas[0] = juego.getEquipoLocal();
 			filas[1] = juego.getEquipoVisitante();
