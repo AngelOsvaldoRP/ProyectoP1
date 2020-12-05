@@ -12,8 +12,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logico.Bateo;
 import logico.Equipo;
 import logico.Juego;
+import logico.Jugador;
+import logico.Picheo;
 import logico.Torneo;
 
 import javax.swing.UIManager;
@@ -24,20 +27,26 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SimulacionJuego extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable tableBV;
 	public static DefaultTableModel modeloBV;
+	public static Object[] filasBV;
 	private JTable tableLV;
 	public static DefaultTableModel modeloLV;
+	public static Object[] filasLV;
 	private JTable tableBL;
 	public static DefaultTableModel modeloBL;
+	public static Object[] filasBL;
 	private JTable tableLL;
 	public static DefaultTableModel modeloLL;
-	private Equipo visitante;
-	private Equipo local;
+	public static Object[] filasLL;
+	private static Equipo visitante;
+	private static Equipo local;
 
 	/**
 	 * Launch the application.
@@ -181,7 +190,12 @@ public class SimulacionJuego extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Finalizar Juego");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						actualizarBV();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -192,6 +206,111 @@ public class SimulacionJuego extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	
+	private void actualizarBV() {
+
+		for (int i = 0; i < filasBV.length; i++) {
+			//Jugador jugador = visitante.buscarJugadorByNumero((Integer)modelo2.getValueAt(seleccion, 0));
+		}
+	}
+	
+	public static void llenarTablaBV() {
+		modeloBV.setRowCount(0);
+		filasBV = new Object[modeloBV.getColumnCount()];
+		for (Jugador jugador : visitante.getJugadores()) {
+			if(jugador instanceof Bateo) {
+				filasBV[0] = jugador.getNumeroCamiseta();
+				filasBV[1] = jugador.getNombre();
+				filasBV[2] = jugador.getPosicion();
+				filasBV[3] = "";
+				filasBV[4] = "";
+				filasBV[5] = "";
+				filasBV[6] = "";
+				filasBV[7] = "";
+				filasBV[8] = "";
+				filasBV[9] = "";
+				filasBV[10] = "";
+				filasBV[11] = "";
+				filasBV[12] = "";
+				filasBV[13] = "";
+				filasBV[14] = "";
+				modeloBV.addRow(filasBV);
+			}
+		}
+		
+	}
+	public static void llenarTablaLV() {
+		modeloLV.setRowCount(0);
+		filasLV = new Object[modeloLV.getColumnCount()];
+		for (Jugador jugador : visitante.getJugadores()) {
+			if(jugador instanceof Picheo) {
+				filasLV[0] = jugador.getNumeroCamiseta();
+				filasLV[1] = jugador.getNombre();
+				filasLV[2] = "";
+				filasLV[3] = "";
+				filasLV[4] = "";
+				filasLV[5] = "";
+				filasLV[6] = "";
+				filasLV[7] = "";
+				filasLV[8] = "";
+				filasLV[9] = "";
+				filasLV[10] = "";
+				filasLV[11] = "";
+				filasLV[12] = "";
+				modeloLV.addRow(filasLV);
+			}
+		}
+		
+	}
+	
+	public static void llenarTablaBL() {
+		modeloBL.setRowCount(0);
+		filasBL = new Object[modeloBL.getColumnCount()];
+		for (Jugador jugador : local.getJugadores()) {
+			if(jugador instanceof Bateo) {
+				filasBL[0] = jugador.getNumeroCamiseta();
+				filasBL[1] = jugador.getNombre();
+				filasBL[2] = jugador.getPosicion();
+				filasBL[3] = "";
+				filasBL[4] = "";
+				filasBL[5] = "";
+				filasBL[6] = "";
+				filasBL[7] = "";
+				filasBL[8] = "";
+				filasBL[9] = "";
+				filasBL[10] = "";
+				filasBL[11] = "";
+				filasBL[12] = "";
+				filasBL[13] = "";
+				filasBL[14] = "";
+				modeloBV.addRow(filasBL);
+			}
+		}
+		
+	}
+	public static void llenarTablaLL() {
+		modeloLL.setRowCount(0);
+		filasLL = new Object[modeloLL.getColumnCount()];
+		for (Jugador jugador : local.getJugadores()) {
+			if(jugador instanceof Picheo) {
+				filasLL[0] = jugador.getNumeroCamiseta();
+				filasLL[1] = jugador.getNombre();
+				filasLL[2] = "";
+				filasLL[3] = "";
+				filasLL[4] = "";
+				filasLL[5] = "";
+				filasLL[6] = "";
+				filasLL[7] = "";
+				filasLL[8] = "";
+				filasLL[9] = "";
+				filasLL[10] = "";
+				filasLL[11] = "";
+				filasLL[12] = "";
+				modeloLV.addRow(filasLL);
+			}
+		}
+		
 	}
 
 }

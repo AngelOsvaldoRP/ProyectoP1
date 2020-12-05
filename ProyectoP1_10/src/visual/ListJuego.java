@@ -96,6 +96,10 @@ public class ListJuego extends JDialog {
 				btnJugar.setEnabled(false);
 				btnJugar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						SimulacionJuego jugando = new SimulacionJuego(Torneo.getInstance().buscarJuegoPorCodigo(identificador));
+						jugando.setModal(true);
+						jugando.setLocationRelativeTo(null);
+						jugando.setVisible(true);
 					}
 				});
 				buttonPane.add(btnJugar);
