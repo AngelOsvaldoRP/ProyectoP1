@@ -260,14 +260,6 @@ public class EstadisticasJugadorBateo extends JDialog {
 				txttb.setColumns(10);
 			}
 			{
-				txtvp = new JTextField();
-				txtvp.setEditable(false);
-				txtvp.setText(String.valueOf(((Bateo) jugador).getCantVP()));
-				txtvp.setBounds(10, 169, 86, 20);
-				panel.add(txtvp);
-				txtvp.setColumns(10);
-			}
-			{
 				JLabel lblNewLabel_15 = new JLabel("CA:");
 				lblNewLabel_15.setBounds(132, 144, 46, 14);
 				panel.add(lblNewLabel_15);

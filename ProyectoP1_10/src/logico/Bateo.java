@@ -3,7 +3,6 @@ package logico;
 public class Bateo extends Jugador {
 	//Variables
 	private int cantTB;
-	private int cantVP;
 	private int cantCA;
 	private int cant2b;
 	private int cant3b;
@@ -18,7 +17,6 @@ public class Bateo extends Jugador {
 		super(nombre, apellido, identificacion, numeroCamiseta, edad, estado,
 				posicion, peso, altura, mano);
 		this.cantTB = 0;
-		this.cantVP = 0;
 		this.cantCA = 0;
 		this.cant2b = 0;
 		this.cant3b = 0;
@@ -34,14 +32,6 @@ public class Bateo extends Jugador {
 
 	public void setCantTB(int cantTB) {
 		this.cantTB = cantTB;
-	}
-
-	public int getCantVP() {
-		return cantVP;
-	}
-
-	public void setCantVP(int cantVP) {
-		this.cantVP = cantVP;
 	}
 
 	public int getCantCA() {

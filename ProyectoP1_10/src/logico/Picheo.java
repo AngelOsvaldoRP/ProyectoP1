@@ -8,9 +8,7 @@ public class Picheo extends Jugador {
 	private int cantJS;
 	private int cantAperturas;
 	private int cantCL;
-	private int cantCP;
 	private int cantTBE;
-	private int cantNL;
 	private int cantHold;
 	private int entradasLanzada;
 	
@@ -28,9 +26,7 @@ public class Picheo extends Jugador {
 		this.cantJS = 0;
 		this.cantAperturas = 0;
 		this.cantCL = 0;
-		this.cantCP = 0;
 		this.cantTBE = 0;
-		this.cantNL = 0;
 		this.cantHold = 0;
 		this.entradasLanzada = 0;
 	}
@@ -85,28 +81,12 @@ public class Picheo extends Jugador {
 		this.cantCL = cantCL;
 	}
 
-	public int getCantCP() {
-		return cantCP;
-	}
-
-	public void setCantCP(int cantCP) {
-		this.cantCP = cantCP;
-	}
-
 	public int getCantTBE() {
 		return cantTBE;
 	}
 
 	public void setCantTBE(int cantTBE) {
 		this.cantTBE = cantTBE;
-	}
-
-	public int getCantNL() {
-		return cantNL;
-	}
-
-	public void setCantNL(int cantNL) {
-		this.cantNL = cantNL;
 	}
 
 	public int getCantHold() {

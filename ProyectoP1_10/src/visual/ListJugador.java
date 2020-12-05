@@ -72,9 +72,10 @@ public class ListJugador extends JDialog {
 			panel.setBounds(10, 69, 1142, 206);
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Bateadores", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel);
-			panel.setLayout(new BorderLayout(0, 0));
+			panel.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(6, 16, 1130, 183);
 				scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 				panel.add(scrollPane);
 				{
