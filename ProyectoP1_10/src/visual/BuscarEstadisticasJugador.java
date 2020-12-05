@@ -5,9 +5,11 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 
 import logico.Bateo;
 import logico.Equipo;
@@ -26,7 +28,7 @@ import java.awt.event.ActionEvent;
 public class BuscarEstadisticasJugador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtNJugador;
+	private JFormattedTextField txtNJugador;
 	private JComboBox cbxNEquipo;
 
 	/**
@@ -68,13 +70,17 @@ public class BuscarEstadisticasJugador extends JDialog {
 				panel.add(cbxNEquipo);
 			}
 			{
-				JLabel lblNewLabel_1 = new JLabel("Nombre del Jugador:");
+				JLabel lblNewLabel_1 = new JLabel("Numero del Jugador:");
 				lblNewLabel_1.setBounds(10, 65, 137, 14);
 				panel.add(lblNewLabel_1);
 			}
 			{
-				txtNJugador = new JTextField();
-				txtNJugador.setBounds(144, 61, 178, 22);
+				try{
+					MaskFormatter mascaral= new MaskFormatter("##");
+					mascaral.setPlaceholderCharacter('-');
+					txtNJugador =new JFormattedTextField(mascaral);
+				} catch(Exception e){}
+				txtNJugador.setBounds(172, 61, 86, 22);
 				panel.add(txtNJugador);
 				txtNJugador.setColumns(10);
 			}
@@ -88,10 +94,10 @@ public class BuscarEstadisticasJugador extends JDialog {
 				JButton btnBuscar = new JButton("Buscar");
 				btnBuscar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(cbxNEquipo.getSelectedIndex()!=0 &&  !txtNJugador.getText().equalsIgnoreCase("")) {
+						if(!txtNJugador.getText().equalsIgnoreCase("--") &&  cbxNEquipo.getSelectedIndex()!=0) {
 							Equipo equipo = Torneo.getInstance().buscarEquiporNombre(cbxNEquipo.getSelectedItem().toString());
 							if(equipo != null){
-								Jugador jugador= equipo.findJugadorByNombre(txtNJugador.getText());
+								Jugador jugador= equipo.buscarJugadorByNumero(new Integer (txtNJugador.getText()));
 								if(jugador != null){
 									if(jugador instanceof Bateo) {
 										EstadisticasJugadorBateo bat = new EstadisticasJugadorBateo(jugador);

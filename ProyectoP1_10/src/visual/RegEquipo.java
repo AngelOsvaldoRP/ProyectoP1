@@ -148,12 +148,17 @@ public class RegEquipo extends JDialog {
 						}
 						if(modo.equalsIgnoreCase("Registrar")) {
 							if(!txtNombre.getText().equalsIgnoreCase("") && !txtCiudad.getText().equalsIgnoreCase("") && !txtManager.getText().equalsIgnoreCase("")&& !txtAnno.getText().equalsIgnoreCase("") && !txtEstadio.getText().equalsIgnoreCase("")){
-								Equipo team = new Equipo(txtNombre.getText(), Integer.parseInt(txtAnno.getText().toString()), txtManager.getText(), txtCiudad.getText(), txtEstadio.getText());
-								Torneo.getInstance().insertarEquipo(team);
-								JOptionPane.showMessageDialog(null, "Equipo ''"+txtNombre.getText()+"'' fue registrado satisfectoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-								Principal.llenarTabla();
-								Principal.llenarTabla2();
-								clear();
+								Equipo aux1= Torneo.getInstance().buscarEquiporNombre(txtNombre.getText());
+								if(aux1== null) {
+									Equipo team = new Equipo(txtNombre.getText(), Integer.parseInt(txtAnno.getText().toString()), txtManager.getText(), txtCiudad.getText(), txtEstadio.getText());
+									Torneo.getInstance().insertarEquipo(team);
+									JOptionPane.showMessageDialog(null, "Equipo ''"+txtNombre.getText()+"'' fue registrado satisfectoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+									Principal.llenarTabla();
+									Principal.llenarTabla2();
+									clear();
+								}else {
+									JOptionPane.showMessageDialog(null, "No se pueden registrar dos equipos con el mismo nombre", null, JOptionPane.ERROR_MESSAGE, null);
+								}
 							}
 							else{
 								JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);

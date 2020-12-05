@@ -64,7 +64,7 @@ public class RegJugador extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(!txtNombre.getText().equalsIgnoreCase("")&& !txtNumero.getText().equalsIgnoreCase("")&&
+						if(!txtNombre.getText().equalsIgnoreCase("")&& !txtNumero.getText().equalsIgnoreCase("--")&&
 								!txtIdentificacion.getText().equalsIgnoreCase("")&& cbxMano.getSelectedIndex()!=0 &&
 								!txtAltura.getText().equalsIgnoreCase("#.##")&& !txtPeso.getText().equalsIgnoreCase("###")&&
 								cbxPosicion.getSelectedIndex()!=0){
@@ -172,7 +172,7 @@ public class RegJugador extends JDialog {
 			
 			try{
 				MaskFormatter mascaral= new MaskFormatter("##");
-				mascaral.setPlaceholderCharacter('-');
+				mascaral.setPlaceholderCharacter(' ');
 				txtNumero =new JFormattedTextField(mascaral);
 			} catch(Exception e){}
 			txtNumero.setBounds(86, 112, 46, 22);

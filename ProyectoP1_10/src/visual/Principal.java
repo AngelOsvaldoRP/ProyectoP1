@@ -96,7 +96,7 @@ public class Principal extends JFrame {
 					Torneo.getInstance().insertarEquipo(e5);
 					Torneo.getInstance().insertarEquipo(e6);
 					
-					Torneo.getInstance().buscarEquiporNombre("Las Aguilas Cibaeñas").setCantJG(1);
+					Torneo.getInstance().buscarEquiporNombre("Las Aguilas Cibaeñas").setCantJG(12);
 					Torneo.getInstance().buscarEquiporNombre("Tigres del Licey").setCantJG(3);
 					Torneo.getInstance().buscarEquiporNombre("Gigantes del Cibao").setCantJG(5);
 					Torneo.getInstance().buscarEquiporNombre("Estrellas Orientales").setCantJG(10);
