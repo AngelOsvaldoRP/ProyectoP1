@@ -134,6 +134,7 @@ public class Principal extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Registro");
+		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/assets/round_add_black_18dp.png")));
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Registrar Equipo");
@@ -161,6 +162,7 @@ public class Principal extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenu mnNewMenu_1 = new JMenu("Lista");
+		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/assets/round_view_list_black_18dp.png")));
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Lista de Equipos");
@@ -189,6 +191,7 @@ public class Principal extends JFrame {
 		mnNewMenu_1.add(mntmNewMenuItem_3);
 		
 		JMenu mnNewMenu_2 = new JMenu("Informacion");
+		mnNewMenu_2.setIcon(new ImageIcon(Principal.class.getResource("/assets/round_visibility_black_18dp.png")));
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem Sitio_web = new JMenuItem("Visita Nuestro sitio web");
@@ -196,6 +199,7 @@ public class Principal extends JFrame {
 		mnNewMenu_2.add(Sitio_web);
 		
 		JMenu Estadisticas = new JMenu("Estadisticas");
+		Estadisticas.setIcon(new ImageIcon(Principal.class.getResource("/assets/round_leaderboard_black_18dp.png")));
 		menuBar.add(Estadisticas);
 		
 		JMenuItem Graficos = new JMenuItem("Graficos de la liga");
