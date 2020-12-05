@@ -24,6 +24,8 @@ import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class BuscarEstadisticasJugador extends JDialog {
 
@@ -92,6 +94,9 @@ public class BuscarEstadisticasJugador extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnBuscar = new JButton("Buscar");
+				btnBuscar.setIcon(new ImageIcon(BuscarEstadisticasJugador.class.getResource("/assets/round_search_white_18dp.png")));
+				btnBuscar.setBackground(new Color(65, 105, 225));
+				btnBuscar.setForeground(Color.WHITE);
 				btnBuscar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(!txtNJugador.getText().equalsIgnoreCase("--") &&  cbxNEquipo.getSelectedIndex()!=0) {
@@ -138,6 +143,9 @@ public class BuscarEstadisticasJugador extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setForeground(new Color(255, 255, 255));
+				cancelButton.setBackground(new Color(128, 0, 0));
+				cancelButton.setIcon(new ImageIcon(BuscarEstadisticasJugador.class.getResource("/assets/round_clear_white_18dp.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

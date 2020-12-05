@@ -36,6 +36,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class ListLesionado extends JDialog {
 	private static DefaultCategoryDataset dataset;
@@ -129,6 +130,7 @@ public class ListLesionado extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnReactivar = new JButton("Reactivar");
+				btnReactivar.setIcon(new ImageIcon(ListLesionado.class.getResource("/assets/round_add_circle_outline_white_18dp.png")));
 				btnReactivar.setForeground(Color.WHITE);
 				btnReactivar.setBackground(new Color(0, 128, 0));
 				btnReactivar.addActionListener(new ActionListener() {
@@ -144,6 +146,7 @@ public class ListLesionado extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setIcon(new ImageIcon(ListLesionado.class.getResource("/assets/round_clear_white_18dp.png")));
 				btnCancelar.setForeground(Color.WHITE);
 				btnCancelar.setBackground(new Color(178, 34, 34));
 				btnCancelar.addActionListener(new ActionListener() {

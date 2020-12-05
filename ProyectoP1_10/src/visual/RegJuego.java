@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.ImageIcon;
 
 public class RegJuego extends JDialog {
 
@@ -87,7 +88,12 @@ public class RegJuego extends JDialog {
 		cbxEquipoL = new JComboBox();
 		cbxEquipoL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtEstadio.setText(Torneo.getInstance().buscarEquiporNombre(cbxEquipoL.getSelectedItem().toString()).getEstadio());
+				try {
+					txtEstadio.setText(Torneo.getInstance().buscarEquiporNombre(cbxEquipoL.getSelectedItem().toString()).getEstadio());
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "'<Seleccione>' no es un equipo local valido", null, JOptionPane.ERROR_MESSAGE, null);
+				}
+				
 			}
 		});
 		cbxEquipoL.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
@@ -115,17 +121,17 @@ public class RegJuego extends JDialog {
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Hora:");
-		lblNewLabel_4.setBounds(308, 127, 46, 14);
+		lblNewLabel_4.setBounds(338, 126, 46, 14);
 		panel.add(lblNewLabel_4);
 		
 		txtFecha = new JDateChooser();
 		txtFecha.getCalendarButton().setForeground(Color.RED);
-		txtFecha.setForeground(Color.RED);
 		txtFecha.setEnabled(false);
+		txtFecha.setForeground(new Color(1, 1, 1));
 		txtFecha.getCalendarButton().setEnabled(true);
 		txtFecha.getCalendarButton().setBackground(Color.WHITE);
-		txtFecha.setBackground(Color.BLACK);
-		txtFecha.setBounds(121, 119, 167, 23);
+		txtFecha.setBackground(new Color(255, 255, 255));
+		txtFecha.setBounds(143, 121, 167, 23);
 		panel.add(txtFecha);
 		
 		
@@ -134,7 +140,7 @@ public class RegJuego extends JDialog {
 			txtHora =new JFormattedTextField(Hora);
 		} catch(Exception e){}
 		
-		txtHora.setBounds(349, 123, 46, 22);
+		txtHora.setBounds(379, 122, 46, 22);
 		panel.add(txtHora);
 		{
 			JPanel buttonPane = new JPanel();
@@ -143,6 +149,9 @@ public class RegJuego extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				okButton.setIcon(new ImageIcon(RegJuego.class.getResource("/assets/round_save_white_18dp.png")));
+				okButton.setForeground(new Color(255, 255, 255));
+				okButton.setBackground(new Color(0, 128, 0));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(cbxEquipoV.getSelectedIndex()!=0 && cbxEquipoV.getSelectedIndex()!=0 && !txtEstadio.getText().equalsIgnoreCase("") &&
@@ -197,6 +206,9 @@ public class RegJuego extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(RegJuego.class.getResource("/assets/round_clear_white_18dp.png")));
+				cancelButton.setForeground(new Color(255, 255, 255));
+				cancelButton.setBackground(new Color(128, 0, 0));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

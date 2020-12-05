@@ -23,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
 
 import logico.Equipo;
 import logico.Torneo;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class ListEquipo extends JDialog {
 
@@ -94,6 +96,9 @@ public class ListEquipo extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.setForeground(new Color(255, 255, 255));
+				btnModificar.setIcon(new ImageIcon(ListEquipo.class.getResource("/assets/round_create_white_18dp.png")));
+				btnModificar.setBackground(new Color(255, 165, 0));
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						RegEquipo re = new RegEquipo("Modificar", aux);
@@ -106,6 +111,9 @@ public class ListEquipo extends JDialog {
 				{
 					
 					btnVerLesionados = new JButton("Ver Lesionados");
+					btnVerLesionados.setBackground(new Color(128, 0, 0));
+					btnVerLesionados.setForeground(new Color(255, 255, 255));
+					btnVerLesionados.setIcon(new ImageIcon(ListEquipo.class.getResource("/assets/round_flaky_white_18dp.png")));
 					btnVerLesionados.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							ListLesionado listaLesionados = new ListLesionado(aux);
@@ -120,12 +128,18 @@ public class ListEquipo extends JDialog {
 				}
 				{
 					btnVerEstadisticas = new JButton("Ver Estadisticas");
+					btnVerEstadisticas.setIcon(new ImageIcon(ListEquipo.class.getResource("/assets/round_visibility_white_18dp.png")));
+					btnVerEstadisticas.setForeground(new Color(255, 255, 255));
+					btnVerEstadisticas.setBackground(new Color(65, 105, 225));
 					btnVerEstadisticas.setEnabled(false);
 					btnVerEstadisticas.setActionCommand("OK");
 					buttonPane.add(btnVerEstadisticas);
 				}
 				{
 					btnVerJugadores = new JButton("Ver Jugadores");
+					btnVerJugadores.setIcon(new ImageIcon(ListEquipo.class.getResource("/assets/round_visibility_white_18dp.png")));
+					btnVerJugadores.setForeground(new Color(255, 255, 255));
+					btnVerJugadores.setBackground(new Color(65, 105, 225));
 					btnVerJugadores.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							ListJugador listaJugadores = new ListJugador(aux);
@@ -145,6 +159,9 @@ public class ListEquipo extends JDialog {
 			}
 			{  
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setForeground(new Color(255, 255, 255));
+				btnEliminar.setIcon(new ImageIcon(ListEquipo.class.getResource("/assets/round_delete_white_18dp.png")));
+				btnEliminar.setBackground(new Color(255, 0, 0));
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(aux!=null) {
@@ -154,6 +171,8 @@ public class ListEquipo extends JDialog {
 								llenarTabla();
 								btnEliminar.setEnabled(false);
 								btnModificar.setEnabled(false);
+								Principal.llenarTabla();
+								Principal.llenarTabla2();
 							}
 						}
 					}
@@ -163,6 +182,9 @@ public class ListEquipo extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setForeground(new Color(255, 255, 255));
+				btnCancelar.setIcon(new ImageIcon(ListEquipo.class.getResource("/assets/round_clear_white_18dp.png")));
+				btnCancelar.setBackground(new Color(128, 0, 0));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

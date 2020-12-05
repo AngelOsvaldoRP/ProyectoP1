@@ -18,6 +18,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class EstadisticasJugadorPicheo extends JDialog {
 
@@ -341,6 +342,9 @@ public class EstadisticasJugadorPicheo extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Aceptar");
+				cancelButton.setForeground(new Color(255, 255, 255));
+				cancelButton.setBackground(new Color(0, 128, 128));
+				cancelButton.setIcon(new ImageIcon(EstadisticasJugadorPicheo.class.getResource("/assets/round_done_outline_white_18dp.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

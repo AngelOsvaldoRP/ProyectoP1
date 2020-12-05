@@ -21,6 +21,8 @@ import logico.Torneo;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class RegEquipo extends JDialog {
 
@@ -126,9 +128,15 @@ public class RegEquipo extends JDialog {
 			{
 				if(modo.equalsIgnoreCase("Modificar")) {
 					btnRegistrar = new JButton("Modificar");
+					btnRegistrar.setBackground(new Color(0, 128, 0));
+					btnRegistrar.setForeground(new Color(255, 255, 255));
+					btnRegistrar.setIcon(new ImageIcon(RegEquipo.class.getResource("/assets/round_save_white_18dp.png")));
 				}
 				if(modo.equalsIgnoreCase("Registrar")) {
 					btnRegistrar = new JButton("Registrar");
+					btnRegistrar.setBackground(new Color(0, 128, 0));
+					btnRegistrar.setForeground(new Color(255, 255, 255));
+					btnRegistrar.setIcon(new ImageIcon(RegEquipo.class.getResource("/assets/round_save_white_18dp.png")));
 				}
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -173,6 +181,9 @@ public class RegEquipo extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setBackground(new Color(139, 0, 0));
+				cancelButton.setForeground(new Color(255, 255, 255));
+				cancelButton.setIcon(new ImageIcon(RegEquipo.class.getResource("/assets/round_clear_white_18dp.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

@@ -96,7 +96,7 @@ public class Principal extends JFrame {
 					Torneo.getInstance().insertarEquipo(e5);
 					Torneo.getInstance().insertarEquipo(e6);
 					
-					Torneo.getInstance().buscarEquiporNombre("Las Aguilas Cibaeñas").setCantJG(12);
+					Torneo.getInstance().buscarEquiporNombre("Las Aguilas Cibaeñas").setCantJG(1);
 					Torneo.getInstance().buscarEquiporNombre("Tigres del Licey").setCantJG(3);
 					Torneo.getInstance().buscarEquiporNombre("Gigantes del Cibao").setCantJG(5);
 					Torneo.getInstance().buscarEquiporNombre("Estrellas Orientales").setCantJG(10);
@@ -259,7 +259,7 @@ public class Principal extends JFrame {
 		table_1 = new JTable();
 		scrollPane_1.setViewportView(table_1);
 		modelo2 = new DefaultTableModel();
-		String[] headers2 = {"Local", "Visitante","Local Score", "Visitante Score", "Hora"};
+		String[] headers2 = {"Local", "Visitante","Estado", "Hora"};
 		modelo2.setColumnIdentifiers(headers2);
 		table_1.setModel(modelo2);
 		
@@ -479,9 +479,8 @@ public class Principal extends JFrame {
 			if(juego.getFecha().equalsIgnoreCase(actual)) {
 			filas[0] = juego.getEquipoLocal();
 			filas[1] = juego.getEquipoVisitante();
-			filas[2] = juego.getCarrerasLocal();
-			filas[3] = juego.getCarrerasVisitante();
-			filas[4] = juego.getHora();
+			filas[2] = juego.getEstado();
+			filas[3] = juego.getHora();
 			modelo2.addRow(filas);
 			}
 		}

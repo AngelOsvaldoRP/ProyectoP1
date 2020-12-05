@@ -25,6 +25,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class RegJugador extends JDialog {
 
@@ -62,6 +64,9 @@ public class RegJugador extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				okButton.setIcon(new ImageIcon(RegJugador.class.getResource("/assets/round_save_white_18dp.png")));
+				okButton.setForeground(new Color(255, 255, 255));
+				okButton.setBackground(new Color(0, 128, 0));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(!txtNombre.getText().equalsIgnoreCase("")&& !txtNumero.getText().equalsIgnoreCase("--")&&
@@ -119,6 +124,9 @@ public class RegJugador extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(RegJugador.class.getResource("/assets/round_clear_white_18dp.png")));
+				cancelButton.setForeground(new Color(255, 255, 255));
+				cancelButton.setBackground(new Color(128, 0, 0));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

@@ -21,6 +21,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class ListJuego extends JDialog {
 
@@ -88,11 +90,15 @@ public class ListJuego extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setForeground(new Color(255, 255, 255));
 			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnJugar = new JButton("Jugar");
+				btnJugar.setIcon(new ImageIcon(ListJuego.class.getResource("/assets/round_play_arrow_white_18dp.png")));
+				btnJugar.setForeground(new Color(255, 255, 255));
+				btnJugar.setBackground(new Color(0, 128, 0));
 				btnJugar.setEnabled(false);
 				btnJugar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -106,6 +112,9 @@ public class ListJuego extends JDialog {
 			}
 			{
 				btnInformacion = new JButton("Informacion");
+				btnInformacion.setIcon(new ImageIcon(ListJuego.class.getResource("/assets/round_leaderboard_white_18dp.png")));
+				btnInformacion.setForeground(new Color(255, 255, 255));
+				btnInformacion.setBackground(new Color(65, 105, 225));
 				btnInformacion.setEnabled(false);
 				btnInformacion.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -115,6 +124,9 @@ public class ListJuego extends JDialog {
 			}
 			{
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setIcon(new ImageIcon(ListJuego.class.getResource("/assets/round_delete_white_18dp.png")));
+				btnEliminar.setForeground(new Color(255, 255, 255));
+				btnEliminar.setBackground(new Color(255, 0, 0));
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -133,6 +145,9 @@ public class ListJuego extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ListJuego.class.getResource("/assets/round_clear_white_18dp.png")));
+				cancelButton.setBackground(new Color(128, 0, 0));
+				cancelButton.setForeground(new Color(255, 255, 255));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

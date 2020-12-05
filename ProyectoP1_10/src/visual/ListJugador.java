@@ -31,6 +31,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class ListJugador extends JDialog {
 	private final JPanel contentPanel = new JPanel();
@@ -175,6 +176,9 @@ public class ListJugador extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnModificar = new JButton("Modificar Jugador");
+				btnModificar.setIcon(new ImageIcon(ListJugador.class.getResource("/assets/round_create_white_18dp.png")));
+				btnModificar.setBackground(new Color(210, 105, 30));
+				btnModificar.setForeground(new Color(255, 255, 255));
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(aux1 instanceof Bateo) {
@@ -195,6 +199,9 @@ public class ListJugador extends JDialog {
 				});
 				{
 					btnVerJugadores = new JButton("Ver Jugador");
+					btnVerJugadores.setIcon(new ImageIcon(ListJugador.class.getResource("/assets/round_visibility_white_18dp.png")));
+					btnVerJugadores.setBackground(new Color(65, 105, 225));
+					btnVerJugadores.setForeground(new Color(255, 255, 255));
 					btnVerJugadores.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							if(aux1 instanceof Bateo) {
@@ -213,6 +220,9 @@ public class ListJugador extends JDialog {
 					});
 					{
 						btnLesionar = new JButton("Lesionar");
+						btnLesionar.setIcon(new ImageIcon(ListJugador.class.getResource("/assets/round_flaky_white_18dp.png")));
+						btnLesionar.setBackground(new Color(165, 42, 42));
+						btnLesionar.setForeground(new Color(255, 255, 255));
 						btnLesionar.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								
@@ -260,6 +270,9 @@ public class ListJugador extends JDialog {
 			}
 			{
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setIcon(new ImageIcon(ListJugador.class.getResource("/assets/round_delete_white_18dp.png")));
+				btnEliminar.setBackground(new Color(255, 0, 0));
+				btnEliminar.setForeground(new Color(255, 255, 255));
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(aux1!=null) {
@@ -293,6 +306,9 @@ public class ListJugador extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setIcon(new ImageIcon(ListJugador.class.getResource("/assets/round_clear_white_18dp.png")));
+				btnCancelar.setBackground(new Color(178, 34, 34));
+				btnCancelar.setForeground(new Color(255, 255, 255));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -300,6 +316,9 @@ public class ListJugador extends JDialog {
 				});
 				{
 					JButton btnAgregarJugador = new JButton("Agregar Jugador");
+					btnAgregarJugador.setIcon(new ImageIcon(ListJugador.class.getResource("/assets/round_add_white_18dp.png")));
+					btnAgregarJugador.setBackground(new Color(0, 128, 0));
+					btnAgregarJugador.setForeground(new Color(255, 255, 255));
 					btnAgregarJugador.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							RegJugador reg = new RegJugador(equipo);

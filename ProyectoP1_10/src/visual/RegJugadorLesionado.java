@@ -29,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class RegJugadorLesionado extends JDialog {
 
@@ -134,6 +135,9 @@ public class RegJugadorLesionado extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Lesionar");
+				okButton.setIcon(new ImageIcon(RegJugadorLesionado.class.getResource("/assets/round_flaky_white_18dp.png")));
+				okButton.setForeground(new Color(255, 255, 255));
+				okButton.setBackground(new Color(0, 128, 0));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(cbxCausa.getSelectedIndex() !=0 && !txtDescripcion.getText().equalsIgnoreCase("") &&
@@ -182,6 +186,9 @@ public class RegJugadorLesionado extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(RegJugadorLesionado.class.getResource("/assets/round_clear_white_18dp.png")));
+				cancelButton.setForeground(new Color(255, 255, 255));
+				cancelButton.setBackground(new Color(128, 0, 0));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
