@@ -11,6 +11,8 @@ public class Torneo {
 	private ArrayList<Lesion> lesiones;
 	private static Torneo torneo = null;
 	private int autoJuegoCode;
+	private ArrayList<User> misUsers;
+	private static User loginUser;
 	
 	
 	
@@ -21,6 +23,7 @@ public class Torneo {
 		this.equipos = new ArrayList<Equipo>();
 		this.jugadores = new ArrayList<Jugador>();
 		this.lesiones  = new ArrayList<Lesion>();
+		this.misUsers = new ArrayList<>();
 		this.setAutoJuegoCode(1);
 		
 	}
@@ -73,6 +76,22 @@ public class Torneo {
 	public void setJugadores(ArrayList<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
+	
+	public ArrayList<User> getMisUsers() {
+		return misUsers;
+	}
+
+	public void setMisUsers(ArrayList<User> misUsers) {
+		this.misUsers = misUsers;
+	}
+	
+	public static User getLoginUser() {
+		return loginUser;
+	}
+
+	public static void setLoginUser(User loginUser) {
+		Torneo.loginUser = loginUser;
+	}
 
 	public int getAutoJuegoCode() {
 		return autoJuegoCode;
@@ -84,6 +103,11 @@ public class Torneo {
 
 	public void insertarEquipo(Equipo team) {
 		equipos.add(team);
+		
+	}
+	
+	public void insertarUser(User user) {
+		misUsers.add(user);
 		
 	}
 
@@ -125,6 +149,17 @@ public class Torneo {
 		equipos.remove(equipo);
 	}
 
+	public boolean confirmLogin(String usuario, String pass) {
+		boolean login = false;
+		for (User user : misUsers) {
+			if(user.getUserName().equals(usuario) && user.getPass().equals(pass)){
+				loginUser = user;
+				login = true;
+			}
+		}
+		return login;
+	}
+	
 	public Jugador buscarJugadorByIdentificacion(String identificacion) {
 		Jugador aux = null;
 		boolean encontrado = false;

@@ -48,7 +48,6 @@ public class Bateo extends Jugador {
 
 	public void setCant2B(int cant2b) {
 		this.cant2b = cant2b;
-		cantHits++;
 	}
 
 	public int getCant3B() {
@@ -57,7 +56,6 @@ public class Bateo extends Jugador {
 
 	public void setCant3B(int cant3b) {
 		this.cant3b = cant3b;
-		cantHits++;
 	}
 
 	public int getCantCI() {
@@ -86,12 +84,12 @@ public class Bateo extends Jugador {
 
 
 	public float avg() {
-		return (float)(Math.round(((float)cantHits/cantTB) * 1000d) / 1000d);
+		return (float)(Math.round(((float)(cantHits+cant2b+cant3b+cantHR)/cantTB) * 1000d) / 1000d);
 		
 	}
 	
 	public float obp() {
-		return (float)(Math.round(((float)(cantHits+cantBB+hbp)/(cantHits+cantBB+hbp+es)) * 1000d) / 1000d);	
+		return (float)(Math.round(((float)(cantHits+cant2b+cant3b+cantHR+hbp)/(cantHits+cant2b+cant3b+cantHR+hbp+es)) * 1000d) / 1000d);	
 	}
 	
 	public float slg() {

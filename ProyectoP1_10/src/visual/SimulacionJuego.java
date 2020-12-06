@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 import logico.Bateo;
 import logico.Equipo;
@@ -21,6 +23,8 @@ import logico.Torneo;
 
 import javax.swing.UIManager;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -51,6 +55,19 @@ public class SimulacionJuego extends JDialog {
 	public static Object[] filasLL;
 	private static Equipo visitante;
 	private static Equipo local;
+	public static DefaultTableModel modeloEntradas;
+	public static Object[] filasEntradas;
+	private static JTable tableEntradas;
+	public static DefaultTableModel modeloMarcador;
+	public static Object[] filasMarcador;
+	private static JTable tableMarcador;
+	public int carrerasVisitante = 0;
+	public int carrerasLocal = 0;
+	public int hitVisitante = 0;
+	public int hitLocal = 0;
+	public int erroresVisitante = 0;
+	public int erroresLocal = 0;
+
 
 	/**
 	 * Launch the application.
@@ -97,8 +114,14 @@ public class SimulacionJuego extends JDialog {
 					panelBV.add(scrollPane1);
 					{
 						modeloBV = new DefaultTableModel();
-						String[] headers = {"No.","Nombre", "Pos.", "H", "2B", "3B", "HR", "K", "HBP", "TB", "BB", "CA", "CI", "ES", "BR"};
+						String[] headers = {"No.","Nombre", "Pos.", "H", "2B", "3B", "HR", "K", "HBP", "TB", "BB", "CA", "CI", "ES", "BR", "Errores"};
 						modeloBV.setColumnIdentifiers(headers);
+						tableBV.addMouseListener(new MouseAdapter() {
+							public void mouseClicked(MouseEvent e) {
+								tableBV.setColumnSelectionAllowed(false);
+								tableBV.setCellSelectionEnabled(false);
+							}
+						});
 						tableBV.setModel(modeloBV);
 						tableBV.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 						tableBV.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -108,20 +131,27 @@ public class SimulacionJuego extends JDialog {
 			}
 			{
 				JPanel panelLV = new JPanel();
-				panelLV.setLayout(new BorderLayout(0, 0));
 				panelLV.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lanzadores ("+visitante.getNombre()+")", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				panelLV.setBounds(10, 276, 450, 206);
 				panel.add(panelLV);
+				panelLV.setLayout(null);
 				{
 					JScrollPane scrollPane2 = new JScrollPane();
+					scrollPane2.setBounds(6, 16, 438, 183);
 					scrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 					scrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 					panelLV.add(scrollPane2);
 					{
 						modeloLV = new DefaultTableModel();
-						String[] headers = {"No.","Nombre", "IL", "H", "HR", "K", "HBP", "BB", "CL", "JS", "TBE", "HOLD"};
+						String[] headers = {"No.","Nombre", "IL", "H", "HR", "K", "HBP", "BB", "CL", "JS", "OUT", "HOLD", "Errores"};
 						modeloLV.setColumnIdentifiers(headers);
 						tableLV = new JTable();
+						tableLV.addMouseListener(new MouseAdapter() {
+							public void mouseClicked(MouseEvent e) {
+								tableLV.setColumnSelectionAllowed(false);
+								tableLV.setCellSelectionEnabled(false);
+							}
+						});
 						tableLV.setModel(modeloLV);
 						tableLV.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 						tableLV.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -143,9 +173,15 @@ public class SimulacionJuego extends JDialog {
 					panelBL.add(scrollPane3);
 					{
 						modeloBL = new DefaultTableModel();
-						String[] headers = {"No.","Nombre", "Pos.", "H", "2B", "3B", "HR", "K", "HBP", "TB", "BB", "CA", "CI", "ES", "BR"};
+						String[] headers = {"No.","Nombre", "Pos.", "H", "2B", "3B", "HR", "K", "HBP", "TB", "BB", "CA", "CI", "ES", "BR", "Errores"};
 						modeloBL.setColumnIdentifiers(headers);
 						tableBL = new JTable();
+						tableBL.addMouseListener(new MouseAdapter() {
+							public void mouseClicked(MouseEvent e) {
+								tableBL.setColumnSelectionAllowed(false);
+								tableBL.setCellSelectionEnabled(false);
+							}
+						});
 						tableBL.setModel(modeloBL);
 						tableBL.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 						tableBL.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -167,9 +203,15 @@ public class SimulacionJuego extends JDialog {
 					panelLL.add(scrollPane4);
 					{
 						modeloLL = new DefaultTableModel();
-						String[] headers = {"No.","Nombre", "IL", "H", "HR", "K", "HBP", "BB", "CL", "JS", "OUT", "HOLD"};
+						String[] headers = {"No.","Nombre", "IL", "H", "HR", "K", "HBP", "BB", "CL", "JS", "OUT", "HOLD", "Errores"};
 						modeloLL.setColumnIdentifiers(headers);
 						tableLL = new JTable();
+						tableLL.addMouseListener(new MouseAdapter() {
+							public void mouseClicked(MouseEvent e) {
+								tableLL.setColumnSelectionAllowed(false);
+								tableLL.setCellSelectionEnabled(false);
+							}
+						});
 						tableLL.setModel(modeloLL);
 						tableLL.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 						tableLL.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -189,6 +231,79 @@ public class SimulacionJuego extends JDialog {
 				lblLocal.setBounds(639, 11, 370, 35);
 				panel.add(lblLocal);
 			}
+			
+			JPanel panelEntradas = new JPanel();
+			panelEntradas.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Entradas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panelEntradas.setBounds(10, 504, 788, 96);
+			panel.add(panelEntradas);
+			panelEntradas.setLayout(null);
+			{
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(6, 16, 776, 73);
+				scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+				panelEntradas.add(scrollPane);
+				{
+					modeloEntradas = new DefaultTableModel();
+					String[] headers = {"Equipo","1", "2", "3", "4", "5", "6", "7", "8", "9"};
+					modeloEntradas.setColumnIdentifiers(headers);
+					tableEntradas = new JTable();
+					tableEntradas.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent e) {
+							tableEntradas.setColumnSelectionAllowed(false);
+							tableEntradas.setCellSelectionEnabled(false);
+						}
+					});
+					tableEntradas.setModel(modeloEntradas);
+					tableEntradas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					scrollPane.setViewportView(tableEntradas);
+				}
+			}
+			
+			{
+				JPanel panelMarcador = new JPanel();
+				panelMarcador.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Marcador", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				panelMarcador.setBounds(808, 504, 181, 96);
+				panel.add(panelMarcador);
+				panelMarcador.setLayout(new BorderLayout(0, 0));
+				{
+					JScrollPane scrollPane_1 = new JScrollPane();
+					scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+					panelMarcador.add(scrollPane_1);
+					{
+						modeloMarcador = new DefaultTableModel();
+						String[] headers = {"C","H","E"};
+						modeloMarcador.setColumnIdentifiers(headers);
+						tableMarcador = new JTable();
+						tableMarcador.setModel(modeloMarcador);
+						scrollPane_1.setViewportView(tableMarcador);
+					}
+				}
+			}
+			
+			JButton buttonVerificar = new JButton("Verificar");
+			buttonVerificar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					boolean confirmacion1 = verificarBV();
+					boolean confirmacion2 = verificarBL();
+					boolean confirmacion3 = verificarLV();
+					boolean confirmacion4 = verificarLL();
+					if(confirmacion1==false || confirmacion2==false || confirmacion3==false || confirmacion4==false) {
+						JOptionPane.showMessageDialog(null, "Favor Verificar Sus Anotaciones", null, JOptionPane.ERROR_MESSAGE, null);
+					}
+					if(confirmacion1==true && confirmacion2==true && confirmacion3==true && confirmacion4==true) {
+						modeloMarcador.setValueAt(carrerasVisitante, 0, 0);
+						modeloMarcador.setValueAt(hitVisitante, 0, 1);
+						modeloMarcador.setValueAt(erroresVisitante, 0, 2);
+						modeloMarcador.setValueAt(carrerasLocal, 1, 0);
+						modeloMarcador.setValueAt(hitLocal, 1, 1);
+						modeloMarcador.setValueAt(erroresLocal, 1, 2);
+						JOptionPane.showMessageDialog(null, "Todo en Orden", null, JOptionPane.OK_OPTION, null);
+					}
+				}
+			});
+			buttonVerificar.setActionCommand("OK");
+			buttonVerificar.setBounds(999, 542, 103, 23);
+			panel.add(buttonVerificar);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -200,9 +315,6 @@ public class SimulacionJuego extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						actualizarBV();
-						actualizarBL();
-						actualizarLV();
-						actualizarLL();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -219,85 +331,201 @@ public class SimulacionJuego extends JDialog {
 		llenarTablaLV();
 		llenarTablaBL();
 		llenarTablaLL();
+		llenarTablaEntradas();
+		llenarMarcador();
 	}
 	
-	private void actualizarBV() {
-		int[] estadistica = new int[12];
+	private boolean verificarBV() {
+		boolean confirmacion = false;
+		int[] estadistica = new int[13];
 		int i = 0;
 		for (Jugador jugador : visitante.getJugadores()) {
 			if(jugador instanceof Bateo) {
 				for (int j = 3; j < filasBV.length; j++) {
-					estadistica[j-3] = Integer.parseInt(tableBV.getValueAt(i, 3).toString());
+					estadistica[j-3] = Integer.parseInt(tableBV.getValueAt(i, j).toString());
+					confirmacion = false;
 				}
-				if(estadistica[6]<(estadistica[0]+estadistica[1]+estadistica[2]+estadistica[3])) {
-					JOptionPane.showMessageDialog(null, "Verifique que los TB de"+jugador.getNombre()+"sea un valor valido", null, JOptionPane.ERROR_MESSAGE, null);
+				if(estadistica[6]<(estadistica[0]+estadistica[1]+estadistica[2]+estadistica[3]+estadistica[4]+estadistica[10])) {
+					JOptionPane.showMessageDialog(null, "Verifique que los TB de "+jugador.getNombre()+" sea un valor valido", null, JOptionPane.ERROR_MESSAGE, null);
+					confirmacion = false;
 				}
-				if(estadistica[6]>=(estadistica[0]+estadistica[1]+estadistica[2]+estadistica[3])) {
-					jugador.setCantHits(jugador.getCantHits()+estadistica[0]);
-					((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B()+estadistica[1]);
-					((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B()+estadistica[2]);
-					jugador.setCantHR(jugador.getCantHR()+estadistica[3]);
-					jugador.setCantPonches(jugador.getCantPonches()+estadistica[4]);
-					jugador.setHbp(jugador.getHbp()+estadistica[5]);
-					((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB()+estadistica[6]);
-					jugador.setCantBB(jugador.getCantBB()+estadistica[7]);
-					((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA()+estadistica[8]);
-					((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI()+estadistica[9]);
-					((Bateo)jugador).setES(((Bateo)jugador).getES()+estadistica[10]);
-					((Bateo)jugador).setCantBR(((Bateo)jugador).getCantBR()+estadistica[11]);
+				if(estadistica[8]<estadistica[3]) {
+					JOptionPane.showMessageDialog(null, "Verifique que las CA de"+jugador.getNombre()+"sea igual o mayor a sus HR", null, JOptionPane.ERROR_MESSAGE, null);
+					confirmacion = false;
+				}
+				if(estadistica[9]<estadistica[8]) {
+					JOptionPane.showMessageDialog(null, "Verifique que las CI de"+jugador.getNombre()+"sea igual o mayor a sus HR", null, JOptionPane.ERROR_MESSAGE, null);
+					confirmacion = false;
+				}
+				if(estadistica[6]>=(estadistica[0]+estadistica[1]+estadistica[2]+estadistica[3]+estadistica[4]+estadistica[10]) && estadistica[8]>=estadistica[3] && estadistica[9]>=estadistica[8]) {
+					carrerasVisitante = carrerasVisitante + estadistica[8];
+					hitVisitante = hitVisitante + estadistica[0] + estadistica[1] + estadistica[2] + estadistica[3];
+					erroresVisitante = erroresVisitante + estadistica[12];
+					confirmacion = true;
 					i++;
 				}
 			}
 			}
+		
+		return confirmacion;
 			
 	}
 	
-	private void actualizarBL() {
-		int[] estadistica = new int[12];
+	private boolean verificarBL() {
+		boolean confirmacion = false;
+		int[] estadistica = new int[13];
 		int i = 0;
 		for (Jugador jugador : local.getJugadores()) {
 			if(jugador instanceof Bateo) {
-				for (int j = 3; j < filasBL.length; j++) {
-					estadistica[j-3] = Integer.parseInt(tableBL.getValueAt(i, 3).toString());
+				for (int j = 3; j < filasBV.length; j++) {
+					estadistica[j-3] = Integer.parseInt(tableBV.getValueAt(i, j).toString());
+					confirmacion = false;
+					
 				}
-				if(estadistica[6]<(estadistica[0]+estadistica[1]+estadistica[2]+estadistica[3])) {
+				if(estadistica[6]<(estadistica[0]+estadistica[1]+estadistica[2]+estadistica[3]+estadistica[4]+estadistica[10])) {
 					JOptionPane.showMessageDialog(null, "Verifique que los TB de"+jugador.getNombre()+"sea un valor valido", null, JOptionPane.ERROR_MESSAGE, null);
+					confirmacion = false;
 				}
-				if(estadistica[6]>=(estadistica[0]+estadistica[1]+estadistica[2]+estadistica[3])) {
-					jugador.setCantHits(jugador.getCantHits()+estadistica[0]);
-					((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B()+estadistica[1]);
-					((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B()+estadistica[2]);
-					jugador.setCantHR(jugador.getCantHR()+estadistica[3]);
-					jugador.setCantPonches(jugador.getCantPonches()+estadistica[4]);
-					jugador.setHbp(jugador.getHbp()+estadistica[5]);
-					((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB()+estadistica[6]);
-					jugador.setCantBB(jugador.getCantBB()+estadistica[7]);
-					((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA()+estadistica[8]);
-					((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI()+estadistica[9]);
-					((Bateo)jugador).setES(((Bateo)jugador).getES()+estadistica[10]);
-					((Bateo)jugador).setCantBR(((Bateo)jugador).getCantBR()+estadistica[11]);
+				if(estadistica[8]<estadistica[3]) {
+					JOptionPane.showMessageDialog(null, "Verifique que las CA de"+jugador.getNombre()+"sea igual o mayor a sus HR", null, JOptionPane.ERROR_MESSAGE, null);
+					confirmacion = false;
+				}
+				if(estadistica[9]<estadistica[8]) {
+					JOptionPane.showMessageDialog(null, "Verifique que las CI de"+jugador.getNombre()+"sea igual o mayor a sus HR", null, JOptionPane.ERROR_MESSAGE, null);
+					confirmacion = false;
+				}
+				if(estadistica[6]>=(estadistica[0]+estadistica[1]+estadistica[2]+estadistica[3]) && estadistica[8]>=estadistica[3] && estadistica[9]>=estadistica[8]) {
+					carrerasVisitante = carrerasVisitante + estadistica[8];
+					hitVisitante = hitVisitante + estadistica[0] + estadistica[1] + estadistica[2] + estadistica[3];
+					erroresVisitante = erroresVisitante + estadistica[12];
+					confirmacion = true;
 					i++;
 				}
 			}
 			}
+		
+		return confirmacion;
 			
 	}
 	
-	private void actualizarLV() {
-		int[] estadistica = new int[10];
+	private boolean verificarLV() {
+		boolean confirmacion = false;
+		int[] estadistica = new int[11];
 		int i = 0;
 		for (Jugador jugador : visitante.getJugadores()) {
 			if(jugador instanceof Picheo) {
 				for (int j = 3; j < filasLV.length; j++) {
-					estadistica[j-3] = Integer.parseInt(tableLV.getValueAt(i, 3).toString());
+					estadistica[j-3] = Integer.parseInt(tableLV.getValueAt(i, j).toString());
+				}
+				if(estadistica[8]==0 && estadistica[0]>0) {
+					JOptionPane.showMessageDialog(null, "Verifique que los OUT de "+jugador.getNombre()+" sea 3 veces las IL", null, JOptionPane.ERROR_MESSAGE, null);
+					confirmacion = false;
+				}
+				if(estadistica[6]<=(estadistica[1]+estadistica[2]) && (estadistica[1]+estadistica[2])!=0) {
+					JOptionPane.showMessageDialog(null, "Verifique que las CL de "+jugador.getNombre()+" sea un valor valido", null, JOptionPane.ERROR_MESSAGE, null);
+					confirmacion = false;
+				}
+				if(estadistica[8]>estadistica[0] && estadistica[2]<=estadistica[6] && estadistica[6]>=(estadistica[1]+estadistica[2]+estadistica[3])) {
+						erroresVisitante = erroresVisitante + estadistica[12];
+						i++;
+						confirmacion = true;
+				}
+			}
+			}
+		return confirmacion;
+	}
+	
+	private boolean verificarLL() {
+		boolean confirmacion = false;
+		int[] estadistica = new int[11];
+		int i = 0;
+		for (Jugador jugador : local.getJugadores()) {
+			if(jugador instanceof Picheo) {
+				for (int j = 3; j < filasLV.length; j++) {
+					estadistica[j-3] = Integer.parseInt(tableLV.getValueAt(i, j).toString());
 				}
 				if(estadistica[8]==0 && estadistica[0]>0) {
 					JOptionPane.showMessageDialog(null, "Verifique que los OUT de"+jugador.getNombre()+"sea 3 veces las IL", null, JOptionPane.ERROR_MESSAGE, null);
+					confirmacion = false;
 				}
-				if(estadistica[6]<=(estadistica[1]+estadistica[2]+estadistica[3])) {
-					JOptionPane.showMessageDialog(null, "Verifique que las CL de"+jugador.getNombre()+"sea un valor valido", null, JOptionPane.ERROR_MESSAGE, null);
+				if(estadistica[6]<=(estadistica[1]+estadistica[2])  && (estadistica[1]+estadistica[2])!=0) {
+					JOptionPane.showMessageDialog(null, "Verifique que las CL de "+jugador.getNombre()+" sea un valor valido", null, JOptionPane.ERROR_MESSAGE, null);
+					confirmacion = false;
 				}
 				if(estadistica[8]>estadistica[0] && estadistica[2]<=estadistica[6] && estadistica[6]>=(estadistica[1]+estadistica[2]+estadistica[3])) {
+						erroresVisitante = erroresVisitante + estadistica[12];
+						i++;
+						confirmacion = true;
+				}
+			}
+			}
+		return confirmacion;
+	}
+	
+	
+	private void actualizarBV() {
+		int[] estadistica = new int[13];
+		int i = 0;
+		for (Jugador jugador : visitante.getJugadores()) {
+			if(jugador instanceof Bateo) {
+				for (int j = 3; j < filasBV.length; j++) {
+					estadistica[j-3] = Integer.parseInt(tableBV.getValueAt(i, j).toString());
+				}
+					jugador.setCantHits(jugador.getCantHits()+estadistica[0]);
+					((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B()+estadistica[1]);
+					((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B()+estadistica[2]);
+					jugador.setCantHR(jugador.getCantHR()+estadistica[3]);
+					jugador.setCantPonches(jugador.getCantPonches()+estadistica[4]);
+					jugador.setHbp(jugador.getHbp()+estadistica[5]);
+					((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB()+estadistica[6]);
+					jugador.setCantBB(jugador.getCantBB()+estadistica[7]);
+					((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA()+estadistica[8]);
+					((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI()+estadistica[9]);
+					((Bateo)jugador).setES(((Bateo)jugador).getES()+estadistica[10]);
+					((Bateo)jugador).setCantBR(((Bateo)jugador).getCantBR()+estadistica[11]);
+					jugador.setErrores(jugador.getErrores()+estadistica[12]);			
+					i++;
+	
+				}
+		}
+
+	}
+			
+	
+	private void actualizarBL() {
+		int[] estadistica = new int[13];
+		int i = 0;
+		for (Jugador jugador : local.getJugadores()) {
+			if(jugador instanceof Bateo) {
+				for (int j = 3; j < filasBL.length; j++) {
+					estadistica[j-3] = Integer.parseInt(tableBL.getValueAt(i, j).toString());
+				}
+					jugador.setCantHits(jugador.getCantHits()+estadistica[0]);
+					((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B()+estadistica[1]);
+					((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B()+estadistica[2]);
+					jugador.setCantHR(jugador.getCantHR()+estadistica[3]);
+					jugador.setCantPonches(jugador.getCantPonches()+estadistica[4]);
+					jugador.setHbp(jugador.getHbp()+estadistica[5]);
+					((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB()+estadistica[6]);
+					jugador.setCantBB(jugador.getCantBB()+estadistica[7]);
+					((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA()+estadistica[8]);
+					((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI()+estadistica[9]);
+					((Bateo)jugador).setES(((Bateo)jugador).getES()+estadistica[10]);
+					((Bateo)jugador).setCantBR(((Bateo)jugador).getCantBR()+estadistica[11]);
+					jugador.setErrores(jugador.getErrores()+estadistica[12]);
+					i++;
+				}
+			}
+			}
+	
+	private void actualizarLV() {
+		int[] estadistica = new int[12];
+		int i = 0;
+		for (Jugador jugador : visitante.getJugadores()) {
+			if(jugador instanceof Picheo) {
+				for (int j = 3; j < filasLV.length; j++) {
+					estadistica[j-3] = Integer.parseInt(tableLV.getValueAt(i, j).toString());
+				}
 						((Picheo)jugador).setEntradasLanzada(((Picheo)jugador).getEntradasLanzada()+estadistica[0]);
 						jugador.setCantHits(jugador.getCantHits()+estadistica[1]);
 						jugador.setCantHR(jugador.getCantHR()+estadistica[2]);
@@ -308,31 +536,25 @@ public class SimulacionJuego extends JDialog {
 						((Picheo)jugador).setCantJS(((Picheo)jugador).getCantJS()+estadistica[7]);
 						((Picheo)jugador).setCantHold(((Picheo)jugador).getCantHold()+estadistica[9]);
 						
-						int tbe = estadistica[8]+estadistica[1]+estadistica[5]+estadistica[4];
+						int tbe = estadistica[8]+estadistica[1]+estadistica[5]+estadistica[4]+estadistica[3];
 						((Picheo)jugador).setCantTBE(tbe);
+						
+						jugador.setErrores(jugador.getErrores()+estadistica[10]);
+						erroresVisitante = erroresVisitante + estadistica[11];
 						
 						i++;
 				}
 			}
 			}
-			
-	}
 	
 	private void actualizarLL() {
-		int[] estadistica = new int[10];
+		int[] estadistica = new int[11];
 		int i = 0;
 		for (Jugador jugador : local.getJugadores()) {
 			if(jugador instanceof Picheo) {
 				for (int j = 3; j < filasLL.length; j++) {
-					estadistica[j-3] = Integer.parseInt(tableLL.getValueAt(i, 3).toString());
+					estadistica[j-3] = Integer.parseInt(tableLL.getValueAt(i, j).toString());
 				}
-				if(estadistica[8]==0 && estadistica[0]>0) {
-					JOptionPane.showMessageDialog(null, "Verifique que los OUT de"+jugador.getNombre()+"sea 3 veces las IL", null, JOptionPane.ERROR_MESSAGE, null);
-				}
-				if(estadistica[6]<=(estadistica[1]+estadistica[2]+estadistica[3])) {
-					JOptionPane.showMessageDialog(null, "Verifique que las CL de"+jugador.getNombre()+"sea un valor valido", null, JOptionPane.ERROR_MESSAGE, null);
-				}
-				if(estadistica[8]>estadistica[0] && estadistica[2]<=estadistica[6] && estadistica[6]>=(estadistica[1]+estadistica[2]+estadistica[3])) {
 						((Picheo)jugador).setEntradasLanzada(((Picheo)jugador).getEntradasLanzada()+estadistica[0]);
 						jugador.setCantHits(jugador.getCantHits()+estadistica[1]);
 						jugador.setCantHR(jugador.getCantHR()+estadistica[2]);
@@ -346,12 +568,13 @@ public class SimulacionJuego extends JDialog {
 						int tbe = estadistica[8]+estadistica[1]+estadistica[5]+estadistica[4];
 						((Picheo)jugador).setCantTBE(tbe);
 						
+						jugador.setErrores(jugador.getErrores()+estadistica[10]);
+						
 						i++;
 				}
 			}
 			}
 			
-	}
 	
 	public static void llenarTablaBV() {
 		modeloBV.setRowCount(0);
@@ -373,6 +596,7 @@ public class SimulacionJuego extends JDialog {
 				filasBV[12] = 0;
 				filasBV[13] = 0;
 				filasBV[14] = 0;
+				filasBV[15] = 0;
 				modeloBV.addRow(filasBV);
 			}
 		}
@@ -395,6 +619,7 @@ public class SimulacionJuego extends JDialog {
 				filasLV[9] = 0;
 				filasLV[10] = 0;
 				filasLV[11] = 0;
+				filasLV[12] = 0;
 				modeloLV.addRow(filasLV);
 			}
 		}
@@ -421,6 +646,7 @@ public class SimulacionJuego extends JDialog {
 				filasBL[12] = 0;
 				filasBL[13] = 0;
 				filasBL[14] = 0;
+				filasBL[15] = 0;
 				modeloBL.addRow(filasBL);
 			}
 		}
@@ -443,9 +669,40 @@ public class SimulacionJuego extends JDialog {
 				filasLL[9] = 0;
 				filasLL[10] = 0;
 				filasLL[11] = 0;
+				filasLL[12] = 0;
 				modeloLL.addRow(filasLL);
 			}
 		}
 		
+	}
+	public static void llenarTablaEntradas() {
+		modeloEntradas.setRowCount(0);
+		filasEntradas = new Object[modeloEntradas.getColumnCount()];
+		for (int i=0; i < 2 ; i++) {
+				filasEntradas[0] = "";
+				filasEntradas[1] = 0;
+				filasEntradas[2] = 0;
+				filasEntradas[3] = 0;
+				filasEntradas[4] = 0;
+				filasEntradas[5] = 0;
+				filasEntradas[6] = 0;
+				filasEntradas[7] = 0;
+				filasEntradas[8] = 0;
+				filasEntradas[9] = 0;
+				modeloEntradas.addRow(filasEntradas);
+		}
+		
+		modeloEntradas.setValueAt("Visitante", 0, 0);
+		modeloEntradas.setValueAt("Local", 1, 0);
+	}
+	public static void llenarMarcador() {
+		modeloMarcador.setRowCount(0);
+		filasMarcador = new Object[modeloMarcador.getColumnCount()];
+		for (int i=0; i < 2 ; i++) {
+				filasMarcador[0] = 0;
+				filasMarcador[1] = 0;
+				filasMarcador[2] = 0;
+				modeloMarcador.addRow(filasMarcador);
+		}
 	}
 }

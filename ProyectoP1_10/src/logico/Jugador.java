@@ -23,6 +23,7 @@ public abstract class Jugador {
 	protected int cantBB;
 	protected int cantPonches;
 	protected int hbp;
+	protected int errores;
 	
 
 	//Constructor
@@ -46,6 +47,7 @@ public abstract class Jugador {
 		this.cantBB = 0;
 		this.cantPonches = 0;
 		this.hbp = 0;
+		this.errores = 0;
 	}
 
 	
@@ -173,7 +175,6 @@ public abstract class Jugador {
 
 	public void setCantHR(int cantHR) {
 		this.cantHR = cantHR;
-		cantHits++;
 	}
 
 
@@ -205,6 +206,18 @@ public abstract class Jugador {
 	public void setHbp(int hbp) {
 		this.hbp = hbp;
 	}
+	
+	
+	public int getErrores() {
+		return errores;
+	}
+
+
+	public void setErrores(int errores) {
+		this.errores = errores;
+	}
+
+
 	public abstract float avg();
 
 
