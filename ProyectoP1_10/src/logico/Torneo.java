@@ -100,6 +100,9 @@ public class Torneo {
 		jugadores.remove(jugador);
 	}
 	
+	public void insertarJugador(Jugador jugador) {
+		jugadores.add(jugador);
+	}
 	public void eliminarEquipo(Equipo equipo) {
 		equipos.remove(equipo);
 	}

@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
+
 
 import java.awt.Panel;
 
@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -45,9 +45,6 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-import com.toedter.calendar.JDayChooser;
-import com.toedter.calendar.JMonthChooser;
 
 import logico.Bateo;
 import logico.Equipo;
@@ -55,11 +52,12 @@ import logico.Juego;
 import logico.Jugador;
 import logico.Picheo;
 import logico.Torneo;
-import javax.swing.JButton;
+
+import javax.swing.JDialog;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
-import java.awt.Window.Type;
-import java.awt.ComponentOrientation;
+
 
 public class Principal extends JFrame {
 	/**
@@ -69,7 +67,6 @@ public class Principal extends JFrame {
 	private static JPanel contentPane;
 	private JTextField fecha_textfield;
 	private JTable table;
-	private Dimension dim;
 	public static DefaultTableModel modelo;
 	public static Object[] filas;
 	private JTable table_1;
@@ -150,6 +147,21 @@ public class Principal extends JFrame {
 					jacb12.setEquipoActual(e1.getNombre());
 					jacb13.setEquipoActual(e1.getNombre());
 					
+					Torneo.getInstance().insertarJugador(jacb1);
+					Torneo.getInstance().insertarJugador(jacb2);
+					Torneo.getInstance().insertarJugador(jacb3);
+					Torneo.getInstance().insertarJugador(jacb4);
+					Torneo.getInstance().insertarJugador(jacb5);
+					Torneo.getInstance().insertarJugador(jacb6);
+					Torneo.getInstance().insertarJugador(jacb7);
+					Torneo.getInstance().insertarJugador(jacb8);
+					Torneo.getInstance().insertarJugador(jacb9);
+					Torneo.getInstance().insertarJugador(jacb10);
+					Torneo.getInstance().insertarJugador(jacb11);
+					Torneo.getInstance().insertarJugador(jacb12);
+					Torneo.getInstance().insertarJugador(jacb13);
+					
+					
 					//Jugadores de los Tigres del Licey
 					Jugador jtlb1 = new Bateo("Yermín", "Merdeces", "22221111", 45, 20, "Disponible", "2B", 166, 6, "Derecho");
 					Jugador jtlb2 = new Bateo("Welington", "Castillo", "22223333", 72, 25, "Disponible", "3B", 186, 6, "Izquierdo");
@@ -165,7 +177,7 @@ public class Principal extends JFrame {
 					Jugador jtlb11 = new Picheo("Ervin", "Santana", "44443333", 11, 23, "Disponible", "P", 176, 6, "Derecho");
 					Jugador jtlb12 = new Picheo("Yeison", "Asencio", "66664444", 12, 22, "Disponible", "P", 176, 6, "Izquierdo");
 					Jugador jtlb13 = new Picheo("Jorge", "Martínez", "77775555", 13, 23, "Disponible", "P", 176, 6, "Derecho");
-			
+					
 					e2.insertarJugador(jtlb1);
 					e2.insertarJugador(jtlb2);
 					e2.insertarJugador(jtlb3);
@@ -194,6 +206,20 @@ public class Principal extends JFrame {
 					jtlb12.setEquipoActual(e2.getNombre());
 					jtlb13.setEquipoActual(e2.getNombre());
 
+					Torneo.getInstance().insertarJugador(jtlb1);
+					Torneo.getInstance().insertarJugador(jtlb2);
+					Torneo.getInstance().insertarJugador(jtlb3);
+					Torneo.getInstance().insertarJugador(jtlb4);
+					Torneo.getInstance().insertarJugador(jtlb5);
+					Torneo.getInstance().insertarJugador(jtlb6);
+					Torneo.getInstance().insertarJugador(jtlb7);
+					Torneo.getInstance().insertarJugador(jtlb8);
+					Torneo.getInstance().insertarJugador(jtlb9);
+					Torneo.getInstance().insertarJugador(jtlb10);
+					Torneo.getInstance().insertarJugador(jtlb11);
+					Torneo.getInstance().insertarJugador(jtlb12);
+					Torneo.getInstance().insertarJugador(jtlb13);
+					
 					Principal.llenarTabla();
 					Principal.llenarTabla2();
 					
@@ -310,6 +336,15 @@ public class Principal extends JFrame {
 		Estadisticas.add(menuItem);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Top10 - Bateadores/Pitchers");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListTopPlayer dialog = new ListTopPlayer();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+				dialog.setModal(true);
+				dialog.setLocationRelativeTo(null);
+			}
+		});
 		mntmNewMenuItem_4.setIcon(new ImageIcon(Principal.class.getResource("/assets/round_leaderboard_black_18dp.png")));
 		Estadisticas.add(mntmNewMenuItem_4);
 		
