@@ -167,6 +167,7 @@ public class RegJugadorLesionado extends JDialog {
 
 								team.insertarLesion(lesion);
 								jugador.setEstado("Lesionado");
+								Torneo.getInstance().insertarLesion(lesion);
 								
 								JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado.", null, JOptionPane.INFORMATION_MESSAGE, null);
 								dispose();
