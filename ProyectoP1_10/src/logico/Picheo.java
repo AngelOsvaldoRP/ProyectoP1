@@ -6,7 +6,6 @@ public class Picheo extends Jugador {
 	private int cantJP;
 	private int cantJJ;
 	private int cantJS;
-	private int cantAperturas;
 	private int cantCL;
 	private int cantTBE;
 	private int cantHold;
@@ -24,7 +23,6 @@ public class Picheo extends Jugador {
 		this.cantJP = 0;
 		this.cantJJ = 0;
 		this.cantJS = 0;
-		this.cantAperturas = 0;
 		this.cantCL = 0;
 		this.cantTBE = 0;
 		this.cantHold = 0;
@@ -63,14 +61,6 @@ public class Picheo extends Jugador {
 
 	public void setCantJS(int cantJS) {
 		this.cantJS = cantJS;
-	}
-
-	public int getCantAperturas() {
-		return cantAperturas;
-	}
-
-	public void setCantAperturas(int cantAperturas) {
-		this.cantAperturas = cantAperturas;
 	}
 
 	public int getCantCL() {

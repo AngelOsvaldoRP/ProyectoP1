@@ -313,14 +313,6 @@ public class EstadisticasJugadorPicheo extends JDialog {
 				panel.add(lblNewLabel_19);
 			}
 			{
-				txtapertura = new JTextField();
-				txtapertura.setEditable(false);
-				txtapertura.setText(String.valueOf(((Picheo) jugador).getCantAperturas()));
-				txtapertura.setBounds(10, 225, 86, 20);
-				panel.add(txtapertura);
-				txtapertura.setColumns(10);
-			}
-			{
 				txtjg = new JTextField();
 				txtjg.setEditable(false);
 				txtjg.setText(String.valueOf(((Picheo) jugador).getCantJG()));

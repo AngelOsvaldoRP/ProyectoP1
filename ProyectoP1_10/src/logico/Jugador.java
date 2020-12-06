@@ -173,6 +173,7 @@ public abstract class Jugador {
 
 	public void setCantHR(int cantHR) {
 		this.cantHR = cantHR;
+		cantHits++;
 	}
 
 

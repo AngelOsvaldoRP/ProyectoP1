@@ -48,6 +48,7 @@ public class Bateo extends Jugador {
 
 	public void setCant2B(int cant2b) {
 		this.cant2b = cant2b;
+		cantHits++;
 	}
 
 	public int getCant3B() {
@@ -56,6 +57,7 @@ public class Bateo extends Jugador {
 
 	public void setCant3B(int cant3b) {
 		this.cant3b = cant3b;
+		cantHits++;
 	}
 
 	public int getCantCI() {
