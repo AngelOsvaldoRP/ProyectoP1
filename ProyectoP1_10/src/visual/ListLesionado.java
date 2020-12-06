@@ -113,7 +113,7 @@ public class ListLesionado extends JDialog {
 			// Fuente de Datos
 			dataset = new DefaultCategoryDataset();
 	        JFreeChart chart = ChartFactory.createBarChart3D
-	        ("Jugadores lesionados en la temporada","Tipo de Lesion", "Cantidad de jugadores", 
+	        ("Jugadores lesionados de: "+equipoSelected.getNombre(),"Tipo de Lesion", "Cantidad de jugadores", 
 	        dataset, PlotOrientation.VERTICAL, true,true, false);
 	        chart.getTitle().setPaint(Color.black); 
 	        CategoryPlot p = chart.getCategoryPlot(); 

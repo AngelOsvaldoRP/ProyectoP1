@@ -320,6 +320,14 @@ public class Principal extends JFrame {
 		menuBar.add(Estadisticas);
 		
 		JMenuItem Graficos = new JMenuItem("Graficos de la liga");
+		Graficos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Graphics dialog = new Graphics();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setLocationRelativeTo(null);
+				dialog.setVisible(true);
+			}
+		});
 		Graficos.setIcon(new ImageIcon(Principal.class.getResource("/assets/round_leaderboard_black_18dp.png")));
 		Estadisticas.add(Graficos);
 		

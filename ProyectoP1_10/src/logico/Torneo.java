@@ -12,14 +12,15 @@ public class Torneo {
 	private static Torneo torneo = null;
 	private int autoJuegoCode;
 	
-
-	 
+	
+	
 	//Constructor
 	private Torneo() {
 		super();
 		this.juegos =new ArrayList<Juego>();
 		this.equipos = new ArrayList<Equipo>();
 		this.jugadores = new ArrayList<Jugador>();
+		this.lesiones  = new ArrayList<Lesion>();
 		this.setAutoJuegoCode(1);
 		
 	}
@@ -29,6 +30,22 @@ public class Torneo {
 			torneo = new Torneo();
 		}
 		return torneo;
+	}
+	
+	public ArrayList<Lesion> getLesiones() {
+		return lesiones;
+	}
+
+	public void setLesiones(ArrayList<Lesion> lesiones) {
+		this.lesiones = lesiones;
+	}
+
+	public static Torneo getTorneo() {
+		return torneo;
+	}
+
+	public static void setTorneo(Torneo torneo) {
+		Torneo.torneo = torneo;
 	}
 
 	//Getters and Setters
