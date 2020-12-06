@@ -84,12 +84,12 @@ public class Bateo extends Jugador {
 
 
 	public float avg() {
-		return (float)(Math.round(((float)(cantHits+cant2b+cant3b+cantHR)/cantTB) * 1000d) / 1000d);
+		return (float)(Math.round(((float)(cantHits)/cantTB) * 1000d) / 1000d);
 		
 	}
 	
 	public float obp() {
-		return (float)(Math.round(((float)(cantHits+cant2b+cant3b+cantHR+hbp)/(cantHits+cant2b+cant3b+cantHR+hbp+es)) * 1000d) / 1000d);	
+		return (float)(Math.round(((float)(cantHits+hbp)/(cantHits+hbp+es)) * 1000d) / 1000d);	
 	}
 	
 	public float slg() {

@@ -10,6 +10,7 @@ public class Picheo extends Jugador {
 	private int cantTBE;
 	private int cantHold;
 	private int entradasLanzada;
+	private int outConseguidos;
 	
 	
 	
@@ -27,6 +28,7 @@ public class Picheo extends Jugador {
 		this.cantTBE = 0;
 		this.cantHold = 0;
 		this.entradasLanzada = 0;
+		this.outConseguidos = 0;
 	}
 	
 	
@@ -93,6 +95,16 @@ public class Picheo extends Jugador {
 
 	public void setEntradasLanzada(int entradasLanzada) {
 		this.entradasLanzada = entradasLanzada;
+	}
+
+
+	public int getOutConseguidos() {
+		return outConseguidos;
+	}
+
+
+	public void setOutConseguidos(int outConseguidos) {
+		this.outConseguidos = outConseguidos;
 	}
 
 
