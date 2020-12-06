@@ -80,8 +80,8 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Principal frame = new Principal();
-					frame.setVisible(true);
+					//Principal frame = new Principal();
+				//	frame.setVisible(true);
 					Equipo e1= new Equipo("Las Aguilas Cibaeñas", 1933,"Félix Fermín", "Santiago", "El Valle de la Muerte");
 					Equipo e2= new Equipo("Tigres del Licey", 1907,"Luis Sojo", "Santo Domingo", "Sin Casa");
 					Equipo e3= new Equipo("Gigantes del Cibao", 1996,"Pipe Urueta", "San Francisco de Macorís.", "Estadio Julián Javier");
