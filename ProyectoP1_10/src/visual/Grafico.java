@@ -21,7 +21,7 @@ import logico.Torneo;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Graphics extends JDialog {
+public class Grafico extends JDialog {
 	private static DefaultCategoryDataset dataset;
 	private final JPanel contentPanel = new JPanel();
 
@@ -33,7 +33,7 @@ public class Graphics extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Graphics() {
+	public Grafico() {
 		setBounds(100, 100, 1031, 472);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

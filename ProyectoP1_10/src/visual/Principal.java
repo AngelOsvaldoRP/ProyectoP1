@@ -4,7 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.Collections;
 import java.util.Comparator;
-
+import java.awt.image.*;
+import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -30,7 +31,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.TableColumnModel;
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.border.BevelBorder;
@@ -56,7 +57,13 @@ import logico.Torneo;
 import javax.swing.JDialog;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import com.sun.prism.Image;
+
+import java.awt.image.*;
+
 import java.awt.Component;
+import javax.swing.UIManager;
 
 
 public class Principal extends JFrame {
@@ -72,7 +79,7 @@ public class Principal extends JFrame {
 	private JTable table_1;
 	public static DefaultTableModel modelo2;
 	Equipo aux;
-	private Panel panel;
+	private JPanel panel;
 	/**
 	 * Launch the application.
 	 */
@@ -219,11 +226,9 @@ public class Principal extends JFrame {
 					Torneo.getInstance().insertarJugador(jtlb11);
 					Torneo.getInstance().insertarJugador(jtlb12);
 					Torneo.getInstance().insertarJugador(jtlb13);
-					
+
 					Principal.llenarTabla();
 					Principal.llenarTabla2();
-					
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -236,7 +241,7 @@ public class Principal extends JFrame {
 	 */
 	public Principal() {
 		setTitle("AWJ Manage League");
-		setResizable(true);
+		setResizable(false);
 		setAutoRequestFocus(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/assets/lidomlogo.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -322,7 +327,7 @@ public class Principal extends JFrame {
 		JMenuItem Graficos = new JMenuItem("Graficos de la liga");
 		Graficos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Graphics dialog = new Graphics();
+				Grafico dialog = new Grafico();
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setLocationRelativeTo(null);
 				dialog.setVisible(true);
@@ -359,22 +364,22 @@ public class Principal extends JFrame {
 		
 		
 		
-		contentPane = new JPanel();
-		contentPane.setOpaque(false);
+		contentPane = new FondoPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		panel = new Panel();
-		panel.setBounds(0, 53, 1257, 606);
+		panel = new TransPanel();
+
 		panel.setFocusable(false);
 		panel.setFocusTraversalKeysEnabled(false);
 		panel.setMaximumSize(new Dimension(32767, 30000));
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JPanel panel_position = new JPanel();
-		panel_position.setBorder(new TitledBorder(null, "Tabla de posiciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		JPanel panel_position = new TransPanel();
+		panel_position.setBackground(Color.WHITE);
+		panel_position.setBorder(new TitledBorder(null, "Tabla de posiciones", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
 		panel_position.setBounds(939, 42, 310, 237);
 		panel.add(panel_position);
 		panel_position.setLayout(new BorderLayout(0, 0));
@@ -390,9 +395,18 @@ public class Principal extends JFrame {
 		String[] headers = {"No.", "Equipo","JJ", "JG", "JP"};
 		modelo.setColumnIdentifiers(headers);
 		table.setModel(modelo);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table.getColumnModel();
+		columnModel.getColumn(0).setPreferredWidth(35);
+		columnModel.getColumn(1).setPreferredWidth(151);
+		columnModel.getColumn(2).setPreferredWidth(35);
+		columnModel.getColumn(3).setPreferredWidth(35);
+		columnModel.getColumn(4).setPreferredWidth(41);
+		table.setEnabled(false);
 		
-		JPanel panel_juegosdeldia = new JPanel();
-		panel_juegosdeldia.setBorder(new TitledBorder(null, "Juegos del dia", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		JPanel panel_juegosdeldia = new TransPanel();
+		panel_juegosdeldia.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Juegos del dia", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
 		panel_juegosdeldia.setBounds(939, 306, 310, 278);
 		panel.add(panel_juegosdeldia);
 		panel_juegosdeldia.setLayout(new BorderLayout(0, 0));
@@ -409,18 +423,18 @@ public class Principal extends JFrame {
 		modelo2.setColumnIdentifiers(headers2);
 		table_1.setModel(modelo2);
 		
-		JPanel equipos = new JPanel();
-		equipos.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(171, 173, 179)), new EmptyBorder(2, 2, 2, 2)), "Equipos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		JPanel equipos = new TransPanel();
+		equipos.setBorder(new TitledBorder(new CompoundBorder(new LineBorder(new Color(171, 173, 179)), new EmptyBorder(2, 2, 2, 2)), "Equipos", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)));
 		equipos.setBounds(10, 402, 919, 182);
 		panel.add(equipos);
 		equipos.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		equipos.add(panel_1);
+		JPanel panel_aguilas = new TransPanel();
+		panel_aguilas.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		equipos.add(panel_aguilas);
 		
 		JLabel Logo_aguilas_campeon = new JLabel("");
-		panel_1.add(Logo_aguilas_campeon);
+		panel_aguilas.add(Logo_aguilas_campeon);
 		Logo_aguilas_campeon.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -438,9 +452,9 @@ public class Principal extends JFrame {
 		Logo_aguilas_campeon.setToolTipText("Ver equipo");
 		Logo_aguilas_campeon.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-AC.png")));
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		equipos.add(panel_2);
+		JPanel panel_licey = new TransPanel();
+		panel_licey.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		equipos.add(panel_licey);
 		
 		JLabel logo_babosos_del_licey = new JLabel("");
 		logo_babosos_del_licey.addMouseListener(new MouseAdapter() {
@@ -457,12 +471,12 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-		panel_2.add(logo_babosos_del_licey);
+		panel_licey.add(logo_babosos_del_licey);
 		logo_babosos_del_licey.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-TL.png")));
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		equipos.add(panel_3);
+		JPanel panel_toros = new TransPanel();
+		panel_toros.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		equipos.add(panel_toros);
 		
 		JLabel logo_toros = new JLabel("");
 		logo_toros.addMouseListener(new MouseAdapter() {
@@ -479,12 +493,12 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-		panel_3.add(logo_toros);
+		panel_toros.add(logo_toros);
 		logo_toros.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-TE.png")));
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		equipos.add(panel_4);
+		JPanel panel_estrellas = new TransPanel();
+		panel_estrellas.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		equipos.add(panel_estrellas);
 		
 		JLabel logo_estrellas = new JLabel("");
 		logo_estrellas.addMouseListener(new MouseAdapter() {
@@ -501,12 +515,12 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-		panel_4.add(logo_estrellas);
+		panel_estrellas.add(logo_estrellas);
 		logo_estrellas.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-ES.png")));
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		equipos.add(panel_5);
+		JPanel panel_gigantes = new TransPanel();
+		panel_gigantes.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		equipos.add(panel_gigantes);
 		
 		JLabel logo_gigantes = new JLabel("");
 		logo_gigantes.addMouseListener(new MouseAdapter() {
@@ -523,12 +537,12 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-		panel_5.add(logo_gigantes);
+		panel_gigantes.add(logo_gigantes);
 		logo_gigantes.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-GC.png")));
 		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		equipos.add(panel_6);
+		JPanel panel_escogido = new TransPanel();
+		panel_escogido.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		equipos.add(panel_escogido);
 		
 		JLabel logo_escojido = new JLabel("");
 		logo_escojido.addMouseListener(new MouseAdapter() {
@@ -545,7 +559,7 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-		panel_6.add(logo_escojido);
+		panel_escogido.add(logo_escojido);
 		logo_escojido.setIcon(new ImageIcon(Principal.class.getResource("/assets/Logo-EC.png")));
 		logo_escojido.setHorizontalAlignment(SwingConstants.LEFT);
 		
@@ -563,6 +577,7 @@ public class Principal extends JFrame {
 		
 		JLabel fecha_label = new JLabel("Fecha Actual:");
 		fecha_label.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		fecha_label.setForeground(Color.WHITE);
 		fecha_label.setBounds(1059, 14, 102, 14);
 		panel.add(fecha_label);
 		
@@ -579,7 +594,7 @@ public class Principal extends JFrame {
 		panel.add(fecha_textfield);
 		fecha_textfield.setColumns(10);
 		fecha_textfield.setText(dia+"/"+mes+"/"+year);
-		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{scrollPane, table, panel_juegosdeldia, scrollPane_1, table_1, equipos, panel_1, Logo_aguilas_campeon, panel_2, logo_babosos_del_licey, panel_3, logo_toros, panel_4, logo_estrellas, panel_5, logo_gigantes, panel_6, logo_escojido, LogoLidom, fecha_label, fecha_textfield}));
+		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{scrollPane, table, panel_juegosdeldia, scrollPane_1, table_1, equipos, panel_aguilas, Logo_aguilas_campeon, panel_licey, logo_babosos_del_licey, panel_toros, logo_toros, panel_estrellas, logo_estrellas, panel_gigantes, logo_gigantes, panel_escogido, logo_escojido, LogoLidom, fecha_label, fecha_textfield}));
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{menuBar}));
 		llenarTabla();
 		llenarTabla2();
@@ -629,6 +644,23 @@ public class Principal extends JFrame {
 			filas[3] = juego.getHora();
 			modelo2.addRow(filas);
 			}
+		}
+	}
+	public class FondoPanel extends JPanel{
+		public void paint(Graphics g) {
+			ImageIcon icon = new ImageIcon(getClass().getResource("/assets/fondo.jpg"));
+			g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
+			setOpaque(false);
+			super.paint(g);
+					
+		}
+		
+	}
+	public class TransPanel extends JPanel{
+		public void paint(Graphics g) {
+			setOpaque(false);
+			super.paint(g);
+			
 		}
 	}
 }
