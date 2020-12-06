@@ -8,6 +8,7 @@ public class Torneo {
 	private ArrayList<Juego> juegos;
 	private ArrayList<Equipo> equipos;
 	private ArrayList<Jugador> jugadores;
+	private ArrayList<Lesion> lesiones;
 	private static Torneo torneo = null;
 	private int autoJuegoCode;
 	private int autoLesionCode;
@@ -98,6 +99,14 @@ public class Torneo {
 	
 	public void eliminarJugador(Jugador jugador) {
 		jugadores.remove(jugador);
+	}
+	
+	public void insertarLesion(Lesion lesion) {
+		lesiones.add(lesion);
+	}
+	
+	public void eliminarLesion(Lesion lesion) {
+		lesiones.remove(lesion);
 	}
 	
 	public void insertarJugador(Jugador jugador) {
