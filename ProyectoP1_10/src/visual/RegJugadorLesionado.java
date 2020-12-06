@@ -49,7 +49,7 @@ public class RegJugadorLesionado extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegJugadorLesionado(Jugador jugador) {
+	public RegJugadorLesionado(Equipo equipo, Jugador jugador) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegJugadorLesionado.class.getResource("/assets/lidomlogo.png")));
 		setTitle("Lesionar Jugador");
 		setResizable(false);
@@ -123,7 +123,7 @@ public class RegJugadorLesionado extends JDialog {
 			panel.add(lblCodigoLesin);
 			
 			textFieldCodLesion = new JTextField();
-			textFieldCodLesion.setText("L-"+ (Torneo.getInstance().getAutoLesionCode()));
+			textFieldCodLesion.setText("L-"+ (equipo.getAutoLesionCode()));
 			textFieldCodLesion.setEditable(false);
 			textFieldCodLesion.setColumns(10);
 			textFieldCodLesion.setBackground(Color.WHITE);
@@ -162,11 +162,12 @@ public class RegJugadorLesionado extends JDialog {
 								String anno = Integer.toString(txtCantDias.getCalendar().get(Calendar.YEAR));
 								String fecha =(dia+"-"+mes+"-"+anno);
 								String estado= "Activa";
-								String lesionCod = "L-" + Torneo.getInstance().getAutoLesionCode();
+								String lesionCod = "L-" + equipo.getAutoLesionCode();
 								lesion = new Lesion(lesionCod, causa, descripcion, jugador, estado, fecha);
 
 								team.insertarLesion(lesion);
 								jugador.setEstado("Lesionado");
+								Torneo.getInstance().insertarLesion(lesion);
 								
 								JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado.", null, JOptionPane.INFORMATION_MESSAGE, null);
 								dispose();

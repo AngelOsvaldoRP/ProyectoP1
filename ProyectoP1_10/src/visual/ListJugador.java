@@ -234,7 +234,7 @@ public class ListJugador extends JDialog {
 
 										JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
 									}else {
-									RegJugadorLesionado reg = new RegJugadorLesionado(aux1);
+									RegJugadorLesionado reg = new RegJugadorLesionado(equipo, aux1);
 									reg.setModal(true);
 									reg.setLocationRelativeTo(null);
 									reg.setVisible(true);
@@ -248,7 +248,7 @@ public class ListJugador extends JDialog {
 
 										JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado!", null, JOptionPane.ERROR_MESSAGE, null);
 									}else {
-									RegJugadorLesionado reg = new RegJugadorLesionado(aux2);
+									RegJugadorLesionado reg = new RegJugadorLesionado(equipo, aux2);
 									reg.setModal(true);
 									reg.setLocationRelativeTo(null);
 									reg.setVisible(true);
