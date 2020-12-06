@@ -1,6 +1,12 @@
 package logico;
 
-public class Bateo extends Jugador {
+import java.io.Serializable;
+
+public class Bateo extends Jugador implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4180720176201999792L;
 	//Variables
 	private int cantTB;
 	private int cantCA;

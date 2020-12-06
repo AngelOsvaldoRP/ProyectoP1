@@ -1,6 +1,12 @@
 package logico;
 
-public class Picheo extends Jugador {
+import java.io.Serializable;
+
+public class Picheo extends Jugador implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4017047603544875569L;
 	//Variables
 	private int cantJG;
 	private int cantJP;

@@ -1,8 +1,15 @@
 package logico;
+
+import java.io.Serializable;
+
 //Import library
 
-public abstract class Jugador {
+public abstract class Jugador implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6231712164079694941L;
 	//Variables
 	protected String nombre;
 	protected String apellido;

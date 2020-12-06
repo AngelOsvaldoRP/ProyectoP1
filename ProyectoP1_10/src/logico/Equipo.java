@@ -1,9 +1,14 @@
 package logico;
+import java.io.Serializable;
 //Import library
 import java.util.ArrayList;
 
 
-public class Equipo {
+public class Equipo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8392731142841442728L;
 	//Variables
 	private String nombre;
 	private int yearFundation;

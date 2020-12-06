@@ -1,6 +1,12 @@
 package logico;
 
-public class Juego {
+import java.io.Serializable;
+
+public class Juego implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4531331713471877027L;
 	//Variables
 	private String juegoCod;
 	private String estado;

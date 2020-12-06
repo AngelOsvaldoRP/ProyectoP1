@@ -1,7 +1,14 @@
 package logico;
+
+import java.io.Serializable;
+
 //Import library
 
-public class Lesion {
+public class Lesion implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6977158009637044862L;
 	//Variables
 	private String lesionCod;
 	private String tipo;

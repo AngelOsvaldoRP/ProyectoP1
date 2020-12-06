@@ -2,8 +2,19 @@ package logico;
 
 //Import library
 import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Torneo {
+public class Torneo implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7359493832968751466L;
 	//Variables
 	private ArrayList<Juego> juegos;
 	private ArrayList<Equipo> equipos;
@@ -220,6 +231,52 @@ public class Torneo {
 			}
 		}
 	}
+	
+	// Metoros para escribir y leer los datos
+	
+	public void escribir(){
+		
+		ObjectOutputStream Oos = null;
+		try {
+			Oos = new ObjectOutputStream( new FileOutputStream ("Torneo.dat"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Oos.writeObject(torneo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Oos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void leer(){
+
+		ObjectInputStream ooE = null;
+		try {
+			ooE = new ObjectInputStream(new FileInputStream ("Torneo.dat"));
+			torneo = (Torneo)ooE.readObject();
+			ooE.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 	
 	
 }
