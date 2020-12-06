@@ -15,6 +15,7 @@ public class Equipo {
 	private int cantJP;
 	private ArrayList<Jugador> jugadores;
 	private ArrayList<Lesion> lesiones;
+	private int autoLesionCode;
 	
 	//Constructor
 	public Equipo(String nombre, int yearFundation, String manager, String ciudad, String estadio) {
@@ -29,6 +30,7 @@ public class Equipo {
 		this.cantJP = 0;
 		this.jugadores = new ArrayList<>();
 		this.lesiones = new ArrayList<>();
+		this.setAutoLesionCode(1);
 	}
 	
 	//Getters and setters
@@ -111,6 +113,14 @@ public class Equipo {
 
 	public void setLesiones(ArrayList<Lesion> lesiones) {
 		this.lesiones = lesiones;
+	}
+	
+	public int getAutoLesionCode() {
+		return autoLesionCode;
+	}
+
+	public void setAutoLesionCode(int autoLesionCode) {
+		this.autoLesionCode = autoLesionCode;
 	}
 	
 	//Funciones para estadisticas de bateo del equipo
@@ -247,6 +257,7 @@ public class Equipo {
 	}
 
 	public void insertarLesion(Lesion lesion) {
+		autoLesionCode++;
 		lesiones.add(lesion);
 		
 	}

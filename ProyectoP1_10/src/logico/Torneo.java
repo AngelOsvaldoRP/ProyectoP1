@@ -11,7 +11,7 @@ public class Torneo {
 	private ArrayList<Lesion> lesiones;
 	private static Torneo torneo = null;
 	private int autoJuegoCode;
-	private int autoLesionCode;
+	
 
 	 
 	//Constructor
@@ -21,7 +21,7 @@ public class Torneo {
 		this.equipos = new ArrayList<Equipo>();
 		this.jugadores = new ArrayList<Jugador>();
 		this.setAutoJuegoCode(1);
-		this.setAutoLesionCode(1);
+		
 	}
 	 
 	public static Torneo getInstance() {
@@ -63,14 +63,6 @@ public class Torneo {
 
 	public void setAutoJuegoCode(int autoJuegoCode) {
 		this.autoJuegoCode = autoJuegoCode;
-	}
-
-	public int getAutoLesionCode() {
-		return autoLesionCode;
-	}
-
-	public void setAutoLesionCode(int autoLesionCode) {
-		this.autoLesionCode = autoLesionCode;
 	}
 
 	public void insertarEquipo(Equipo team) {
