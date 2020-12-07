@@ -186,6 +186,7 @@ public class RegJuego extends JDialog {
 									
 									juego = new Juego(juegoCod, estado, fecha, hora, local, visitante, estadio);
 									Torneo.getInstance().insertarJuego(juego);
+									Torneo.getInstance().escribir();
 								
 									JOptionPane.showMessageDialog(null, "El juego se registró sastifactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 									Principal.llenarTabla();

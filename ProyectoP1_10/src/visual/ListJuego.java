@@ -39,15 +39,7 @@ public class ListJuego extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListJuego dialog = new ListJuego();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
@@ -136,6 +128,7 @@ public class ListJuego extends JDialog {
 						int delete = JOptionPane.showConfirmDialog(null, "Realmente desea Eliminar el juego numero: " + juego.getJuegoCod() , null, JOptionPane.YES_NO_OPTION);
 							if (delete == JOptionPane.YES_OPTION) {
 							    Torneo.getInstance().eliminarJuego(identificador);
+							    Torneo.getInstance().escribir();
 							    llenarCalendariodeJuegos();
 							    btnEliminar.setEnabled(false);
 							}

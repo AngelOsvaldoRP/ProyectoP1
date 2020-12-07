@@ -33,6 +33,7 @@ public class Login extends JFrame {
 				try {
 					User usuario= new User("admin", "admin");
 					Torneo.getInstance().insertarUser(usuario);
+					Torneo.getInstance().leer();
 					Login frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception e) {

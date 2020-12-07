@@ -105,6 +105,7 @@ public class RegJugador extends JDialog {
 									player.setEquipoActual(team.getNombre());
 									team.insertarJugador(player);
 									Torneo.getInstance().insertarJugador(player);
+									Torneo.getInstance().escribir();
 									JOptionPane.showMessageDialog(null, "El jugador ''" + nombre+"'' se agregó sastifactoriamente.", null, JOptionPane.INFORMATION_MESSAGE, null);
 									clean();
 								}else {
@@ -133,7 +134,7 @@ public class RegJugador extends JDialog {
 				cancelButton.setBackground(new Color(128, 0, 0));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//dispose();
+						dispose();
 					}
 				});
 				cancelButton.setActionCommand("Cancel");

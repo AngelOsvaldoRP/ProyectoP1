@@ -137,6 +137,7 @@ public class ListLesionado extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						aux.setEstado("Terminada");
 						aux.getJugador().setEstado("Disponible");
+						Torneo.getInstance().escribir();
 						JOptionPane.showMessageDialog(null, "El jugador ya esta disponible", null, JOptionPane.INFORMATION_MESSAGE, null);
 						llenarTabla();
 					}

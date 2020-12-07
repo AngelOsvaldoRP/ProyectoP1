@@ -283,6 +283,7 @@ public class ListJugador extends JDialog {
 							if(option == JOptionPane.OK_OPTION) {
 								Torneo.getInstance().eliminarJugador(aux1);
 								equipo.eliminarJugador(aux1);
+								Torneo.getInstance().escribir();
 								llenarTabla();
 								llenarTabla2();
 								btnEliminar.setEnabled(false);
@@ -295,6 +296,7 @@ public class ListJugador extends JDialog {
 							if(option == JOptionPane.OK_OPTION) {
 								Torneo.getInstance().eliminarJugador(aux2);
 								equipo.eliminarJugador(aux2);
+								Torneo.getInstance().escribir();
 								llenarTabla();
 								llenarTabla2();
 								btnEliminar.setEnabled(false);

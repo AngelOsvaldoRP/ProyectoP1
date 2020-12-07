@@ -138,6 +138,7 @@ public class Torneo implements Serializable {
 
 	public void insertarJuego(Juego juego) {
 		autoJuegoCode++;
+		escribir();
 		juegos.add(juego);
 	}
 	

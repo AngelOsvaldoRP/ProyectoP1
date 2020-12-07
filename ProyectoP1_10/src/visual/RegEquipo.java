@@ -149,6 +149,7 @@ public class RegEquipo extends JDialog {
 								equipo.setYearFundation(Integer.valueOf(txtAnno.getText()));
 								equipo.setManager(txtManager.getText());
 								equipo.setEstadio(txtEstadio.getText());
+								Torneo.getInstance().escribir();
 								JOptionPane.showMessageDialog(null, "Equipo ''"+txtNombre.getText()+"'' fue registrado satisfectoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 								dispose();
 							}
@@ -162,6 +163,7 @@ public class RegEquipo extends JDialog {
 								if(aux1== null) {
 									Equipo team = new Equipo(txtNombre.getText(), Integer.parseInt(txtAnno.getText().toString()), txtManager.getText(), txtCiudad.getText(), txtEstadio.getText());
 									Torneo.getInstance().insertarEquipo(team);
+									Torneo.getInstance().escribir();
 									JOptionPane.showMessageDialog(null, "Equipo ''"+txtNombre.getText()+"'' fue registrado satisfectoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 									Principal.llenarTabla();
 									Principal.llenarTabla2();

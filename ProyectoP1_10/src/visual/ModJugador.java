@@ -15,6 +15,7 @@ import logico.Bateo;
 import logico.Equipo;
 import logico.Jugador;
 import logico.Picheo;
+import logico.Torneo;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -84,7 +85,7 @@ public class ModJugador extends JDialog {
 							aux.setPeso(new Float(txtPeso.getText()));
 							aux.setMano(cbxMano.getSelectedItem().toString());
 							
-							
+							Torneo.getInstance().escribir();
 							
 							JOptionPane.showMessageDialog(null, "El Jugador "+aux.getNombre()+ " se modificó corectamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 							dispose();

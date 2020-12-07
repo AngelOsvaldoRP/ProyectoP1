@@ -263,6 +263,7 @@ public class Equipo implements Serializable{
 
 	public void insertarLesion(Lesion lesion) {
 		autoLesionCode++;
+		Torneo.getInstance().escribir();
 		lesiones.add(lesion);
 		
 	}

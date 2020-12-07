@@ -173,6 +173,7 @@ public class ListEquipo extends JDialog {
 								llenarTabla();
 								btnEliminar.setEnabled(false);
 								btnModificar.setEnabled(false);
+								Torneo.getInstance().escribir();
 								Principal.llenarTabla();
 								Principal.llenarTabla2();
 							}
