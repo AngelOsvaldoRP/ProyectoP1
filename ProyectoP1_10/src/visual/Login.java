@@ -17,6 +17,8 @@ import logico.User;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class Login extends JFrame {
 
@@ -49,7 +51,7 @@ public class Login extends JFrame {
 	public Login() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 243, 299);
+		setBounds(100, 100, 243, 255);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -80,6 +82,9 @@ public class Login extends JFrame {
 		textPass.setColumns(10);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.setIcon(new ImageIcon(Login.class.getResource("/assets/round_done_outline_white_18dp.png")));
+		btnLogin.setForeground(new Color(255, 255, 255));
+		btnLogin.setBackground(new Color(0, 128, 0));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!textUsuario.getText().equalsIgnoreCase("") && !textPass.getText().equalsIgnoreCase("")) {
@@ -97,7 +102,7 @@ public class Login extends JFrame {
 				}
 			}
 		});
-		btnLogin.setBounds(112, 179, 89, 23);
+		btnLogin.setBounds(112, 163, 89, 23);
 		panel.add(btnLogin);
 	}
 }
