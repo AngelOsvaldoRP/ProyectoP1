@@ -107,13 +107,13 @@ public class ListJuego extends JDialog {
 						String actual = dia+"/"+mes+"/"+year;
 						
 						if(juego.getFecha().equalsIgnoreCase(actual)) {
-							if(juego.getEstado()== "En espera") {
+							if(juego.getEstado().equalsIgnoreCase("En espera")) {
 								SimulacionJuego jugando = new SimulacionJuego(Torneo.getInstance().buscarJuegoPorCodigo(identificador));
 								jugando.setModal(true);
 								jugando.setLocationRelativeTo(null);
 								jugando.setVisible(true);
 								dispose();
-							}else {
+							}else{
 								JOptionPane.showMessageDialog(null, "El juego seleccionado ya fue jugado", null, JOptionPane.ERROR_MESSAGE, null);
 							}
 						}else {

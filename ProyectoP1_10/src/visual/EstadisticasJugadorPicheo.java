@@ -181,7 +181,7 @@ public class EstadisticasJugadorPicheo extends JDialog {
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
-				JLabel lblNewLabel_3 = new JLabel("AVG:");
+				JLabel lblNewLabel_3 = new JLabel("PCL:");
 				lblNewLabel_3.setBounds(10, 32, 46, 14);
 				panel.add(lblNewLabel_3);
 			}

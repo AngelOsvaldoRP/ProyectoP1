@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class EstadisticasEquipo extends JDialog {
 
@@ -47,6 +48,7 @@ public class EstadisticasEquipo extends JDialog {
 	 * Create the dialog.
 	 */
 	public EstadisticasEquipo(Equipo equipo) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(EstadisticasEquipo.class.getResource("/assets/logo lidom.png")));
 		setBounds(100, 100, 436, 540);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -165,18 +167,18 @@ public class EstadisticasEquipo extends JDialog {
 		txtJP.setColumns(10);
 		
 		JLabel lblNewLabel_8 = new JLabel("AVG Bateo:");
-		lblNewLabel_8.setBounds(106, 85, 114, 14);
+		lblNewLabel_8.setBounds(10, 85, 114, 14);
 		panel.add(lblNewLabel_8);
 		
-		JLabel lblNewLabel_9 = new JLabel("AVG Picheo:");
-		lblNewLabel_9.setBounds(258, 85, 104, 14);
+		JLabel lblNewLabel_9 = new JLabel("PCL Picheo:");
+		lblNewLabel_9.setBounds(150, 85, 104, 14);
 		panel.add(lblNewLabel_9);
 		
 		txtAVGB = new JTextField();
 		txtAVGB.setBackground(Color.WHITE);
 		txtAVGB.setEditable(false);
 		txtAVGB.setText(String.valueOf(equipo.avgEquipoBateo()));
-		txtAVGB.setBounds(106, 110, 86, 22);
+		txtAVGB.setBounds(10, 110, 86, 22);
 		panel.add(txtAVGB);
 		txtAVGB.setColumns(10);
 		
@@ -184,7 +186,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtAVGP.setBackground(Color.WHITE);
 		txtAVGP.setEditable(false);
 		txtAVGP.setText(String.valueOf(equipo.avgEquipoPicheo()));
-		txtAVGP.setBounds(258, 110, 86, 22);
+		txtAVGP.setBounds(150, 110, 86, 22);
 		panel.add(txtAVGP);
 		txtAVGP.setColumns(10);
 		
@@ -225,18 +227,18 @@ public class EstadisticasEquipo extends JDialog {
 		txtHR.setColumns(10);
 		
 		JLabel lblNewLabel_13 = new JLabel("Ponches:");
-		lblNewLabel_13.setBounds(106, 198, 90, 14);
+		lblNewLabel_13.setBounds(284, 85, 90, 14);
 		panel.add(lblNewLabel_13);
 		
 		JLabel lblNewLabel_14 = new JLabel("BB:");
-		lblNewLabel_14.setBounds(258, 198, 78, 14);
+		lblNewLabel_14.setBounds(150, 206, 78, 14);
 		panel.add(lblNewLabel_14);
 		
 		txtPonches = new JTextField();
 		txtPonches.setBackground(Color.WHITE);
 		txtPonches.setEditable(false);
 		txtPonches.setText(String.valueOf(equipo.cantPonchesEquipo()));
-		txtPonches.setBounds(106, 223, 86, 22);
+		txtPonches.setBounds(284, 110, 86, 22);
 		panel.add(txtPonches);
 		txtPonches.setColumns(10);
 		
@@ -244,7 +246,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtBB.setBackground(Color.WHITE);
 		txtBB.setEditable(false);
 		txtBB.setText(String.valueOf(equipo.cantBBEquipo()));
-		txtBB.setBounds(258, 223, 86, 22);
+		txtBB.setBounds(150, 231, 86, 22);
 		panel.add(txtBB);
 		txtBB.setColumns(10);
 		{

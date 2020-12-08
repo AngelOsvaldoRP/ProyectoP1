@@ -89,7 +89,7 @@ public class ListTopPlayer extends JDialog {
 		table_1 = new JTable();
 		scrollPane_1.setViewportView(table_1);
 		modelo = new DefaultTableModel();
-		String[] headers = {"No.", "Equipo", "Nombre", "Apellido","AVG" };
+		String[] headers = {"No.", "Equipo", "Nombre", "Apellido","PCL"};
 		modelo.setColumnIdentifiers(headers);
 		table_1.setModel(modelo);
 		

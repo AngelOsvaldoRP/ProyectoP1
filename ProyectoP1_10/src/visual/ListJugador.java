@@ -117,7 +117,7 @@ public class ListJugador extends JDialog {
 				panel2.add(scrollPane);
 				{
 					modelo2 = new DefaultTableModel();
-					String[] headers = {"No.", "Estado", "Nombre", "Apellido", "AVG", "JG", "JP", "K", "BB", "IL"};
+					String[] headers = {"No.", "Estado", "Nombre", "Apellido", "PCL", "JG", "JP", "K", "BB", "IL"};
 					modelo2.setColumnIdentifiers(headers);
 					table2 = new JTable();
 					table2.addMouseListener(new MouseAdapter() {
@@ -185,18 +185,18 @@ public class ListJugador extends JDialog {
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(aux1 instanceof Bateo) {
+							dispose();
 							ModJugador mod = new ModJugador(equipo, aux1);
 							mod.setModal(true);
 							mod.setLocationRelativeTo(null);
 							mod.setVisible(true);
-							llenarTabla();
 						}
 						if(aux2 instanceof Picheo) {
+							dispose();
 							ModJugador mod = new ModJugador(equipo, aux2);
 							mod.setModal(true);
 							mod.setLocationRelativeTo(null);
 							mod.setVisible(true);
-							llenarTabla2();
 						}
 					}
 				});

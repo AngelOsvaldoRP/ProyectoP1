@@ -18,16 +18,15 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class InformacionJuego extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textCarrerasGanador;
 	private JTextField textHitsGanador;
-	private JTextField textErroresGanador;
 	private JTextField textCarrerasPerdedor;
 	private JTextField textHitsPerdedor;
-	private JTextField textErroresPerdedor;
 	private JTextField textFecha;
 	private JTextField textEstado;
 	private JTextField textHora;
@@ -43,8 +42,9 @@ public class InformacionJuego extends JDialog {
 	 * Create the dialog.
 	 */
 	public InformacionJuego(Juego juego) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InformacionJuego.class.getResource("/assets/logo lidom.png")));
 		setTitle("Informacion Juego");
-		setBounds(100, 100, 421, 477);
+		setBounds(100, 100, 421, 449);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -57,12 +57,12 @@ public class InformacionJuego extends JDialog {
 			{
 				JPanel panelResultadosJuego = new JPanel();
 				panelResultadosJuego.setBorder(new TitledBorder(null, "Resultados Partido", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panelResultadosJuego.setBounds(10, 207, 362, 177);
+				panelResultadosJuego.setBounds(10, 207, 362, 144);
 				panel.add(panelResultadosJuego);
 				panelResultadosJuego.setLayout(null);
 				{
 					JPanel panel_1_1 = new JPanel();
-					panel_1_1.setBounds(10, 20, 161, 146);
+					panel_1_1.setBounds(10, 20, 161, 113);
 					panelResultadosJuego.add(panel_1_1);
 					panel_1_1.setLayout(null);
 					panel_1_1.setBorder(new TitledBorder(null, "Equipo Ganador", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -88,10 +88,10 @@ public class InformacionJuego extends JDialog {
 						textCarrerasGanador.setEditable(false);
 						if(juego.getEstado().equalsIgnoreCase("Jugado")) {
 							if(juego.getGanador().equalsIgnoreCase("Local")) {
-								textCarrerasGanador.setText(""+juego.getCarrerasLocal());
+								textCarrerasGanador.setText(String.valueOf(juego.getCarrerasLocal()));
 							}
 							if(juego.getGanador().equalsIgnoreCase("Visitante")) {
-								textCarrerasGanador.setText(""+juego.getCarrerasVisitante());
+								textCarrerasGanador.setText(String.valueOf(juego.getCarrerasVisitante()));
 							}
 						}
 						if(juego.getEstado().equalsIgnoreCase("En espera")) {
@@ -111,10 +111,10 @@ public class InformacionJuego extends JDialog {
 						textHitsGanador.setEditable(false);
 						if(juego.getEstado().equalsIgnoreCase("Jugado")) {
 							if(juego.getGanador().equalsIgnoreCase("Local")) {
-								textHitsGanador.setText(""+juego.getHitsLocal());
+								textHitsGanador.setText(String.valueOf(juego.getHitsLocal()));
 							}
 							if(juego.getGanador().equalsIgnoreCase("Visitante")) {
-								textHitsGanador.setText(""+juego.getHitsVisitante());
+								textHitsGanador.setText(String.valueOf(juego.getHitsVisitante()));
 							}
 						}
 						if(juego.getEstado().equalsIgnoreCase("En espera")) {
@@ -125,29 +125,6 @@ public class InformacionJuego extends JDialog {
 						panel_1_1.add(textHitsGanador);
 					}
 					{
-						JLabel label = new JLabel("Errores:");
-						label.setBounds(10, 104, 63, 14);
-						panel_1_1.add(label);
-					}
-					{
-						textErroresGanador = new JTextField();
-						textErroresGanador.setEditable(false);
-						if(juego.getEstado().equalsIgnoreCase("Jugado")) {
-							if(juego.getGanador().equalsIgnoreCase("Local")) {
-								textErroresGanador.setText(""+juego.getErroresLocal());
-							}
-							if(juego.getGanador().equalsIgnoreCase("Visitante")) {
-								textErroresGanador.setText(""+juego.getErroresVisitante());
-							}
-						}
-						if(juego.getEstado().equalsIgnoreCase("En espera")) {
-							textErroresGanador.setText("");
-						}
-						textErroresGanador.setColumns(10);
-						textErroresGanador.setBounds(70, 101, 37, 23);
-						panel_1_1.add(textErroresGanador);
-					}
-					{
 						JLabel labelGanador = new JLabel((String) null);
 						labelGanador.setBounds(10, 21, 141, 14);
 						panel_1_1.add(labelGanador);
@@ -155,7 +132,7 @@ public class InformacionJuego extends JDialog {
 				}
 				{
 					JPanel panel_1_1 = new JPanel();
-					panel_1_1.setBounds(191, 20, 161, 146);
+					panel_1_1.setBounds(191, 20, 161, 113);
 					panelResultadosJuego.add(panel_1_1);
 					panel_1_1.setLayout(null);
 					panel_1_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Equipo Perdedor", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -180,10 +157,10 @@ public class InformacionJuego extends JDialog {
 						textCarrerasPerdedor.setEditable(false);
 						if(juego.getEstado().equalsIgnoreCase("Jugado")) {
 							if(juego.getPerdedor().equalsIgnoreCase("Local")) {
-								textCarrerasPerdedor.setText(""+juego.getCarrerasLocal());
+								textCarrerasPerdedor.setText(String.valueOf(juego.getCarrerasLocal()));
 							}
 							if(juego.getPerdedor().equalsIgnoreCase("Visitante")) {
-								textCarrerasPerdedor.setText(""+juego.getCarrerasVisitante());
+								textCarrerasPerdedor.setText(String.valueOf(juego.getCarrerasVisitante()));
 							}
 						}
 						if(juego.getEstado().equalsIgnoreCase("En espera")) {
@@ -203,10 +180,10 @@ public class InformacionJuego extends JDialog {
 						textHitsPerdedor.setEditable(false);
 						if(juego.getEstado().equalsIgnoreCase("Jugado")) {
 							if(juego.getPerdedor().equalsIgnoreCase("Local")) {
-								textHitsPerdedor.setText(""+juego.getHitsLocal());
+								textHitsPerdedor.setText(String.valueOf(juego.getHitsLocal()));
 							}
 							if(juego.getPerdedor().equalsIgnoreCase("Visitante")) {
-								textHitsPerdedor.setText(""+juego.getHitsVisitante());
+								textHitsPerdedor.setText(String.valueOf(juego.getHitsVisitante()));
 							}
 						}
 						if(juego.getEstado().equalsIgnoreCase("En espera")) {
@@ -215,29 +192,6 @@ public class InformacionJuego extends JDialog {
 						textHitsPerdedor.setColumns(10);
 						textHitsPerdedor.setBounds(70, 73, 37, 23);
 						panel_1_1.add(textHitsPerdedor);
-					}
-					{
-						JLabel label = new JLabel("Errores:");
-						label.setBounds(10, 104, 63, 14);
-						panel_1_1.add(label);
-					}
-					{
-						textErroresPerdedor = new JTextField();
-						textErroresPerdedor.setEditable(false);
-						if(juego.getEstado().equalsIgnoreCase("Jugado")) {
-							if(juego.getPerdedor().equalsIgnoreCase("Local")) {
-								textErroresPerdedor.setText(""+juego.getErroresLocal());
-							}
-							if(juego.getGanador().equalsIgnoreCase("Visitante")) {
-								textErroresPerdedor.setText(""+juego.getErroresVisitante());
-							}
-						}
-						if(juego.getEstado().equalsIgnoreCase("En espera")) {
-							textErroresPerdedor.setText("");
-						}
-						textErroresPerdedor.setColumns(10);
-						textErroresPerdedor.setBounds(70, 101, 37, 23);
-						panel_1_1.add(textErroresPerdedor);
 					}
 					{
 						JLabel labelPerdedor = new JLabel((String) null);
@@ -259,12 +213,12 @@ public class InformacionJuego extends JDialog {
 				}
 				{
 					JLabel lblEquipoVisitante = new JLabel("Equipo Visitante:");
-					lblEquipoVisitante.setBounds(10, 79, 108, 23);
+					lblEquipoVisitante.setBounds(10, 109, 108, 23);
 					panel_1.add(lblEquipoVisitante);
 				}
 				{
 					JLabel lblEquipoLocal = new JLabel("Equipo Local:");
-					lblEquipoLocal.setBounds(10, 113, 108, 23);
+					lblEquipoLocal.setBounds(10, 143, 108, 23);
 					panel_1.add(lblEquipoLocal);
 				}
 				{
@@ -279,7 +233,7 @@ public class InformacionJuego extends JDialog {
 				}
 				{
 					JLabel lblEstadio = new JLabel("Estadio:");
-					lblEstadio.setBounds(184, 45, 51, 23);
+					lblEstadio.setBounds(10, 79, 51, 23);
 					panel_1.add(lblEstadio);
 				}
 				{
@@ -311,7 +265,7 @@ public class InformacionJuego extends JDialog {
 					textEstadio.setEditable(false);
 					textEstadio.setText(juego.getEstadio());
 					textEstadio.setColumns(10);
-					textEstadio.setBounds(237, 45, 125, 23);
+					textEstadio.setBounds(108, 79, 244, 23);
 					panel_1.add(textEstadio);
 				}
 				{
@@ -319,7 +273,7 @@ public class InformacionJuego extends JDialog {
 					textVisitante.setEditable(false);
 					textVisitante.setText(juego.getEquipoVisitante());
 					textVisitante.setColumns(10);
-					textVisitante.setBounds(108, 80, 244, 23);
+					textVisitante.setBounds(108, 110, 244, 23);
 					panel_1.add(textVisitante);
 				}
 				{
@@ -327,7 +281,7 @@ public class InformacionJuego extends JDialog {
 					textLocal.setEditable(false);
 					textLocal.setText(juego.getEquipoLocal());
 					textLocal.setColumns(10);
-					textLocal.setBounds(108, 113, 244, 23);
+					textLocal.setBounds(108, 143, 244, 23);
 					panel_1.add(textLocal);
 				}
 			}

@@ -241,5 +241,4 @@ public class ModJugador extends JDialog {
 			txtIdentificacion.setColumns(10);
 		}
 	}
-	
 }

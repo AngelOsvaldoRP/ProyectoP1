@@ -314,26 +314,26 @@ public class SimulacionJuego extends JDialog {
 				okButton.setBackground(new Color(0, 128, 0));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(verificarDatosV()==true && verificarDatosL()==true && verificarEntradas()==true && Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())!=Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
-							guardarDatosJugadoresV();
-							guardarDatosJugadoresL();
-							llenarMarcadorJuego();
-							determinarWinnerLosser(juego);
-							tablaFinal(juego);
-							juego.setEstado("Jugado");
-							SituacionLanzadorJuego informacionFinal = new SituacionLanzadorJuego(juego);
-							informacionFinal.setLocationRelativeTo(null);
-							informacionFinal.setModal(true);
-							informacionFinal.setVisible(true);
-							Torneo.getInstance().escribir();
-							JOptionPane.showMessageDialog(null, "Datos Guardados de Manera Correcta", null, JOptionPane.INFORMATION_MESSAGE, null);
-							Principal.llenarTabla();
-							Principal.llenarTabla2();
-							dispose();
-						}
-						if(verificarDatosV()==false || verificarDatosL()==false || verificarEntradas()==false || Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())==Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
-							JOptionPane.showMessageDialog(null, "Favor Verificar Datos Introducidos", null, JOptionPane.ERROR_MESSAGE, null);
-						}
+							if(verificarDatosV()==true && verificarDatosL()==true && verificarEntradas()==true && Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())!=Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
+								guardarDatosJugadoresV();
+								guardarDatosJugadoresL();
+								llenarMarcadorJuego();
+								determinarWinnerLosser(juego);
+								tablaFinal(juego);
+								juego.setEstado("Jugado");
+								SituacionLanzadorJuego informacionFinal = new SituacionLanzadorJuego(juego);
+								informacionFinal.setLocationRelativeTo(null);
+								informacionFinal.setModal(true);
+								informacionFinal.setVisible(true);
+								Torneo.getInstance().escribir();
+								JOptionPane.showMessageDialog(null, "Datos Guardados de Manera Correcta", null, JOptionPane.INFORMATION_MESSAGE, null);
+								Principal.llenarTabla();
+								Principal.llenarTabla2();
+								dispose();
+							}
+							if(verificarDatosV()==false || verificarDatosL()==false || verificarEntradas()==false || Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())==Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
+								JOptionPane.showMessageDialog(null, "Favor Verificar Datos Introducidos", null, JOptionPane.ERROR_MESSAGE, null);
+							}
 					}
 
 				});
@@ -457,35 +457,37 @@ public class SimulacionJuego extends JDialog {
 		int i = 0;
 		int j = 0;
 		for(Jugador jugador : visitante.getJugadores()) {
-			if(jugador instanceof Bateo) {
-				jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableBV.getValueAt(i, 3).toString())+Integer.parseInt(tableBV.getValueAt(i, 6).toString())+Integer.parseInt(tableBV.getValueAt(i, 4).toString())+Integer.parseInt(tableBV.getValueAt(i, 5).toString()));
-				jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableBV.getValueAt(i, 6).toString()));
-				jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableBV.getValueAt(i, 10).toString()));
-				jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableBV.getValueAt(i, 7).toString()));
-				jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableBV.getValueAt(i, 14).toString()));
-				jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableBV.getValueAt(i, 8).toString()));
-				((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B() + Integer.parseInt(tableBV.getValueAt(i, 4).toString()));
-				((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B() + Integer.parseInt(tableBV.getValueAt(i, 5).toString()));
-				((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB() + Integer.parseInt(tableBV.getValueAt(i, 9).toString()));
-				((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA() + Integer.parseInt(tableBV.getValueAt(i, 11).toString()));
-				((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI() + Integer.parseInt(tableBV.getValueAt(i, 12).toString()));
-				((Bateo)jugador).setES(((Bateo)jugador).getES() + Integer.parseInt(tableBV.getValueAt(i, 13).toString()));
-				i++;
-			}
-			if(jugador instanceof Picheo) {
-				((Picheo) jugador).setEntradasLanzada(((Picheo) jugador).getEntradasLanzada() + Integer.parseInt(tableLV.getValueAt(j, 2).toString()));
-				jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableLV.getValueAt(j, 3).toString())+ Integer.parseInt(tableLV.getValueAt(j, 4).toString()));
-				jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableLV.getValueAt(j, 4).toString()));
-				jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableLV.getValueAt(j, 7).toString()));
-				jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableLV.getValueAt(j, 5).toString()));
-				jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableLV.getValueAt(j, 9).toString()));
-				jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableLV.getValueAt(j, 6).toString()));
-				((Picheo) jugador).setCantCL(((Picheo) jugador).getCantCL() + Integer.parseInt(tableLV.getValueAt(j, 8).toString()));
-				((Picheo) jugador).setCantTBE(((Picheo) jugador).getCantTBE() + Integer.parseInt(tableLV.getValueAt(j, 10).toString()));
-				if(Integer.parseInt(tableLV.getValueAt(j, 2).toString())>0) {
-					((Picheo)jugador).setCantJJ(((Picheo)jugador).getCantJJ() + 1);
+			if(jugador.getEstado().equalsIgnoreCase("Disponible")) {
+				if(jugador instanceof Bateo) {
+					jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableBV.getValueAt(i, 3).toString())+Integer.parseInt(tableBV.getValueAt(i, 6).toString())+Integer.parseInt(tableBV.getValueAt(i, 4).toString())+Integer.parseInt(tableBV.getValueAt(i, 5).toString()));
+					jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableBV.getValueAt(i, 6).toString()));
+					jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableBV.getValueAt(i, 10).toString()));
+					jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableBV.getValueAt(i, 7).toString()));
+					jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableBV.getValueAt(i, 14).toString()));
+					jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableBV.getValueAt(i, 8).toString()));
+					((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B() + Integer.parseInt(tableBV.getValueAt(i, 4).toString()));
+					((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B() + Integer.parseInt(tableBV.getValueAt(i, 5).toString()));
+					((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB() + Integer.parseInt(tableBV.getValueAt(i, 9).toString()));
+					((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA() + Integer.parseInt(tableBV.getValueAt(i, 11).toString()));
+					((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI() + Integer.parseInt(tableBV.getValueAt(i, 12).toString()));
+					((Bateo)jugador).setES(((Bateo)jugador).getES() + Integer.parseInt(tableBV.getValueAt(i, 13).toString()));
+					i++;
 				}
-				j++;
+				if(jugador instanceof Picheo) {
+					((Picheo) jugador).setEntradasLanzada(((Picheo) jugador).getEntradasLanzada() + Integer.parseInt(tableLV.getValueAt(j, 2).toString()));
+					jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableLV.getValueAt(j, 3).toString())+ Integer.parseInt(tableLV.getValueAt(j, 4).toString()));
+					jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableLV.getValueAt(j, 4).toString()));
+					jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableLV.getValueAt(j, 7).toString()));
+					jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableLV.getValueAt(j, 5).toString()));
+					jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableLV.getValueAt(j, 9).toString()));
+					jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableLV.getValueAt(j, 6).toString()));
+					((Picheo) jugador).setCantCL(((Picheo) jugador).getCantCL() + Integer.parseInt(tableLV.getValueAt(j, 8).toString()));
+					((Picheo) jugador).setCantTBE(((Picheo) jugador).getCantTBE() + Integer.parseInt(tableLV.getValueAt(j, 10).toString()));
+					if(Integer.parseInt(tableLV.getValueAt(j, 2).toString())>0) {
+						((Picheo)jugador).setCantJJ(((Picheo)jugador).getCantJJ() + 1);
+					}
+					j++;
+				}
 			}
 		}
 	}
@@ -494,32 +496,34 @@ public class SimulacionJuego extends JDialog {
 		int i = 0;
 		int j = 0;
 		for(Jugador jugador : local.getJugadores()) {
-			if(jugador instanceof Bateo) {
-				jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableBL.getValueAt(i, 3).toString())+Integer.parseInt(tableBL.getValueAt(i, 6).toString())+Integer.parseInt(tableBL.getValueAt(i, 4).toString())+Integer.parseInt(tableBL.getValueAt(i, 5).toString()));
-				jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableBL.getValueAt(i, 6).toString()));
-				jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableBL.getValueAt(i, 10).toString()));
-				jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableBL.getValueAt(i, 7).toString()));
-				jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableBL.getValueAt(i, 14).toString()));
-				jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableBL.getValueAt(i, 8).toString()));
-				((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B() + Integer.parseInt(tableBL.getValueAt(i, 4).toString()));
-				((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B() + Integer.parseInt(tableBL.getValueAt(i, 5).toString()));
-				((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB() + Integer.parseInt(tableBL.getValueAt(i, 9).toString()));
-				((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA() + Integer.parseInt(tableBL.getValueAt(i, 11).toString()));
-				((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI() + Integer.parseInt(tableBL.getValueAt(i, 12).toString()));
-				((Bateo)jugador).setES(((Bateo)jugador).getES() + Integer.parseInt(tableBL.getValueAt(i, 13).toString()));
-				i++;
-			}
-			if(jugador instanceof Picheo) {
-				((Picheo) jugador).setEntradasLanzada(((Picheo) jugador).getEntradasLanzada() + Integer.parseInt(tableLL.getValueAt(j, 2).toString()));
-				jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableLL.getValueAt(j, 3).toString()) + Integer.parseInt(tableLL.getValueAt(j, 4).toString()));
-				jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableLL.getValueAt(j, 4).toString()));
-				jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableLL.getValueAt(j, 7).toString()));
-				jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableLL.getValueAt(j, 5).toString()));
-				jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableLL.getValueAt(j, 9).toString()));
-				jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableLL.getValueAt(j, 6).toString()));
-				((Picheo) jugador).setCantCL(((Picheo) jugador).getCantCL() + Integer.parseInt(tableLL.getValueAt(j, 8).toString()));
-				((Picheo) jugador).setCantTBE(((Picheo) jugador).getCantTBE() + Integer.parseInt(tableLL.getValueAt(j, 10).toString()));
-				j++;
+			if(jugador.getEstado().equalsIgnoreCase("Disponible")) {
+				if(jugador instanceof Bateo) {
+					jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableBL.getValueAt(i, 3).toString())+Integer.parseInt(tableBL.getValueAt(i, 6).toString())+Integer.parseInt(tableBL.getValueAt(i, 4).toString())+Integer.parseInt(tableBL.getValueAt(i, 5).toString()));
+					jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableBL.getValueAt(i, 6).toString()));
+					jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableBL.getValueAt(i, 10).toString()));
+					jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableBL.getValueAt(i, 7).toString()));
+					jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableBL.getValueAt(i, 14).toString()));
+					jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableBL.getValueAt(i, 8).toString()));
+					((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B() + Integer.parseInt(tableBL.getValueAt(i, 4).toString()));
+					((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B() + Integer.parseInt(tableBL.getValueAt(i, 5).toString()));
+					((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB() + Integer.parseInt(tableBL.getValueAt(i, 9).toString()));
+					((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA() + Integer.parseInt(tableBL.getValueAt(i, 11).toString()));
+					((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI() + Integer.parseInt(tableBL.getValueAt(i, 12).toString()));
+					((Bateo)jugador).setES(((Bateo)jugador).getES() + Integer.parseInt(tableBL.getValueAt(i, 13).toString()));
+					i++;
+				}
+				if(jugador instanceof Picheo) {
+					((Picheo) jugador).setEntradasLanzada(((Picheo) jugador).getEntradasLanzada() + Integer.parseInt(tableLL.getValueAt(j, 2).toString()));
+					jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableLL.getValueAt(j, 3).toString()) + Integer.parseInt(tableLL.getValueAt(j, 4).toString()));
+					jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableLL.getValueAt(j, 4).toString()));
+					jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableLL.getValueAt(j, 7).toString()));
+					jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableLL.getValueAt(j, 5).toString()));
+					jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableLL.getValueAt(j, 9).toString()));
+					jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableLL.getValueAt(j, 6).toString()));
+					((Picheo) jugador).setCantCL(((Picheo) jugador).getCantCL() + Integer.parseInt(tableLL.getValueAt(j, 8).toString()));
+					((Picheo) jugador).setCantTBE(((Picheo) jugador).getCantTBE() + Integer.parseInt(tableLL.getValueAt(j, 10).toString()));
+					j++;
+				}	
 			}
 		}
 	}
@@ -529,32 +533,34 @@ public class SimulacionJuego extends JDialog {
 		int i = 0;
 		int j = 0;
 		for(Jugador jugador : visitante.getJugadores()) {
-			if(jugador instanceof Bateo) {
-				//HR y Carreras Anotadas/Impulsadas
-				if(Integer.parseInt(tableBV.getValueAt(i, 11).toString())<Integer.parseInt(tableBV.getValueAt(i, 6).toString()) || Integer.parseInt(tableBV.getValueAt(i, 12).toString())<Integer.parseInt(tableBV.getValueAt(i, 6).toString())) {
-					JOptionPane.showMessageDialog(null, "Asegurarse que CA/CI sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
-					return false;
+			if(jugador.getEstado().equalsIgnoreCase("Disponible")) {
+				if(jugador instanceof Bateo) {
+					//HR y Carreras Anotadas/Impulsadas
+					if(Integer.parseInt(tableBV.getValueAt(i, 11).toString())<Integer.parseInt(tableBV.getValueAt(i, 6).toString()) || Integer.parseInt(tableBV.getValueAt(i, 12).toString())<Integer.parseInt(tableBV.getValueAt(i, 6).toString())) {
+						JOptionPane.showMessageDialog(null, "Asegurarse que CA/CI sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+						return false;
+					}
+					//Cant TB con Hits/HR/2B/3B/ES/K
+					if(Integer.parseInt(tableBV.getValueAt(i, 9).toString())<(Integer.parseInt(tableBV.getValueAt(i, 3).toString())+Integer.parseInt(tableBV.getValueAt(i, 6).toString())+Integer.parseInt(tableBV.getValueAt(i, 4).toString())+Integer.parseInt(tableBV.getValueAt(i, 5).toString())+Integer.parseInt(tableBV.getValueAt(i, 13).toString())+Integer.parseInt(tableBV.getValueAt(i, 7).toString()))) {
+						JOptionPane.showMessageDialog(null, "Asegurarse que Hits/HR/2B/3B/ES/K sean igual o menor a TB ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+						return false;
+					}
+					i++;
 				}
-				//Cant TB con Hits/HR/2B/3B/ES/K
-				if(Integer.parseInt(tableBV.getValueAt(i, 9).toString())<(Integer.parseInt(tableBV.getValueAt(i, 3).toString())+Integer.parseInt(tableBV.getValueAt(i, 6).toString())+Integer.parseInt(tableBV.getValueAt(i, 4).toString())+Integer.parseInt(tableBV.getValueAt(i, 5).toString())+Integer.parseInt(tableBV.getValueAt(i, 13).toString())+Integer.parseInt(tableBV.getValueAt(i, 7).toString()))) {
-					JOptionPane.showMessageDialog(null, "Asegurarse que Hits/HR/2B/3B/ES/K sean igual o menor a TB ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
-					return false;
+				
+				if(jugador instanceof Picheo) {
+					//HR y CL
+					if(Integer.parseInt(tableLV.getValueAt(j, 8).toString())<Integer.parseInt(tableLV.getValueAt(j, 4).toString())) {
+						JOptionPane.showMessageDialog(null, "Asegurarse que CL sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+						return false;
+					}
+					//TBE y HIT/K/BB/HR/HBP
+					if(Integer.parseInt(tableLV.getValueAt(j, 10).toString())<(Integer.parseInt(tableLV.getValueAt(j, 3).toString())+Integer.parseInt(tableLV.getValueAt(j, 5).toString())+Integer.parseInt(tableLV.getValueAt(j, 7).toString())+Integer.parseInt(tableLV.getValueAt(j, 4).toString())+Integer.parseInt(tableLV.getValueAt(j, 6).toString()))) {
+						JOptionPane.showMessageDialog(null, "Asegurarse que HIT/K/BB/HR/HBP sean igual o menor a TBE ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+						return false;
+					}
+					j++;
 				}
-				i++;
-			}
-			
-			if(jugador instanceof Picheo) {
-				//HR y CL
-				if(Integer.parseInt(tableLV.getValueAt(j, 8).toString())<Integer.parseInt(tableLV.getValueAt(j, 4).toString())) {
-					JOptionPane.showMessageDialog(null, "Asegurarse que CL sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
-					return false;
-				}
-				//TBE y HIT/K/BB/HR/HBP
-				if(Integer.parseInt(tableLV.getValueAt(j, 10).toString())<(Integer.parseInt(tableLV.getValueAt(j, 3).toString())+Integer.parseInt(tableLV.getValueAt(j, 5).toString())+Integer.parseInt(tableLV.getValueAt(j, 7).toString())+Integer.parseInt(tableLV.getValueAt(j, 4).toString())+Integer.parseInt(tableLV.getValueAt(j, 6).toString()))) {
-					JOptionPane.showMessageDialog(null, "Asegurarse que HIT/K/BB/HR/HBP sean igual o menor a TBE ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
-					return false;
-				}
-				j++;
 			}
 		}
 			       
@@ -567,32 +573,34 @@ public class SimulacionJuego extends JDialog {
 		int i = 0;
 		int j = 0;
 		for(Jugador jugador : local.getJugadores()) {
-			if(jugador instanceof Bateo) {
-				//HR y Carreras Anotadas/Impulsadas
-				if(Integer.parseInt(tableBL.getValueAt(i, 11).toString())<Integer.parseInt(tableBL.getValueAt(i, 6).toString()) || Integer.parseInt(tableBL.getValueAt(i, 12).toString())<Integer.parseInt(tableBL.getValueAt(i, 6).toString())) {
-					JOptionPane.showMessageDialog(null, "Asegurarse que CA/CI sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
-					return false;
+			if(jugador.getEstado().equalsIgnoreCase("Disponible")) {
+				if(jugador instanceof Bateo) {
+					//HR y Carreras Anotadas/Impulsadas
+					if(Integer.parseInt(tableBL.getValueAt(i, 11).toString())<Integer.parseInt(tableBL.getValueAt(i, 6).toString()) || Integer.parseInt(tableBL.getValueAt(i, 12).toString())<Integer.parseInt(tableBL.getValueAt(i, 6).toString())) {
+						JOptionPane.showMessageDialog(null, "Asegurarse que CA/CI sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+						return false;
+					}
+					//Cant TB con Hits/HR/2B/3B/ES/K
+					if(Integer.parseInt(tableBL.getValueAt(i, 9).toString())<(Integer.parseInt(tableBL.getValueAt(i, 3).toString())+Integer.parseInt(tableBL.getValueAt(i, 6).toString())+Integer.parseInt(tableBL.getValueAt(i, 4).toString())+Integer.parseInt(tableBL.getValueAt(i, 5).toString())+Integer.parseInt(tableBL.getValueAt(i, 13).toString())+Integer.parseInt(tableBL.getValueAt(i, 7).toString()))) {
+						JOptionPane.showMessageDialog(null, "Asegurarse que Hits/HR/2B/3B/ES/K sean igual o menor a TB ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+						return false;
+					}
+					i++;
 				}
-				//Cant TB con Hits/HR/2B/3B/ES/K
-				if(Integer.parseInt(tableBL.getValueAt(i, 9).toString())<(Integer.parseInt(tableBL.getValueAt(i, 3).toString())+Integer.parseInt(tableBL.getValueAt(i, 6).toString())+Integer.parseInt(tableBL.getValueAt(i, 4).toString())+Integer.parseInt(tableBL.getValueAt(i, 5).toString())+Integer.parseInt(tableBL.getValueAt(i, 13).toString())+Integer.parseInt(tableBL.getValueAt(i, 7).toString()))) {
-					JOptionPane.showMessageDialog(null, "Asegurarse que Hits/HR/2B/3B/ES/K sean igual o menor a TB ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
-					return false;
+				
+				if(jugador instanceof Picheo) {
+					//HR y CL
+					if(Integer.parseInt(tableLL.getValueAt(j, 8).toString())<Integer.parseInt(tableLL.getValueAt(j, 4).toString())) {
+						JOptionPane.showMessageDialog(null, "Asegurarse que CL sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+						return false;
+					}
+					//TBE y HIT/K/BB/HR/HBP
+					if(Integer.parseInt(tableLL.getValueAt(j, 10).toString())<(Integer.parseInt(tableLL.getValueAt(j, 3).toString())+Integer.parseInt(tableLL.getValueAt(j, 5).toString())+Integer.parseInt(tableLL.getValueAt(j, 7).toString())+Integer.parseInt(tableLL.getValueAt(j, 4).toString())+Integer.parseInt(tableLL.getValueAt(j, 6).toString()))) {
+						JOptionPane.showMessageDialog(null, "Asegurarse que HIT/K/BB/HR/HBP sean igual o menor a TBE ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+						return false; 
+					}
+					j++;
 				}
-				i++;
-			}
-			
-			if(jugador instanceof Picheo) {
-				//HR y CL
-				if(Integer.parseInt(tableLL.getValueAt(j, 8).toString())<Integer.parseInt(tableLL.getValueAt(j, 4).toString())) {
-					JOptionPane.showMessageDialog(null, "Asegurarse que CL sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
-					return false;
-				}
-				//TBE y HIT/K/BB/HR/HBP
-				if(Integer.parseInt(tableLL.getValueAt(j, 10).toString())<(Integer.parseInt(tableLL.getValueAt(j, 3).toString())+Integer.parseInt(tableLL.getValueAt(j, 5).toString())+Integer.parseInt(tableLL.getValueAt(j, 7).toString())+Integer.parseInt(tableLL.getValueAt(j, 4).toString())+Integer.parseInt(tableLL.getValueAt(j, 6).toString()))) {
-					JOptionPane.showMessageDialog(null, "Asegurarse que HIT/K/BB/HR/HBP sean igual o menor a TBE ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
-					return false; 
-				}
-				j++;
 			}
 		}
 			       
