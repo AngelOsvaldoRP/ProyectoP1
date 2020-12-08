@@ -49,6 +49,7 @@ public class Login extends JFrame {
 					Torneo.getInstance().leer();
 					}
 					else {
+						
 						Torneo.getInstance().escribir();
 					    System.out.println("OJO: ¡¡No existe ningun Torneo!!");
 					    System.out.println("Se creara el torneo...");
