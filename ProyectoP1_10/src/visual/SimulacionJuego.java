@@ -71,8 +71,6 @@ public class SimulacionJuego extends JDialog {
 	public ArrayList<Jugador> jugadoresV;
 	public ArrayList<Jugador> jugadoresL;
 
-	
-
 	/**
 	 * Launch the application.
 	 */
@@ -310,15 +308,21 @@ public class SimulacionJuego extends JDialog {
 				JButton okButton = new JButton("Finalizar Juego");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(verificarDatosV()==true && verificarDatosL()==true && verificarEntradas()==true) {
+						if(verificarDatosV()==true && verificarDatosL()==true && verificarEntradas()==true && Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())!=Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
 							guardarDatosJugadoresV();
 							guardarDatosJugadoresL();
 							llenarMarcadorJuego();
 							determinarWinnerLosser(juego);
 							tablaFinal(juego);
 							juego.setEstado("Jugado");
+							SituacionLanzadorJuego informacionFinal = new SituacionLanzadorJuego(juego);
+							informacionFinal.setLocationRelativeTo(null);
+							informacionFinal.setModal(true);
+							informacionFinal.setVisible(true);
+							JOptionPane.showMessageDialog(null, "Datos Guardados de Manera Correcta", null, JOptionPane.INFORMATION_MESSAGE, null);
+							dispose();
 						}
-						if(verificarDatosV()==false || verificarDatosL()==false || verificarEntradas()==false) {
+						if(verificarDatosV()==false || verificarDatosL()==false || verificarEntradas()==false || Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())==Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
 							JOptionPane.showMessageDialog(null, "Favor Verificar Datos Introducidos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
 					}
@@ -361,53 +365,71 @@ public class SimulacionJuego extends JDialog {
 	}
 	
 	private void determinarWinnerLosser(Juego juego) {
-		if(carrerasVisitante<carrerasLocal) {
+		if(carrerasVisitante>carrerasLocal) {
 			juego.setEquipoganador(visitante.getNombre());
 			juego.setEquipoPerdedor(local.getNombre());
+			juego.setGanador("Visitante");
+			juego.setPerdedor("Local");
 			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).setCantJG(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).getCantJG()+1);
 			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).getCantJJ()+1);
 			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).setCantJP(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).getCantJP()+1);
 			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).getCantJJ()+1);
 		}
-		if(carrerasVisitante>carrerasLocal) {
+		if(carrerasVisitante<carrerasLocal) {
 			juego.setEquipoganador(local.getNombre());
 			juego.setEquipoPerdedor(visitante.getNombre());
+			juego.setGanador("Local");
+			juego.setPerdedor("Visitante");
 			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).setCantJP(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).getCantJP()+1);
 			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).getCantJJ()+1);
 			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).setCantJG(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).getCantJG()+1);
 			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).getCantJJ()+1);
 		}
-		if(carrerasVisitante==carrerasLocal) {
-			juego.setEquipoganador("Empate");
-			juego.setEquipoPerdedor("Empate");
-			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).getCantJJ()+1);
-			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).getCantJJ()+1);
-		}
-		
 	}
 	
 	private boolean verificarEntradas() {
 		boolean confirmacionVisitante = false;
 		boolean confirmacionLocal = false;
-		for (int i = 0; i < 2; i++) {
-			int entradas = 0;
-			for (int j = 1; j < 10; j++) {
-				entradas = entradas + Integer.parseInt(tableEntradas.getValueAt(i, j).toString());
-			}
-			if(entradas == Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())) {
-				confirmacionVisitante = true;
-			}
-			if(entradas == Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
-				confirmacionLocal = true;
-			}
+		boolean confirmacion = false;
+		int entradasVisitante = 0;
+		int entradasLocal = 0;
+		
+		entradasVisitante = entradasVisitante + Integer.parseInt(tableEntradas.getValueAt(0, 1).toString());
+		entradasVisitante = entradasVisitante + Integer.parseInt(tableEntradas.getValueAt(0, 2).toString());
+		entradasVisitante = entradasVisitante + Integer.parseInt(tableEntradas.getValueAt(0, 3).toString());
+		entradasVisitante = entradasVisitante + Integer.parseInt(tableEntradas.getValueAt(0, 4).toString());
+		entradasVisitante = entradasVisitante + Integer.parseInt(tableEntradas.getValueAt(0, 5).toString());
+		entradasVisitante = entradasVisitante + Integer.parseInt(tableEntradas.getValueAt(0, 6).toString());
+		entradasVisitante = entradasVisitante + Integer.parseInt(tableEntradas.getValueAt(0, 7).toString());
+		entradasVisitante = entradasVisitante + Integer.parseInt(tableEntradas.getValueAt(0, 8).toString());
+		entradasVisitante = entradasVisitante + Integer.parseInt(tableEntradas.getValueAt(0, 9).toString());
+		
+		entradasLocal = entradasLocal + Integer.parseInt(tableEntradas.getValueAt(1, 1).toString());
+		entradasLocal = entradasLocal + Integer.parseInt(tableEntradas.getValueAt(1, 2).toString());
+		entradasLocal = entradasLocal + Integer.parseInt(tableEntradas.getValueAt(1, 3).toString());
+		entradasLocal = entradasLocal + Integer.parseInt(tableEntradas.getValueAt(1, 4).toString());
+		entradasLocal = entradasLocal + Integer.parseInt(tableEntradas.getValueAt(1, 5).toString());
+		entradasLocal = entradasLocal + Integer.parseInt(tableEntradas.getValueAt(1, 6).toString());
+		entradasLocal = entradasLocal + Integer.parseInt(tableEntradas.getValueAt(1, 7).toString());
+		entradasLocal = entradasLocal + Integer.parseInt(tableEntradas.getValueAt(1, 8).toString());
+		entradasLocal = entradasLocal + Integer.parseInt(tableEntradas.getValueAt(1, 9).toString());
+		
+		if(entradasVisitante == Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())) {
+			confirmacionVisitante = true;
+		}
+		if(entradasLocal == Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
+			confirmacionLocal = true;
+		}
+		
+		if(confirmacionVisitante == true && confirmacionLocal == true) {
+			confirmacion = true;
 		}
 		
 		if(confirmacionVisitante == false || confirmacionLocal == false) {
 			JOptionPane.showMessageDialog(null, "Favor Verificar Entradas (Conflicto entre datos entrada y marcador)", null, JOptionPane.ERROR_MESSAGE, null);
 			return false;
 		}
-		
-		return true;
+		return confirmacion;
 	}
 	
 	public void llenarMarcadorJuego() {

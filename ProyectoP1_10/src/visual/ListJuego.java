@@ -17,6 +17,8 @@ import logico.Torneo;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Calendar;
@@ -67,7 +69,6 @@ public class ListJuego extends JDialog {
 			modelo = new DefaultTableModel();
 			String[] headers = {"No.","Equipo Local","Equipo Visitante","Estadio","Fecha","Hora","Estado"};
 			modelo.setColumnIdentifiers(headers);
-			
 			table = new JTable();
 			table.addMouseListener(new MouseAdapter() {
 				@Override

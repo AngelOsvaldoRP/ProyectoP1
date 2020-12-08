@@ -23,6 +23,8 @@ public class Juego implements Serializable {
 	private int carrerasLocal;
 	private int hitsLocal;
 	private int erroresLocal;
+	private String ganador;
+	private String perdedor;
 	
 	//Constructor
 	
@@ -46,6 +48,27 @@ public class Juego implements Serializable {
 		this.erroresLocal = 0;
 	}
 	
+	
+	public String getGanador() {
+		return ganador;
+	}
+
+
+	public void setGanador(String ganador) {
+		this.ganador = ganador;
+	}
+
+
+	public String getPerdedor() {
+		return perdedor;
+	}
+
+
+	public void setPerdedor(String perdedor) {
+		this.perdedor = perdedor;
+	}
+
+
 	public String getJuegoCod() {
 		return juegoCod;
 	}

@@ -191,8 +191,11 @@ public class RegJuego extends JDialog {
 									JOptionPane.showMessageDialog(null, "El juego se registró sastifactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 									Principal.llenarTabla();
 									Principal.llenarTabla2();
-									clear();
-									
+									dispose();
+									RegJuego registroNuevo = new RegJuego();
+									registroNuevo.setModal(true);
+									registroNuevo.setLocationRelativeTo(null);
+									registroNuevo.setVisible(true);						
 								}
 							}
 							
@@ -272,9 +275,5 @@ public class RegJuego extends JDialog {
             return null;
         } 
     }
-	public void clear(){
-		txtHora.setText("");
-		
-	}
 	
 }
