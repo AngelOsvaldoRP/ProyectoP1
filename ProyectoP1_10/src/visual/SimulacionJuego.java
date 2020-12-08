@@ -68,8 +68,8 @@ public class SimulacionJuego extends JDialog {
 	public int hitLocal = 0;
 	public int erroresVisitante = 0;
 	public int erroresLocal = 0;
-	private static ArrayList<Jugador> jugadoresVisitante;
-	private static ArrayList<Jugador> jugadoresLocal;
+	public ArrayList<Jugador> jugadoresV;
+	public ArrayList<Jugador> jugadoresL;
 
 	
 
@@ -91,17 +91,17 @@ public class SimulacionJuego extends JDialog {
 	 */
 	public SimulacionJuego(Juego juego) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(SimulacionJuego.class.getResource("/assets/lidomlogo.png")));
-		
 		visitante = Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante());
 		local = Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal());
-		jugadoresVisitante = new ArrayList<>();
-		jugadoresLocal = new ArrayList<>();
+		
+		jugadoresV = new ArrayList<>();
+		jugadoresL = new ArrayList<>();
 		
 		for(Jugador jugador : visitante.getJugadores()) {
-			jugadoresVisitante.add(jugador);
+			jugadoresV.add(jugador);
 		}
 		for(Jugador jugador : local.getJugadores()) {
-			jugadoresLocal.add(jugador);
+			jugadoresL.add(jugador);
 		}
 		
 		setTitle(visitante.getNombre()+" vs "+local.getNombre()+" ("+juego.getFecha()+")");
@@ -129,7 +129,7 @@ public class SimulacionJuego extends JDialog {
 					panelBV.add(scrollPane1);
 					{
 						modeloBV = new DefaultTableModel();
-						String[] headers = {"No.","Nombre", "Pos.", "H", "2B", "3B", "HR", "K", "HBP", "TB", "BB", "CA", "CI", "ES", "BR", "Errores"};
+						String[] headers = {"No.","Nombre", "Pos.", "H", "2B", "3B", "HR", "K", "HBP", "TB", "BB", "CA", "CI", "ES", "Errores"};
 						modeloBV.setColumnIdentifiers(headers);
 						tableBV.addMouseListener(new MouseAdapter() {
 							public void mouseClicked(MouseEvent e) {
@@ -149,16 +149,15 @@ public class SimulacionJuego extends JDialog {
 				panelLV.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lanzadores ("+visitante.getNombre()+")", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				panelLV.setBounds(10, 276, 450, 206);
 				panel.add(panelLV);
-				panelLV.setLayout(null);
+				panelLV.setLayout(new BorderLayout(0, 0));
 				{
 					JScrollPane scrollPane2 = new JScrollPane();
-					scrollPane2.setBounds(6, 16, 438, 183);
 					scrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 					scrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 					panelLV.add(scrollPane2);
 					{
 						modeloLV = new DefaultTableModel();
-						String[] headers = {"No.","Nombre", "IL", "H", "HR", "K", "HBP", "BB", "CL", "JS", "OUT", "HOLD", "Errores"};
+						String[] headers = {"No.","Nombre", "IL", "H", "HR", "K", "HBP", "BB", "CL", "Errores", "TBE"};
 						modeloLV.setColumnIdentifiers(headers);
 						tableLV = new JTable();
 						tableLV.addMouseListener(new MouseAdapter() {
@@ -188,7 +187,7 @@ public class SimulacionJuego extends JDialog {
 					panelBL.add(scrollPane3);
 					{
 						modeloBL = new DefaultTableModel();
-						String[] headers = {"No.","Nombre", "Pos.", "H", "2B", "3B", "HR", "K", "HBP", "TB", "BB", "CA", "CI", "ES", "BR", "Errores"};
+						String[] headers = {"No.","Nombre", "Pos.", "H", "2B", "3B", "HR", "K", "HBP", "TB", "BB", "CA", "CI", "ES", "Errores"};
 						modeloBL.setColumnIdentifiers(headers);
 						tableBL = new JTable();
 						tableBL.addMouseListener(new MouseAdapter() {
@@ -218,7 +217,7 @@ public class SimulacionJuego extends JDialog {
 					panelLL.add(scrollPane4);
 					{
 						modeloLL = new DefaultTableModel();
-						String[] headers = {"No.","Nombre", "IL", "H", "HR", "K", "HBP", "BB", "CL", "JS", "OUT", "HOLD", "Errores"};
+						String[] headers = {"No.","Nombre", "IL", "H", "HR", "K", "HBP", "BB", "CL", "Errores", "TBE"};
 						modeloLL.setColumnIdentifiers(headers);
 						tableLL = new JTable();
 						tableLL.addMouseListener(new MouseAdapter() {
@@ -310,11 +309,18 @@ public class SimulacionJuego extends JDialog {
 			{
 				JButton okButton = new JButton("Finalizar Juego");
 				okButton.addActionListener(new ActionListener() {
-
-					@Override
 					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						
+						if(verificarDatosV()==true && verificarDatosL()==true && verificarEntradas()==true) {
+							guardarDatosJugadoresV();
+							guardarDatosJugadoresL();
+							llenarMarcadorJuego();
+							determinarWinnerLosser(juego);
+							tablaFinal(juego);
+							juego.setEstado("Jugado");
+						}
+						if(verificarDatosV()==false || verificarDatosL()==false || verificarEntradas()==false) {
+							JOptionPane.showMessageDialog(null, "Favor Verificar Datos Introducidos", null, JOptionPane.ERROR_MESSAGE, null);
+						}
 					}
 
 				});
@@ -324,6 +330,14 @@ public class SimulacionJuego extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int option = JOptionPane.showConfirmDialog(null, "¿Esta Seguro de Cancelar el Juego? "+" Los datos insertados no se guardaran", "Confirmacion", JOptionPane.WARNING_MESSAGE);
+						if(option == JOptionPane.OK_OPTION) {
+							dispose();
+						}
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -334,30 +348,247 @@ public class SimulacionJuego extends JDialog {
 		llenarTablaLL();
 		llenarTablaEntradas();
 		llenarMarcador();
+		
+	}
+	
+	private void tablaFinal(Juego juego) {
+		juego.setCarrerasVisitante(carrerasVisitante);
+		juego.setHitsVisitante(hitVisitante);
+		juego.setErroresVisitante(erroresVisitante);
+		juego.setCarrerasLocal(carrerasLocal);
+		juego.setHitsLocal(hitLocal);
+		juego.setErroresLocal(erroresLocal);
+	}
+	
+	private void determinarWinnerLosser(Juego juego) {
+		if(carrerasVisitante<carrerasLocal) {
+			juego.setEquipoganador(visitante.getNombre());
+			juego.setEquipoPerdedor(local.getNombre());
+			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).setCantJG(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).getCantJG()+1);
+			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).getCantJJ()+1);
+			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).setCantJP(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).getCantJP()+1);
+			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).getCantJJ()+1);
+		}
+		if(carrerasVisitante>carrerasLocal) {
+			juego.setEquipoganador(local.getNombre());
+			juego.setEquipoPerdedor(visitante.getNombre());
+			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).setCantJP(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).getCantJP()+1);
+			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).getCantJJ()+1);
+			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).setCantJG(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).getCantJG()+1);
+			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).getCantJJ()+1);
+		}
+		if(carrerasVisitante==carrerasLocal) {
+			juego.setEquipoganador("Empate");
+			juego.setEquipoPerdedor("Empate");
+			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoVisitante()).getCantJJ()+1);
+			Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).setCantJJ(Torneo.getInstance().buscarEquiporNombre(juego.getEquipoLocal()).getCantJJ()+1);
+		}
+		
+	}
+	
+	private boolean verificarEntradas() {
+		boolean confirmacionVisitante = false;
+		boolean confirmacionLocal = false;
+		for (int i = 0; i < 2; i++) {
+			int entradas = 0;
+			for (int j = 1; j < 10; j++) {
+				entradas = entradas + Integer.parseInt(tableEntradas.getValueAt(i, j).toString());
+			}
+			if(entradas == Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())) {
+				confirmacionVisitante = true;
+			}
+			if(entradas == Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
+				confirmacionLocal = true;
+			}
+		}
+		
+		if(confirmacionVisitante == false || confirmacionLocal == false) {
+			JOptionPane.showMessageDialog(null, "Favor Verificar Entradas (Conflicto entre datos entrada y marcador)", null, JOptionPane.ERROR_MESSAGE, null);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public void llenarMarcadorJuego() {
+		carrerasVisitante = Integer.parseInt(tableMarcador.getValueAt(0, 0).toString());
+		hitVisitante = Integer.parseInt(tableMarcador.getValueAt(0, 1).toString());
+		erroresVisitante = Integer.parseInt(tableMarcador.getValueAt(0, 2).toString());
+		carrerasLocal = Integer.parseInt(tableMarcador.getValueAt(1, 0).toString());
+		hitLocal = Integer.parseInt(tableMarcador.getValueAt(1, 1).toString());
+		erroresLocal = Integer.parseInt(tableMarcador.getValueAt(1, 2).toString());
+	}
+	
+	public void guardarDatosJugadoresV() {
+		int i = 0;
+		int j = 0;
+		for(Jugador jugador : visitante.getJugadores()) {
+			if(jugador instanceof Bateo) {
+				jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableBV.getValueAt(i, 3).toString())+Integer.parseInt(tableBV.getValueAt(i, 6).toString())+Integer.parseInt(tableBV.getValueAt(i, 4).toString())+Integer.parseInt(tableBV.getValueAt(i, 5).toString()));
+				jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableBV.getValueAt(i, 6).toString()));
+				jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableBV.getValueAt(i, 10).toString()));
+				jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableBV.getValueAt(i, 7).toString()));
+				jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableBV.getValueAt(i, 14).toString()));
+				jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableBV.getValueAt(i, 8).toString()));
+				((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B() + Integer.parseInt(tableBV.getValueAt(i, 4).toString()));
+				((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B() + Integer.parseInt(tableBV.getValueAt(i, 5).toString()));
+				((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB() + Integer.parseInt(tableBV.getValueAt(i, 9).toString()));
+				((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA() + Integer.parseInt(tableBV.getValueAt(i, 11).toString()));
+				((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI() + Integer.parseInt(tableBV.getValueAt(i, 12).toString()));
+				((Bateo)jugador).setES(((Bateo)jugador).getES() + Integer.parseInt(tableBV.getValueAt(i, 13).toString()));
+				i++;
+			}
+			if(jugador instanceof Picheo) {
+				((Picheo) jugador).setEntradasLanzada(((Picheo) jugador).getEntradasLanzada() + Integer.parseInt(tableLV.getValueAt(j, 2).toString()));
+				jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableLV.getValueAt(j, 3).toString())+ Integer.parseInt(tableLV.getValueAt(j, 4).toString()));
+				jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableLV.getValueAt(j, 4).toString()));
+				jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableLV.getValueAt(j, 7).toString()));
+				jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableLV.getValueAt(j, 5).toString()));
+				jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableLV.getValueAt(j, 9).toString()));
+				jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableLV.getValueAt(j, 6).toString()));
+				((Picheo) jugador).setCantCL(((Picheo) jugador).getCantCL() + Integer.parseInt(tableLV.getValueAt(j, 8).toString()));
+				((Picheo) jugador).setCantTBE(((Picheo) jugador).getCantTBE() + Integer.parseInt(tableLV.getValueAt(j, 10).toString()));
+				if(Integer.parseInt(tableLV.getValueAt(j, 2).toString())>0) {
+					((Picheo)jugador).setCantJJ(((Picheo)jugador).getCantJJ() + 1);
+				}
+				j++;
+			}
+		}
+	}
+	
+	public void guardarDatosJugadoresL() {
+		int i = 0;
+		int j = 0;
+		for(Jugador jugador : local.getJugadores()) {
+			if(jugador instanceof Bateo) {
+				jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableBL.getValueAt(i, 3).toString())+Integer.parseInt(tableBL.getValueAt(i, 6).toString())+Integer.parseInt(tableBL.getValueAt(i, 4).toString())+Integer.parseInt(tableBL.getValueAt(i, 5).toString()));
+				jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableBL.getValueAt(i, 6).toString()));
+				jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableBL.getValueAt(i, 10).toString()));
+				jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableBL.getValueAt(i, 7).toString()));
+				jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableBL.getValueAt(i, 14).toString()));
+				jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableBL.getValueAt(i, 8).toString()));
+				((Bateo)jugador).setCant2B(((Bateo)jugador).getCant2B() + Integer.parseInt(tableBL.getValueAt(i, 4).toString()));
+				((Bateo)jugador).setCant3B(((Bateo)jugador).getCant3B() + Integer.parseInt(tableBL.getValueAt(i, 5).toString()));
+				((Bateo)jugador).setCantTB(((Bateo)jugador).getCantTB() + Integer.parseInt(tableBL.getValueAt(i, 9).toString()));
+				((Bateo)jugador).setCantCA(((Bateo)jugador).getCantCA() + Integer.parseInt(tableBL.getValueAt(i, 11).toString()));
+				((Bateo)jugador).setCantCI(((Bateo)jugador).getCantCI() + Integer.parseInt(tableBL.getValueAt(i, 12).toString()));
+				((Bateo)jugador).setES(((Bateo)jugador).getES() + Integer.parseInt(tableBL.getValueAt(i, 13).toString()));
+				i++;
+			}
+			if(jugador instanceof Picheo) {
+				((Picheo) jugador).setEntradasLanzada(((Picheo) jugador).getEntradasLanzada() + Integer.parseInt(tableLL.getValueAt(j, 2).toString()));
+				jugador.setCantHits(jugador.getCantHits() + Integer.parseInt(tableLL.getValueAt(j, 3).toString()) + Integer.parseInt(tableLL.getValueAt(j, 4).toString()));
+				jugador.setCantHR(jugador.getCantHR() + Integer.parseInt(tableLL.getValueAt(j, 4).toString()));
+				jugador.setCantBB(jugador.getCantBB() + Integer.parseInt(tableLL.getValueAt(j, 7).toString()));
+				jugador.setCantPonches(jugador.getCantPonches() + Integer.parseInt(tableLL.getValueAt(j, 5).toString()));
+				jugador.setErrores(jugador.getErrores() + Integer.parseInt(tableLL.getValueAt(j, 9).toString()));
+				jugador.setHbp(jugador.getHbp() + Integer.parseInt(tableLL.getValueAt(j, 6).toString()));
+				((Picheo) jugador).setCantCL(((Picheo) jugador).getCantCL() + Integer.parseInt(tableLL.getValueAt(j, 8).toString()));
+				((Picheo) jugador).setCantTBE(((Picheo) jugador).getCantTBE() + Integer.parseInt(tableLL.getValueAt(j, 10).toString()));
+				j++;
+			}
+		}
+	}
+	
+	public boolean verificarDatosV() {
+		boolean confirmacion = true;
+		int i = 0;
+		int j = 0;
+		for(Jugador jugador : visitante.getJugadores()) {
+			if(jugador instanceof Bateo) {
+				//HR y Carreras Anotadas/Impulsadas
+				if(Integer.parseInt(tableBV.getValueAt(i, 11).toString())<Integer.parseInt(tableBV.getValueAt(i, 6).toString()) || Integer.parseInt(tableBV.getValueAt(i, 12).toString())<Integer.parseInt(tableBV.getValueAt(i, 6).toString())) {
+					JOptionPane.showMessageDialog(null, "Asegurarse que CA/CI sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+					return false;
+				}
+				//Cant TB con Hits/HR/2B/3B/ES/K
+				if(Integer.parseInt(tableBV.getValueAt(i, 9).toString())<(Integer.parseInt(tableBV.getValueAt(i, 3).toString())+Integer.parseInt(tableBV.getValueAt(i, 6).toString())+Integer.parseInt(tableBV.getValueAt(i, 4).toString())+Integer.parseInt(tableBV.getValueAt(i, 5).toString())+Integer.parseInt(tableBV.getValueAt(i, 13).toString())+Integer.parseInt(tableBV.getValueAt(i, 7).toString()))) {
+					JOptionPane.showMessageDialog(null, "Asegurarse que Hits/HR/2B/3B/ES/K sean igual o menor a TB ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+					return false;
+				}
+				i++;
+			}
+			
+			if(jugador instanceof Picheo) {
+				//HR y CL
+				if(Integer.parseInt(tableLV.getValueAt(j, 8).toString())<Integer.parseInt(tableLV.getValueAt(j, 4).toString())) {
+					JOptionPane.showMessageDialog(null, "Asegurarse que CL sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+					return false;
+				}
+				//TBE y HIT/K/BB/HR/HBP
+				if(Integer.parseInt(tableLV.getValueAt(j, 10).toString())<(Integer.parseInt(tableLV.getValueAt(j, 3).toString())+Integer.parseInt(tableLV.getValueAt(j, 5).toString())+Integer.parseInt(tableLV.getValueAt(j, 7).toString())+Integer.parseInt(tableLV.getValueAt(j, 4).toString())+Integer.parseInt(tableLV.getValueAt(j, 6).toString()))) {
+					JOptionPane.showMessageDialog(null, "Asegurarse que HIT/K/BB/HR/HBP sean igual o menor a TBE ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+					return false;
+				}
+				j++;
+			}
+		}
+			       
+		
+		return confirmacion;
+	}
+	
+	public boolean verificarDatosL() {
+		boolean confirmacion = true;
+		int i = 0;
+		int j = 0;
+		for(Jugador jugador : local.getJugadores()) {
+			if(jugador instanceof Bateo) {
+				//HR y Carreras Anotadas/Impulsadas
+				if(Integer.parseInt(tableBL.getValueAt(i, 11).toString())<Integer.parseInt(tableBL.getValueAt(i, 6).toString()) || Integer.parseInt(tableBL.getValueAt(i, 12).toString())<Integer.parseInt(tableBL.getValueAt(i, 6).toString())) {
+					JOptionPane.showMessageDialog(null, "Asegurarse que CA/CI sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+					return false;
+				}
+				//Cant TB con Hits/HR/2B/3B/ES/K
+				if(Integer.parseInt(tableBL.getValueAt(i, 9).toString())<(Integer.parseInt(tableBL.getValueAt(i, 3).toString())+Integer.parseInt(tableBL.getValueAt(i, 6).toString())+Integer.parseInt(tableBL.getValueAt(i, 4).toString())+Integer.parseInt(tableBL.getValueAt(i, 5).toString())+Integer.parseInt(tableBL.getValueAt(i, 13).toString())+Integer.parseInt(tableBL.getValueAt(i, 7).toString()))) {
+					JOptionPane.showMessageDialog(null, "Asegurarse que Hits/HR/2B/3B/ES/K sean igual o menor a TB ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+					return false;
+				}
+				i++;
+			}
+			
+			if(jugador instanceof Picheo) {
+				//HR y CL
+				if(Integer.parseInt(tableLL.getValueAt(j, 8).toString())<Integer.parseInt(tableLL.getValueAt(j, 4).toString())) {
+					JOptionPane.showMessageDialog(null, "Asegurarse que CL sean igual o mayor a HR ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+					return false;
+				}
+				//TBE y HIT/K/BB/HR/HBP
+				if(Integer.parseInt(tableLL.getValueAt(j, 10).toString())<(Integer.parseInt(tableLL.getValueAt(j, 3).toString())+Integer.parseInt(tableLL.getValueAt(j, 5).toString())+Integer.parseInt(tableLL.getValueAt(j, 7).toString())+Integer.parseInt(tableLL.getValueAt(j, 4).toString())+Integer.parseInt(tableLL.getValueAt(j, 6).toString()))) {
+					JOptionPane.showMessageDialog(null, "Asegurarse que HIT/K/BB/HR/HBP sean igual o menor a TBE ("+jugador.getNombre()+" "+jugador.getApellido()+")", null, JOptionPane.ERROR_MESSAGE, null);
+					return false; 
+				}
+				j++;
+			}
+		}
+			       
+		
+		return confirmacion;
 	}
 	
 	public static void llenarTablaBV() {
 		modeloBV.setRowCount(0);
 		filasBV = new Object[modeloBV.getColumnCount()];
-		for (Jugador jugador : jugadoresVisitante) {
-			if(jugador instanceof Bateo) {
-				filasBV[0] = jugador.getNumeroCamiseta();
-				filasBV[1] = jugador.getNombre();
-				filasBV[2] = jugador.getPosicion();
-				filasBV[3] = 0;
-				filasBV[4] = 0;
-				filasBV[5] = 0;
-				filasBV[6] = 0;
-				filasBV[7] = 0;
-				filasBV[8] = 0;
-				filasBV[9] = 0;
-				filasBV[10] = 0;
-				filasBV[11] = 0;
-				filasBV[12] = 0;
-				filasBV[13] = 0;
-				filasBV[14] = 0;
-				filasBV[15] = 0;
-				modeloBV.addRow(filasBV);
+		for (Jugador jugador : visitante.getJugadores()) {
+			if(jugador.getEstado().equalsIgnoreCase("Disponible")) {
+				if(jugador instanceof Bateo) {
+					filasBV[0] = jugador.getNumeroCamiseta();
+					filasBV[1] = jugador.getNombre();
+					filasBV[2] = jugador.getPosicion();
+					filasBV[3] = 0;
+					filasBV[4] = 0;
+					filasBV[5] = 0;
+					filasBV[6] = 0;
+					filasBV[7] = 0;
+					filasBV[8] = 0;
+					filasBV[9] = 0;
+					filasBV[10] = 0;
+					filasBV[11] = 0;
+					filasBV[12] = 0;
+					filasBV[13] = 0;
+					filasBV[14] = 0;
+					modeloBV.addRow(filasBV);
+			}
 			}
 		}
 		
@@ -365,23 +596,24 @@ public class SimulacionJuego extends JDialog {
 	public static void llenarTablaLV() {
 		modeloLV.setRowCount(0);
 		filasLV = new Object[modeloLV.getColumnCount()];
-		for (Jugador jugador : jugadoresVisitante) {
-			if(jugador instanceof Picheo) {
-				filasLV[0] = jugador.getNumeroCamiseta();
-				filasLV[1] = jugador.getNombre();
-				filasLV[2] = 0;
-				filasLV[3] = 0;
-				filasLV[4] = 0;
-				filasLV[5] = 0;
-				filasLV[6] = 0;
-				filasLV[7] = 0;
-				filasLV[8] = 0;
-				filasLV[9] = 0;
-				filasLV[10] = 0;
-				filasLV[11] = 0;
-				filasLV[12] = 0;
-				modeloLV.addRow(filasLV);
+		for (Jugador jugador : visitante.getJugadores()) {
+			if(jugador.getEstado().equalsIgnoreCase("Disponible")) {
+				if(jugador instanceof Picheo) {
+					filasLV[0] = jugador.getNumeroCamiseta();
+					filasLV[1] = jugador.getNombre();
+					filasLV[2] = 0;
+					filasLV[3] = 0;
+					filasLV[4] = 0;
+					filasLV[5] = 0;
+					filasLV[6] = 0;
+					filasLV[7] = 0;
+					filasLV[8] = 0;
+					filasLV[9] = 0;
+					filasLV[10] = 0;
+					modeloLV.addRow(filasLV);
+				}
 			}
+			
 		}
 		
 	}
@@ -389,7 +621,8 @@ public class SimulacionJuego extends JDialog {
 	public static void llenarTablaBL() {
 		modeloBL.setRowCount(0);
 		filasBL = new Object[modeloBL.getColumnCount()];
-		for (Jugador jugador : jugadoresLocal) {
+		for (Jugador jugador : local.getJugadores()) {
+			if(jugador.getEstado().equalsIgnoreCase("Disponible")) {
 			if(jugador instanceof Bateo) {
 				filasBL[0] = jugador.getNumeroCamiseta();
 				filasBL[1] = jugador.getNombre();
@@ -406,8 +639,8 @@ public class SimulacionJuego extends JDialog {
 				filasBL[12] = 0;
 				filasBL[13] = 0;
 				filasBL[14] = 0;
-				filasBL[15] = 0;
 				modeloBL.addRow(filasBL);
+			}
 			}
 		}
 		
@@ -415,7 +648,8 @@ public class SimulacionJuego extends JDialog {
 	public static void llenarTablaLL() {
 		modeloLL.setRowCount(0);
 		filasLL = new Object[modeloLL.getColumnCount()];
-		for (Jugador jugador : jugadoresLocal) {
+		for (Jugador jugador : local.getJugadores()) {
+			if(jugador.getEstado().equalsIgnoreCase("Disponible")) {
 			if(jugador instanceof Picheo) {
 				filasLL[0] = jugador.getNumeroCamiseta();
 				filasLL[1] = jugador.getNombre();
@@ -428,11 +662,10 @@ public class SimulacionJuego extends JDialog {
 				filasLL[8] = 0;
 				filasLL[9] = 0;
 				filasLL[10] = 0;
-				filasLL[11] = 0;
-				filasLL[12] = 0;
 				modeloLL.addRow(filasLL);
 			}
 		}
+	}
 		
 	}
 	public static void llenarTablaEntradas() {

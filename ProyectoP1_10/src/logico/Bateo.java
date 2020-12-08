@@ -13,7 +13,6 @@ public class Bateo extends Jugador implements Serializable {
 	private int cant2b;
 	private int cant3b;
 	private int cantCI;
-	private int cantBR;
 	private int es;
 	
 	//Constructor
@@ -27,7 +26,6 @@ public class Bateo extends Jugador implements Serializable {
 		this.cant2b = 0;
 		this.cant3b = 0;
 		this.cantCI = 0;
-		this.cantBR = 0;
 		this.es = 0;
 	}
 	
@@ -70,14 +68,6 @@ public class Bateo extends Jugador implements Serializable {
 
 	public void setCantCI(int cantCI) {
 		this.cantCI = cantCI;
-	}
-
-	public int getCantBR() {
-		return cantBR;
-	}
-
-	public void setCantBR(int cantBR) {
-		this.cantBR = cantBR;
 	}
 
 	public int getES() {
