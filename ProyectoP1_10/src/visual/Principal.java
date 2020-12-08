@@ -65,7 +65,7 @@ import java.awt.image.*;
 import java.awt.Component;
 import javax.swing.UIManager;
 
-
+//WilliamMMG
 public class Principal extends JFrame {
 	/**
 	 * 
