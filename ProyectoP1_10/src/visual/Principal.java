@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.util.Collections;
 import java.util.Comparator;
 import java.awt.image.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -65,7 +67,6 @@ import java.awt.image.*;
 import java.awt.Component;
 import javax.swing.UIManager;
 
-//WilliamMMG
 public class Principal extends JFrame {
 	/**
 	 * 
@@ -91,7 +92,7 @@ public class Principal extends JFrame {
 					frame.setVisible(true);
 					Equipo e1= new Equipo("Las Aguilas Cibaeñas", 1933,"Félix Fermín", "Santiago", "El Valle de la Muerte");
 					Equipo e2= new Equipo("Tigres del Licey", 1907,"Luis Sojo", "Santo Domingo", "Sin Casa");
-					Equipo e3= new Equipo("Gigantes del Cibao", 1996,"Pipe Urueta", "San Francisco de Macorís.", "Estadio Julián Javier");
+					Equipo e3= new Equipo("Gigantes del Cibao", 1996,"Pipe Urueta", "San Francisco de Macorís", "Estadio Julián Javier");
 					Equipo e4= new Equipo("Estrellas Orientales", 1910,"José Alguacil", "San Pedro de Macoris", "Estadio Tetelo Vargas");
 					Equipo e5= new Equipo("Toros del Este", 1983,"Lino Rivera", "La Romana", "Estadio Francisco Micheli");
 					Equipo e6= new Equipo("Leones del Escogido", 1921,"Dave Jauss", "Santo Domingo", "Estadio Quisqueya Juan Marichal");
@@ -316,6 +317,11 @@ public class Principal extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem Sitio_web = new JMenuItem("Visita Nuestro sitio web");
+		Sitio_web.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				goToURL("https://lidom.com/");
+			}
+		});
 		Sitio_web.setIcon(new ImageIcon(Principal.class.getResource("/assets/round_visibility_black_18dp.png")));
 		mnNewMenu_2.add(Sitio_web);
 		
@@ -662,4 +668,18 @@ public class Principal extends JFrame {
 			
 		}
 	}
+	
+	public void goToURL(String URL){
+        if (java.awt.Desktop.isDesktopSupported()) {
+        	java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+        if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
+        	try {
+                java.net.URI uri = new java.net.URI(URL);
+                desktop.browse(uri);
+             } catch (URISyntaxException | IOException ex) {
+                 System.out.println("Error: sitio no encontrado: "+ ex);
+             }
+        }
+     }
+  }
 }

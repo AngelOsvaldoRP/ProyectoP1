@@ -50,7 +50,7 @@ public class Grafico extends JDialog {
 		        dataset, PlotOrientation.VERTICAL, true,true, false);
 		        chart.getTitle().setPaint(Color.black); 
 		        CategoryPlot p = chart.getCategoryPlot(); 
-		        p.setRangeGridlinePaint(Color.RED); 
+		        p.setRangeGridlinePaint(Color.BLUE); 
 		        // Mostrar Grafico
 		        ChartPanel chartPanel = new ChartPanel(chart);
 		        panel.add(chartPanel);
