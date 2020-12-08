@@ -12,6 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import logico.Bateo;
+import logico.Equipo;
+import logico.Jugador;
+import logico.Picheo;
 import logico.Torneo;
 import logico.User;
 
