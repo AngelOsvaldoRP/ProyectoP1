@@ -112,6 +112,7 @@ public class ListJuego extends JDialog {
 								jugando.setModal(true);
 								jugando.setLocationRelativeTo(null);
 								jugando.setVisible(true);
+								dispose();
 							}else {
 								JOptionPane.showMessageDialog(null, "El juego seleccionado ya fue jugado", null, JOptionPane.ERROR_MESSAGE, null);
 							}
@@ -130,6 +131,10 @@ public class ListJuego extends JDialog {
 				btnInformacion.setEnabled(false);
 				btnInformacion.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						InformacionJuego informacion = new InformacionJuego(Torneo.getInstance().buscarJuegoPorCodigo(identificador));
+						informacion.setLocationRelativeTo(null);
+						informacion.setModal(true);
+						informacion.setVisible(true);
 					}
 				});
 				buttonPane.add(btnInformacion);
