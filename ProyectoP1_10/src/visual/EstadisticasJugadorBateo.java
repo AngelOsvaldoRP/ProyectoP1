@@ -70,7 +70,7 @@ public class EstadisticasJugadorBateo extends JDialog {
 			panel.setLayout(null);
 			{
 				JLabel lblNewLabel = new JLabel("Nombre completo:");
-				lblNewLabel.setBounds(10, 40, 101, 14);
+				lblNewLabel.setBounds(10, 40, 137, 14);
 				panel.add(lblNewLabel);
 			}
 			{
@@ -237,11 +237,6 @@ public class EstadisticasJugadorBateo extends JDialog {
 				txtops.setColumns(10);
 			}
 			{
-				JLabel lblNewLabel_13 = new JLabel("VP:");
-				lblNewLabel_13.setBounds(10, 144, 46, 14);
-				panel.add(lblNewLabel_13);
-			}
-			{
 				JLabel lblNewLabel_14 = new JLabel("TB:");
 				lblNewLabel_14.setBounds(250, 88, 46, 14);
 				panel.add(lblNewLabel_14);
@@ -290,24 +285,24 @@ public class EstadisticasJugadorBateo extends JDialog {
 			}
 			{
 				JLabel lblNewLabel_17 = new JLabel("HR:");
-				lblNewLabel_17.setBounds(10, 200, 46, 14);
+				lblNewLabel_17.setBounds(10, 144, 46, 14);
 				panel.add(lblNewLabel_17);
 			}
 			{
 				JLabel lblNewLabel_18 = new JLabel("2B:");
-				lblNewLabel_18.setBounds(132, 200, 46, 14);
+				lblNewLabel_18.setBounds(10, 200, 46, 14);
 				panel.add(lblNewLabel_18);
 			}
 			{
 				JLabel lblNewLabel_19 = new JLabel("3B:");
-				lblNewLabel_19.setBounds(250, 200, 46, 14);
+				lblNewLabel_19.setBounds(132, 200, 46, 14);
 				panel.add(lblNewLabel_19);
 			}
 			{
 				txthr = new JTextField();
 				txthr.setEditable(false);
 				txthr.setText(String.valueOf(jugador.getCantHR()));
-				txthr.setBounds(10, 225, 86, 20);
+				txthr.setBounds(10, 169, 86, 20);
 				panel.add(txthr);
 				txthr.setColumns(10);
 			}
@@ -315,7 +310,7 @@ public class EstadisticasJugadorBateo extends JDialog {
 				txt2b = new JTextField();
 				txt2b.setEditable(false);
 				txt2b.setText(String.valueOf(((Bateo) jugador).getCant2B()));
-				txt2b.setBounds(132, 225, 86, 20);
+				txt2b.setBounds(10, 225, 86, 20);
 				panel.add(txt2b);
 				txt2b.setColumns(10);
 			}
@@ -323,7 +318,7 @@ public class EstadisticasJugadorBateo extends JDialog {
 				txt3b = new JTextField();
 				txt3b.setEditable(false);
 				txt3b.setText(String.valueOf(((Bateo) jugador).getCant3B()));
-				txt3b.setBounds(250, 225, 86, 20);
+				txt3b.setBounds(132, 225, 86, 20);
 				panel.add(txt3b);
 				txt3b.setColumns(10);
 			}

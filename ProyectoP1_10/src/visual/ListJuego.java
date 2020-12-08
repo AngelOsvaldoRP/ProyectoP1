@@ -19,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -96,10 +98,25 @@ public class ListJuego extends JDialog {
 				btnJugar.setEnabled(false);
 				btnJugar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						SimulacionJuego jugando = new SimulacionJuego(Torneo.getInstance().buscarJuegoPorCodigo(identificador));
-						jugando.setModal(true);
-						jugando.setLocationRelativeTo(null);
-						jugando.setVisible(true);
+						Juego juego = Torneo.getInstance().buscarJuegoPorCodigo(identificador);
+						Calendar fecha = new GregorianCalendar();
+						int year = fecha.get(Calendar.YEAR);
+						int mes = 1+fecha.get(Calendar.MONTH);
+						int dia = fecha.get(Calendar.DAY_OF_MONTH);
+						String actual = dia+"/"+mes+"/"+year;
+						
+						if(juego.getFecha().equalsIgnoreCase(actual)) {
+							if(juego.getEstado()== "En espera") {
+								SimulacionJuego jugando = new SimulacionJuego(Torneo.getInstance().buscarJuegoPorCodigo(identificador));
+								jugando.setModal(true);
+								jugando.setLocationRelativeTo(null);
+								jugando.setVisible(true);
+							}else {
+								JOptionPane.showMessageDialog(null, "El juego seleccionado ya fue jugado", null, JOptionPane.ERROR_MESSAGE, null);
+							}
+						}else {
+							JOptionPane.showMessageDialog(null, "El juego no puede ser jugado en una fecha distinta a la actual", null, JOptionPane.ERROR_MESSAGE, null);
+						}
 					}
 				});
 				buttonPane.add(btnJugar);

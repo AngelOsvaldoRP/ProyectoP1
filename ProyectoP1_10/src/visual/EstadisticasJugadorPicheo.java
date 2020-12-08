@@ -71,7 +71,7 @@ public class EstadisticasJugadorPicheo extends JDialog {
 			panel.setLayout(null);
 			{
 				JLabel lblNewLabel = new JLabel("Nombre completo:");
-				lblNewLabel.setBounds(10, 40, 101, 14);
+				lblNewLabel.setBounds(10, 40, 129, 14);
 				panel.add(lblNewLabel);
 			}
 			{
@@ -298,25 +298,20 @@ public class EstadisticasJugadorPicheo extends JDialog {
 				txtHits.setColumns(10);
 			}
 			{
-				JLabel lblNewLabel_17 = new JLabel("Aperturas:");
-				lblNewLabel_17.setBounds(10, 200, 86, 14);
-				panel.add(lblNewLabel_17);
-			}
-			{
 				JLabel lblNewLabel_18 = new JLabel("JG:");
-				lblNewLabel_18.setBounds(132, 200, 46, 14);
+				lblNewLabel_18.setBounds(10, 200, 46, 14);
 				panel.add(lblNewLabel_18);
 			}
 			{
 				JLabel lblNewLabel_19 = new JLabel("JP:");
-				lblNewLabel_19.setBounds(250, 200, 46, 14);
+				lblNewLabel_19.setBounds(132, 200, 46, 14);
 				panel.add(lblNewLabel_19);
 			}
 			{
 				txtjg = new JTextField();
 				txtjg.setEditable(false);
 				txtjg.setText(String.valueOf(((Picheo) jugador).getCantJG()));
-				txtjg.setBounds(132, 225, 86, 20);
+				txtjg.setBounds(10, 225, 86, 20);
 				panel.add(txtjg);
 				txtjg.setColumns(10);
 			}
@@ -324,7 +319,7 @@ public class EstadisticasJugadorPicheo extends JDialog {
 				txtjp = new JTextField();
 				txtjp.setEditable(false);
 				txtjp.setText(String.valueOf(((Picheo) jugador).getCantJP()));
-				txtjp.setBounds(250, 225, 86, 20);
+				txtjp.setBounds(132, 225, 86, 20);
 				panel.add(txtjp);
 				txtjp.setColumns(10);
 			}
