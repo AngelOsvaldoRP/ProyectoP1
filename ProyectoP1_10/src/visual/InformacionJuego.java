@@ -17,6 +17,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class InformacionJuego extends JDialog {
 
@@ -337,6 +338,9 @@ public class InformacionJuego extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.setIcon(new ImageIcon(InformacionJuego.class.getResource("/assets/round_done_outline_white_18dp.png")));
+				okButton.setBackground(new Color(0, 128, 0));
+				okButton.setForeground(new Color(255, 255, 255));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
