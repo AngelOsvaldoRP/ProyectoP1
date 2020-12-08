@@ -288,6 +288,7 @@ public class SituacionLanzadorJuego extends JDialog {
 					aux2 = null;
 					((Picheo)aux1).setCantJG(((Picheo)aux1).getCantJG() + 1);
 					llenarTablaLV(aux1.getNumeroCamiseta());
+					Torneo.getInstance().escribir();
 					JOptionPane.showMessageDialog(null, "El Jugador "+aux1.getNombre()+" se agrego como ganador", null, JOptionPane.INFORMATION_MESSAGE, null);
 					ganadorL = 1;
 					btnLanzadorGanador.setEnabled(false);
@@ -305,6 +306,7 @@ public class SituacionLanzadorJuego extends JDialog {
 					aux2 = null;
 					((Picheo)aux1).setCantJS(((Picheo)aux1).getCantJS() + 1);
 					llenarTablaLV(aux1.getNumeroCamiseta());
+					Torneo.getInstance().escribir();
 					JOptionPane.showMessageDialog(null, "El Jugador "+aux1.getNombre()+" se agrego como salvador", null, JOptionPane.INFORMATION_MESSAGE, null);
 					salvadorL = 1;
 					btnLanzadorGanador.setEnabled(false);
@@ -322,6 +324,7 @@ public class SituacionLanzadorJuego extends JDialog {
 					aux1 = null;
 					((Picheo)aux2).setCantJP(((Picheo)aux2).getCantJP() + 1);
 					llenarTablaLL(aux2.getNumeroCamiseta());
+					Torneo.getInstance().escribir();
 					JOptionPane.showMessageDialog(null, "El Jugador "+aux2.getNombre()+" se agrego como perdedor", null, JOptionPane.INFORMATION_MESSAGE, null);
 					perdedorL = 1;
 					btnPerdedor.setEnabled(false);

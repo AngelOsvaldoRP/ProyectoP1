@@ -319,6 +319,7 @@ public class SimulacionJuego extends JDialog {
 							informacionFinal.setLocationRelativeTo(null);
 							informacionFinal.setModal(true);
 							informacionFinal.setVisible(true);
+							Torneo.getInstance().escribir();
 							JOptionPane.showMessageDialog(null, "Datos Guardados de Manera Correcta", null, JOptionPane.INFORMATION_MESSAGE, null);
 							dispose();
 						}
