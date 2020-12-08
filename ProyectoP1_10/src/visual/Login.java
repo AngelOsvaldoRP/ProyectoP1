@@ -33,6 +33,8 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
+					
 					User usuario= new User("admin", "admin");
 					Torneo.getInstance().insertarUser(usuario);
 					Torneo.getInstance().leer();

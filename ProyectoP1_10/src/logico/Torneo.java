@@ -34,7 +34,7 @@ public class Torneo implements Serializable {
 		this.equipos = new ArrayList<Equipo>();
 		this.jugadores = new ArrayList<Jugador>();
 		this.lesiones  = new ArrayList<Lesion>();
-		this.misUsers = new ArrayList<>();
+		this.misUsers = new ArrayList<User>();
 		this.setAutoJuegoCode(1);
 		
 	}

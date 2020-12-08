@@ -130,6 +130,14 @@ public class ListEquipo extends JDialog {
 				}
 				{
 					btnVerEstadisticas = new JButton("Ver Estadisticas");
+					btnVerEstadisticas.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							EstadisticasEquipo vista = new EstadisticasEquipo(aux);
+							vista.setModal(true);
+							vista.setLocationRelativeTo(null);
+							vista.setVisible(true);
+						}
+					});
 					btnVerEstadisticas.setIcon(new ImageIcon(ListEquipo.class.getResource("/assets/round_visibility_white_18dp.png")));
 					btnVerEstadisticas.setForeground(new Color(255, 255, 255));
 					btnVerEstadisticas.setBackground(new Color(65, 105, 225));

@@ -8,6 +8,9 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import logico.Equipo;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -22,7 +25,7 @@ public class EstadisticasEquipo extends JDialog {
 	private JTextField txtYear;
 	private JTextField txtManager;
 	private JTextField txtCiudad;
-	private JTextField txtEstado;
+	private JTextField txtEstadio;
 	private JTextField txtJJ;
 	private JTextField txtJG;
 	private JTextField txtJP;
@@ -37,20 +40,12 @@ public class EstadisticasEquipo extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			EstadisticasEquipo dialog = new EstadisticasEquipo();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
 	 */
-	public EstadisticasEquipo() {
+	public EstadisticasEquipo(Equipo equipo) {
 		setBounds(100, 100, 436, 540);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -71,6 +66,7 @@ public class EstadisticasEquipo extends JDialog {
 				txtNombre = new JTextField();
 				txtNombre.setBackground(Color.WHITE);
 				txtNombre.setEditable(false);
+				txtNombre.setText(String.valueOf(equipo.getNombre()));
 				txtNombre.setBounds(137, 30, 263, 22);
 				panel.add(txtNombre);
 				txtNombre.setColumns(10);
@@ -83,6 +79,7 @@ public class EstadisticasEquipo extends JDialog {
 			txtYear = new JTextField();
 			txtYear.setBackground(Color.WHITE);
 			txtYear.setEditable(false);
+			txtYear.setText(String.valueOf(equipo.getYearFundation()));
 			txtYear.setBounds(137, 55, 263, 22);
 			panel.add(txtYear);
 			txtYear.setColumns(10);
@@ -94,6 +91,7 @@ public class EstadisticasEquipo extends JDialog {
 			txtManager = new JTextField();
 			txtManager.setBackground(Color.WHITE);
 			txtManager.setEditable(false);
+			txtManager.setText(String.valueOf(equipo.getManager()));
 			txtManager.setBounds(137, 80, 263, 22);
 			panel.add(txtManager);
 			txtManager.setColumns(10);
@@ -105,6 +103,7 @@ public class EstadisticasEquipo extends JDialog {
 			txtCiudad = new JTextField();
 			txtCiudad.setBackground(Color.WHITE);
 			txtCiudad.setEditable(false);
+			txtCiudad.setText(String.valueOf(equipo.getCiudad()));
 			txtCiudad.setBounds(137, 105, 263, 22);
 			panel.add(txtCiudad);
 			txtCiudad.setColumns(10);
@@ -113,12 +112,13 @@ public class EstadisticasEquipo extends JDialog {
 			lblNewLabel_4.setBounds(10, 133, 97, 14);
 			panel.add(lblNewLabel_4);
 			
-			txtEstado = new JTextField();
-			txtEstado.setBackground(Color.WHITE);
-			txtEstado.setEditable(false);
-			txtEstado.setBounds(137, 130, 263, 22);
-			panel.add(txtEstado);
-			txtEstado.setColumns(10);
+			txtEstadio = new JTextField();
+			txtEstadio.setBackground(Color.WHITE);
+			txtEstadio.setEditable(false);
+			txtEstadio.setText(String.valueOf(equipo.getEstadio()));
+			txtEstadio.setBounds(137, 130, 263, 22);
+			panel.add(txtEstadio);
+			txtEstadio.setColumns(10);
 		}
 		
 		JPanel panel = new JPanel();
@@ -142,6 +142,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtJJ = new JTextField();
 		txtJJ.setBackground(Color.WHITE);
 		txtJJ.setEditable(false);
+		txtJJ.setText(String.valueOf(equipo.getCantJJ()));
 		txtJJ.setBounds(10, 52, 86, 22);
 		panel.add(txtJJ);
 		txtJJ.setColumns(10);
@@ -149,6 +150,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtJG = new JTextField();
 		txtJG.setBackground(Color.WHITE);
 		txtJG.setEditable(false);
+		txtJG.setText(String.valueOf(equipo.getCantJG()));
 		txtJG.setBounds(150, 52, 86, 22);
 		panel.add(txtJG);
 		txtJG.setColumns(10);
@@ -156,6 +158,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtJP = new JTextField();
 		txtJP.setBackground(Color.WHITE);
 		txtJP.setEditable(false);
+		txtJP.setText(String.valueOf(equipo.getCantJP()));
 		txtJP.setBounds(288, 52, 86, 22);
 		panel.add(txtJP);
 		txtJP.setColumns(10);
@@ -171,6 +174,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtAVGB = new JTextField();
 		txtAVGB.setBackground(Color.WHITE);
 		txtAVGB.setEditable(false);
+		txtAVGB.setText(String.valueOf(equipo.avgEquipoBateo()));
 		txtAVGB.setBounds(106, 110, 86, 22);
 		panel.add(txtAVGB);
 		txtAVGB.setColumns(10);
@@ -178,6 +182,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtAVGP = new JTextField();
 		txtAVGP.setBackground(Color.WHITE);
 		txtAVGP.setEditable(false);
+		txtAVGP.setText(String.valueOf(equipo.avgEquipoPicheo()));
 		txtAVGP.setBounds(258, 110, 86, 22);
 		panel.add(txtAVGP);
 		txtAVGP.setColumns(10);
@@ -197,6 +202,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtCA = new JTextField();
 		txtCA.setBackground(Color.WHITE);
 		txtCA.setEditable(false);
+		txtCA.setText(String.valueOf(equipo.cantCarrerasEquipo()));
 		txtCA.setBounds(10, 165, 86, 22);
 		panel.add(txtCA);
 		txtCA.setColumns(10);
@@ -204,6 +210,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtHits = new JTextField();
 		txtHits.setBackground(Color.WHITE);
 		txtHits.setEditable(false);
+		txtHits.setText(String.valueOf(equipo.cantHitsEquipo()));
 		txtHits.setBounds(150, 165, 86, 22);
 		panel.add(txtHits);
 		txtHits.setColumns(10);
@@ -211,6 +218,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtHR = new JTextField();
 		txtHR.setBackground(Color.WHITE);
 		txtHR.setEditable(false);
+		txtHR.setText(String.valueOf(equipo.cantHREquipo()));
 		txtHR.setBounds(288, 165, 86, 22);
 		panel.add(txtHR);
 		txtHR.setColumns(10);
@@ -226,6 +234,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtPonches = new JTextField();
 		txtPonches.setBackground(Color.WHITE);
 		txtPonches.setEditable(false);
+		txtPonches.setText(String.valueOf(equipo.cantPonchesEquipo()));
 		txtPonches.setBounds(106, 223, 86, 22);
 		panel.add(txtPonches);
 		txtPonches.setColumns(10);
@@ -233,6 +242,7 @@ public class EstadisticasEquipo extends JDialog {
 		txtBB = new JTextField();
 		txtBB.setBackground(Color.WHITE);
 		txtBB.setEditable(false);
+		txtBB.setText(String.valueOf(equipo.cantBBEquipo()));
 		txtBB.setBounds(258, 223, 86, 22);
 		panel.add(txtBB);
 		txtBB.setColumns(10);
