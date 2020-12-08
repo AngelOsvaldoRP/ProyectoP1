@@ -735,7 +735,7 @@ public class SimulacionJuego extends JDialog {
 	
 	public class FondoPanel extends JPanel{
 		public void paint(Graphics g) {
-			ImageIcon icon = new ImageIcon(getClass().getResource("/assets/fondo.jpg"));
+			ImageIcon icon = new ImageIcon(getClass().getResource("/assets/fondogame.jpg"));
 			g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
 			setOpaque(false);
 			super.paint(g);
