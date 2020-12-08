@@ -13,6 +13,13 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import logico.Equipo;
+import logico.Juego;
+import logico.Jugador;
+import logico.Picheo;
+import logico.Torneo;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -35,11 +42,13 @@ public class SituacionLanzadorJuego extends JDialog {
 	public static DefaultTableModel modeloLL;
 	public static Object[] filasLL;
 	private static JTable tableLL;
+	private static Equipo ganador;
+	private static Equipo perdedor;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			SituacionLanzadorJuego dialog = new SituacionLanzadorJuego();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -52,7 +61,11 @@ public class SituacionLanzadorJuego extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public SituacionLanzadorJuego() {
+	public SituacionLanzadorJuego(Juego juego) {
+		
+		ganador = Torneo.getInstance().buscarEquiporNombre(juego.getEquipoganador());
+		perdedor = Torneo.getInstance().buscarEquiporNombre(juego.getEquipoPerdedor());
+		
 		setBounds(100, 100, 695, 426);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -240,6 +253,36 @@ public class SituacionLanzadorJuego extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+		}
+	}
+	
+	public static void llenarTablaLL() {
+		modeloLL.setRowCount(0);
+		filasLL = new Object[modeloLL.getColumnCount()];
+		for (Jugador jugador : perdedor.getJugadores()) {
+			if(jugador.getEstado().equalsIgnoreCase("Disponible")) {
+			if(jugador instanceof Picheo) {
+				filasLL[0] = jugador.getNumeroCamiseta();
+				filasLL[1] = jugador.getNombre();
+				filasLL[2] = jugador.getApellido();
+				modeloLL.addRow(filasLL);
+			}
+		}
+		}
+	}
+	
+	public static void llenarTablaLV() {
+		modeloLV.setRowCount(0);
+		filasLV = new Object[modeloLV.getColumnCount()];
+		for (Jugador jugador : ganador.getJugadores()) {
+			if(jugador.getEstado().equalsIgnoreCase("Disponible")) {
+			if(jugador instanceof Picheo) {
+				filasLV[0] = jugador.getNumeroCamiseta();
+				filasLV[1] = jugador.getNombre();
+				filasLV[2] = jugador.getApellido();
+				modeloLL.addRow(filasLV);
+			}
+		}
 		}
 	}
 }
