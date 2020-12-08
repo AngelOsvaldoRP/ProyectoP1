@@ -19,12 +19,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textUsuario;
-	private JTextField textPass;
+	private JPasswordField  textPass;
 
 	/**
 	 * Launch the application.
@@ -33,10 +34,9 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
-					
 					User usuario= new User("admin", "admin");
 					Torneo.getInstance().insertarUser(usuario);
+					Torneo.getInstance().escribir();
 					Torneo.getInstance().leer();
 					Login frame = new Login();
 					frame.setVisible(true);
@@ -78,7 +78,7 @@ public class Login extends JFrame {
 		lblNewLabel_1.setBounds(23, 94, 101, 14);
 		panel.add(lblNewLabel_1);
 		
-		textPass = new JTextField();
+		textPass = new JPasswordField();
 		textPass.setBounds(23, 119, 178, 22);
 		panel.add(textPass);
 		textPass.setColumns(10);
@@ -89,8 +89,9 @@ public class Login extends JFrame {
 		btnLogin.setBackground(new Color(0, 128, 0));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textUsuario.getText().equalsIgnoreCase("") && !textPass.getText().equalsIgnoreCase("")) {
-					if(Torneo.getInstance().confirmLogin(textUsuario.getText(),textPass.getText())){
+				String valorPass = new String(textPass.getPassword());
+				if(!textUsuario.getText().equalsIgnoreCase("") && !valorPass.equalsIgnoreCase("")) {
+					if(Torneo.getInstance().confirmLogin(textUsuario.getText(),valorPass)){
 						Principal frame = new Principal();
 						dispose();
 						frame.setVisible(true);
@@ -106,5 +107,8 @@ public class Login extends JFrame {
 		});
 		btnLogin.setBounds(112, 163, 89, 23);
 		panel.add(btnLogin);
+		
+		
+		
 	}
 }
