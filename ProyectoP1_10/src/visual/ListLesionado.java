@@ -142,7 +142,7 @@ public class ListLesionado extends JDialog {
 						llenarTabla();
 					}
 				});
-				btnReactivar.setEnabled(false);
+				btnReactivar.setEnabled(true);
 				buttonPane.add(btnReactivar);
 			}
 			{
