@@ -153,7 +153,6 @@ public class RegJugadorLesionado extends JDialog {
 								JOptionPane.showMessageDialog(null, "La fecha para la cantidad de dias no puede ser pasada", null, JOptionPane.ERROR_MESSAGE, null);
 							
 							}else{
-								Equipo team= Torneo.getInstance().buscarEquiporNombre(jugador.getEquipoActual());
 								Lesion lesion = null;
 								String causa = cbxCausa.getSelectedItem().toString();
 								String descripcion = txtDescripcion.getText();
@@ -165,14 +164,14 @@ public class RegJugadorLesionado extends JDialog {
 								String lesionCod = "L-" + equipo.getAutoLesionCode();
 								lesion = new Lesion(lesionCod, causa, descripcion, jugador, estado, fecha);
 
-								team.insertarLesion(lesion);
+								equipo.insertarLesion(lesion);
 								jugador.setEstado("Lesionado");
 								Torneo.getInstance().insertarLesion(lesion);
 								Torneo.getInstance().escribir();
 								
 								JOptionPane.showMessageDialog(null, "El jugador ya esta lesionado.", null, JOptionPane.INFORMATION_MESSAGE, null);
 								dispose();
-								ListJugador list = new ListJugador(team);
+								ListJugador list = new ListJugador(equipo);
 								list.setModal(true);
 								list.setLocationRelativeTo(null);
 								list.setVisible(true);

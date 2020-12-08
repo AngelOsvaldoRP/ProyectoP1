@@ -233,14 +233,14 @@ public class SimulacionJuego extends JDialog {
 				}
 			}
 			{
-				JLabel lblVisitante = new JLabel(visitante.getNombre());
+				JLabel lblVisitante = new JLabel(visitante.getNombre()+" (Visitante)");
 				lblVisitante.setForeground(new Color(255, 255, 255));
 				lblVisitante.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
 				lblVisitante.setBounds(21, 11, 370, 35);
 				panel.add(lblVisitante);
 			}
 			{
-				JLabel lblLocal = new JLabel(local.getNombre());
+				JLabel lblLocal = new JLabel(local.getNombre()+" (Local)");
 				lblLocal.setForeground(new Color(255, 255, 255));
 				lblLocal.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
 				lblLocal.setBounds(639, 11, 370, 35);
