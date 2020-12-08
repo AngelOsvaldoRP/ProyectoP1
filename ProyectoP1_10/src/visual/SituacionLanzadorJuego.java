@@ -30,6 +30,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class SituacionLanzadorJuego extends JDialog {
 
@@ -75,6 +76,7 @@ public class SituacionLanzadorJuego extends JDialog {
 	 * Create the dialog.
 	 */
 	public SituacionLanzadorJuego(Juego juego) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(SituacionLanzadorJuego.class.getResource("/assets/lidomlogo.png")));
 		
 		ganador = Torneo.getInstance().buscarEquiporNombre(juego.getEquipoganador());
 		perdedor = Torneo.getInstance().buscarEquiporNombre(juego.getEquipoPerdedor());
@@ -182,13 +184,13 @@ public class SituacionLanzadorJuego extends JDialog {
 			}
 			
 			textCarrerasGanador = new JTextField();
+			textCarrerasGanador.setEditable(false);
 			if(juego.getGanador().equalsIgnoreCase("Local")) {
 				textCarrerasGanador.setText(""+juego.getCarrerasLocal());
 			}
 			if(juego.getGanador().equalsIgnoreCase("Visitante")) {
 				textCarrerasGanador.setText(""+juego.getCarrerasVisitante());
 			}
-			textCarrerasGanador.setEnabled(false);
 			textCarrerasGanador.setBounds(70, 43, 37, 23);
 			panel_1.add(textCarrerasGanador);
 			textCarrerasGanador.setColumns(10);
@@ -198,13 +200,13 @@ public class SituacionLanzadorJuego extends JDialog {
 			panel_1.add(lblHits);
 			
 			textHitsGanador = new JTextField();
+			textHitsGanador.setEditable(false);
 			if(juego.getGanador().equalsIgnoreCase("Local")) {
 				textHitsGanador.setText(""+juego.getHitsLocal());
 			}
 			if(juego.getGanador().equalsIgnoreCase("Visitante")) {
 				textHitsGanador.setText(""+juego.getHitsVisitante());
 			}
-			textHitsGanador.setEnabled(false);
 			textHitsGanador.setColumns(10);
 			textHitsGanador.setBounds(70, 73, 37, 23);
 			panel_1.add(textHitsGanador);
@@ -214,13 +216,13 @@ public class SituacionLanzadorJuego extends JDialog {
 			panel_1.add(lblErrores);
 			
 			textFErroresGanandor = new JTextField();
+			textFErroresGanandor.setEditable(false);
 			if(juego.getGanador().equalsIgnoreCase("Local")) {
 				textFErroresGanandor.setText(""+juego.getErroresLocal());
 			}
 			if(juego.getGanador().equalsIgnoreCase("Visitante")) {
 				textFErroresGanandor.setText(""+juego.getErroresVisitante());
 			}
-			textFErroresGanandor.setEnabled(false);
 			textFErroresGanandor.setColumns(10);
 			textFErroresGanandor.setBounds(70, 101, 37, 23);
 			panel_1.add(textFErroresGanandor);
@@ -240,13 +242,13 @@ public class SituacionLanzadorJuego extends JDialog {
 			panel_2.add(label_1);
 			
 			textCarrerasPerdedor = new JTextField();
+			textCarrerasPerdedor.setEditable(false);
 			if(juego.getPerdedor().equalsIgnoreCase("Local")) {
 				textCarrerasPerdedor.setText(""+juego.getCarrerasLocal());
 			}
 			if(juego.getPerdedor().equalsIgnoreCase("Visitante")) {
 				textCarrerasPerdedor.setText(""+juego.getCarrerasVisitante());
 			}
-			textCarrerasPerdedor.setEnabled(false);
 			textCarrerasPerdedor.setColumns(10);
 			textCarrerasPerdedor.setBounds(70, 43, 37, 23);
 			panel_2.add(textCarrerasPerdedor);
@@ -256,13 +258,13 @@ public class SituacionLanzadorJuego extends JDialog {
 			panel_2.add(label_2);
 			
 			textHitsPerdedor = new JTextField();
+			textHitsPerdedor.setEditable(false);
 			if(juego.getPerdedor().equalsIgnoreCase("Local")) {
 				textHitsPerdedor.setText(""+juego.getHitsLocal());
 			}
 			if(juego.getPerdedor().equalsIgnoreCase("Visitante")) {
 				textHitsPerdedor.setText(""+juego.getHitsVisitante());
 			}
-			textHitsPerdedor.setEnabled(false);
 			textHitsPerdedor.setColumns(10);
 			textHitsPerdedor.setBounds(70, 73, 37, 23);
 			panel_2.add(textHitsPerdedor);
@@ -272,13 +274,13 @@ public class SituacionLanzadorJuego extends JDialog {
 			panel_2.add(label_3);
 			
 			textErroresPerdedor = new JTextField();
+			textErroresPerdedor.setEditable(false);
 			if(juego.getPerdedor().equalsIgnoreCase("Local")) {
 				textErroresPerdedor.setText(""+juego.getErroresLocal());
 			}
 			if(juego.getPerdedor().equalsIgnoreCase("Visitante")) {
 				textErroresPerdedor.setText(""+juego.getErroresVisitante());
 			}
-			textErroresPerdedor.setEnabled(false);
 			textErroresPerdedor.setColumns(10);
 			textErroresPerdedor.setBounds(70, 101, 37, 23);
 			panel_2.add(textErroresPerdedor);
