@@ -138,12 +138,12 @@ public class Equipo implements Serializable{
 			if(player instanceof Bateo) {
 				sumaAVG += player.avg();
 				cantBateadores++;
+			} 
 			}
-		}
 		
 		avgEquipo =(float) (sumaAVG/ cantBateadores);
-		
-		return avgEquipo;
+
+		return (float)(Math.round(((float)(avgEquipo) * 1000d) / 1000d));
 	}
 	
 	public int cantHitsEquipo() {
@@ -192,7 +192,7 @@ public class Equipo implements Serializable{
 		
 		avgEquipo =(float) (sumaAVG/ cantPiches);
 		
-		return avgEquipo;
+		return (float)(Math.round(((float)(avgEquipo) * 1000d) / 1000d));
 	}
 	
 	public int cantPonchesEquipo() {

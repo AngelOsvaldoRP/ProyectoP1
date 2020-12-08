@@ -115,7 +115,7 @@ public class Picheo extends Jugador implements Serializable {
 
 
 	public float avg() {
-		return (float)(Math.round(((float)cantHits/cantTBE) * 1000d) / 1000d);
+		return (float)(Math.round(((float)(cantCL*9)/entradasLanzada) * 1000d) / 1000d);
 	}
 	
 	public float whip() {
