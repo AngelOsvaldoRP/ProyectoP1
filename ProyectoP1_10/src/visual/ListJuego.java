@@ -150,6 +150,8 @@ public class ListJuego extends JDialog {
 							    llenarCalendariodeJuegos();
 							    btnEliminar.setEnabled(false);
 							}
+							Principal.llenarTabla();
+							Principal.llenarTabla2();
 					}
 				});
 				btnEliminar.setActionCommand("OK");

@@ -33,6 +33,8 @@ import java.awt.Panel;
 
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class ListTopPlayer extends JDialog {
 
@@ -102,6 +104,9 @@ public class ListTopPlayer extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Aceptar");
+				cancelButton.setForeground(new Color(255, 255, 255));
+				cancelButton.setIcon(new ImageIcon(ListTopPlayer.class.getResource("/assets/round_done_outline_white_18dp.png")));
+				cancelButton.setBackground(new Color(0, 128, 0));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
@@ -174,8 +179,6 @@ public class ListTopPlayer extends JDialog {
 					return new Integer(Float.compare(p1.avg(), p2.avg()));
 			}
 		});
-		Collections.reverse(jgp);
-		
 		for (int i = 0; i < 10 && i <jgp.size(); i++) {
 				jgp10.add(jgp.get(i));
 		}

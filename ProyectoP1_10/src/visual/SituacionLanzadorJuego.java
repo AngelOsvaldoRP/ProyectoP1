@@ -29,6 +29,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class SituacionLanzadorJuego extends JDialog {
 
@@ -283,6 +284,9 @@ public class SituacionLanzadorJuego extends JDialog {
 			panel_2.add(textErroresPerdedor);
 			
 			btnLanzadorGanador = new JButton("Ganador");
+			btnLanzadorGanador.setForeground(new Color(255, 255, 255));
+			btnLanzadorGanador.setBackground(new Color(0, 128, 128));
+			btnLanzadorGanador.setIcon(new ImageIcon(SituacionLanzadorJuego.class.getResource("/assets/round_emoji_events_white_18dp.png")));
 			btnLanzadorGanador.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					aux2 = null;
@@ -301,6 +305,9 @@ public class SituacionLanzadorJuego extends JDialog {
 			panelVerificarLanzadores.add(btnLanzadorGanador);
 	
 			btnLanzadorSalvador = new JButton("Salvador");
+			btnLanzadorSalvador.setForeground(new Color(255, 255, 255));
+			btnLanzadorSalvador.setIcon(new ImageIcon(SituacionLanzadorJuego.class.getResource("/assets/round_stars_white_18dp.png")));
+			btnLanzadorSalvador.setBackground(new Color(218, 165, 32));
 			btnLanzadorSalvador.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					aux2 = null;
@@ -319,6 +326,9 @@ public class SituacionLanzadorJuego extends JDialog {
 			panelVerificarLanzadores.add(btnLanzadorSalvador);
 			
 			btnPerdedor = new JButton("Perdedor");
+			btnPerdedor.setIcon(new ImageIcon(SituacionLanzadorJuego.class.getResource("/assets/round_disabled_by_default_white_18dp.png")));
+			btnPerdedor.setBackground(new Color(128, 0, 0));
+			btnPerdedor.setForeground(new Color(255, 255, 255));
 			btnPerdedor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					aux1 = null;
@@ -343,15 +353,21 @@ public class SituacionLanzadorJuego extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Aceptar");
+				okButton.setForeground(new Color(255, 255, 255));
+				okButton.setBackground(new Color(0, 128, 0));
+				okButton.setIcon(new ImageIcon(SituacionLanzadorJuego.class.getResource("/assets/round_done_outline_white_18dp.png")));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(ganadorL==0 || perdedorL==0) {
 							JOptionPane.showMessageDialog(null, "Asegurese de asignar agregar al menos un ganador y perdedor", null, JOptionPane.ERROR_MESSAGE, null);
+							
 						}
 						if(ganadorL==1 && perdedorL==1) {
 							dispose();
 						}
+						Principal.llenarTabla();
+						Principal.llenarTabla2();
 					}
 				});
 				okButton.setActionCommand("OK");

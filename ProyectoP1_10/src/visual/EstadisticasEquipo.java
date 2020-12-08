@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.UIManager;
+import javax.swing.ImageIcon;
 
 public class EstadisticasEquipo extends JDialog {
 
@@ -253,6 +254,9 @@ public class EstadisticasEquipo extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Aceptar");
+				cancelButton.setForeground(new Color(255, 255, 255));
+				cancelButton.setBackground(new Color(0, 128, 0));
+				cancelButton.setIcon(new ImageIcon(EstadisticasEquipo.class.getResource("/assets/round_done_outline_white_18dp.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

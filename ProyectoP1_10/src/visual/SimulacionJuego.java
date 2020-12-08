@@ -34,6 +34,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -41,7 +42,7 @@ import java.awt.Toolkit;
 
 public class SimulacionJuego extends JDialog {
 
-	private final JPanel contentPanel = new JPanel();
+	private final JPanel contentPanel = new FondoPanel();
 	public static JTable tableBV = new JTable();
 	public static DefaultTableModel modeloBV;
 	public static Object[] filasBV;
@@ -110,13 +111,13 @@ public class SimulacionJuego extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
-			JPanel panel = new JPanel();
+			JPanel panel = new TransPanel();
 			panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
-				JPanel panelBV = new JPanel();
-				panelBV.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Bateadores ("+visitante.getNombre()+")", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				JPanel panelBV = new TransPanel();
+				panelBV.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Bateadores ("+visitante.getNombre()+")", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 				panelBV.setBounds(10, 57, 450, 206);
 				panel.add(panelBV);
 				panelBV.setLayout(new BorderLayout(0, 0));
@@ -143,8 +144,8 @@ public class SimulacionJuego extends JDialog {
 				}
 			}
 			{
-				JPanel panelLV = new JPanel();
-				panelLV.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lanzadores ("+visitante.getNombre()+")", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				JPanel panelLV = new TransPanel();
+				panelLV.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lanzadores ("+visitante.getNombre()+")", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 				panelLV.setBounds(10, 276, 450, 206);
 				panel.add(panelLV);
 				panelLV.setLayout(new BorderLayout(0, 0));
@@ -172,9 +173,9 @@ public class SimulacionJuego extends JDialog {
 				}
 			}
 			{
-				JPanel panelBL = new JPanel();
+				JPanel panelBL = new TransPanel();
 				panelBL.setLayout(new BorderLayout(0, 0));
-				panelBL.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Bateadores ("+local.getNombre()+")", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				panelBL.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Bateadores ("+local.getNombre()+")", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 				panelBL.setBounds(639, 57, 450, 206);
 				panel.add(panelBL);
 				{
@@ -202,9 +203,9 @@ public class SimulacionJuego extends JDialog {
 				}
 			}
 			{
-				JPanel panelLL = new JPanel();
+				JPanel panelLL = new TransPanel();
 				panelLL.setLayout(new BorderLayout(0, 0));
-				panelLL.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lanzadores ("+local.getNombre()+")", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				panelLL.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lanzadores ("+local.getNombre()+")", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 				panelLL.setBounds(639, 276, 450, 206);
 				panel.add(panelLL);
 				{
@@ -233,19 +234,21 @@ public class SimulacionJuego extends JDialog {
 			}
 			{
 				JLabel lblVisitante = new JLabel(visitante.getNombre());
+				lblVisitante.setForeground(new Color(255, 255, 255));
 				lblVisitante.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
 				lblVisitante.setBounds(21, 11, 370, 35);
 				panel.add(lblVisitante);
 			}
 			{
 				JLabel lblLocal = new JLabel(local.getNombre());
+				lblLocal.setForeground(new Color(255, 255, 255));
 				lblLocal.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
 				lblLocal.setBounds(639, 11, 370, 35);
 				panel.add(lblLocal);
 			}
 			
-			JPanel panelEntradas = new JPanel();
-			panelEntradas.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Entradas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			JPanel panelEntradas = new TransPanel();
+			panelEntradas.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Entradas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 			panelEntradas.setBounds(10, 504, 788, 96);
 			panel.add(panelEntradas);
 			panelEntradas.setLayout(null);
@@ -272,8 +275,8 @@ public class SimulacionJuego extends JDialog {
 			}
 			
 			{
-				JPanel panelMarcador = new JPanel();
-				panelMarcador.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Marcador", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				JPanel panelMarcador = new TransPanel();
+				panelMarcador.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Marcador", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 				panelMarcador.setBounds(808, 504, 181, 96);
 				panel.add(panelMarcador);
 				panelMarcador.setLayout(new BorderLayout(0, 0));
@@ -300,12 +303,15 @@ public class SimulacionJuego extends JDialog {
 			}
 		}
 		{
-			JPanel buttonPane = new JPanel();
+			JPanel buttonPane = new TransPanel();
 			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Finalizar Juego");
+				okButton.setIcon(new ImageIcon(SimulacionJuego.class.getResource("/assets/round_save_white_18dp.png")));
+				okButton.setForeground(new Color(255, 255, 255));
+				okButton.setBackground(new Color(0, 128, 0));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(verificarDatosV()==true && verificarDatosL()==true && verificarEntradas()==true && Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())!=Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
@@ -321,6 +327,8 @@ public class SimulacionJuego extends JDialog {
 							informacionFinal.setVisible(true);
 							Torneo.getInstance().escribir();
 							JOptionPane.showMessageDialog(null, "Datos Guardados de Manera Correcta", null, JOptionPane.INFORMATION_MESSAGE, null);
+							Principal.llenarTabla();
+							Principal.llenarTabla2();
 							dispose();
 						}
 						if(verificarDatosV()==false || verificarDatosL()==false || verificarEntradas()==false || Integer.parseInt(tableMarcador.getValueAt(0, 0).toString())==Integer.parseInt(tableMarcador.getValueAt(1, 0).toString())) {
@@ -335,6 +343,9 @@ public class SimulacionJuego extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setIcon(new ImageIcon(SimulacionJuego.class.getResource("/assets/round_clear_white_18dp.png")));
+				cancelButton.setBackground(new Color(139, 0, 0));
+				cancelButton.setForeground(new Color(255, 255, 255));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						int option = JOptionPane.showConfirmDialog(null, "¿Esta Seguro de Cancelar el Juego? "+" Los datos insertados no se guardaran", "Confirmacion", JOptionPane.WARNING_MESSAGE);
@@ -719,6 +730,24 @@ public class SimulacionJuego extends JDialog {
 				filasMarcador[1] = 0;
 				filasMarcador[2] = 0;
 				modeloMarcador.addRow(filasMarcador);
+		}
+	}
+	
+	public class FondoPanel extends JPanel{
+		public void paint(Graphics g) {
+			ImageIcon icon = new ImageIcon(getClass().getResource("/assets/fondo.jpg"));
+			g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
+			setOpaque(false);
+			super.paint(g);
+					
+		}
+		
+	}
+	public class TransPanel extends JPanel{
+		public void paint(Graphics g) {
+			setOpaque(false);
+			super.paint(g);
+			
 		}
 	}
 }

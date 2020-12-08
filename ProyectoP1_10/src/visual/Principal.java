@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.Collections;
 import java.util.Comparator;
-import java.awt.image.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.awt.Graphics;
@@ -15,8 +14,6 @@ import javax.swing.border.EmptyBorder;
 
 import javax.swing.JMenuBar;
 
-
-import java.awt.Panel;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -60,9 +57,6 @@ import javax.swing.JDialog;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import com.sun.prism.Image;
-
-import java.awt.image.*;
 
 import java.awt.Component;
 import javax.swing.UIManager;

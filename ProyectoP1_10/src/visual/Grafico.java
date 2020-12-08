@@ -20,6 +20,7 @@ import logico.Lesion;
 import logico.Torneo;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class Grafico extends JDialog {
 	private static DefaultCategoryDataset dataset;
@@ -63,6 +64,9 @@ public class Grafico extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Aceptar");
+				okButton.setIcon(new ImageIcon(Grafico.class.getResource("/assets/round_done_outline_white_18dp.png")));
+				okButton.setBackground(new Color(0, 128, 0));
+				okButton.setForeground(new Color(255, 255, 255));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
